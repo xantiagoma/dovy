@@ -35,7 +35,12 @@ class MainScreen extends StatelessWidget {
           FlatButton(
             color: context.theme.primaryColor,
             child: Text("Start"),
-            onPressed: () {},
+            onPressed: () {
+              context.navigateTo(
+                "/init",
+                transition: TransitionType.cupertino,
+              );
+            },
           )
         ],
       ),

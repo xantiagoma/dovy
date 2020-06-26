@@ -1,7 +1,9 @@
 // Packages
+export 'package:fluro/fluro.dart';
 export 'package:flutter_hooks/flutter_hooks.dart';
 export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:flutter/material.dart';
+export 'package:get_it/get_it.dart';
 export 'package:lottie/lottie.dart';
 export 'package:pigment/pigment.dart';
 

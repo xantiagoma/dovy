@@ -1,7 +1,9 @@
 import 'package:dovy/general.dart';
+import 'package:dovy/router.dart';
 import 'package:dovy/theme.dart';
 
 void main() {
+  GetIt.I.registerSingleton(router);
   runApp(App());
 }
 
@@ -21,7 +23,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: S?.current?.appName ?? 'Dovy',
       theme: lightTheme,
-      home: MainScreen(),
+      onGenerateRoute: context.router.generator,
     );
   }
 }

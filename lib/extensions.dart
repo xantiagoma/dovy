@@ -4,6 +4,26 @@ extension BuildContext_ on BuildContext {
   S get s => S.of(this);
   ThemeData get theme => Theme.of(this);
   MediaQueryData get media => MediaQuery.of(this);
+  NavigatorState get navigator => Navigator.of(this);
+  GetIt get i => GetIt.I;
+  Router get router => GetIt.I<Router>();
+  Future navigateTo(
+    String path, {
+    bool replace = false,
+    bool clearStack = false,
+    TransitionType transition,
+    Duration transitionDuration = const Duration(milliseconds: 250),
+    RouteTransitionsBuilder transitionBuilder,
+  }) =>
+      GetIt.I<Router>().navigateTo(
+        this,
+        path,
+        replace: replace,
+        clearStack: clearStack,
+        transition: transition,
+        transitionDuration: transitionDuration,
+        transitionBuilder: transitionBuilder,
+      );
 }
 
 extension Kolor on Color {
