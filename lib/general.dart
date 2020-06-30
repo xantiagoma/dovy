@@ -6,7 +6,7 @@ export 'package:flutter_hooks/flutter_hooks.dart';
 export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:flutter/material.dart';
 export 'package:get_it/get_it.dart' hide throwIf, throwIfNot;
-export 'package:lottie/lottie.dart';
+export 'package:lottie/lottie.dart' hide Marker;
 export 'package:pigment/pigment.dart';
 export 'package:dio/dio.dart' hide VoidCallback;
 export 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -14,6 +14,9 @@ export 'package:supercharged/supercharged.dart';
 export 'package:after_layout/after_layout.dart';
 export 'package:flushbar/flushbar.dart';
 export 'package:rubber/rubber.dart';
+export 'package:flutter_map/flutter_map.dart';
+export 'package:latlong/latlong.dart' hide Path;
+export 'package:map_controller/map_controller.dart';
 
 // App
 export 'package:dovy/extensions.dart';

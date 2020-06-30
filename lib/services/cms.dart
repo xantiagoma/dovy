@@ -29,9 +29,12 @@ class AuthService {
 
   Future<bool> get checkUser async {
     final token = (await box).get('jwt');
-    GetIt.I<CmsService>()
-        .externalService
-        .initialize(base_url: CmsService.baseUrl, token: token);
+    if (token != null) {
+      GetIt.I<CmsService>().externalService.initialize(
+            base_url: CmsService.baseUrl,
+            token: token,
+          );
+    }
     return token != null;
   }
 
@@ -47,5 +50,9 @@ class AuthService {
 
 class CmsService {
   static String baseUrl = 'https://servy-4npeq4oexa-ue.a.run.app';
-  final externalService = Strapi.newClient()..initialize(base_url: baseUrl);
+  final externalService = Strapi.newClient()
+    ..initialize(
+      base_url: baseUrl,
+      token: '',
+    );
 }

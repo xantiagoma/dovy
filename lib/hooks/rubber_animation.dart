@@ -142,6 +142,8 @@ class RubberAnimationControllerHookState extends HookState<
 
   @override
   void dispose() {
-    _animationController.dispose();
+    try {
+      _animationController.dispose();
+    } catch (_) {}
   }
 }

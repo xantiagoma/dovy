@@ -13,8 +13,66 @@ class HomeScreen extends HookWidget {
     );
     final scrollController = useScrollController();
 
+    final sMapController = useState<StatefulMapController>(
+      StatefulMapController(
+        mapController: MapController(),
+        customTileLayer: TileLayerOptions(
+          urlTemplate:
+              'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+          subdomains: ['a', 'b', 'c'],
+          additionalOptions: {
+            'r': '@2x',
+          },
+        ),
+        tileLayerType: TileLayerType.normal,
+      )
+        ..mapOptions = MapOptions(
+          center: LatLng(37.42796133580664, -122.085749655962),
+          zoom: 13.0,
+        )
+        ..addMarker(
+          marker: Marker(
+            builder: (context) => Icon(Icons.location_on),
+            point: LatLng(37.42796133580664, -122.085749655962),
+          ),
+          name: 'current_pin',
+        ),
+    );
+
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: <Widget>[
+          PopupMenuButton<String>(
+            onSelected: (v) async {
+              switch (v) {
+                case 'Logout':
+                  await context.i<AuthService>().logout();
+                  final msg = Flushbar(
+                    icon: Icon(
+                      Icons.info_outline,
+                      color: Colors.orangeAccent,
+                    ),
+                    margin: EdgeInsets.all(8),
+                    duration: 2.seconds,
+                    borderRadius: 8,
+                    message: 'Logged',
+                  );
+                  await msg.show(context);
+                  context.navigateTo('/', clearStack: true);
+                  break;
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return ["Logout"].map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+            },
+          ),
+        ],
+      ),
       body: Container(
         child: RubberBottomSheet(
           scrollController: scrollController,
@@ -23,32 +81,14 @@ class HomeScreen extends HookWidget {
             decoration: BoxDecoration(
               color: context.theme.accentColor,
             ),
-            child: ListView(
-              children: <Widget>[
-                RaisedButton(
-                  onPressed: () async {
-                    await context.i<AuthService>().logout();
-                    final msg = Flushbar(
-                      icon: Icon(
-                        Icons.info_outline,
-                        color: Colors.orangeAccent,
-                      ),
-                      margin: EdgeInsets.all(8),
-                      duration: 2.seconds,
-                      borderRadius: 8,
-                      message: 'Logged',
-                    );
-                    await msg.show(context);
-                    context.navigateTo('/', clearStack: true);
-                  },
-                  child: Text("Logout"),
+            child: FlutterMap(
+              mapController: sMapController.value.mapController,
+              options: sMapController.value.mapOptions,
+              layers: [
+                sMapController.value.tileLayer,
+                MarkerLayerOptions(
+                  markers: sMapController.value.markers,
                 ),
-                RaisedButton(
-                  onPressed: () {
-                    animationController.animateTo(to: 1.0);
-                  },
-                  child: Text('Scroll'),
-                )
               ],
             ),
           ),
@@ -64,7 +104,17 @@ class HomeScreen extends HookWidget {
               controller: scrollController,
               physics: NeverScrollableScrollPhysics(),
               children: <Widget>[
-                Text("Holi"),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    RaisedButton(
+                      onPressed: () {
+                        animationController.animateTo(to: 1.0);
+                      },
+                      child: Text('Scroll'),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

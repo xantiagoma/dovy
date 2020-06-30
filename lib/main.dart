@@ -1,9 +1,15 @@
 import 'package:dovy/general.dart';
 import 'package:dovy/setup.dart';
 import 'package:dovy/theme.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 void main() {
   setUp();
+  GetIt.I<CmsService>().externalService.http.interceptors.add(
+        PrettyDioLogger(
+          requestBody: true,
+        ),
+      );
   runApp(App());
 }
 

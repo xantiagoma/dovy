@@ -45,12 +45,10 @@ class LoginScreen extends HookWidget {
                           Flushbar msg;
                           if (form.saveAndValidate()) {
                             final data = form.value;
-                            final r = await GetIt.I<AuthService>()
-                                .login(
-                                  data["id"],
-                                  data["password"],
-                                )
-                                .tryOrNull;
+                            final r = await GetIt.I<AuthService>().login(
+                              data["id"],
+                              data["password"],
+                            );
                             if (r == null) {
                               msg = Flushbar(
                                 icon: Icon(
