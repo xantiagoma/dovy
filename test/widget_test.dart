@@ -5,8 +5,8 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:dovy/models/models.dart';
-import 'package:flutter/material.dart';
+// import 'package:dovy/models/models.dart';
+// import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dovy/general.dart';
 import 'package:dovy/setup.dart' as setup;
@@ -18,12 +18,12 @@ void main() {
     });
 
     test('Login', () async {
-      final resp = await GetIt.I<AuthService>().login('test', 'password');
-      final auth = AuthResponse.fromJson(resp.data);
+      final auth =
+          await GetIt.I<AuthService>().login('test', 'password').tryOrNull;
       print(auth);
       print(auth.user.role.created);
 
-      expect(resp, isNot(null));
+      expect(auth, isNot(null));
       return;
     });
   });

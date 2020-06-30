@@ -8,8 +8,14 @@ final router = Router()
     ),
   )
   ..define(
-    '/init',
+    '/login',
     handler: Handler(
-      handlerFunc: (context, parameters) => InitScreen(),
+      handlerFunc: (context, parameters) => LoginScreen(),
+    ),
+  )
+  ..define(
+    '/home',
+    handler: Handler(
+      handlerFunc: (context, parameters) => HomeScreen(),
     ),
   );

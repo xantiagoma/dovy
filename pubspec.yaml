@@ -38,6 +38,8 @@ dependencies:
   supercharged: ^1.6.0
   after_layout: ^1.0.7+2
   flushbar: ^1.10.4
+  hive: ^1.4.1+1
+  hive_flutter: ^0.3.0+2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -48,6 +50,10 @@ dev_dependencies:
     sdk: flutter
   build_runner:
   built_value_generator:
+  hive_generator:
+    git:
+      url: git://github.com/hivedb/hive.git
+      path: hive_generator
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

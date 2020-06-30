@@ -5,7 +5,23 @@ class MainScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final reverse = useState(true);
+    final showLogin = useState(false);
+    useEffect(() {
+      context.i.allReady().then((_) {
+        context.i<AuthService>().checkToken.then((value) {
+          if (value == null) {
+            showLogin.value = true;
+          } else {
+            context.navigateTo(
+              "/home",
+              clearStack: true,
+              transition: TransitionType.fadeIn,
+            );
+          }
+        });
+      });
+      return () => {};
+    });
 
     return Scaffold(
       appBar: AppBar(
@@ -21,37 +37,32 @@ class MainScreen extends HookWidget {
       body: Column(
         children: <Widget>[
           Text(context.s.appDescription),
-          GestureDetector(
-            onTap: () {
-              reverse.value = !reverse.value;
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                color: context.theme.accentColor,
-                shape: BoxShape.circle,
-              ),
-              width: context.media.size.width,
-              height: context.media.size.width,
-              margin: EdgeInsets.all(context.media.size.width * 0.1),
-              child: Lottie.asset(
-                "assets/lottie/map-location.json",
-                fit: BoxFit.contain,
-                animate: reverse.value,
-              ),
+          Container(
+            decoration: BoxDecoration(
+              color: context.theme.accentColor,
+              shape: BoxShape.circle,
+            ),
+            width: context.media.size.width,
+            height: context.media.size.width,
+            margin: EdgeInsets.all(context.media.size.width * 0.1),
+            child: Lottie.asset(
+              "assets/lottie/map-location.json",
+              fit: BoxFit.contain,
             ),
           ),
-          FlatButton(
-            color: reverse.value
-                ? context.theme.primaryColor
-                : context.theme.accentColor,
-            child: Text("Start"),
-            onPressed: () {
-              context.navigateTo(
-                "/init",
-                transition: TransitionType.cupertino,
-              );
-            },
-          )
+          if (showLogin.value)
+            FlatButton(
+              color: context.theme.primaryColor,
+              child: Text("Start"),
+              onPressed: () {
+                context.navigateTo(
+                  "/login",
+                  transition: TransitionType.cupertino,
+                );
+              },
+            )
+          else
+            CircularProgressIndicator()
         ],
       ),
     );

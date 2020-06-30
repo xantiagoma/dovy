@@ -1,22 +1,18 @@
 import 'package:dovy/general.dart';
 
-class InitScreen extends HookWidget {
-  const InitScreen({Key key}) : super(key: key);
+class LoginScreen extends HookWidget {
+  const LoginScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final formKey = useState(GlobalKey<FormBuilderState>());
     final loading = useState(false);
+
     return Scaffold(
       appBar: AppBar(),
       body: Column(
         children: <Widget>[
           Text(context.s.appDescription),
-          // FlatButton(
-          //   color: context.theme.primaryColor,
-          //   child: Text("Init"),
-          //   onPressed: () {},
-          // )
           FormBuilder(
             key: formKey.value,
             initialValue: {
@@ -77,6 +73,7 @@ class InitScreen extends HookWidget {
                                 borderRadius: 8,
                                 message: 'Logged',
                               );
+                              context.navigateTo("/home", clearStack: true);
                             }
                           } else {
                             msg = Flushbar(
