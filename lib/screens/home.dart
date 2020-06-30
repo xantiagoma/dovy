@@ -13,8 +13,8 @@ class HomeScreen extends HookWidget {
     );
     final scrollController = useScrollController();
 
-    final sMapController = useState<StatefulMapController>(
-      StatefulMapController(
+    final sMapController = useState<StatefulMapController>((() {
+      final s = StatefulMapController(
         mapController: MapController(),
         customTileLayer: TileLayerOptions(
           urlTemplate:
@@ -25,19 +25,36 @@ class HomeScreen extends HookWidget {
           },
         ),
         tileLayerType: TileLayerType.normal,
-      )
-        ..mapOptions = MapOptions(
+      )..mapOptions = MapOptions(
           center: LatLng(37.42796133580664, -122.085749655962),
           zoom: 13.0,
-        )
-        ..addMarker(
-          marker: Marker(
-            builder: (context) => Icon(Icons.location_on),
-            point: LatLng(37.42796133580664, -122.085749655962),
-          ),
-          name: 'current_pin',
+        );
+      s.addStatefulMarker(
+        name: 'current_pin',
+        statefulMarker: StatefulMarker(
+          builder: (context, state) {
+            return GestureDetector(
+              child: Icon(
+                Icons.location_on,
+                color: state['color'],
+              ),
+              onTap: () {
+                print('Mutate to blue');
+                s.mutateMarker(
+                  name: 'current_pin',
+                  property: 'color',
+                  value: Colors.blue,
+                );
+                s.zoomTo(s.zoom + 0.1);
+              },
+            );
+          },
+          state: {'color': Colors.red},
+          point: LatLng(37.42796133580664, -122.085749655962),
         ),
-    );
+      );
+      return s;
+    })());
 
     return Scaffold(
       appBar: AppBar(
