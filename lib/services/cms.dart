@@ -20,14 +20,27 @@ class AuthService {
 
     final authResponse = AuthResponse.fromJson(r.data);
     (await box).put('jwt', authResponse.jwt);
+    GetIt.I<CmsService>().externalService.initialize(
+          base_url: CmsService.baseUrl,
+          token: authResponse.jwt,
+        );
     return authResponse;
   }
 
-  Future<String> get checkToken async {
+  Future<bool> get checkUser async {
+    final token = (await box).get('jwt');
+    GetIt.I<CmsService>()
+        .externalService
+        .initialize(base_url: CmsService.baseUrl, token: token);
+    return token != null;
+  }
+
+  Future<String> get token async {
     return (await box).get('jwt');
   }
 
   Future<void> logout() async {
+    GetIt.I<CmsService>().externalService.http.interceptors.clear();
     return (await box).delete('jwt');
   }
 }

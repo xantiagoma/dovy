@@ -13,6 +13,7 @@ export 'package:flutter_form_builder/flutter_form_builder.dart';
 export 'package:supercharged/supercharged.dart';
 export 'package:after_layout/after_layout.dart';
 export 'package:flushbar/flushbar.dart';
+export 'package:rubber/rubber.dart';
 
 // App
 export 'package:dovy/extensions.dart';

@@ -8,15 +8,15 @@ class MainScreen extends HookWidget {
     final showLogin = useState(false);
     useEffect(() {
       context.i.allReady().then((_) {
-        context.i<AuthService>().checkToken.then((value) {
-          if (value == null) {
-            showLogin.value = true;
-          } else {
+        context.i<AuthService>().checkUser.then((value) {
+          if (value) {
             context.navigateTo(
               "/home",
               clearStack: true,
               transition: TransitionType.fadeIn,
             );
+          } else {
+            showLogin.value = true;
           }
         });
       });
