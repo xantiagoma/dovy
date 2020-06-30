@@ -5,7 +5,7 @@ class MainScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final reverse = useState(false);
+    final reverse = useState(true);
 
     return Scaffold(
       appBar: AppBar(

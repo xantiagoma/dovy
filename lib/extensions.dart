@@ -39,3 +39,17 @@ extension Kolor on Color {
   static Color fromString(String color) => Pigment.fromString(color);
   static Color fromCSSColor(CSSColor color) => Pigment.fromCSSColor(color);
 }
+
+extension FormBuilder_ on ValueNotifier<GlobalKey<FormBuilderState>> {
+  FormBuilderState get form => this.value.currentState;
+}
+
+extension Future_<T> on Future<T> {
+  Future<T> get tryOrNull async {
+    try {
+      return await this;
+    } catch (_) {
+      return null;
+    }
+  }
+}

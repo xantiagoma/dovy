@@ -1,9 +1,9 @@
 import 'package:dovy/general.dart';
-import 'package:dovy/router.dart';
+import 'package:dovy/setup.dart';
 import 'package:dovy/theme.dart';
 
 void main() {
-  GetIt.I.registerSingleton(router);
+  setUp();
   runApp(App());
 }
 
