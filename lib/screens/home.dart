@@ -32,7 +32,6 @@ class HomeScreen extends HookWidget {
     }, [tabController]);
 
     return Scaffold(
-      backgroundColor: Kolor.fromString("090909"),
       bottomNavigationBar: buildBottomNavigation(tabController),
       body: buildTabs(mapController, tabController, index.value),
     );

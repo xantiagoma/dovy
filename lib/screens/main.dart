@@ -69,9 +69,6 @@ class MainScreen extends HookWidget {
               ),
               child: Column(
                 children: <Widget>[
-                  Button(
-                    text: "X",
-                  ),
                   SizedBox(
                     height: 20,
                   ),
@@ -83,8 +80,6 @@ class MainScreen extends HookWidget {
                         Expanded(
                           child: Button(
                             text: 'Login',
-                            color: Kolor.fromString("#31AB5A"),
-                            splashColor: Kolor.fromString("#31AB5A").darken(),
                             onTap: () {
                               context.navigateTo(
                                 "/login",
@@ -113,12 +108,20 @@ class MainScreen extends HookWidget {
                       ],
                     ),
                   ),
-                  Button(
-                    text: "Forgot Password",
-                    color: Colors.transparent,
-                    textColor: Colors.black,
-                    borderRadius: BorderRadius.zero,
-                    onTap: () {},
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 20,
+                    ),
+                    child: Button(
+                      text: "Forgot Password",
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.zero,
+                      highlightColor: Colors.transparent,
+                      customBorder: ContinuousRectangleBorder(
+                        borderRadius: BorderRadius.circular(28.0),
+                      ),
+                      onTap: () {},
+                    ),
                   ),
                 ],
               ),
