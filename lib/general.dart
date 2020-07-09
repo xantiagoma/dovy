@@ -19,6 +19,8 @@ export 'package:latlong/latlong.dart' hide Path;
 export 'package:map_controller/map_controller.dart';
 export 'package:tinycolor/tinycolor.dart';
 export 'package:convex_bottom_bar/convex_bottom_bar.dart';
+export 'package:flutter_spinkit/flutter_spinkit.dart';
+export 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 // App
 export 'package:dovy/extensions.dart';

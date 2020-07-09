@@ -1,6 +1,5 @@
 import 'package:dovy/general.dart';
 import 'package:dovy/hooks/tab_controller.dart';
-import 'package:flutter/gestures.dart';
 // import 'package:dovy/hooks/rubber_animation.dart';
 // import 'package:dovy/hooks/scroll_controller.dart';
 
@@ -33,6 +32,7 @@ class HomeScreen extends HookWidget {
     }, [tabController]);
 
     return Scaffold(
+      backgroundColor: Kolor.fromString("090909"),
       bottomNavigationBar: buildBottomNavigation(tabController),
       body: buildTabs(mapController, tabController, index.value),
     );
@@ -68,7 +68,14 @@ class HomeScreen extends HookWidget {
     )..mapOptions = MapOptions(
         center: mapTileCenter,
         zoom: mapTileZoom,
+        maxZoom: 18.49,
+        minZoom: 2,
+        // onPositionChanged: (pos, b) {
+        //   pos.toString();
+        //   print("pos: ${pos.zoom}, b: $b");
+        // },
       );
+
     return s;
   }
 
@@ -232,7 +239,11 @@ class MapScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       if (mapController == null) {
-        return CircularProgressIndicator();
+        return Center(
+          child: SpinKitDoubleBounce(
+            color: context.theme.primaryColor,
+          ),
+        );
       }
       return FlutterMap(
         mapController: mapController.mapController,

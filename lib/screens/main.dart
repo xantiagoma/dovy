@@ -1,5 +1,4 @@
 import 'package:dovy/general.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class MainScreen extends HookWidget {
   const MainScreen({Key key}) : super(key: key);
@@ -125,7 +124,11 @@ class MainScreen extends HookWidget {
               ),
             )
           else
-            CircularProgressIndicator()
+            Center(
+              child: SpinKitDoubleBounce(
+                color: context.theme.primaryColor,
+              ),
+            )
         ],
       ),
     );

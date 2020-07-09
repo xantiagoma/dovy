@@ -133,3 +133,34 @@ extension LatLng_ on LatLng {
         'longitude': this.longitude.toDouble(),
       };
 }
+
+String latLngBoundsToString(LatLngBounds t) => """\n
+        ${t.runtimeType} {
+          isValid: ${t.isValid},
+          west: ${t.west},
+          south: ${t.south},
+          east: ${t.east},
+          north: ${t.north},
+          southWest: ${t.southWest},
+          northEast: ${t.northEast},
+          northWest: ${t.northWest},
+          southEast: ${t.southEast},
+        }
+  """;
+
+String mapPositionToString(MapPosition t) => """\n
+    ${t.runtimeType} {
+      bounds: ${latLngBoundsToString(t.bounds)},
+      center: ${t.center},
+      hasGesture: ${t.hasGesture},
+      zoom: ${t.zoom},
+    }
+  """;
+
+extension LatLngBounds_ on LatLngBounds {
+  String get string => latLngBoundsToString(this);
+}
+
+extension MapPosition_ on MapPosition {
+  String get string => mapPositionToString(this);
+}
