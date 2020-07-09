@@ -18,4 +18,7 @@ final router = Router()
     handler: Handler(
       handlerFunc: (context, parameters) => HomeScreen(),
     ),
+  )
+  ..notFoundHandler = Handler(
+    handlerFunc: (context, parameters) => NotFoundScreen(),
   );

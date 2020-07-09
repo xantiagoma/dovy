@@ -1,142 +1,228 @@
 import 'package:dovy/general.dart';
-import 'package:dovy/hooks/rubber_animation.dart';
-import 'package:dovy/hooks/scroll_controller.dart';
+import 'package:dovy/hooks/tab_controller.dart';
+// import 'package:dovy/hooks/rubber_animation.dart';
+// import 'package:dovy/hooks/scroll_controller.dart';
 
 class HomeScreen extends HookWidget {
   const HomeScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final animationController = useRubberAnimationController(
-      duration: 1.seconds,
-      upperBoundValue: AnimationControllerValue(percentage: 1.0),
-    );
-    final scrollController = useScrollController();
+    final cmsConfigsMemo = useMemoized(() => context.i<CmsService>().configs);
+    final cmsConfigsMemoFuture = useFuture(cmsConfigsMemo);
+    // final cbmController = useState(CircularBottomNavigationController(0));
 
-    final sMapController = useState<StatefulMapController>((() {
-      final s = StatefulMapController(
-        mapController: MapController(),
-        customTileLayer: TileLayerOptions(
-          urlTemplate:
-              'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-          subdomains: ['a', 'b', 'c'],
-          additionalOptions: {
-            'r': '@2x',
-          },
-        ),
-        tileLayerType: TileLayerType.normal,
-      )..mapOptions = MapOptions(
-          center: LatLng(37.42796133580664, -122.085749655962),
-          zoom: 13.0,
-        );
-      s.addStatefulMarker(
-        name: 'current_pin',
-        statefulMarker: StatefulMarker(
-          builder: (context, state) {
-            return GestureDetector(
-              child: Icon(
-                Icons.location_on,
-                color: state['color'],
-              ),
-              onTap: () {
-                print('Mutate to blue');
-                s.mutateMarker(
-                  name: 'current_pin',
-                  property: 'color',
-                  value: Colors.blue,
-                );
-                s.zoomTo(s.zoom + 0.1);
-              },
-            );
-          },
-          state: {'color': Colors.red},
-          point: LatLng(37.42796133580664, -122.085749655962),
-        ),
-      );
-      return s;
-    })());
+    final mapController = useMemoized(
+      () => cmsConfigsMemoFuture.data == null
+          ? null
+          : createMapController(cmsConfigsMemoFuture.data),
+      [cmsConfigsMemoFuture],
+    );
+
+    final tabController = useTabController();
+
+    print(cmsConfigsMemoFuture.data);
 
     return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          PopupMenuButton<String>(
-            onSelected: (v) async {
-              switch (v) {
-                case 'Logout':
-                  await context.i<AuthService>().logout();
-                  final msg = Flushbar(
-                    icon: Icon(
-                      Icons.info_outline,
-                      color: Colors.orangeAccent,
-                    ),
-                    margin: EdgeInsets.all(8),
-                    duration: 2.seconds,
-                    borderRadius: 8,
-                    message: 'Logged',
-                  );
-                  await msg.show(context);
-                  context.navigateTo('/', clearStack: true);
-                  break;
-              }
-            },
-            itemBuilder: (BuildContext context) {
-              return ["Logout"].map((String choice) {
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice),
-                );
-              }).toList();
-            },
+      bottomNavigationBar: buildBottomNavigation(tabController),
+      body: buildTabs(mapController, tabController),
+    );
+  }
+
+  StatefulMapController createMapController(Map<String, dynamic> options) {
+    final String mapTileUrl = options['map_tile_url'];
+    // 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
+    final List<String> mapTileSubdomains = List.from(
+      options['map_tile_subdomains'],
+    );
+    // ['a', 'b', 'c']
+    final Map<String, String> mapTileAdditionalOptions = Map.from(
+      options['map_tile_additional_options'],
+    );
+    // {'r': '@2x',}
+
+    final LatLng mapTileCenter = Map.from(
+          options['map_tile_center'],
+        ).cast<String, num>().latlng ??
+        LatLng(37.42796133580664, -122.085749655962);
+
+    final double mapTileZoom = options['map_tile_zoom'].toDouble();
+
+    final s = StatefulMapController(
+      mapController: MapController(),
+      customTileLayer: TileLayerOptions(
+        urlTemplate: mapTileUrl,
+        subdomains: mapTileSubdomains,
+        additionalOptions: mapTileAdditionalOptions,
+      ),
+      tileLayerType: TileLayerType.normal,
+    )..mapOptions = MapOptions(
+        center: mapTileCenter,
+        zoom: mapTileZoom,
+      );
+    return s;
+  }
+
+  // Widget buildBottomSheet() {
+  //       final animationController = useRubberAnimationController(
+  //     duration: 1.seconds,
+  //     upperBoundValue: AnimationControllerValue(percentage: 1.0),
+  //     lowerBoundValue: AnimationControllerValue(percentage: 0.1),
+  //     halfBoundValue: AnimationControllerValue(percentage: 1.3 / 2),
+  //   );
+  //   final scrollController = useScrollController();
+  //   RubberBottomSheet(
+  //         scrollController: scrollController,
+  //         animationController: animationController,
+  //         // menuLayer: buildBottomNavigation(tabController),
+  //         lowerLayer: buildLowerLayer(mapController, tabController),
+  //         upperLayer: buildSheet(scrollController, animationController),
+  //       ),
+  //     ),
+  // }
+
+  Widget buildSheet(ScrollController scrollController,
+      RubberAnimationController animationController) {
+    final context = useContext();
+    return Container(
+      decoration: BoxDecoration(
+        color: context.theme.primaryColor,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(5),
+          topRight: Radius.circular(5),
+        ),
+      ),
+      child: ListView(
+        controller: scrollController,
+        physics: NeverScrollableScrollPhysics(),
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              RaisedButton(
+                onPressed: () {
+                  animationController.animateTo(to: 1.0);
+                },
+                child: Text('Scroll'),
+              ),
+            ],
           ),
         ],
       ),
-      body: Container(
-        child: RubberBottomSheet(
-          scrollController: scrollController,
-          animationController: animationController,
-          lowerLayer: Container(
-            decoration: BoxDecoration(
-              color: context.theme.accentColor,
-            ),
-            child: FlutterMap(
-              mapController: sMapController.value.mapController,
-              options: sMapController.value.mapOptions,
-              layers: [
-                sMapController.value.tileLayer,
-                MarkerLayerOptions(
-                  markers: sMapController.value.markers,
-                ),
-              ],
-            ),
-          ),
-          upperLayer: Container(
-            decoration: BoxDecoration(
-              color: context.theme.primaryColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(5),
-                topRight: Radius.circular(5),
-              ),
-            ),
-            child: ListView(
-              controller: scrollController,
-              physics: NeverScrollableScrollPhysics(),
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    RaisedButton(
-                      onPressed: () {
-                        animationController.animateTo(to: 1.0);
-                      },
-                      child: Text('Scroll'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+    );
+  }
+
+  Widget buildTabs(
+    StatefulMapController mapController,
+    TabController tabController,
+  ) {
+    final context = useContext();
+    return TabBarView(
+      controller: tabController,
+      children: [
+        MapScreen(
+          mapController: mapController,
         ),
+        Center(
+          child: Text("2"),
+        ),
+        Center(
+          child: Text("3"),
+        ),
+        MessagesScreen(),
+        ProfileScreen(),
+      ],
+    );
+  }
+
+  Widget buildBottomNavigation(
+    TabController tabController,
+  ) {
+    return ConvexAppBar(
+      controller: tabController,
+      backgroundColor: Colors.blueGrey.shade900,
+      items: [
+        TabItem(icon: Icons.location_on, title: 'Map'),
+        TabItem(icon: Icons.map, title: 'Discovery'),
+        TabItem(icon: Icons.add, title: 'Add'),
+        TabItem(icon: Icons.message, title: 'Message'),
+        TabItem(icon: Icons.people, title: 'Profile'),
+      ],
+      initialActiveIndex: 0, //optional, default as 0
+      // onTap: (int i) => print('click index=$i'),
+    );
+  }
+}
+
+class MessagesScreen extends StatelessWidget {
+  const MessagesScreen({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(itemBuilder: (ctx, i) {
+      return Container(
+        child: Text("Item: $i"),
+      );
+    });
+  }
+}
+
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: RaisedButton(
+        onPressed: () async {
+          await context.i<AuthService>().logout();
+          final msg = Flushbar(
+            icon: Icon(
+              Icons.info_outline,
+              color: Colors.orangeAccent,
+            ),
+            margin: EdgeInsets.all(8),
+            duration: 2.seconds,
+            borderRadius: 8,
+            message: 'Logged',
+          );
+          await msg.show(context);
+          context.navigateTo('/', clearStack: true);
+        },
+        child: Text("Logout"),
       ),
     );
+  }
+}
+
+class MapScreen extends StatelessWidget {
+  final StatefulMapController mapController;
+
+  const MapScreen({
+    Key key,
+    @required this.mapController,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Builder(builder: (context) {
+      if (mapController == null) {
+        return CircularProgressIndicator();
+      }
+      return FlutterMap(
+        mapController: mapController.mapController,
+        options: mapController.mapOptions,
+        layers: [
+          mapController.tileLayer,
+          MarkerLayerOptions(
+            markers: mapController.markers,
+          ),
+        ],
+      );
+    });
   }
 }

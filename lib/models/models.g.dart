@@ -10,6 +10,7 @@ Serializer<User> _$userSerializer = new _$UserSerializer();
 Serializer<Role> _$roleSerializer = new _$RoleSerializer();
 Serializer<AuthResponse> _$authResponseSerializer =
     new _$AuthResponseSerializer();
+Serializer<Config<Object>> _$configSerializer = new _$ConfigSerializer();
 
 class _$UserSerializer implements StructuredSerializer<User> {
   @override
@@ -330,6 +331,111 @@ class _$AuthResponseSerializer implements StructuredSerializer<AuthResponse> {
         case 'user':
           result.user.replace(serializers.deserialize(value,
               specifiedType: const FullType(User)) as User);
+          break;
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'createdAt':
+          result.createdAt = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'updatedAt':
+          result.updatedAt = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case '__v':
+          result.v = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$ConfigSerializer implements StructuredSerializer<Config<Object>> {
+  @override
+  final Iterable<Type> types = const [Config, _$Config];
+  @override
+  final String wireName = 'Config';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, Config<Object> object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final isUnderspecified =
+        specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
+    final parameterT =
+        isUnderspecified ? FullType.object : specifiedType.parameters[0];
+
+    final result = <Object>[];
+    if (object.key != null) {
+      result
+        ..add('key')
+        ..add(serializers.serialize(object.key,
+            specifiedType: const FullType(String)));
+    }
+    if (object.value != null) {
+      result
+        ..add('value')
+        ..add(serializers.serialize(object.value, specifiedType: parameterT));
+    }
+    if (object.id != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(object.id,
+            specifiedType: const FullType(String)));
+    }
+    if (object.createdAt != null) {
+      result
+        ..add('createdAt')
+        ..add(serializers.serialize(object.createdAt,
+            specifiedType: const FullType(String)));
+    }
+    if (object.updatedAt != null) {
+      result
+        ..add('updatedAt')
+        ..add(serializers.serialize(object.updatedAt,
+            specifiedType: const FullType(String)));
+    }
+    if (object.v != null) {
+      result
+        ..add('__v')
+        ..add(serializers.serialize(object.v,
+            specifiedType: const FullType(int)));
+    }
+    return result;
+  }
+
+  @override
+  Config<Object> deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final isUnderspecified =
+        specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
+    final parameterT =
+        isUnderspecified ? FullType.object : specifiedType.parameters[0];
+
+    final result = isUnderspecified
+        ? new ConfigBuilder<Object>()
+        : serializers.newBuilder(specifiedType) as ConfigBuilder;
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'key':
+          result.key = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'value':
+          result.value =
+              serializers.deserialize(value, specifiedType: parameterT);
           break;
         case 'id':
           result.id = serializers.deserialize(value,
@@ -898,6 +1004,143 @@ class AuthResponseBuilder
       }
       rethrow;
     }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$Config<T> extends Config<T> {
+  @override
+  final String key;
+  @override
+  final T value;
+  @override
+  final String id;
+  @override
+  final String createdAt;
+  @override
+  final String updatedAt;
+  @override
+  final int v;
+
+  factory _$Config([void Function(ConfigBuilder<T>) updates]) =>
+      (new ConfigBuilder<T>()..update(updates)).build();
+
+  _$Config._(
+      {this.key, this.value, this.id, this.createdAt, this.updatedAt, this.v})
+      : super._() {
+    if (T == dynamic) {
+      throw new BuiltValueMissingGenericsError('Config', 'T');
+    }
+  }
+
+  @override
+  Config<T> rebuild(void Function(ConfigBuilder<T>) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ConfigBuilder<T> toBuilder() => new ConfigBuilder<T>()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is Config &&
+        key == other.key &&
+        value == other.value &&
+        id == other.id &&
+        createdAt == other.createdAt &&
+        updatedAt == other.updatedAt &&
+        v == other.v;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(
+        $jc(
+            $jc($jc($jc($jc(0, key.hashCode), value.hashCode), id.hashCode),
+                createdAt.hashCode),
+            updatedAt.hashCode),
+        v.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('Config')
+          ..add('key', key)
+          ..add('value', value)
+          ..add('id', id)
+          ..add('createdAt', createdAt)
+          ..add('updatedAt', updatedAt)
+          ..add('v', v))
+        .toString();
+  }
+}
+
+class ConfigBuilder<T> implements Builder<Config<T>, ConfigBuilder<T>> {
+  _$Config<T> _$v;
+
+  String _key;
+  String get key => _$this._key;
+  set key(String key) => _$this._key = key;
+
+  T _value;
+  T get value => _$this._value;
+  set value(T value) => _$this._value = value;
+
+  String _id;
+  String get id => _$this._id;
+  set id(String id) => _$this._id = id;
+
+  String _createdAt;
+  String get createdAt => _$this._createdAt;
+  set createdAt(String createdAt) => _$this._createdAt = createdAt;
+
+  String _updatedAt;
+  String get updatedAt => _$this._updatedAt;
+  set updatedAt(String updatedAt) => _$this._updatedAt = updatedAt;
+
+  int _v;
+  int get v => _$this._v;
+  set v(int v) => _$this._v = v;
+
+  ConfigBuilder();
+
+  ConfigBuilder<T> get _$this {
+    if (_$v != null) {
+      _key = _$v.key;
+      _value = _$v.value;
+      _id = _$v.id;
+      _createdAt = _$v.createdAt;
+      _updatedAt = _$v.updatedAt;
+      _v = _$v.v;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(Config<T> other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$Config<T>;
+  }
+
+  @override
+  void update(void Function(ConfigBuilder<T>) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$Config<T> build() {
+    final _$result = _$v ??
+        new _$Config<T>._(
+            key: key,
+            value: value,
+            id: id,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            v: v);
     replace(_$result);
     return _$result;
   }

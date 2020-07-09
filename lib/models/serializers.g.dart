@@ -8,6 +8,7 @@ part of 'serializers.dart';
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AuthResponse.serializer)
+      ..add(Config.serializer)
       ..add(Role.serializer)
       ..add(User.serializer))
     .build();

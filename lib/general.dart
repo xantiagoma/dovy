@@ -17,9 +17,12 @@ export 'package:rubber/rubber.dart';
 export 'package:flutter_map/flutter_map.dart';
 export 'package:latlong/latlong.dart' hide Path;
 export 'package:map_controller/map_controller.dart';
+export 'package:tinycolor/tinycolor.dart';
+export 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
 // App
 export 'package:dovy/extensions.dart';
 export 'package:dovy/generated/l10n.dart';
 export 'package:dovy/screens/screens.dart';
 export 'package:dovy/services/services.dart';
+export 'package:dovy/widgets/widgets.dart';

@@ -10,6 +10,7 @@ part 'serializers.g.dart';
   User,
   Role,
   ModelEntity,
+  Config,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

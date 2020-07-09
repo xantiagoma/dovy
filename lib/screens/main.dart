@@ -1,4 +1,5 @@
 import 'package:dovy/general.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class MainScreen extends HookWidget {
   const MainScreen({Key key}) : super(key: key);
@@ -8,8 +9,20 @@ class MainScreen extends HookWidget {
     final showLogin = useState(false);
     useEffect(() {
       context.i.allReady().then((_) {
-        context.i<AuthService>().checkUser.then((value) {
-          if (value) {
+        context.i<AuthService>().token.then((value) {
+          print("token: $value");
+          context.i<CmsService>().token = value;
+          // context
+          //     .i<CmsService>()
+          //     .externalService
+          //     .http
+          //     .interceptors
+          //     .add(PrettyDioLogger(
+          //       requestBody: true,
+          //       requestHeader: true,
+          //     ));
+
+          if (value != null) {
             context.navigateTo(
               "/home",
               clearStack: true,
@@ -51,15 +64,65 @@ class MainScreen extends HookWidget {
             ),
           ),
           if (showLogin.value)
-            FlatButton(
-              color: context.theme.primaryColor,
-              child: Text("Start"),
-              onPressed: () {
-                context.navigateTo(
-                  "/login",
-                  transition: TransitionType.cupertino,
-                );
-              },
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: Column(
+                children: <Widget>[
+                  Button(
+                    text: "X",
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: 50,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Expanded(
+                          child: Button(
+                            text: 'Login',
+                            color: Kolor.fromString("#31AB5A"),
+                            splashColor: Kolor.fromString("#31AB5A").darken(),
+                            onTap: () {
+                              context.navigateTo(
+                                "/login",
+                                transition:
+                                    TransitionType.materialFullScreenDialog,
+                              );
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          // width: double.infinity,
+                          // color: Colors.blue,
+                          child: Button(
+                            text: 'Sign Up',
+                            onTap: () {
+                              context.navigateTo(
+                                "/signup",
+                                transition: TransitionType.cupertino,
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Button(
+                    text: "Forgot Password",
+                    color: Colors.transparent,
+                    textColor: Colors.black,
+                    borderRadius: BorderRadius.zero,
+                    onTap: () {},
+                  ),
+                ],
+              ),
             )
           else
             CircularProgressIndicator()

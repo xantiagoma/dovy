@@ -1,42 +1,87 @@
 import 'package:dovy/general.dart';
 
-class LoginScreen extends HookWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: LoginForm(),
+    );
+  }
+}
+
+class LoginForm extends HookWidget {
+  const LoginForm({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final formKey = useState(GlobalKey<FormBuilderState>());
     final loading = useState(false);
+    final obscurePassword = useState(true);
 
-    return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: <Widget>[
-          Text(context.s.appDescription),
-          FormBuilder(
-            key: formKey.value,
-            initialValue: {
-              "id": "",
-              "password": "",
-            },
+    final dec = InputDecoration(
+      fillColor: Colors.white,
+      border: OutlineInputBorder(
+        borderSide: BorderSide(
+          width: 1,
+          color: Colors.black,
+          style: BorderStyle.solid,
+        ),
+      ),
+    );
+
+    return Column(
+      children: <Widget>[
+        FormBuilder(
+          key: formKey.value,
+          initialValue: {
+            "id": "",
+            "password": "",
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               children: <Widget>[
                 FormBuilderTextField(
+                  decoration: dec.copyWith(
+                    hintText: "Identifier",
+                    prefixIcon: Icon(Icons.person),
+                  ),
                   attribute: "id",
                   validators: [
                     FormBuilderValidators.required(),
                   ],
                 ),
+                SizedBox(
+                  height: 20,
+                ),
                 FormBuilderTextField(
+                  decoration: dec.copyWith(
+                    hintText: "Password",
+                    prefixIcon: IconButton(
+                      icon: Icon(
+                        obscurePassword.value ? Icons.lock : Icons.lock_open,
+                      ),
+                      onPressed: () {
+                        obscurePassword.value = !obscurePassword.value;
+                      },
+                    ),
+                  ),
                   attribute: "password",
-                  obscureText: true,
+                  obscureText: obscurePassword.value,
                   maxLines: 1,
                   validators: [
                     FormBuilderValidators.required(),
                   ],
                 ),
-                OutlineButton(
-                  onPressed: loading.value
+                SizedBox(
+                  height: 20,
+                ),
+                Button(
+                  text: "Submit",
+                  onTap: loading.value
                       ? null
                       : () async {
                           final form = formKey.form;
@@ -88,13 +133,12 @@ class LoginScreen extends HookWidget {
                           loading.value = false;
                           msg.show(context);
                         },
-                  child: Text('Submit'),
                 )
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

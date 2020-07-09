@@ -20,20 +20,14 @@ class AuthService {
 
     final authResponse = AuthResponse.fromJson(r.data);
     (await box).put('jwt', authResponse.jwt);
-    GetIt.I<CmsService>().externalService.initialize(
-          base_url: CmsService.baseUrl,
-          token: authResponse.jwt,
-        );
+    GetIt.I<CmsService>().token = authResponse.jwt;
     return authResponse;
   }
 
   Future<bool> get checkUser async {
     final token = (await box).get('jwt');
     if (token != null) {
-      GetIt.I<CmsService>().externalService.initialize(
-            base_url: CmsService.baseUrl,
-            token: token,
-          );
+      GetIt.I<CmsService>().token = token;
     }
     return token != null;
   }
@@ -50,9 +44,30 @@ class AuthService {
 
 class CmsService {
   static String baseUrl = 'https://servy-4npeq4oexa-ue.a.run.app';
-  final externalService = Strapi.newClient()
+  Strapi externalService = Strapi.newClient()
     ..initialize(
       base_url: baseUrl,
       token: '',
     );
+
+  Future<Map<String, dynamic>> get configs async {
+    final d = await externalService.find('configs');
+    final configs = d.fold<Map<String, dynamic>>(
+      <String, dynamic>{},
+      (previousValue, element) {
+        final json = element.data;
+        previousValue[json['key']] = json['value'];
+        return previousValue;
+      },
+    );
+    return configs;
+  }
+
+  set token(String jwt) {
+    externalService = Strapi.newClient()
+      ..initialize(
+        base_url: baseUrl,
+        token: jwt ?? '',
+      );
+  }
 }

@@ -100,3 +100,25 @@ abstract class AuthResponse
     return serializers.deserializeWith(AuthResponse.serializer, json);
   }
 }
+
+abstract class Config<T>
+    with ModelEntity
+    implements Built<Config<T>, ConfigBuilder<T>> {
+  @nullable
+  String get key;
+  @nullable
+  T get value;
+
+  Config._();
+  factory Config([void Function(ConfigBuilder<T>) updates]) = _$Config<T>;
+
+  Map<String, dynamic> toJson() {
+    return serializers.serializeWith(Config.serializer, this);
+  }
+
+  static Config fromJson(Map<String, dynamic> json) {
+    return serializers.deserializeWith(Config.serializer, json);
+  }
+
+  static Serializer<Config> get serializer => _$configSerializer;
+}
