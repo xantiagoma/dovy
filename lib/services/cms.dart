@@ -25,11 +25,21 @@ class AuthService {
   }
 
   Future<bool> get checkUser async {
-    final token = (await box).get('jwt');
-    if (token != null) {
+    try {
+      final token = (await box).get('jwt');
+      if (token == null) {
+        return false;
+      }
       GetIt.I<CmsService>().token = token;
+      final r =
+          await GetIt.I<CmsService>().externalService.http.get("/users/me");
+      if (r.statusCode < 400) {
+        return true;
+      }
+      return false;
+    } catch (_) {
+      return false;
     }
-    return token != null;
   }
 
   Future<String> get token async {

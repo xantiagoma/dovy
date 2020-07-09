@@ -8,20 +8,8 @@ class MainScreen extends HookWidget {
     final showLogin = useState(false);
     useEffect(() {
       context.i.allReady().then((_) {
-        context.i<AuthService>().token.then((value) {
-          print("token: $value");
-          context.i<CmsService>().token = value;
-          // context
-          //     .i<CmsService>()
-          //     .externalService
-          //     .http
-          //     .interceptors
-          //     .add(PrettyDioLogger(
-          //       requestBody: true,
-          //       requestHeader: true,
-          //     ));
-
-          if (value != null) {
+        context.i<AuthService>().checkUser.then((value) {
+          if (value) {
             context.navigateTo(
               "/home",
               clearStack: true,

@@ -32,7 +32,7 @@ class HomeScreen extends HookWidget {
     }, [tabController]);
 
     return Scaffold(
-      bottomNavigationBar: buildBottomNavigation(tabController),
+      bottomNavigationBar: buildBottomNavigation(tabController, context),
       body: buildTabs(mapController, tabController, index.value),
     );
   }
@@ -152,11 +152,11 @@ class HomeScreen extends HookWidget {
   }
 
   Widget buildBottomNavigation(
-    TabController tabController,
-  ) {
+      TabController tabController, BuildContext context) {
     return ConvexAppBar(
       controller: tabController,
-      backgroundColor: Colors.blueGrey.shade900,
+      backgroundColor: context.theme.scaffoldBackgroundColor.darken(),
+      top: -30,
       items: [
         TabItem(icon: Icons.location_on, title: 'Map'),
         TabItem(icon: Icons.map, title: 'Discovery'),
