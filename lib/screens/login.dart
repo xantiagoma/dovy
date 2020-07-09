@@ -32,113 +32,117 @@ class LoginForm extends HookWidget {
       ),
     );
 
-    return Column(
-      children: <Widget>[
-        FormBuilder(
-          key: formKey.value,
-          initialValue: {
-            "id": "",
-            "password": "",
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: <Widget>[
-                FormBuilderTextField(
-                  decoration: dec.copyWith(
-                    hintText: "Identifier",
-                    prefixIcon: Icon(Icons.person),
-                  ),
-                  attribute: "id",
-                  validators: [
-                    FormBuilderValidators.required(),
-                  ],
+    return FormBuilder(
+      key: formKey.value,
+      initialValue: {
+        "id": "",
+        "password": "",
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: <Widget>[
+            FormBuilderTextField(
+              decoration: dec.copyWith(
+                hintText: "Identifier",
+                prefixIcon: Icon(Icons.person),
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.clear),
+                  onPressed: () {},
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                FormBuilderTextField(
-                  decoration: dec.copyWith(
-                    hintText: "Password",
-                    prefixIcon: IconButton(
-                      icon: Icon(
-                        obscurePassword.value ? Icons.lock : Icons.lock_open,
-                      ),
-                      onPressed: () {
-                        obscurePassword.value = !obscurePassword.value;
-                      },
-                    ),
-                  ),
-                  attribute: "password",
-                  obscureText: obscurePassword.value,
-                  maxLines: 1,
-                  validators: [
-                    FormBuilderValidators.required(),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Button(
-                  text: "Submit",
-                  onTap: loading.value
-                      ? null
-                      : () async {
-                          final form = formKey.form;
-                          // print(FormBuilder.of(context).fields);
-                          loading.value = true;
-                          Flushbar msg;
-                          if (form.saveAndValidate()) {
-                            final data = form.value;
-                            final r = await GetIt.I<AuthService>().login(
-                              data["id"],
-                              data["password"],
-                            );
-                            if (r == null) {
-                              msg = Flushbar(
-                                icon: Icon(
-                                  Icons.info_outline,
-                                  color: Colors.redAccent,
-                                ),
-                                margin: EdgeInsets.all(8),
-                                duration: 2.seconds,
-                                borderRadius: 8,
-                                message: 'Invalid credentials',
-                              );
-                            } else {
-                              msg = Flushbar(
-                                icon: Icon(
-                                  Icons.check_circle_outline,
-                                  color: Colors.greenAccent,
-                                ),
-                                margin: EdgeInsets.all(8),
-                                duration: 2.seconds,
-                                borderRadius: 8,
-                                message: 'Logged',
-                              );
-                              context.navigateTo("/home", clearStack: true);
-                            }
-                          } else {
-                            msg = Flushbar(
-                              icon: Icon(
-                                Icons.info_outline,
-                                color: Colors.redAccent,
-                              ),
-                              margin: EdgeInsets.all(8),
-                              duration: 2.seconds,
-                              borderRadius: 8,
-                              message: 'Wrong data - validations no pass',
-                            );
-                          }
-                          loading.value = false;
-                          msg.show(context);
-                        },
-                )
+              ),
+              attribute: "id",
+              validators: [
+                FormBuilderValidators.required(),
               ],
             ),
-          ),
+            SizedBox(
+              height: 20,
+            ),
+            FormBuilderTextField(
+              decoration: dec.copyWith(
+                hintText: "Password",
+                prefixIcon: IconButton(
+                  icon: Icon(
+                    obscurePassword.value ? Icons.lock : Icons.lock_open,
+                  ),
+                  onPressed: () {
+                    obscurePassword.value = !obscurePassword.value;
+                  },
+                ),
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.clear),
+                  onPressed: () {},
+                ),
+              ),
+              attribute: "password",
+              obscureText: obscurePassword.value,
+              maxLines: 1,
+              validators: [
+                FormBuilderValidators.required(),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Button(
+              text: "Submit",
+              onTap: loading.value
+                  ? null
+                  : () async {
+                      final form = formKey.form;
+                      // print(FormBuilder.of(context).fields);
+                      loading.value = true;
+                      Flushbar msg;
+                      if (form.saveAndValidate()) {
+                        final data = form.value;
+                        final r = await GetIt.I<AuthService>().login(
+                          data["id"],
+                          data["password"],
+                        );
+                        if (r == null) {
+                          msg = Flushbar(
+                            icon: Icon(
+                              Icons.info_outline,
+                              color: Colors.redAccent,
+                            ),
+                            margin: EdgeInsets.all(8),
+                            duration: 2.seconds,
+                            borderRadius: 8,
+                            message: 'Invalid credentials',
+                          );
+                        } else {
+                          msg = Flushbar(
+                            icon: Icon(
+                              Icons.check_circle_outline,
+                              color: Colors.greenAccent,
+                            ),
+                            margin: EdgeInsets.all(8),
+                            duration: 2.seconds,
+                            borderRadius: 8,
+                            message: 'Logged',
+                          );
+                          context.navigateTo("/home", clearStack: true);
+                        }
+                      } else {
+                        msg = Flushbar(
+                          icon: Icon(
+                            Icons.info_outline,
+                            color: Colors.redAccent,
+                          ),
+                          margin: EdgeInsets.all(8),
+                          duration: 2.seconds,
+                          borderRadius: 8,
+                          message: 'Wrong data - validations no pass',
+                        );
+                      }
+                      loading.value = false;
+                      msg.show(context);
+                    },
+            )
+          ],
         ),
-      ],
+      ),
     );
   }
 }
