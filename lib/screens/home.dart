@@ -177,6 +177,7 @@ class _MessagesScreenState extends State<MessagesScreen>
     with AutomaticKeepAliveClientMixin<MessagesScreen> {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ListView.builder(itemBuilder: (ctx, i) {
       return Container(
         child: Text("Item: $i"),
