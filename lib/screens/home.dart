@@ -1,5 +1,6 @@
 import 'package:dovy/general.dart';
 import 'package:dovy/hooks/tab_controller.dart';
+import 'package:flutter/gestures.dart';
 // import 'package:dovy/hooks/rubber_animation.dart';
 // import 'package:dovy/hooks/scroll_controller.dart';
 
@@ -21,11 +22,19 @@ class HomeScreen extends HookWidget {
 
     final tabController = useTabController();
 
-    print(cmsConfigsMemoFuture.data);
+    final index = useState(0);
+
+    useEffect(() {
+      final listener = () {
+        index.value = tabController.index;
+      };
+      tabController.addListener(listener);
+      return () => tabController.removeListener(listener);
+    }, [tabController]);
 
     return Scaffold(
       bottomNavigationBar: buildBottomNavigation(tabController),
-      body: buildTabs(mapController, tabController),
+      body: buildTabs(mapController, tabController, index.value),
     );
   }
 
@@ -115,10 +124,11 @@ class HomeScreen extends HookWidget {
   Widget buildTabs(
     StatefulMapController mapController,
     TabController tabController,
+    int index,
   ) {
-    final context = useContext();
     return TabBarView(
       controller: tabController,
+      physics: index == 0 ? NeverScrollableScrollPhysics() : null,
       children: [
         MapScreen(
           mapController: mapController,
@@ -177,8 +187,8 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: RaisedButton(
-        onPressed: () async {
+      child: Button(
+        onTap: () async {
           await context.i<AuthService>().logout();
           final msg = Flushbar(
             icon: Icon(
@@ -193,7 +203,8 @@ class ProfileScreen extends StatelessWidget {
           await msg.show(context);
           context.navigateTo('/', clearStack: true);
         },
-        child: Text("Logout"),
+        width: context.media.size.width / 3,
+        text: "Logout",
       ),
     );
   }
