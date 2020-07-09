@@ -164,11 +164,17 @@ class HomeScreen extends HookWidget {
   }
 }
 
-class MessagesScreen extends StatelessWidget {
+class MessagesScreen extends StatefulWidget {
   const MessagesScreen({
     Key key,
   }) : super(key: key);
 
+  @override
+  _MessagesScreenState createState() => _MessagesScreenState();
+}
+
+class _MessagesScreenState extends State<MessagesScreen>
+    with AutomaticKeepAliveClientMixin<MessagesScreen> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(itemBuilder: (ctx, i) {
@@ -177,6 +183,9 @@ class MessagesScreen extends StatelessWidget {
       );
     });
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class ProfileScreen extends StatelessWidget {
