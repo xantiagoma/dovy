@@ -127,6 +127,10 @@ extension MapLatLng_ on Map<String, num> {
   }
 }
 
+extension LoadMap_ on Map<String, dynamic> {
+  T load<T>(T Function(Map<String, dynamic>) f) => f(this);
+}
+
 extension LatLng_ on LatLng {
   Map<String, num> get map => {
         'latitude': this.latitude.toDouble(),
