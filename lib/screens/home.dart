@@ -1,5 +1,4 @@
 import 'package:dovy/general.dart';
-import 'package:dovy/hooks/tab_controller.dart';
 import 'package:dovy/theme.dart';
 // import 'package:dovy/hooks/rubber_animation.dart';
 // import 'package:dovy/hooks/scroll_controller.dart';
@@ -20,7 +19,9 @@ class HomeScreen extends HookWidget {
       [cmsConfigsMemoFuture],
     );
 
-    final tabController = useTabController();
+    final tabController = useTabController(
+      initialLength: 5,
+    );
 
     final index = useState(0);
 

@@ -56,7 +56,7 @@ RubberAnimationController useRubberAnimationController({
 }) {
   vsync ??= useSingleTickerProvider(keys: keys);
 
-  return Hook.use(
+  return use(
     RubberAnimationControllerHook(
       animationBehavior: animationBehavior,
       debugLabel: debugLabel,
