@@ -50,6 +50,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.1"
+  bloc:
+    dependency: "direct main"
+    description:
+      name: bloc
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.0.0-dev.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -267,13 +274,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.9"
-  extra_pedantic:
-    dependency: transitive
-    description:
-      name: extra_pedantic
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.0"
   file:
     dependency: transitive
     description:
@@ -307,6 +307,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_bloc:
+    dependency: "direct main"
+    description:
+      name: flutter_bloc
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.0.0-dev.1"
   flutter_cache_manager:
     dependency: transitive
     description:
@@ -401,27 +408,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.5"
-  geodesy:
-    dependency: transitive
-    description:
-      name: geodesy
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.2"
-  geojson:
-    dependency: transitive
-    description:
-      name: geojson
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.1"
-  geopoint:
-    dependency: transitive
-    description:
-      name: geopoint
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.7.1"
   get_it:
     dependency: "direct main"
     description:
@@ -536,13 +522,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.4"
-  iso:
-    dependency: transitive
-    description:
-      name: iso
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.0"
   js:
     dependency: transitive
     description:
@@ -585,13 +564,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.1"
-  map_controller:
-    dependency: "direct main"
-    description:
-      name: map_controller
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.8.0"
   matcher:
     dependency: transitive
     description:
@@ -620,6 +592,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.6+3"
+  nested:
+    dependency: transitive
+    description:
+      name: nested
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.4"
   node_interop:
     dependency: transitive
     description:
@@ -753,6 +732,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  provider:
+    dependency: transitive
+    description:
+      name: provider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.3.1"
   pub_semver:
     dependency: transitive
     description:
@@ -821,13 +807,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
-  slugify2:
-    dependency: transitive
-    description:
-      name: slugify2
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.1"
   source_gen:
     dependency: transitive
     description:
@@ -1040,4 +1019,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.8.0 <3.0.0"
-  flutter: ">=1.12.13+hotfix.6 <2.0.0"
+  flutter: ">=1.16.0 <2.0.0"

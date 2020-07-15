@@ -10,10 +10,7 @@ class AuthService {
   }
 
   Future<AuthResponse> login(String id, String password) async {
-    final r = await GetIt.I<CmsService>()
-        .externalService
-        .http
-        .post("/auth/local", data: {
+    final r = await GetIt.I<CmsService>().s.http.post("/auth/local", data: {
       "identifier": id,
       "password": password,
     });
@@ -31,9 +28,11 @@ class AuthService {
         return false;
       }
       GetIt.I<CmsService>().token = token;
-      final r =
-          await GetIt.I<CmsService>().externalService.http.get("/users/me");
+      final r = await GetIt.I<CmsService>().s.http.get("/users/me");
       if (r.statusCode < 400) {
+        // GetIt.I<CmsService>().s.http.interceptors.add(PrettyDioLogger(
+        //       responseBody: false,
+        //     ));
         return true;
       }
       return false;
@@ -47,22 +46,23 @@ class AuthService {
   }
 
   Future<void> logout() async {
-    GetIt.I<CmsService>().externalService.http.interceptors.clear();
+    GetIt.I<CmsService>().s.http.interceptors.clear();
     return (await box).delete('jwt');
   }
 }
 
 class CmsService {
   static String baseUrl = 'https://servy-4npeq4oexa-ue.a.run.app';
-  Strapi externalService = Strapi.newClient()
+
+  Strapi s = Strapi.newClient()
     ..initialize(
       base_url: baseUrl,
       token: '',
     );
 
   Future<Map<String, dynamic>> get configs async {
-    final d = await externalService.find('configs');
-    final configs = d.fold<Map<String, dynamic>>(
+    final d = await s.find('configs');
+    final configs = d?.fold<Map<String, dynamic>>(
       <String, dynamic>{},
       (previousValue, element) {
         final json = element.data;
@@ -74,7 +74,7 @@ class CmsService {
   }
 
   set token(String jwt) {
-    externalService = Strapi.newClient()
+    s = Strapi.newClient()
       ..initialize(
         base_url: baseUrl,
         token: jwt ?? '',

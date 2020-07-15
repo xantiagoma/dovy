@@ -168,3 +168,11 @@ extension LatLngBounds_ on LatLngBounds {
 extension MapPosition_ on MapPosition {
   String get string => mapPositionToString(this);
 }
+
+extension Location_ on Location {
+  LatLng get latlng => LatLng(this.latitude, this.longitude);
+}
+
+extension Station_ on Station {
+  LatLng get latlng => Location_(this.location).latlng;
+}

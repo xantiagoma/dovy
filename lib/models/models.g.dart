@@ -11,6 +11,9 @@ Serializer<Role> _$roleSerializer = new _$RoleSerializer();
 Serializer<AuthResponse> _$authResponseSerializer =
     new _$AuthResponseSerializer();
 Serializer<Config<Object>> _$configSerializer = new _$ConfigSerializer();
+Serializer<Station<Object>> _$stationSerializer = new _$StationSerializer();
+Serializer<Location> _$locationSerializer = new _$LocationSerializer();
+Serializer<Line<Object>> _$lineSerializer = new _$LineSerializer();
 
 class _$UserSerializer implements StructuredSerializer<User> {
   @override
@@ -452,6 +455,240 @@ class _$ConfigSerializer implements StructuredSerializer<Config<Object>> {
         case '__v':
           result.v = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$StationSerializer implements StructuredSerializer<Station<Object>> {
+  @override
+  final Iterable<Type> types = const [Station, _$Station];
+  @override
+  final String wireName = 'Station';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, Station<Object> object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final isUnderspecified =
+        specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
+    final parameterT =
+        isUnderspecified ? FullType.object : specifiedType.parameters[0];
+
+    final result = <Object>[];
+    if (object.name != null) {
+      result
+        ..add('name')
+        ..add(serializers.serialize(object.name,
+            specifiedType: const FullType(String)));
+    }
+    if (object.code != null) {
+      result
+        ..add('code')
+        ..add(serializers.serialize(object.code,
+            specifiedType: const FullType(String)));
+    }
+    if (object.location != null) {
+      result
+        ..add('location')
+        ..add(serializers.serialize(object.location,
+            specifiedType: const FullType(Location)));
+    }
+    if (object.lines != null) {
+      result
+        ..add('lines')
+        ..add(serializers.serialize(object.lines,
+            specifiedType: new FullType(BuiltList, [parameterT])));
+    }
+    return result;
+  }
+
+  @override
+  Station<Object> deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final isUnderspecified =
+        specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
+    final parameterT =
+        isUnderspecified ? FullType.object : specifiedType.parameters[0];
+
+    final result = isUnderspecified
+        ? new StationBuilder<Object>()
+        : serializers.newBuilder(specifiedType) as StationBuilder;
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'code':
+          result.code = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'location':
+          result.location.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Location)) as Location);
+          break;
+        case 'lines':
+          result.lines.replace(serializers.deserialize(value,
+                  specifiedType: new FullType(BuiltList, [parameterT]))
+              as BuiltList<Object>);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$LocationSerializer implements StructuredSerializer<Location> {
+  @override
+  final Iterable<Type> types = const [Location, _$Location];
+  @override
+  final String wireName = 'Location';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, Location object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[];
+    if (object.latitude != null) {
+      result
+        ..add('latitude')
+        ..add(serializers.serialize(object.latitude,
+            specifiedType: const FullType(double)));
+    }
+    if (object.longitude != null) {
+      result
+        ..add('longitude')
+        ..add(serializers.serialize(object.longitude,
+            specifiedType: const FullType(double)));
+    }
+    return result;
+  }
+
+  @override
+  Location deserialize(Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new LocationBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'latitude':
+          result.latitude = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+        case 'longitude':
+          result.longitude = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$LineSerializer implements StructuredSerializer<Line<Object>> {
+  @override
+  final Iterable<Type> types = const [Line, _$Line];
+  @override
+  final String wireName = 'Line';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, Line<Object> object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final isUnderspecified =
+        specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
+    final parameterT =
+        isUnderspecified ? FullType.object : specifiedType.parameters[0];
+
+    final result = <Object>[];
+    if (object.color != null) {
+      result
+        ..add('color')
+        ..add(serializers.serialize(object.color,
+            specifiedType: const FullType(String)));
+    }
+    if (object.type != null) {
+      result
+        ..add('type')
+        ..add(serializers.serialize(object.type,
+            specifiedType: const FullType(String)));
+    }
+    if (object.name != null) {
+      result
+        ..add('name')
+        ..add(serializers.serialize(object.name,
+            specifiedType: const FullType(String)));
+    }
+    if (object.code != null) {
+      result
+        ..add('code')
+        ..add(serializers.serialize(object.code,
+            specifiedType: const FullType(String)));
+    }
+    if (object.stations != null) {
+      result
+        ..add('stations')
+        ..add(serializers.serialize(object.stations,
+            specifiedType: new FullType(BuiltList, [parameterT])));
+    }
+    return result;
+  }
+
+  @override
+  Line<Object> deserialize(Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final isUnderspecified =
+        specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
+    final parameterT =
+        isUnderspecified ? FullType.object : specifiedType.parameters[0];
+
+    final result = isUnderspecified
+        ? new LineBuilder<Object>()
+        : serializers.newBuilder(specifiedType) as LineBuilder;
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'color':
+          result.color = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'type':
+          result.type = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'code':
+          result.code = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'stations':
+          result.stations.replace(serializers.deserialize(value,
+                  specifiedType: new FullType(BuiltList, [parameterT]))
+              as BuiltList<Object>);
           break;
       }
     }
@@ -1141,6 +1378,354 @@ class ConfigBuilder<T> implements Builder<Config<T>, ConfigBuilder<T>> {
             createdAt: createdAt,
             updatedAt: updatedAt,
             v: v);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$Station<T> extends Station<T> {
+  @override
+  final String name;
+  @override
+  final String code;
+  @override
+  final Location location;
+  @override
+  final BuiltList<T> lines;
+
+  factory _$Station([void Function(StationBuilder<T>) updates]) =>
+      (new StationBuilder<T>()..update(updates)).build();
+
+  _$Station._({this.name, this.code, this.location, this.lines}) : super._() {
+    if (T == dynamic) {
+      throw new BuiltValueMissingGenericsError('Station', 'T');
+    }
+  }
+
+  @override
+  Station<T> rebuild(void Function(StationBuilder<T>) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  StationBuilder<T> toBuilder() => new StationBuilder<T>()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is Station &&
+        name == other.name &&
+        code == other.code &&
+        location == other.location &&
+        lines == other.lines;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(
+        $jc($jc($jc(0, name.hashCode), code.hashCode), location.hashCode),
+        lines.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('Station')
+          ..add('name', name)
+          ..add('code', code)
+          ..add('location', location)
+          ..add('lines', lines))
+        .toString();
+  }
+}
+
+class StationBuilder<T> implements Builder<Station<T>, StationBuilder<T>> {
+  _$Station<T> _$v;
+
+  String _name;
+  String get name => _$this._name;
+  set name(String name) => _$this._name = name;
+
+  String _code;
+  String get code => _$this._code;
+  set code(String code) => _$this._code = code;
+
+  LocationBuilder _location;
+  LocationBuilder get location => _$this._location ??= new LocationBuilder();
+  set location(LocationBuilder location) => _$this._location = location;
+
+  ListBuilder<T> _lines;
+  ListBuilder<T> get lines => _$this._lines ??= new ListBuilder<T>();
+  set lines(ListBuilder<T> lines) => _$this._lines = lines;
+
+  StationBuilder();
+
+  StationBuilder<T> get _$this {
+    if (_$v != null) {
+      _name = _$v.name;
+      _code = _$v.code;
+      _location = _$v.location?.toBuilder();
+      _lines = _$v.lines?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(Station<T> other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$Station<T>;
+  }
+
+  @override
+  void update(void Function(StationBuilder<T>) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$Station<T> build() {
+    _$Station<T> _$result;
+    try {
+      _$result = _$v ??
+          new _$Station<T>._(
+              name: name,
+              code: code,
+              location: _location?.build(),
+              lines: _lines?.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'location';
+        _location?.build();
+        _$failedField = 'lines';
+        _lines?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'Station', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$Location extends Location {
+  @override
+  final double latitude;
+  @override
+  final double longitude;
+
+  factory _$Location([void Function(LocationBuilder) updates]) =>
+      (new LocationBuilder()..update(updates)).build();
+
+  _$Location._({this.latitude, this.longitude}) : super._();
+
+  @override
+  Location rebuild(void Function(LocationBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  LocationBuilder toBuilder() => new LocationBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is Location &&
+        latitude == other.latitude &&
+        longitude == other.longitude;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, latitude.hashCode), longitude.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('Location')
+          ..add('latitude', latitude)
+          ..add('longitude', longitude))
+        .toString();
+  }
+}
+
+class LocationBuilder implements Builder<Location, LocationBuilder> {
+  _$Location _$v;
+
+  double _latitude;
+  double get latitude => _$this._latitude;
+  set latitude(double latitude) => _$this._latitude = latitude;
+
+  double _longitude;
+  double get longitude => _$this._longitude;
+  set longitude(double longitude) => _$this._longitude = longitude;
+
+  LocationBuilder();
+
+  LocationBuilder get _$this {
+    if (_$v != null) {
+      _latitude = _$v.latitude;
+      _longitude = _$v.longitude;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(Location other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$Location;
+  }
+
+  @override
+  void update(void Function(LocationBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$Location build() {
+    final _$result =
+        _$v ?? new _$Location._(latitude: latitude, longitude: longitude);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$Line<T> extends Line<T> {
+  @override
+  final String color;
+  @override
+  final String type;
+  @override
+  final String name;
+  @override
+  final String code;
+  @override
+  final BuiltList<T> stations;
+
+  factory _$Line([void Function(LineBuilder<T>) updates]) =>
+      (new LineBuilder<T>()..update(updates)).build();
+
+  _$Line._({this.color, this.type, this.name, this.code, this.stations})
+      : super._() {
+    if (T == dynamic) {
+      throw new BuiltValueMissingGenericsError('Line', 'T');
+    }
+  }
+
+  @override
+  Line<T> rebuild(void Function(LineBuilder<T>) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  LineBuilder<T> toBuilder() => new LineBuilder<T>()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is Line &&
+        color == other.color &&
+        type == other.type &&
+        name == other.name &&
+        code == other.code &&
+        stations == other.stations;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(
+        $jc($jc($jc($jc(0, color.hashCode), type.hashCode), name.hashCode),
+            code.hashCode),
+        stations.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('Line')
+          ..add('color', color)
+          ..add('type', type)
+          ..add('name', name)
+          ..add('code', code)
+          ..add('stations', stations))
+        .toString();
+  }
+}
+
+class LineBuilder<T> implements Builder<Line<T>, LineBuilder<T>> {
+  _$Line<T> _$v;
+
+  String _color;
+  String get color => _$this._color;
+  set color(String color) => _$this._color = color;
+
+  String _type;
+  String get type => _$this._type;
+  set type(String type) => _$this._type = type;
+
+  String _name;
+  String get name => _$this._name;
+  set name(String name) => _$this._name = name;
+
+  String _code;
+  String get code => _$this._code;
+  set code(String code) => _$this._code = code;
+
+  ListBuilder<T> _stations;
+  ListBuilder<T> get stations => _$this._stations ??= new ListBuilder<T>();
+  set stations(ListBuilder<T> stations) => _$this._stations = stations;
+
+  LineBuilder();
+
+  LineBuilder<T> get _$this {
+    if (_$v != null) {
+      _color = _$v.color;
+      _type = _$v.type;
+      _name = _$v.name;
+      _code = _$v.code;
+      _stations = _$v.stations?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(Line<T> other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$Line<T>;
+  }
+
+  @override
+  void update(void Function(LineBuilder<T>) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$Line<T> build() {
+    _$Line<T> _$result;
+    try {
+      _$result = _$v ??
+          new _$Line<T>._(
+              color: color,
+              type: type,
+              name: name,
+              code: code,
+              stations: _stations?.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'stations';
+        _stations?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'Line', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

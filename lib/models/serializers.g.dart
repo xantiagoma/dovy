@@ -9,7 +9,10 @@ part of 'serializers.dart';
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AuthResponse.serializer)
       ..add(Config.serializer)
+      ..add(Line.serializer)
+      ..add(Location.serializer)
       ..add(Role.serializer)
+      ..add(Station.serializer)
       ..add(User.serializer))
     .build();
 

@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:dovy/models/serializers.dart';
 export 'package:dovy/models/serializers.dart';
@@ -121,4 +122,86 @@ abstract class Config<T>
   }
 
   static Serializer<Config> get serializer => _$configSerializer;
+}
+
+abstract class Station<T> implements Built<Station<T>, StationBuilder<T>> {
+  @nullable
+  String get name;
+
+  @nullable
+  String get code;
+
+  @nullable
+  Location get location;
+
+  @nullable
+  BuiltList<T> get lines;
+
+  Station._();
+  factory Station([void Function(StationBuilder<T>) updates]) = _$Station<T>;
+
+  Map<String, dynamic> toJson() {
+    return serializers.serializeWith(Station.serializer, this);
+  }
+
+  static Station<T> fromJson<T>(Map<String, dynamic> json) {
+    return serializers.deserializeWith(Station.serializer, json);
+  }
+
+  static Serializer<Station> get serializer => _$stationSerializer;
+}
+
+abstract class Location implements Built<Location, LocationBuilder> {
+  @nullable
+  double get latitude;
+
+  @nullable
+  double get longitude;
+
+  // TODO META
+  // @nullable
+  // dynamic get meta;
+
+  Location._();
+  factory Location([void Function(LocationBuilder) updates]) = _$Location;
+
+  Map<String, dynamic> toJson() {
+    return serializers.serializeWith(Location.serializer, this);
+  }
+
+  static Location fromJson(Map<String, dynamic> json) {
+    return serializers.deserializeWith(Location.serializer, json);
+  }
+
+  static Serializer<Location> get serializer => _$locationSerializer;
+}
+
+abstract class Line<T> implements Built<Line<T>, LineBuilder<T>> {
+  @nullable
+  String get color;
+
+  @nullable
+  String get type;
+
+  @nullable
+  String get name;
+
+  @nullable
+  String get code;
+
+  @nullable
+  BuiltList<T> get stations;
+
+  Line._();
+  factory Line([void Function(LineBuilder<T>) updates]) = _$Line<T>;
+
+  Map<String, dynamic> toJson() {
+    return serializers.serializeWith(Line.serializer, this);
+  }
+
+  static Line<T> fromJson<T>(Map<String, dynamic> json) {
+    return serializers.deserializeWith(Line.serializer, json);
+  }
+
+  static Serializer<Line> get serializer => _$lineSerializer;
 }

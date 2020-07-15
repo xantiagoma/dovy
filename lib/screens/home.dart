@@ -1,5 +1,5 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:dovy/general.dart';
-import 'package:dovy/theme.dart';
 // import 'package:dovy/hooks/rubber_animation.dart';
 // import 'package:dovy/hooks/scroll_controller.dart';
 
@@ -8,17 +8,6 @@ class HomeScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cmsConfigsMemo = useMemoized(() => context.i<CmsService>().configs);
-    final cmsConfigsMemoFuture = useFuture(cmsConfigsMemo);
-    // final cbmController = useState(CircularBottomNavigationController(0));
-
-    final mapController = useMemoized(
-      () => cmsConfigsMemoFuture.data == null
-          ? null
-          : createMapController(cmsConfigsMemoFuture.data),
-      [cmsConfigsMemoFuture],
-    );
-
     final tabController = useTabController(
       initialLength: 5,
     );
@@ -35,50 +24,8 @@ class HomeScreen extends HookWidget {
 
     return Scaffold(
       bottomNavigationBar: buildBottomNavigation(tabController, context),
-      body: buildTabs(mapController, tabController, index.value),
+      body: buildTabs(tabController, index.value),
     );
-  }
-
-  StatefulMapController createMapController(Map<String, dynamic> options) {
-    final String mapTileUrl = options['map_tile_url'];
-    // 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
-    final List<String> mapTileSubdomains = List.from(
-      options['map_tile_subdomains'],
-    );
-    // ['a', 'b', 'c']
-    final Map<String, String> mapTileAdditionalOptions = Map.from(
-      options['map_tile_additional_options'],
-    );
-    // {'r': '@2x',}
-
-    final LatLng mapTileCenter = Map.from(
-          options['map_tile_center'],
-        ).cast<String, num>().latlng ??
-        LatLng(37.42796133580664, -122.085749655962);
-
-    final double mapTileZoom = options['map_tile_zoom'].toDouble();
-
-    final s = StatefulMapController(
-      mapController: MapController(),
-      customTileLayer: TileLayerOptions(
-        urlTemplate: mapTileUrl,
-        subdomains: mapTileSubdomains,
-        additionalOptions: mapTileAdditionalOptions,
-        backgroundColor: lightTheme.scaffoldBackgroundColor,
-      ),
-      tileLayerType: TileLayerType.normal,
-    )..mapOptions = MapOptions(
-        center: mapTileCenter,
-        zoom: mapTileZoom,
-        maxZoom: 18.49,
-        minZoom: 2,
-        // onPositionChanged: (pos, b) {
-        //   pos.toString();
-        //   print("pos: ${pos.zoom}, b: $b");
-        // },
-      );
-
-    return s;
   }
 
   // Widget buildBottomSheet() {
@@ -131,7 +78,6 @@ class HomeScreen extends HookWidget {
   }
 
   Widget buildTabs(
-    StatefulMapController mapController,
     TabController tabController,
     int index,
   ) {
@@ -139,9 +85,7 @@ class HomeScreen extends HookWidget {
       controller: tabController,
       physics: index == 0 ? NeverScrollableScrollPhysics() : null,
       children: [
-        MapScreen(
-          mapController: mapController,
-        ),
+        MapScreen(),
         Center(
           child: Text("2"),
         ),
@@ -213,7 +157,7 @@ class ProfileScreen extends StatelessWidget {
         SliverToBoxAdapter(
           child: FutureBuilder<User>(
             future: GetIt.I<CmsService>()
-                .externalService
+                .s
                 .findOne('users', 'me')
                 .then((value) => value.data)
                 .then(
@@ -273,33 +217,114 @@ class ProfileScreen extends StatelessWidget {
 }
 
 class MapScreen extends StatelessWidget {
-  final StatefulMapController mapController;
-
   const MapScreen({
     Key key,
-    @required this.mapController,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      if (mapController == null) {
-        return Center(
-          child: SpinKitDoubleBounce(
-            color: context.theme.primaryColor,
-          ),
-        );
-      }
-      return FlutterMap(
-        mapController: mapController.mapController,
-        options: mapController.mapOptions,
-        layers: [
-          mapController.tileLayer,
-          MarkerLayerOptions(
-            markers: mapController.markers,
-          ),
-        ],
+    print("Multibloc");
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => PositionCubit(null),
+        ),
+        BlocProvider(
+          create: (context) => StationsCubit(null)..load(),
+        ),
+        BlocProvider(
+          create: (context) => LinesCubit(null)..load(),
+        ),
+      ],
+      child: BlocBuilder<StationsCubit, BuiltList<Station>>(
+        builder: (context, state) => BlocBuilder<LinesCubit, BuiltList<Line>>(
+            builder: (context, snapshot) {
+          return Mapa();
+        }),
+      ),
+    );
+  }
+}
+
+class Mapa extends HookWidget {
+  const Mapa({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final cmsConfigsMemo = useMemoized(() => context.i<CmsService>().configs);
+    final cmsConfigsMemo$ = useFuture(cmsConfigsMemo);
+
+    if (cmsConfigsMemo$.data == null) {
+      return Center(
+        child: CircularProgressIndicator(),
       );
-    });
+    }
+
+    final mapController = MapController();
+
+    final options = cmsConfigsMemo$.data;
+    final String mapTileUrl = options['map_tile_url'];
+    // 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
+    final List<String> mapTileSubdomains = List.from(
+      options['map_tile_subdomains'],
+    );
+    // ['a', 'b', 'c']
+    final Map<String, String> mapTileAdditionalOptions = Map.from(
+      options['map_tile_additional_options'],
+    );
+    // {'r': '@2x',}
+
+    final LatLng mapTileCenter = Map.from(
+          options['map_tile_center'],
+        ).cast<String, num>().latlng ??
+        LatLng(37.42796133580664, -122.085749655962);
+
+    final double mapTileZoom = options['map_tile_zoom'].toDouble();
+
+    return FlutterMap(
+      mapController: mapController,
+      options: MapOptions(
+        center: mapTileCenter,
+        zoom: mapTileZoom,
+        maxZoom: 18.49,
+        minZoom: 2,
+        onPositionChanged: (position, _) =>
+            context.bloc<PositionCubit>().change(position),
+      ),
+      layers: [
+        TileLayerOptions(
+          urlTemplate: mapTileUrl,
+          subdomains: mapTileSubdomains,
+          additionalOptions: mapTileAdditionalOptions,
+          backgroundColor: context.theme.scaffoldBackgroundColor,
+        ),
+        MarkerLayerOptions(
+          markers: context
+              .bloc<StationsCubit>()
+              .state
+              .map(
+                (s) => Marker(
+                  point: s.latlng,
+                  builder: (context) => IconButton(
+                    icon: Icon(Icons.place),
+                    onPressed: () {
+                      context.show(
+                        Flushbar(
+                          title: s.name,
+                          message: s.lines.toString(),
+                          duration: 1.5.seconds,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              )
+              .toList(),
+        )
+      ],
+    );
   }
 }
