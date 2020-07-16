@@ -23,6 +23,9 @@ export 'package:supercharged/supercharged.dart' hide Duration_;
 export 'package:tinycolor/tinycolor.dart';
 export 'package:bloc/bloc.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
+export 'package:built_collection/built_collection.dart';
+export 'package:built_value/built_value.dart' hide Builder;
+export 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 // App
 export 'package:dovy/extensions.dart';

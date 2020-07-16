@@ -192,6 +192,9 @@ abstract class Line<T> implements Built<Line<T>, LineBuilder<T>> {
   @nullable
   BuiltList<T> get stations;
 
+  @nullable
+  BuiltList<Location> get path;
+
   Line._();
   factory Line([void Function(LineBuilder<T>) updates]) = _$Line<T>;
 

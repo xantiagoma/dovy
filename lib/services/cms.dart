@@ -80,4 +80,68 @@ class CmsService {
         token: jwt ?? '',
       );
   }
+
+  Future<BuiltList<Station<Line<String>>>> getStations({
+    Map<String, dynamic> queryParameters,
+  }) async {
+    final m = (await GetIt.I<CmsService>().s.find('stations'))
+        .map((e) => e.data)
+        .toList();
+
+    final o = serializers.deserialize(
+      m,
+      specifiedType: FullType(
+        BuiltList,
+        [
+          FullType(
+            Station,
+            [
+              FullType(
+                Line,
+                [
+                  FullType(
+                    String,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+
+    return o;
+  }
+
+  Future<BuiltList<Line<Station<String>>>> getLines({
+    Map<String, dynamic> queryParameters,
+  }) async {
+    final m = (await GetIt.I<CmsService>().s.find('lines'))
+        .map((e) => e.data)
+        .toList();
+
+    final o = serializers.deserialize(
+      m,
+      specifiedType: FullType(
+        BuiltList,
+        [
+          FullType(
+            Line,
+            [
+              FullType(
+                Station,
+                [
+                  FullType(
+                    String,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+
+    return o;
+  }
 }

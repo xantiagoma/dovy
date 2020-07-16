@@ -8,52 +8,23 @@ class PositionCubit extends Cubit<MapPosition> {
 }
 
 class StationsCubit extends Cubit<BuiltList<Station<Line<String>>>> {
-  StationsCubit(MapPosition state) : super(BuiltList<Station<Line<String>>>());
+  StationsCubit() : super(BuiltList<Station<Line<String>>>());
 
   void load() async {
     print("StationsCubit loading...");
-    final m = (await GetIt.I<CmsService>().s.find('stations'))
-        .map((e) => e.data)
-        .toList();
-
-    final o = serializers.deserialize(
-      m,
-      specifiedType: FullType(
-        BuiltList,
-        [
-          FullType(
-            Station,
-            [
-              FullType(
-                Line,
-                [
-                  FullType(
-                    String,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-    emit(o);
+    final stations = await GetIt.I<CmsService>().getStations();
+    emit(stations);
     return;
   }
 }
 
-class LinesCubit extends Cubit<BuiltList<Line>> {
-  LinesCubit(MapPosition state) : super(BuiltList<Line>());
+class LinesCubit extends Cubit<BuiltList<Line<Station<String>>>> {
+  LinesCubit() : super(BuiltList<Line<Station<String>>>());
 
   void load() async {
     print("LinesCubit loading...");
-    // final m = (await GetIt.I<CmsService>().s.find('Lines'))
-    //     .map(
-    //       (e) => Line.fromJson(e.data),
-    //     )
-    //     .toBuiltList();
-    // print(m);
-    // emit(m);
+    final lines = await GetIt.I<CmsService>().getLines();
+    emit(lines);
     return;
   }
 }

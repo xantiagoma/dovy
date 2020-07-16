@@ -46,6 +46,7 @@ dependencies:
   hive: ^1.4.1+1
   latlong: ^0.6.1
   lottie: ^0.4.1
+  material_design_icons_flutter: ^4.0.5345
   pigment: ^1.0.3
   pretty_dio_logger: ^1.1.1
   rubber: ^0.4.0

@@ -16,77 +16,36 @@ part 'serializers.g.dart';
   Location,
   Line,
 ])
-final serializersBuilder = _$serializers.toBuilder()
-  ..addPlugin(
-    StandardJsonPlugin(),
-  )
-  ..addBuilderFactory(
-    FullType(
-      Station,
-      [
-        FullType(Line),
-      ],
-    ),
-    () => StationBuilder<Line>(),
-  )
-  ..addBuilderFactory(
-    FullType(
-      Station,
-      [
+final Serializers serializers = (_$serializers.toBuilder()
+      ..addPlugin(
+        StandardJsonPlugin(),
+      )
+      ..addBuilderFactory(
         FullType(
-          Line,
+          Station,
           [
-            FullType(String),
+            FullType(Line),
           ],
         ),
-      ],
-    ),
-    () => StationBuilder<Line<String>>(),
-  )
-  ..addBuilderFactory(
-    FullType(
-      BuiltList,
-      [
+        () => StationBuilder<Line>(),
+      )
+      ..addBuilderFactory(
         FullType(
-          Line,
+          Station,
           [
             FullType(
-              String,
+              Line,
+              [
+                FullType(String),
+              ],
             ),
           ],
         ),
-      ],
-    ),
-    () => ListBuilder<Line>(),
-  )
-  ..addBuilderFactory(
-    FullType(
-      BuiltList,
-      [
+        () => StationBuilder<Line<String>>(),
+      )
+      ..addBuilderFactory(
         FullType(
-          String,
-        ),
-      ],
-    ),
-    () => ListBuilder<String>(),
-  )
-  ..addBuilderFactory(
-    FullType(
-      Line,
-      [
-        FullType(
-          String,
-        ),
-      ],
-    ),
-    () => LineBuilder<String>(),
-  )
-  ..addBuilderFactory(
-    FullType(
-      BuiltList,
-      [
-        FullType(
-          Station,
+          BuiltList,
           [
             FullType(
               Line,
@@ -98,20 +57,113 @@ final serializersBuilder = _$serializers.toBuilder()
             ),
           ],
         ),
-      ],
-    ),
-    () => ListBuilder<Station<Line<String>>>(),
-  )
-  ..addBuilderFactory(
-    FullType(
-      Station,
-      [
+        () => ListBuilder<Line>(),
+      )
+      ..addBuilderFactory(
         FullType(
-          String,
+          BuiltList,
+          [
+            FullType(
+              String,
+            ),
+          ],
         ),
-      ],
-    ),
-    () => StationBuilder<String>(),
-  );
-
-final Serializers serializers = serializersBuilder.build();
+        () => ListBuilder<String>(),
+      )
+      ..addBuilderFactory(
+        FullType(
+          Line,
+          [
+            FullType(
+              String,
+            ),
+          ],
+        ),
+        () => LineBuilder<String>(),
+      )
+      ..addBuilderFactory(
+        FullType(
+          BuiltList,
+          [
+            FullType(
+              Station,
+              [
+                FullType(
+                  Line,
+                  [
+                    FullType(
+                      String,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+        () => ListBuilder<Station<Line<String>>>(),
+      )
+      ..addBuilderFactory(
+        FullType(
+          BuiltList,
+          [
+            FullType(
+              Station,
+              [
+                FullType(
+                  String,
+                ),
+              ],
+            ),
+          ],
+        ),
+        () => ListBuilder<Station<String>>(),
+      )
+      ..addBuilderFactory(
+        FullType(
+          Line,
+          [
+            FullType(
+              Station,
+              [
+                FullType(
+                  String,
+                ),
+              ],
+            ),
+          ],
+        ),
+        () => LineBuilder<Station<String>>(),
+      )
+      ..addBuilderFactory(
+        FullType(
+          BuiltList,
+          [
+            FullType(
+              Line,
+              [
+                FullType(
+                  Station,
+                  [
+                    FullType(
+                      String,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+        () => ListBuilder<Line<Station<String>>>(),
+      )
+      ..addBuilderFactory(
+        FullType(
+          Station,
+          [
+            FullType(
+              String,
+            ),
+          ],
+        ),
+        () => StationBuilder<String>(),
+      ))
+    .build();

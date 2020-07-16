@@ -10,20 +10,33 @@ void main() {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // Localization
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        S.delegate,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => PositionCubit(null),
+        ),
+        BlocProvider(
+          create: (context) => StationsCubit()..load(),
+        ),
+        BlocProvider(
+          create: (context) => LinesCubit()..load(),
+        ),
       ],
-      supportedLocales: S.delegate.supportedLocales,
-      // End Localization
-      debugShowCheckedModeBanner: false,
-      title: S?.current?.appName ?? 'Dovy',
-      theme: lightTheme,
-      onGenerateRoute: context.router.generator,
+      child: MaterialApp(
+        // Localization
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          S.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
+        // End Localization
+        debugShowCheckedModeBanner: false,
+        title: S?.current?.appName ?? 'Dovy',
+        theme: lightTheme,
+        onGenerateRoute: context.router.generator,
+      ),
     );
   }
 }

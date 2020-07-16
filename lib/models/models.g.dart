@@ -647,6 +647,13 @@ class _$LineSerializer implements StructuredSerializer<Line<Object>> {
         ..add(serializers.serialize(object.stations,
             specifiedType: new FullType(BuiltList, [parameterT])));
     }
+    if (object.path != null) {
+      result
+        ..add('path')
+        ..add(serializers.serialize(object.path,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Location)])));
+    }
     return result;
   }
 
@@ -688,6 +695,12 @@ class _$LineSerializer implements StructuredSerializer<Line<Object>> {
         case 'stations':
           result.stations.replace(serializers.deserialize(value,
                   specifiedType: new FullType(BuiltList, [parameterT]))
+              as BuiltList<Object>);
+          break;
+        case 'path':
+          result.path.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(Location)]))
               as BuiltList<Object>);
           break;
       }
@@ -1605,11 +1618,14 @@ class _$Line<T> extends Line<T> {
   final String code;
   @override
   final BuiltList<T> stations;
+  @override
+  final BuiltList<Location> path;
 
   factory _$Line([void Function(LineBuilder<T>) updates]) =>
       (new LineBuilder<T>()..update(updates)).build();
 
-  _$Line._({this.color, this.type, this.name, this.code, this.stations})
+  _$Line._(
+      {this.color, this.type, this.name, this.code, this.stations, this.path})
       : super._() {
     if (T == dynamic) {
       throw new BuiltValueMissingGenericsError('Line', 'T');
@@ -1631,15 +1647,18 @@ class _$Line<T> extends Line<T> {
         type == other.type &&
         name == other.name &&
         code == other.code &&
-        stations == other.stations;
+        stations == other.stations &&
+        path == other.path;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc($jc(0, color.hashCode), type.hashCode), name.hashCode),
-            code.hashCode),
-        stations.hashCode));
+        $jc(
+            $jc($jc($jc($jc(0, color.hashCode), type.hashCode), name.hashCode),
+                code.hashCode),
+            stations.hashCode),
+        path.hashCode));
   }
 
   @override
@@ -1649,7 +1668,8 @@ class _$Line<T> extends Line<T> {
           ..add('type', type)
           ..add('name', name)
           ..add('code', code)
-          ..add('stations', stations))
+          ..add('stations', stations)
+          ..add('path', path))
         .toString();
   }
 }
@@ -1677,6 +1697,11 @@ class LineBuilder<T> implements Builder<Line<T>, LineBuilder<T>> {
   ListBuilder<T> get stations => _$this._stations ??= new ListBuilder<T>();
   set stations(ListBuilder<T> stations) => _$this._stations = stations;
 
+  ListBuilder<Location> _path;
+  ListBuilder<Location> get path =>
+      _$this._path ??= new ListBuilder<Location>();
+  set path(ListBuilder<Location> path) => _$this._path = path;
+
   LineBuilder();
 
   LineBuilder<T> get _$this {
@@ -1686,6 +1711,7 @@ class LineBuilder<T> implements Builder<Line<T>, LineBuilder<T>> {
       _name = _$v.name;
       _code = _$v.code;
       _stations = _$v.stations?.toBuilder();
+      _path = _$v.path?.toBuilder();
       _$v = null;
     }
     return this;
@@ -1714,12 +1740,15 @@ class LineBuilder<T> implements Builder<Line<T>, LineBuilder<T>> {
               type: type,
               name: name,
               code: code,
-              stations: _stations?.build());
+              stations: _stations?.build(),
+              path: _path?.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'stations';
         _stations?.build();
+        _$failedField = 'path';
+        _path?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'Line', _$failedField, e.toString());
