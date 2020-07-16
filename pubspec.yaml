@@ -34,6 +34,7 @@ dependencies:
   dart_date: ^1.0.6
   dart_strapi: ^0.0.3
   dio: ^3.0.9
+  fl_chart: ^0.10.1
   fluro: ^1.6.3
   flushbar: ^1.10.4
   flutter_bloc: ^6.0.0-dev.1

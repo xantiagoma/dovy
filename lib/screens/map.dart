@@ -1,4 +1,5 @@
 import 'package:dovy/general.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({
@@ -66,57 +67,107 @@ class Mapa extends HookWidget {
 
     final stations = context.bloc<StationsCubit>().state;
     final lines = context.bloc<LinesCubit>().state;
+    // final zoomLevel = context.bloc<PositionCubit>().state.zoom;
 
-    return FlutterMap(
-      mapController: mapController,
-      options: MapOptions(
-        center: mapTileCenter,
-        zoom: mapTileZoom,
-        maxZoom: 18.49,
-        minZoom: 2,
-        onPositionChanged: (position, _) =>
-            context.bloc<PositionCubit>().change(position),
-      ),
-      layers: [
-        TileLayerOptions(
-          urlTemplate: mapTileUrl,
-          subdomains: mapTileSubdomains,
-          additionalOptions: mapTileAdditionalOptions,
-          backgroundColor: context.theme.scaffoldBackgroundColor,
+    return BlocBuilder<PositionCubit, MapPosition>(
+        builder: (context, mapPosition) {
+      final zoom = (mapPosition?.zoom ?? 12) - 10;
+      return FlutterMap(
+        mapController: mapController,
+        options: MapOptions(
+          center: mapTileCenter,
+          zoom: mapTileZoom,
+          maxZoom: 18.49,
+          minZoom: 2,
+          onPositionChanged: (position, _) =>
+              context.bloc<PositionCubit>().change(position),
         ),
-        PolylineLayerOptions(
-          polylines: lines
-              .map(
-                (l) => Polyline(
-                  points: l.path?.map((p) => p.latlng)?.toList() ?? [],
-                  color: l.color.toColor(),
-                  strokeWidth: 2,
-                ),
-              )
-              .toList(),
-        ),
-        MarkerLayerOptions(
-          markers: stations
-              .map(
-                (s) => Marker(
-                  point: s.latlng,
-                  builder: (context) => IconButton(
-                    icon: Icon(Icons.trip_origin),
-                    onPressed: () {
-                      context.show(
-                        Flushbar(
-                          title: s.name,
-                          message: s.lines.map((e) => e.name).join(', '),
-                          duration: 1.5.seconds,
-                        ),
-                      );
-                    },
+        layers: [
+          TileLayerOptions(
+            urlTemplate: mapTileUrl,
+            subdomains: mapTileSubdomains,
+            additionalOptions: mapTileAdditionalOptions,
+            backgroundColor: context.theme.scaffoldBackgroundColor,
+          ),
+          PolylineLayerOptions(
+            polylines: lines
+                .map(
+                  (l) => Polyline(
+                    points: l.path?.map((p) => p.latlng)?.toList() ?? [],
+                    color: l.color.toColor(),
+                    strokeWidth: 2,
                   ),
-                ),
-              )
-              .toList(),
+                )
+                .toList(),
+          ),
+          MarkerLayerOptions(
+            markers: stations
+                .map(
+                  (s) => Marker(
+                    point: s.latlng,
+                    builder: (context) => IconButton(
+                      icon: DonutColors(
+                        colors: s.lines.map((c) => c.color.toColor()).toList(),
+                        radius: zoom,
+                        centerRatio: 0.1,
+                      ),
+                      onPressed: () {
+                        context.show(
+                          Flushbar(
+                            title: s.name,
+                            message: s.lines.map((e) => e.name).join(', '),
+                            duration: 1.5.seconds,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                )
+                .toList(),
+          ),
+        ],
+      );
+    });
+  }
+}
+
+class DonutColors extends StatelessWidget {
+  final double radius;
+  final double centerSpaceRadius;
+  final List<Color> colors;
+  final Color centerColor;
+
+  const DonutColors({
+    Key key,
+    @required this.colors,
+    double radius = 12,
+    double centerRatio = 0.6,
+    this.centerColor = Colors.black,
+  })  : this.radius = radius * (1 - centerRatio),
+        this.centerSpaceRadius = radius * centerRatio,
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return PieChart(
+      PieChartData(
+        sectionsSpace: 0,
+        centerSpaceRadius: 4,
+        borderData: FlBorderData(
+          show: false,
         ),
-      ],
+        centerSpaceColor: centerColor,
+        sections: colors
+            .map(
+              (c) => PieChartSectionData(
+                color: c,
+                value: 1,
+                showTitle: false,
+                radius: radius,
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 }

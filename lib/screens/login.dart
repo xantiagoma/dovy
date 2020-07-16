@@ -105,7 +105,6 @@ class LoginForm extends HookWidget {
                   ? null
                   : () async {
                       final form = formKey.form;
-                      // print(FormBuilder.of(context).fields);
                       loading.value = true;
                       Flushbar msg;
                       if (form.saveAndValidate()) {

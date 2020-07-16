@@ -20,9 +20,6 @@ void main() {
     test('Login', () async {
       final auth =
           await GetIt.I<AuthService>().login('test', 'password').tryOrNull;
-      // print(auth);
-      // print(auth.user.role.created);
-
       expect(auth, isNot(null));
       return;
     });

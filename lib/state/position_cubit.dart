@@ -11,7 +11,6 @@ class StationsCubit extends Cubit<BuiltList<Station<Line<String>>>> {
   StationsCubit() : super(BuiltList<Station<Line<String>>>());
 
   void load() async {
-    print("StationsCubit loading...");
     final stations = await GetIt.I<CmsService>().getStations();
     emit(stations);
     return;
@@ -22,7 +21,6 @@ class LinesCubit extends Cubit<BuiltList<Line<Station<String>>>> {
   LinesCubit() : super(BuiltList<Line<Station<String>>>());
 
   void load() async {
-    print("LinesCubit loading...");
     final lines = await GetIt.I<CmsService>().getLines();
     emit(lines);
     return;
