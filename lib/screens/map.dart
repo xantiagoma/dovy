@@ -112,36 +112,50 @@ class Mapa extends HookWidget {
                         centerRatio: 0.1,
                       ),
                       onPressed: () {
-                        context.show(
-                          Flushbar(
-                            margin: EdgeInsets.all(10),
-                            borderRadius: 10,
-                            title: s.name,
-                            messageText: Row(
-                              children: s.lines
-                                  .map(
-                                    (l) => SizedBox(
-                                      height: 30,
-                                      width: 30,
-                                      child: Stack(
-                                        children: <Widget>[
-                                          DonutColors(
-                                            radius: 15,
-                                            centerColor: l.color.toColor(),
-                                            colors: [l.color.toColor()],
-                                          ),
-                                          Align(
-                                            alignment: Alignment.center,
-                                            child: Text(l.name),
-                                          ),
-                                        ],
-                                      ),
+                        Flushbar msg;
+                        msg = Flushbar(
+                          margin: EdgeInsets.all(10),
+                          borderRadius: 10,
+                          titleText: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                s.name,
+                                style: context.theme.textTheme.subtitle1,
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.close),
+                                onPressed: () {
+                                  msg.dismiss();
+                                },
+                              ),
+                            ],
+                          ),
+                          messageText: Row(
+                            children: s.lines
+                                .map(
+                                  (l) => SizedBox(
+                                    height: 30,
+                                    width: 30,
+                                    child: Stack(
+                                      children: <Widget>[
+                                        DonutColors(
+                                          radius: 15,
+                                          centerColor: l.color.toColor(),
+                                          colors: [l.color.toColor()],
+                                        ),
+                                        Align(
+                                          alignment: Alignment.center,
+                                          child: Text(l.name),
+                                        ),
+                                      ],
                                     ),
-                                  )
-                                  .toList(),
-                            ),
+                                  ),
+                                )
+                                .toList(),
                           ),
                         );
+                        context.show(msg);
                       },
                     ),
                   ),
