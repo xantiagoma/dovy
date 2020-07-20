@@ -114,9 +114,32 @@ class Mapa extends HookWidget {
                       onPressed: () {
                         context.show(
                           Flushbar(
+                            margin: EdgeInsets.all(10),
+                            borderRadius: 10,
                             title: s.name,
-                            message: s.lines.map((e) => e.name).join(', '),
-                            duration: 1.5.seconds,
+                            messageText: Row(
+                              children: s.lines
+                                  .map(
+                                    (l) => SizedBox(
+                                      height: 30,
+                                      width: 30,
+                                      child: Stack(
+                                        children: <Widget>[
+                                          DonutColors(
+                                            radius: 15,
+                                            centerColor: l.color.toColor(),
+                                            colors: [l.color.toColor()],
+                                          ),
+                                          Align(
+                                            alignment: Alignment.center,
+                                            child: Text(l.name),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
                           ),
                         );
                       },
