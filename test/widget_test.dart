@@ -7,23 +7,28 @@
 
 // import 'package:dovy/models/models.dart';
 // import 'package:flutter/material.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:dovy/general.dart';
-// import 'package:dovy/setup.dart' as setup;
+import 'package:flutter_test/flutter_test.dart';
+import 'package:dovy/general.dart';
+import 'package:dovy/setup.dart' as setup;
 
 void main() {
-  // group("Auth", () {
-  //   setUp(() {
-  //     setup.setUp();
-  //   });
+  group("Auth", () {
+    // setUp(() {
+    //   // setup.setUp();
+    // });
 
-  //   test('Login', () async {
-  //     final auth =
-  //         await GetIt.I<AuthService>().login('test', 'password').tryOrNull;
-  //     expect(auth, isNot(null));
-  //     return;
-  //   });
-  // });
+    // test('Login', () async {
+    //   final auth =
+    //       await GetIt.I<AuthService>().login('test', 'password').tryOrNull;
+    //   expect(auth, isNot(null));
+    //   return;
+    // });
+
+    test('Mock', () async {
+      expect(4, isNot(5));
+      return;
+    });
+  });
   // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
   //   // Build our app and trigger a frame.
   //   await tester.pumpWidget(MyApp());
