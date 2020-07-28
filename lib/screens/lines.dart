@@ -23,14 +23,51 @@ class _LinesScreenState extends State<LinesScreen>
         );
       }
 
-      return ListView.builder(
-        itemCount: snapshot.length,
-        itemBuilder: (context, i) {
-          final line = snapshot[i];
-          return Text('${line.code} - ${line.name}');
-        },
+      return CustomScrollView(
+        slivers: <Widget>[
+          SliverSafeArea(
+            sliver: SliverPadding(
+              padding: EdgeInsets.all(20),
+              sliver: buildGridView(snapshot),
+            ),
+          ),
+        ],
       );
     });
+  }
+
+  SliverGrid buildGridView(BuiltList<Line<Station<String>>> snapshot) {
+    return SliverGrid(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 20,
+        crossAxisSpacing: 20,
+      ),
+      delegate: SliverChildBuilderDelegate(
+        (context, i) {
+          final line = snapshot[i];
+          return Material(
+            color: line.color.toColor().desaturate().lighten(),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            child: InkWell(
+              onTap: () {
+                final msg = Flushbar(
+                  message: line.name,
+                );
+                context.show(msg);
+              },
+              child: Center(
+                child: Text(
+                  line.name,
+                  style: context.theme.textTheme.headline2,
+                ),
+              ),
+            ),
+          );
+        },
+        childCount: snapshot.length,
+      ),
+    );
   }
 
   @override
