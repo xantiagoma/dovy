@@ -1,4 +1,5 @@
 import 'package:dovy/general.dart';
+import 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
 
 extension BuildContext_ on BuildContext {
   S get s => S.of(this);
@@ -175,4 +176,24 @@ extension Location_ on Location {
 
 extension Station_ on Station {
   LatLng get latlng => Location_(this.location).latlng;
+}
+
+extension PolylineDecode_ on String {
+  List<LatLng> toLatLngList({int accuracyExponent = 5}) {
+    try {
+      return decodePolyline(
+        this,
+        accuracyExponent: accuracyExponent,
+      )
+          .map(
+            (p) => LatLng(
+              p.first,
+              p.last,
+            ),
+          )
+          .toList();
+    } catch (e) {
+      return [];
+    }
+  }
 }

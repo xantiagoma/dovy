@@ -90,15 +90,16 @@ class Mapa extends HookWidget {
             backgroundColor: context.theme.scaffoldBackgroundColor,
           ),
           PolylineLayerOptions(
-            polylines: lines
-                .map(
-                  (l) => Polyline(
-                    points: l.path?.map((p) => p.latlng)?.toList() ?? [],
-                    color: l.color.toColor(),
-                    strokeWidth: 2,
-                  ),
-                )
-                .toList(),
+            polylines: lines.map(
+              (l) {
+                final points = l.shape?.toLatLngList() ?? [];
+                return Polyline(
+                  points: points,
+                  color: l.color.toColor(),
+                  strokeWidth: 2,
+                );
+              },
+            ).toList(),
           ),
           MarkerLayerOptions(
             markers: stations
