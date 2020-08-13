@@ -103,6 +103,11 @@ class Mapa extends HookWidget {
           if (line == null) {
             return;
           }
+
+          if (select.line != null && select.line != id) {
+            return;
+          }
+
           final points = (line["shape"] as String)?.toLatLngList() ?? [];
           if (points.isEmpty) {
             return;
@@ -117,6 +122,11 @@ class Mapa extends HookWidget {
           final stations = line["stations"];
 
           stations.forEach((station) {
+            final id = station["id"] as String;
+            if (select.station != null && select.station != id) {
+              return;
+            }
+
             final location = station["location"];
             if (location == null) {
               return;
