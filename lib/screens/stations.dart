@@ -16,7 +16,11 @@ class _StationsScreenState extends State<StationsScreen>
     super.build(context);
 
     return MapStateBuilder(
-      builder: (context, select, systemsList, linesList, stations) {
+      builder: (context, select, systemsList, linesList, s) {
+        final systems = mapKeysFromList(systemsList, (k) => k["id"]);
+        final system = systems[select.system];
+        final name = system["name"];
+
         final stations = uniqBy(
           linesList
               .map((line) => line["stations"])
@@ -26,11 +30,57 @@ class _StationsScreenState extends State<StationsScreen>
           (s) => s["id"],
         );
 
-        return ListView.builder(
-          itemCount: stations.length,
-          itemBuilder: (context, i) {
-            return Text(stations[i]["name"]);
-          },
+        final linesBy = mapKeysFromList(linesList, (s) => s["id"]);
+
+        return CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              title: Text("$name - Stations"),
+            ),
+            SliverPadding(
+              padding: EdgeInsets.all(20),
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, i) {
+                    final station = stations[i];
+                    final name = station["name"];
+                    final lines = station["lines"]
+                        .map((p) => p["id"])
+                        .map((id) => linesBy[id])
+                        .toList();
+                    print(lines);
+                    return Row(
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            for (final line in lines)
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: Builder(builder: (context) {
+                                  final color =
+                                      (line["color"] as String).toColor();
+                                  return Chip(
+                                    backgroundColor: color,
+                                    label: Text(
+                                      line["name"],
+                                      style: TextStyle(
+                                        color: color.inverseBW,
+                                      ),
+                                    ),
+                                  );
+                                }),
+                              ),
+                          ],
+                        ),
+                        Text(name),
+                      ],
+                    );
+                  },
+                  childCount: stations.length,
+                ),
+              ),
+            )
+          ],
         );
       },
     );

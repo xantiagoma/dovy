@@ -16,14 +16,18 @@ class _LinesScreenState extends State<LinesScreen>
     super.build(context);
     return MapStateBuilder(
         builder: (context, select, systemsList, lines, stationsList) {
+      final systems = mapKeysFromList(systemsList, (k) => k["id"]);
+      final system = systems[select.system];
+      final name = system["name"];
       return CustomScrollView(
         slivers: <Widget>[
-          SliverSafeArea(
-            sliver: SliverPadding(
-              padding: EdgeInsets.all(20),
-              sliver: buildGridView(lines), // TODO: Change
-            ),
+          SliverAppBar(
+            title: Text("$name - Lines"),
           ),
+          SliverPadding(
+            padding: EdgeInsets.all(20),
+            sliver: buildGridView(lines), // TODO: Change
+          )
         ],
       );
     });
