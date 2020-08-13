@@ -62,9 +62,8 @@ class SystemsListCubit extends Cubit<List<dynamic>> with EquatableMixin {
   @override
   bool get stringify => true;
 
-  loadSystems() {
-    graphQLClient.value
-        .query(
+  Future<List<dynamic>> loadSystems() async {
+    final value = await graphQLClient.value.query(
       QueryOptions(
         documentNode: gql(
           """
@@ -80,11 +79,10 @@ class SystemsListCubit extends Cubit<List<dynamic>> with EquatableMixin {
         """,
         ),
       ),
-    )
-        .then((value) {
-      final systems = (value.data["systems"] as Iterable).toList();
-      emit(systems);
-    });
+    );
+    final systems = (value.data["systems"] as Iterable).toList();
+    emit(systems);
+    return systems;
   }
 }
 

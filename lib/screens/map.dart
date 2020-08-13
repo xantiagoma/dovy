@@ -47,7 +47,10 @@ class Mapa extends HookWidget {
     useEffect(() {
       final system = select.state.system;
       if (system == null) {
-        systemsList.loadSystems();
+        systemsList.loadSystems().then((list) {
+          // First Load
+          select.selectSystem(list[0]["id"]);
+        });
       }
 
       return () {};
