@@ -112,9 +112,10 @@ class Mapa extends HookWidget {
           }
 
           final points = (line["shape"] as String)?.toLatLngList() ?? [];
-          if (points.isEmpty) {
-            return;
-          }
+          //TODO
+          // if (points.isEmpty) {
+          //   return;
+          // }
           final polyline = Polyline(
             points: points,
             color: (line["color"] as String).toColor(),
