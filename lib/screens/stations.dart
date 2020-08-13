@@ -36,6 +36,20 @@ class _StationsScreenState extends State<StationsScreen>
           slivers: <Widget>[
             SliverAppBar(
               title: Text("$name - Stations"),
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.settings),
+                  onPressed: () {
+                    final message = Flushbar(
+                      title: "Options",
+                      messageText: SelectSystem(),
+                      margin: EdgeInsets.all(10),
+                      borderRadius: 20,
+                    );
+                    context.show(message);
+                  },
+                )
+              ],
             ),
             SliverPadding(
               padding: EdgeInsets.all(20),
@@ -48,7 +62,6 @@ class _StationsScreenState extends State<StationsScreen>
                         .map((p) => p["id"])
                         .map((id) => linesBy[id])
                         .toList();
-                    print(lines);
                     return Row(
                       children: <Widget>[
                         Row(

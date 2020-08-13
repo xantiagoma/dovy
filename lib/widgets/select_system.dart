@@ -32,6 +32,7 @@ class SelectSystem extends HookWidget {
                         )
                         .toList(),
                     onChanged: systemSelectBloc.selectSystem,
+                    displayClearIcon: false,
                     onClear: () => systemSelectBloc.selectSystem(null),
                     hint: "System",
                     searchHint: "Select a System",

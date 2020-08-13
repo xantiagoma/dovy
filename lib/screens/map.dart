@@ -82,8 +82,8 @@ class Mapa extends HookWidget {
 
     return MapStateBuilder(
         builder: (context, select, systemsList, linesList, stationsList) {
-      print(
-          "$select: systems: ${systemsList.length}, lines: ${linesList.length}, stations: ${stationsList.length}");
+      // print(
+      //     "$select: systems: ${systemsList.length}, lines: ${linesList.length}, stations: ${stationsList.length}");
 
       final systems = mapKeysFromList(systemsList, (s) => s['id']);
       final lines = mapKeysFromList(linesList, (s) => s['id']);
