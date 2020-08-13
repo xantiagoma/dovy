@@ -72,6 +72,9 @@ class SystemsListCubit extends Cubit<List<dynamic>> with EquatableMixin {
               systems {
                 name
                 id
+                lines {
+                  id
+                }
               }
             }
         """,
@@ -140,6 +143,19 @@ class LinesListCubit extends Cubit<List<dynamic>> with EquatableMixin {
                 lines {
                   id
                   name
+                  color
+                  shape
+                  stations {
+                    id
+                    name
+                    location {
+                      latitude
+                      longitude
+                    }
+                    lines {
+                      id
+                    }
+                  }
                 }
               }
             }
