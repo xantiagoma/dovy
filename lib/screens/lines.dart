@@ -39,8 +39,10 @@ class _LinesScreenState extends State<LinesScreen>
       delegate: SliverChildBuilderDelegate(
         (context, i) {
           final line = lines[i];
+          final color =
+              (line["color"] as String).toColor().desaturate().lighten();
           return Material(
-            color: (line["color"] as String).toColor().desaturate().lighten(),
+            color: color,
             borderRadius: BorderRadius.all(Radius.circular(10)),
             child: InkWell(
               onTap: () {
@@ -52,7 +54,10 @@ class _LinesScreenState extends State<LinesScreen>
               child: Center(
                 child: Text(
                   line["name"],
-                  style: context.theme.textTheme.headline2,
+                  style: context.theme.textTheme.headline4.copyWith(
+                    color: color.inverseBW,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
