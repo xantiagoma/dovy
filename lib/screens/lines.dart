@@ -1,6 +1,6 @@
 import 'package:dovy/general.dart';
 
-class LinesScreen extends StatefulWidget {
+class LinesScreen extends StatefulHookWidget {
   const LinesScreen({
     Key key,
   }) : super(key: key);
@@ -14,19 +14,22 @@ class _LinesScreenState extends State<LinesScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverSafeArea(
-          sliver: SliverPadding(
-            padding: EdgeInsets.all(20),
-            sliver: buildGridView(BuiltList()), // TODO: Change
+    return MapStateBuilder(
+        builder: (context, select, systemsList, lines, stationsList) {
+      return CustomScrollView(
+        slivers: <Widget>[
+          SliverSafeArea(
+            sliver: SliverPadding(
+              padding: EdgeInsets.all(20),
+              sliver: buildGridView(lines), // TODO: Change
+            ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 
-  SliverGrid buildGridView(BuiltList<Line<Station<String>>> snapshot) {
+  SliverGrid buildGridView(List lines) {
     return SliverGrid(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -35,27 +38,27 @@ class _LinesScreenState extends State<LinesScreen>
       ),
       delegate: SliverChildBuilderDelegate(
         (context, i) {
-          final line = snapshot[i];
+          final line = lines[i];
           return Material(
-            color: line.color.toColor().desaturate().lighten(),
+            color: (line["color"] as String).toColor().desaturate().lighten(),
             borderRadius: BorderRadius.all(Radius.circular(10)),
             child: InkWell(
               onTap: () {
                 final msg = Flushbar(
-                  message: line.name,
+                  message: line["name"],
                 );
                 context.show(msg);
               },
               child: Center(
                 child: Text(
-                  line.name,
+                  line["name"],
                   style: context.theme.textTheme.headline2,
                 ),
               ),
             ),
           );
         },
-        childCount: snapshot.length,
+        childCount: lines.length,
       ),
     );
   }

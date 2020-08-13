@@ -15,12 +15,23 @@ class _StationsScreenState extends State<StationsScreen>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return ListView.builder(
-      itemCount: 0,
-      itemBuilder: (context, i) {
-        // final line = snapshot[i];
-        // return Text('${line.code} - ${line.name}');
-        return Text('Line');
+    return MapStateBuilder(
+      builder: (context, select, systemsList, linesList, stations) {
+        final stations = uniqBy(
+          linesList
+              .map((line) => line["stations"])
+              .toList()
+              .expand((element) => element)
+              .toList(),
+          (s) => s["id"],
+        );
+
+        return ListView.builder(
+          itemCount: stations.length,
+          itemBuilder: (context, i) {
+            return Text(stations[i]["name"]);
+          },
+        );
       },
     );
   }

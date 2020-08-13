@@ -7,3 +7,6 @@ Map<T, S> mapKeysFromList<S, T>(Iterable<S> values, T key(S element)) {
   });
   return map;
 }
+
+List<S> uniqBy<S, T>(Iterable<S> values, T key(S element)) =>
+    mapKeysFromList(values, key).values.toList();
