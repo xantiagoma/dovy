@@ -1,7 +1,10 @@
 import 'package:dovy/general.dart';
+import 'package:dovy/hooks/graphql.dart';
+import 'package:dovy/state/system_cubit.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:searchable_dropdown/searchable_dropdown.dart';
 
-class MapScreen extends StatefulWidget {
+class MapScreen extends StatefulHookWidget {
   const MapScreen({
     Key key,
   }) : super(key: key);
@@ -16,16 +19,132 @@ class _MapScreenState extends State<MapScreen>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return BlocBuilder<StationsCubit, BuiltList<Station>>(
-      builder: (context, state) => BlocBuilder<LinesCubit, BuiltList<Line>>(
-          builder: (context, snapshot) {
-        return Mapa();
-      }),
+    return Stack(
+      children: <Widget>[
+        Mapa(),
+        Align(
+          alignment: Alignment.bottomRight,
+          child: SettingsButton(),
+        ),
+      ],
     );
   }
 
   @override
   bool get wantKeepAlive => true;
+}
+
+class SettingsButton extends StatelessWidget {
+  const SettingsButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(
+        right: 10,
+        bottom: 10,
+      ),
+      decoration: BoxDecoration(
+        color: context.theme.primaryColor,
+        borderRadius: BorderRadius.all(
+          Radius.circular(100),
+        ),
+      ),
+      child: InkWell(
+        onTap: () {
+          final message = Flushbar(
+            title: "Options",
+            messageText: SelectSystem(),
+            margin: EdgeInsets.all(10),
+            borderRadius: 20,
+          );
+          context.show(message);
+        },
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Icon(Icons.settings),
+        ),
+      ),
+    );
+  }
+}
+
+class SelectSystem extends HookWidget {
+  const SelectSystem({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final systemSelectBloc = useBloc<SystemSelectCubit>();
+
+    return BlocBuilder<SystemsListCubit, List<dynamic>>(
+        builder: (context, systemsListState) {
+      return BlocBuilder<LinesListCubit, List<dynamic>>(
+          builder: (context, linesListState) {
+        return BlocBuilder<StationsListCubit, List<dynamic>>(
+            builder: (context, stationsListState) {
+          return BlocBuilder<SystemSelectCubit, SystemSelectState>(
+              builder: (context, systemSelectState) {
+            return Column(
+              children: <Widget>[
+                if (systemsListState.isNotEmpty)
+                  SearchableDropdown.single(
+                    value: systemSelectState.system,
+                    items: systemsListState
+                        .map(
+                          (system) => DropdownMenuItem(
+                            child: Text(system["name"]),
+                            value: system["id"],
+                          ),
+                        )
+                        .toList(),
+                    onChanged: systemSelectBloc.selectSystem,
+                    onClear: () => systemSelectBloc.selectSystem(null),
+                    hint: "System",
+                    searchHint: "Select a System",
+                  ),
+                if (linesListState.isNotEmpty)
+                  SearchableDropdown.single(
+                    value: systemSelectState.line,
+                    items: linesListState
+                        .map(
+                          (line) => DropdownMenuItem(
+                            child: Text(line["name"]),
+                            value: line["id"],
+                          ),
+                        )
+                        .toList(),
+                    onChanged: systemSelectBloc.selectLine,
+                    onClear: () => systemSelectBloc.selectLine(null),
+                    hint: "Line",
+                    searchHint: "Select a Line",
+                  ),
+                if (stationsListState.isNotEmpty)
+                  SearchableDropdown.single(
+                    value: systemSelectState.station,
+                    items: stationsListState
+                        .map(
+                          (line) => DropdownMenuItem(
+                            child: Text(line["name"]),
+                            value: line["id"],
+                          ),
+                        )
+                        .toList(),
+                    onChanged: systemSelectBloc.selectStation,
+                    onClear: () => systemSelectBloc.selectStation(null),
+                    hint: "Station",
+                    searchHint: "Select a Station",
+                  ),
+              ],
+            );
+          });
+        });
+      });
+    });
+  }
 }
 
 class Mapa extends HookWidget {
@@ -35,10 +154,22 @@ class Mapa extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cmsConfigsMemo = useMemoized(() => context.i<CmsService>().configs);
-    final cmsConfigsMemo$ = useFuture(cmsConfigsMemo);
+    // final cmsConfigsMemo = useMemoized(() => context.i<CmsService>().configs);
+    // final cmsConfigsMemo$ = useFuture(cmsConfigsMemo);
+    final snapshot = useMemoizedFuture(context.i<CmsService>().configs);
+    final select = useBloc<SystemSelectCubit>();
+    final systemsList = useBloc<SystemsListCubit>();
 
-    if (cmsConfigsMemo$.data == null) {
+    useEffect(() {
+      final system = select.state.system;
+      if (system == null) {
+        systemsList.loadSystems();
+      }
+
+      return () {};
+    }, [select.state.system]);
+
+    if (snapshot.data == null) {
       return Center(
         child: CircularProgressIndicator(),
       );
@@ -46,7 +177,7 @@ class Mapa extends HookWidget {
 
     final mapController = MapController();
 
-    final options = cmsConfigsMemo$.data;
+    final options = snapshot.data;
     final String mapTileUrl = options['map_tile_url'];
     // 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
     final List<String> mapTileSubdomains = List.from(
@@ -65,9 +196,11 @@ class Mapa extends HookWidget {
 
     final double mapTileZoom = options['map_tile_zoom'].toDouble();
 
-    final stations = context.bloc<StationsCubit>().state;
-    final lines = context.bloc<LinesCubit>().state;
+    // final stations = context.bloc<StationsCubit>().state;
+    // final lines = context.bloc<LinesCubit>().state;
     // final zoomLevel = context.bloc<PositionCubit>().state.zoom;
+    final lines = []; // TODO: change
+    final stations = []; // TODO: change
 
     return BlocBuilder<PositionCubit, MapPosition>(
         builder: (context, mapPosition) {

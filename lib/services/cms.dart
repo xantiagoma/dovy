@@ -52,7 +52,7 @@ class AuthService {
 }
 
 class CmsService {
-  static String baseUrl = 'https://servy-4npeq4oexa-ue.a.run.app';
+  static String baseUrl = 'https://server.xantiagoma.com';
 
   Strapi s = Strapi.newClient()
     ..initialize(

@@ -8,8 +8,8 @@
 // import 'package:dovy/models/models.dart';
 // import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:dovy/general.dart';
-import 'package:dovy/setup.dart' as setup;
+// import 'package:dovy/general.dart';
+// import 'package:dovy/setup.dart' as setup;
 
 void main() {
   group("Auth", () {

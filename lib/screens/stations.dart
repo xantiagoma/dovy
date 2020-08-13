@@ -15,22 +15,14 @@ class _StationsScreenState extends State<StationsScreen>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return BlocBuilder<StationsCubit, BuiltList<Station<Line<String>>>>(
-        builder: (context, snapshot) {
-      if (snapshot == null) {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      }
-
-      return ListView.builder(
-        itemCount: snapshot.length,
-        itemBuilder: (context, i) {
-          final line = snapshot[i];
-          return Text('${line.code} - ${line.name}');
-        },
-      );
-    });
+    return ListView.builder(
+      itemCount: 0,
+      itemBuilder: (context, i) {
+        // final line = snapshot[i];
+        // return Text('${line.code} - ${line.name}');
+        return Text('Line');
+      },
+    );
   }
 
   @override

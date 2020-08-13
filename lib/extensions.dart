@@ -26,6 +26,7 @@ extension BuildContext_ on BuildContext {
         transitionBuilder: transitionBuilder,
       );
   Future<T> show<T>(Flushbar<T> flushbar) => flushbar.show(this);
+  GraphQLClient get graphql => GraphQLProvider.of(this).value;
 }
 
 extension FormBuilder_ on ValueNotifier<GlobalKey<FormBuilderState>> {

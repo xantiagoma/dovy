@@ -107,7 +107,6 @@ class HomeScreen extends HookWidget {
         TabItem(icon: Icons.people, title: 'Profile'),
       ],
       initialActiveIndex: 0, //optional, default as 0
-      // onTap: (int i) => print('click index=$i'),
     );
   }
 }

@@ -14,26 +14,16 @@ class _LinesScreenState extends State<LinesScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
-    return BlocBuilder<LinesCubit, BuiltList<Line<Station<String>>>>(
-        builder: (context, snapshot) {
-      if (snapshot == null) {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      }
-
-      return CustomScrollView(
-        slivers: <Widget>[
-          SliverSafeArea(
-            sliver: SliverPadding(
-              padding: EdgeInsets.all(20),
-              sliver: buildGridView(snapshot),
-            ),
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverSafeArea(
+          sliver: SliverPadding(
+            padding: EdgeInsets.all(20),
+            sliver: buildGridView(BuiltList()), // TODO: Change
           ),
-        ],
-      );
-    });
+        ),
+      ],
+    );
   }
 
   SliverGrid buildGridView(BuiltList<Line<Station<String>>> snapshot) {

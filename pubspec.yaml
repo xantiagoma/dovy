@@ -34,6 +34,7 @@ dependencies:
   dart_date: ^1.0.6
   dart_strapi: ^0.0.3
   dio: ^3.0.9
+  equatable: ^1.2.3
   fl_chart: ^0.10.1
   fluro: ^1.6.3
   flushbar: ^1.10.4
@@ -41,9 +42,10 @@ dependencies:
   flutter_form_builder: ^3.11.4
   flutter_hooks: ^0.12.0
   flutter_map: ^0.9.0
-  google_polyline_algorithm: ^2.0.0
   flutter_spinkit: ^4.1.2+1
   get_it: ^4.0.2
+  google_polyline_algorithm: ^2.0.0
+  graphql_flutter: ^3.1.0
   hive_flutter: ^0.3.0+2
   hive: ^1.4.1+1
   latlong: ^0.6.1
@@ -52,6 +54,7 @@ dependencies:
   pigment: ^1.0.3
   pretty_dio_logger: ^1.1.1
   rubber: ^0.4.0
+  searchable_dropdown: ^1.1.3
   supercharged: ^1.6.0
   tinycolor: ^1.0.2
 
