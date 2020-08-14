@@ -25,55 +25,6 @@ class HomeScreen extends HookWidget {
     );
   }
 
-  // Widget buildBottomSheet() {
-  //       final animationController = useRubberAnimationController(
-  //     duration: 1.seconds,
-  //     upperBoundValue: AnimationControllerValue(percentage: 1.0),
-  //     lowerBoundValue: AnimationControllerValue(percentage: 0.1),
-  //     halfBoundValue: AnimationControllerValue(percentage: 1.3 / 2),
-  //   );
-  //   final scrollController = useScrollController();
-  //   RubberBottomSheet(
-  //         scrollController: scrollController,
-  //         animationController: animationController,
-  //         // menuLayer: buildBottomNavigation(tabController),
-  //         lowerLayer: buildLowerLayer(mapController, tabController),
-  //         upperLayer: buildSheet(scrollController, animationController),
-  //       ),
-  //     ),
-  // }
-
-  Widget buildSheet(ScrollController scrollController,
-      RubberAnimationController animationController) {
-    final context = useContext();
-    return Container(
-      decoration: BoxDecoration(
-        color: context.theme.primaryColor,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(5),
-          topRight: Radius.circular(5),
-        ),
-      ),
-      child: ListView(
-        controller: scrollController,
-        physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              RaisedButton(
-                onPressed: () {
-                  animationController.animateTo(to: 1.0);
-                },
-                child: Text('Scroll'),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget buildTabs(
     TabController tabController,
     int index,

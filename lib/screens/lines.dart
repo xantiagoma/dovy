@@ -62,21 +62,13 @@ class _LinesScreenState extends State<LinesScreen>
           return Material(
             color: color,
             borderRadius: BorderRadius.all(Radius.circular(10)),
-            child: InkWell(
-              onTap: () {
-                final msg = Flushbar(
-                  message: line["name"],
-                );
-                context.show(msg);
-              },
-              child: Center(
-                child: Text(
-                  line["name"],
-                  style: context.theme.textTheme.headline4.copyWith(
-                    color: color.inverseBW,
-                  ),
-                  textAlign: TextAlign.center,
+            child: Center(
+              child: Text(
+                line["name"],
+                style: context.theme.textTheme.headline4.copyWith(
+                  color: color.inverseBW,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
           );
