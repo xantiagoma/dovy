@@ -3,7 +3,7 @@ import 'package:dovy/graphql.dart';
 import 'package:dovy/router.dart';
 import 'package:dovy/services/localstorage.dart';
 
-setUp() {
+void setUp() {
   WidgetsFlutterBinding.ensureInitialized();
   GetIt.I.registerSingleton(router);
   GetIt.I.registerSingleton(CmsService());

@@ -1,6 +1,4 @@
 import 'package:dovy/general.dart';
-import 'package:dovy/models/models.dart';
-import 'package:hive/hive.dart';
 
 class AuthService {
   Future<Box<String>> get box async {
@@ -9,15 +7,15 @@ class AuthService {
     return box;
   }
 
-  Future<AuthResponse> login(String id, String password) async {
+  Future<Map<String, dynamic>> login(String id, String password) async {
     final r = await GetIt.I<CmsService>().s.http.post("/auth/local", data: {
       "identifier": id,
       "password": password,
     });
 
-    final authResponse = AuthResponse.fromJson(r.data);
-    (await box).put('jwt', authResponse.jwt);
-    GetIt.I<CmsService>().token = authResponse.jwt;
+    final authResponse = r.data;
+    (await box).put('jwt', authResponse["jwt"]);
+    GetIt.I<CmsService>().token = authResponse["jwt"];
     return authResponse;
   }
 
@@ -81,67 +79,21 @@ class CmsService {
       );
   }
 
-  Future<BuiltList<Station<Line<String>>>> getStations({
+  Future<List> getStations({
     Map<String, dynamic> queryParameters,
   }) async {
     final m = (await GetIt.I<CmsService>().s.find('stations'))
         .map((e) => e.data)
         .toList();
-
-    final o = serializers.deserialize(
-      m,
-      specifiedType: FullType(
-        BuiltList,
-        [
-          FullType(
-            Station,
-            [
-              FullType(
-                Line,
-                [
-                  FullType(
-                    String,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-
-    return o;
+    return m;
   }
 
-  Future<BuiltList<Line<Station<String>>>> getLines({
+  Future<List> getLines({
     Map<String, dynamic> queryParameters,
   }) async {
     final m = (await GetIt.I<CmsService>().s.find('lines'))
         .map((e) => e.data)
         .toList();
-
-    final o = serializers.deserialize(
-      m,
-      specifiedType: FullType(
-        BuiltList,
-        [
-          FullType(
-            Line,
-            [
-              FullType(
-                Station,
-                [
-                  FullType(
-                    String,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-
-    return o;
+    return m;
   }
 }

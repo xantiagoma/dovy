@@ -21,6 +21,7 @@ export 'package:flutter_spinkit/flutter_spinkit.dart';
 export 'package:flutter/material.dart' hide Interval;
 export 'package:get_it/get_it.dart' hide throwIf, throwIfNot;
 export 'package:graphql_flutter/graphql_flutter.dart' hide Location;
+export 'package:hive/hive.dart';
 export 'package:latlong/latlong.dart' hide Path;
 export 'package:lottie/lottie.dart' hide Marker;
 export 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -28,13 +29,12 @@ export 'package:pigment/pigment.dart';
 export 'package:pretty_dio_logger/pretty_dio_logger.dart';
 export 'package:rubber/rubber.dart';
 export 'package:searchable_dropdown/searchable_dropdown.dart';
-export 'package:supercharged/supercharged.dart' hide Duration_;
+export 'package:supercharged/supercharged.dart';
 export 'package:tinycolor/tinycolor.dart';
 
 // App
 export 'package:dovy/extensions.dart';
 export 'package:dovy/generated/l10n.dart';
-export 'package:dovy/models/models.dart';
 export 'package:dovy/screens/screens.dart';
 export 'package:dovy/services/services.dart';
 export 'package:dovy/state/state.dart';

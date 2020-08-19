@@ -50,16 +50,16 @@ class ProfileHook extends HookWidget {
     if (snap.data.hasException) {
       return Text("Error");
     }
-    final user = User.fromJson(snap.data.data['me']);
+    final Map<String, dynamic> user = snap.data.data['me'];
 
     return Column(
       children: <Widget>[
         Text(
-          '@${user.username}',
+          '@${user["username"]}',
           style: context.theme.textTheme.headline5,
         ),
         Text(
-          user.email,
+          user["email"],
           style: context.theme.textTheme.headline6,
         ),
         Button(

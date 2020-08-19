@@ -171,13 +171,13 @@ extension MapPosition_ on MapPosition {
   String get string => mapPositionToString(this);
 }
 
-extension Location_ on Location {
-  LatLng get latlng => LatLng(this.latitude, this.longitude);
-}
+// extension Location_ on Location {
+//   LatLng get latlng => LatLng(this.latitude, this.longitude);
+// }
 
-extension Station_ on Station {
-  LatLng get latlng => Location_(this.location).latlng;
-}
+// extension Station_ on Station {
+//   LatLng get latlng => Location_(this.location).latlng;
+// }
 
 extension PolylineDecode_ on String {
   List<LatLng> toLatLngList({int accuracyExponent = 5}) {
