@@ -64,20 +64,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
-  built_collection:
-    dependency: "direct main"
-    description:
-      name: built_collection
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.3.2"
-  built_value:
-    dependency: "direct main"
-    description:
-      name: built_value
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "7.1.0"
   cached_network_image:
     dependency: transitive
     description:
@@ -239,13 +225,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.2.1"
-  fixnum:
-    dependency: transitive
-    description:
-      name: fixnum
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.11"
   fl_chart:
     dependency: "direct main"
     description:
@@ -665,13 +644,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
-  pretty_dio_logger:
-    dependency: "direct main"
-    description:
-      name: pretty_dio_logger
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.1"
   process:
     dependency: transitive
     description:
@@ -714,13 +686,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
-  rubber:
-    dependency: "direct main"
-    description:
-      name: rubber
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.0"
   rxdart:
     dependency: transitive
     description:
