@@ -1,11 +1,12 @@
 import 'package:dovy/general.dart';
 
 typedef MapStateBuilderFunction = Widget Function(
-    BuildContext context,
-    SystemSelectState systemSelectState,
-    List systemsListState,
-    List linesListState,
-    List stationsListState);
+  BuildContext context,
+  SystemSelectState systemSelectState,
+  List systemsListState,
+  List linesListState,
+  List stationsListState,
+);
 
 class MapStateBuilder extends StatelessWidget {
   MapStateBuilder({Key key, @required this.builder}) : super(key: key);
