@@ -17,9 +17,7 @@ class _SearchScreenState extends State<SearchScreen>
 
     return ListView.builder(
       itemBuilder: (ctx, i) {
-        return Container(
-          child: Text("Item: $i"),
-        );
+        return Text("Item: $i");
       },
     );
   }
