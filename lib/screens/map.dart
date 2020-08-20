@@ -174,13 +174,15 @@ class Mapa extends HookWidget {
         return FlutterMap(
           mapController: mapController,
           options: MapOptions(
-            center: mapTileCenter,
-            zoom: mapTileZoom,
-            maxZoom: 18.49,
-            minZoom: 2,
-            onPositionChanged: (position, _) =>
-                context.bloc<PositionCubit>().change(position),
-          ),
+              center: mapTileCenter,
+              zoom: mapTileZoom,
+              maxZoom: 18.49,
+              minZoom: 2,
+              onPositionChanged: (position, _) =>
+                  context.bloc<PositionCubit>().change(position),
+              onTap: (l) {
+                clickPlace(context, l);
+              }),
           layers: [
             TileLayerOptions(
               urlTemplate: mapTileUrl,
@@ -201,7 +203,7 @@ class Mapa extends HookWidget {
   }
 }
 
-clickStation(BuildContext context, station, List lines) {
+void clickStation(BuildContext context, station, List lines) {
   Flushbar msg;
   msg = Flushbar(
     margin: EdgeInsets.all(10),
@@ -221,28 +223,46 @@ clickStation(BuildContext context, station, List lines) {
       ],
     ),
     messageText: Row(
-      children: lines
-          .map(
-            (l) => SizedBox(
-              height: 30,
-              width: 30,
-              child: Stack(
-                children: <Widget>[
-                  DonutColors(
-                    radius: 15,
-                    centerColor: (l["color"] as String).toColor(),
-                    colors: [(l["color"] as String).toColor()],
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(l["name"]),
-                  ),
-                ],
+      children: lines.map(
+        (l) {
+          final color = (l["color"] as String).toColor();
+          return Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: Chip(
+              label: Text(
+                l["name"],
+                style: TextStyle(
+                  color: color.inverseBW,
+                ),
               ),
+              backgroundColor: color,
             ),
-          )
-          .toList(),
+          );
+        },
+      ).toList(),
     ),
   );
+  context.show(msg);
+}
+
+void clickPlace(BuildContext context, LatLng point) {
+  Flushbar msg;
+  msg = Flushbar(
+    margin: EdgeInsets.all(10).copyWith(bottom: 120),
+    borderRadius: 10,
+    icon: Icon(Icons.info_outline),
+    messageText: FutureBuilder<Map<String, dynamic>>(
+      future: LocationService.getLocation(point),
+      builder: (context, snapshot) {
+        return Row(children: [
+          if (snapshot.connectionState == ConnectionState.done)
+            Expanded(child: Text(snapshot.data["display_name"]))
+          else
+            Expanded(child: Center(child: CircularProgressIndicator()))
+        ]);
+      },
+    ),
+  );
+
   context.show(msg);
 }
