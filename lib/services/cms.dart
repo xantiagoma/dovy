@@ -108,4 +108,7 @@ class LocationService {
         },
       ))
           .data;
+
+  static Future<Map<String, dynamic>> getIpInfo() async =>
+      (await Dio().get("https://xantiagoma.com/api/ip-api")).data;
 }

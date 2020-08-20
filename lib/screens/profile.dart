@@ -62,6 +62,28 @@ class ProfileHook extends HookWidget {
           user["email"],
           style: context.theme.textTheme.headline6,
         ),
+        FutureBuilder<Map<String, dynamic>>(
+          future: LocationService.getIpInfo(),
+          builder: (context, snapshot) {
+            if (snapshot.data == null) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Table(
+                children: [
+                  for (final entry in snapshot.data.entries)
+                    TableRow(children: [
+                      Text(entry.key),
+                      Text(entry.value.toString()),
+                    ]),
+                ],
+              ),
+            );
+          },
+        ),
         Button(
           onTap: () async {
             await context.i<AuthService>().logout();
