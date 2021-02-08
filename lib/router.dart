@@ -1,6 +1,6 @@
 import 'package:dovy/general.dart';
 
-final router = Router()
+final router = FluroRouter()
   ..define(
     '/',
     handler: Handler(

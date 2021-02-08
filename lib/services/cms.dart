@@ -1,7 +1,7 @@
 import 'package:dovy/general.dart';
 
 class CmsService {
-  static String baseUrl = 'https://server.xantiagoma.com';
+  static String baseUrl = 'https://xantiagoma.herokuapp.com';
 
   Strapi s = Strapi.newClient()
     ..initialize(
@@ -10,15 +10,8 @@ class CmsService {
     );
 
   Future<Map<String, dynamic>> get configs async {
-    final d = await s.find('configs');
-    final configs = d?.fold<Map<String, dynamic>>(
-      <String, dynamic>{},
-      (previousValue, element) {
-        final json = element.data;
-        previousValue[json['key']] = json['value'];
-        return previousValue;
-      },
-    );
+    final response = await s.http.get('/configs');
+    final configs = response.data;
     return configs;
   }
 

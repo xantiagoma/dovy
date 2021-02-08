@@ -2,7 +2,7 @@ import 'package:dovy/general.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 final HttpLink httpLink = HttpLink(
-  uri: 'https://server.xantiagoma.com/graphql',
+  uri: 'https://xantiagoma.herokuapp.com/graphql',
 );
 
 final AuthLink authLink = AuthLink(
