@@ -29,10 +29,6 @@ extension BuildContext_ on BuildContext {
   GraphQLClient get graphql => GraphQLProvider.of(this).value;
 }
 
-extension FormBuilder_ on ValueNotifier<GlobalKey<FormBuilderState>> {
-  FormBuilderState get form => this.value.currentState;
-}
-
 extension Future_<T> on Future<T> {
   Future<T> get tryOrNull async {
     try {

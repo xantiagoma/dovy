@@ -10,7 +10,6 @@ export 'package:fl_chart/fl_chart.dart';
 export 'package:fluro/fluro.dart';
 export 'package:flushbar/flushbar.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
-export 'package:flutter_form_builder/flutter_form_builder.dart';
 export 'package:flutter_hooks/flutter_hooks.dart';
 export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:flutter_map/flutter_map.dart';

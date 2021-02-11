@@ -11,9 +11,11 @@ class LoginForm extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formKey = useState(GlobalKey<FormBuilderState>());
+    // final formKey = useState(GlobalKey<FormBuilderState>());
     final loading = useState(false);
     final obscurePassword = useState(true);
+    final id = useTextEditingController.fromValue(TextEditingValue.empty);
+    final password = useTextEditingController.fromValue(TextEditingValue.empty);
 
     final dec = InputDecoration(
       fillColor: Colors.white,
@@ -26,100 +28,72 @@ class LoginForm extends HookWidget {
       ),
     );
 
-    return FormBuilder(
-      key: formKey.value,
-      initialValue: {
-        "id": "",
-        "password": "",
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            FormBuilderTextField(
-              decoration: dec.copyWith(
-                hintText: "Identifier",
-                prefixIcon: Icon(Icons.person),
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.clear),
-                  onPressed: () {},
-                ),
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextField(
+            controller: id,
+            decoration: dec.copyWith(
+              hintText: "Identifier",
+              prefixIcon: Icon(Icons.person),
+              suffixIcon: IconButton(
+                icon: Icon(Icons.clear),
+                onPressed: () {
+                  id.text = '';
+                },
               ),
-              attribute: "id",
-              validators: [
-                FormBuilderValidators.required(),
-              ],
             ),
-            SizedBox(
-              height: 20,
-            ),
-            FormBuilderTextField(
-              decoration: dec.copyWith(
-                hintText: "Password",
-                prefixIcon: IconButton(
-                  icon: Icon(
-                    obscurePassword.value ? Icons.lock : Icons.lock_open,
-                  ),
-                  onPressed: () {
-                    obscurePassword.value = !obscurePassword.value;
-                  },
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          TextField(
+            controller: password,
+            decoration: dec.copyWith(
+              hintText: "Password",
+              prefixIcon: IconButton(
+                icon: Icon(
+                  obscurePassword.value ? Icons.lock : Icons.lock_open,
                 ),
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.clear),
-                  onPressed: () {},
-                ),
+                onPressed: () {
+                  obscurePassword.value = !obscurePassword.value;
+                },
               ),
-              attribute: "password",
-              obscureText: obscurePassword.value,
-              maxLines: 1,
-              validators: [
-                FormBuilderValidators.required(),
-              ],
+              suffixIcon: IconButton(
+                icon: Icon(Icons.clear),
+                onPressed: () {
+                  password.text = '';
+                },
+              ),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            if (loading.value)
-              CircularProgressIndicator()
-            else
-              Button(
-                text: "Submit",
-                onTap: () => onSubmit(context, formKey, loading),
-              )
-          ],
-        ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Button(
+            text: "Submit",
+            onTap: () async {
+              Flushbar msg;
+
+              final r = await GetIt.I<AuthService>()
+                  .login(id.text, password.text)
+                  .tryOrNull;
+
+              if (r == null) {
+                msg = getMessage(LoginResult.InvalidCredentials);
+              } else {
+                msg = getMessage(LoginResult.Success);
+                context.navigateTo("/home", clearStack: true);
+              }
+
+              msg.show(context);
+            },
+          ),
+        ],
       ),
     );
-  }
-
-  onSubmit(
-    BuildContext context,
-    ValueNotifier<GlobalKey<FormBuilderState>> formKey,
-    ValueNotifier<bool> loading,
-  ) async {
-    final form = formKey.form;
-    loading.value = true;
-    Flushbar msg;
-    if (form.saveAndValidate()) {
-      final data = form.value;
-      final r = await GetIt.I<AuthService>()
-          .login(
-            data["id"],
-            data["password"],
-          )
-          .tryOrNull;
-      if (r == null) {
-        msg = getMessage(LoginResult.InvalidCredentials);
-      } else {
-        msg = getMessage(LoginResult.Success);
-        context.navigateTo("/home", clearStack: true);
-      }
-    } else {
-      msg = getMessage(LoginResult.NoValid);
-    }
-    loading.value = false;
-    msg.show(context);
   }
 
   Flushbar getMessage(LoginResult result) {
