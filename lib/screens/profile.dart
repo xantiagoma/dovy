@@ -1,5 +1,7 @@
 import 'package:dovy/general.dart';
 import 'package:dovy/hooks/graphql.dart';
+import 'package:dovy/providers/providers.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({
@@ -86,7 +88,8 @@ class ProfileHook extends HookWidget {
         ),
         Button(
           onTap: () async {
-            await context.i<AuthService>().logout();
+            final authService = context.read(authServiceProvider);
+            await authService.logout();
             final msg = Flushbar(
               icon: Icon(
                 Icons.info_outline,

@@ -1,4 +1,5 @@
 import 'package:dovy/general.dart';
+import 'package:dovy/providers/providers.dart';
 
 enum LoginResult {
   NoValid,
@@ -76,10 +77,10 @@ class LoginForm extends HookWidget {
             text: "Submit",
             onTap: () async {
               Flushbar msg;
+              final authService = context.read(authServiceProvider);
 
-              final r = await GetIt.I<AuthService>()
-                  .login(id.text, password.text)
-                  .tryOrNull;
+              final r =
+                  await authService.login(id.text, password.text).tryOrNull;
 
               if (r == null) {
                 msg = getMessage(LoginResult.InvalidCredentials);

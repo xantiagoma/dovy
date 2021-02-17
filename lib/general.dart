@@ -13,7 +13,6 @@ export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:flutter_map/flutter_map.dart';
 export 'package:flutter_spinkit/flutter_spinkit.dart';
 export 'package:flutter/material.dart' hide Interval;
-export 'package:get_it/get_it.dart' hide throwIf, throwIfNot;
 export 'package:graphql_flutter/graphql_flutter.dart' hide Location;
 export 'package:hive/hive.dart';
 export 'package:latlong/latlong.dart' hide Path;
@@ -23,6 +22,7 @@ export 'package:pigment/pigment.dart';
 export 'package:searchable_dropdown/searchable_dropdown.dart';
 export 'package:supercharged/supercharged.dart';
 export 'package:tinycolor/tinycolor.dart';
+export 'package:hooks_riverpod/hooks_riverpod.dart' hide Listener;
 
 // App
 export 'package:dovy/extensions.dart';

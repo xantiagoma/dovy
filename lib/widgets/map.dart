@@ -10,8 +10,9 @@ class Mapa extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cmsService = useProvider(cmsServiceProvider);
     final hookContext = useContext();
-    final snapshot = useMemoizedFuture(context.i<CmsService>().configs);
+    final snapshot = useMemoizedFuture(cmsService.configs);
     final select = useProvider(systemSelectProvider);
     final systemsList = useProvider(systemsListProvider);
     final linesList = useProvider(linesListProvider);

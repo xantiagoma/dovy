@@ -1,21 +1,28 @@
 import 'package:dovy/general.dart';
 
 class AuthService {
+  final HiveInterface store;
+  final CmsService cmsService;
+
+  AuthService({
+    @required this.store,
+    @required this.cmsService,
+  });
+
   Future<Box<String>> get box async {
-    final store = GetIt.I<LocalStorage>().store;
     final box = await store.openBox<String>('auth_box');
     return box;
   }
 
   Future<Map<String, dynamic>> login(String id, String password) async {
-    final r = await GetIt.I<CmsService>().s.http.post("/auth/local", data: {
+    final r = await cmsService.s.http.post("/auth/local", data: {
       "identifier": id,
       "password": password,
     });
 
     final authResponse = r.data;
     (await box).put('jwt', authResponse["jwt"]);
-    GetIt.I<CmsService>().token = authResponse["jwt"];
+    cmsService.token = authResponse["jwt"];
     return authResponse;
   }
 
@@ -25,10 +32,10 @@ class AuthService {
       if (token == null) {
         return false;
       }
-      GetIt.I<CmsService>().token = token;
-      final r = await GetIt.I<CmsService>().s.http.get("/users/me");
+      cmsService.token = token;
+      final r = await cmsService.s.http.get("/users/me");
       if (r.statusCode < 400) {
-        // GetIt.I<CmsService>().s.http.interceptors.add(PrettyDioLogger(
+        // cmsService.s.http.interceptors.add(PrettyDioLogger(
         //       responseBody: false,
         //     ));
         return true;
@@ -44,7 +51,7 @@ class AuthService {
   }
 
   Future<void> logout() async {
-    GetIt.I<CmsService>().s.http.interceptors.clear();
+    cmsService.s.http.interceptors.clear();
     return (await box).delete('jwt');
   }
 }

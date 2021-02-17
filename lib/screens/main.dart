@@ -1,4 +1,6 @@
 import 'package:dovy/general.dart';
+import 'package:dovy/providers/providers.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class MainScreen extends HookWidget {
   const MainScreen({Key key}) : super(key: key);
@@ -6,22 +8,22 @@ class MainScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final showLogin = useState(false);
+    final authService = useProvider(authServiceProvider);
+
     useEffect(() {
-      context.i.allReady().then((_) {
-        context.i<AuthService>().checkUser.then((value) {
-          if (value) {
-            context.navigateTo(
-              "/home",
-              clearStack: true,
-              transition: TransitionType.fadeIn,
-            );
-          } else {
-            showLogin.value = true;
-          }
-        });
+      authService?.checkUser?.then((value) {
+        if (value) {
+          context.navigateTo(
+            "/home",
+            clearStack: true,
+            transition: TransitionType.fadeIn,
+          );
+        } else {
+          showLogin.value = true;
+        }
       });
       return () => {};
-    });
+    }, [authService]);
 
     return Scaffold(
       body: Stack(

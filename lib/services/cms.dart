@@ -26,18 +26,14 @@ class CmsService {
   Future<List> getStations({
     Map<String, dynamic> queryParameters,
   }) async {
-    final m = (await GetIt.I<CmsService>().s.find('stations'))
-        .map((e) => e.data)
-        .toList();
+    final m = (await s.find('stations')).map((e) => e.data).toList();
     return m;
   }
 
   Future<List> getLines({
     Map<String, dynamic> queryParameters,
   }) async {
-    final m = (await GetIt.I<CmsService>().s.find('lines'))
-        .map((e) => e.data)
-        .toList();
+    final m = (await s.find('lines')).map((e) => e.data).toList();
     return m;
   }
 }

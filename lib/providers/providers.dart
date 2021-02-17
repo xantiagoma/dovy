@@ -1,6 +1,7 @@
 import 'package:dovy/general.dart';
-import 'package:dovy/graphql.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 final positionProvider = StateProvider<MapPosition>(
   (ref) => null,
@@ -16,7 +17,8 @@ final systemSelectProvider = StateProvider<SelectState>(
 
 final systemsListProvider = FutureProvider<List>(
   (ref) async {
-    final value = await graphQLClient.value.query(
+    final graphQLClient = ref.watch(graphQlProvider);
+    final value = await graphQLClient.query(
       QueryOptions(
         documentNode: gql(
           """
@@ -40,13 +42,15 @@ final systemsListProvider = FutureProvider<List>(
 
 final linesListProvider = FutureProvider<List>(
   (ref) async {
+    final graphQLClient = ref.watch(graphQlProvider);
+
     final systemId = ref.watch(systemSelectProvider).state.system;
 
     if (systemId == null) {
       return [];
     }
 
-    final value = await graphQLClient.value.query(
+    final value = await graphQLClient.query(
       QueryOptions(
         documentNode: gql(
           """
@@ -85,13 +89,15 @@ final linesListProvider = FutureProvider<List>(
 
 final stationsListProvider = FutureProvider<List>(
   (ref) async {
+    final graphQLClient = ref.watch(graphQlProvider);
+
     final lineId = ref.watch(systemSelectProvider).state.line;
 
     if (lineId == null) {
       return [];
     }
 
-    final value = await graphQLClient.value.query(
+    final value = await graphQLClient.query(
       QueryOptions(
         documentNode: gql(
           """
@@ -114,3 +120,81 @@ final stationsListProvider = FutureProvider<List>(
     return lines;
   },
 );
+
+final localStorageProvider = FutureProvider<HiveInterface>(
+  (ref) async {
+    await Hive.initFlutter();
+    return Hive;
+  },
+);
+
+final cmsServiceProvider = Provider((ref) => CmsService());
+
+final authServiceProvider = Provider<AuthService>(
+  (ref) {
+    final store = ref.watch(localStorageProvider).data?.value;
+    final cmsService = ref.watch(cmsServiceProvider);
+
+    if ([store, cmsService].any((element) => element == null)) {
+      return null;
+    }
+
+    return AuthService(
+      store: store,
+      cmsService: cmsService,
+    );
+  },
+);
+
+final routerProvider = Provider<FluroRouter>(
+  (ref) {
+    final router = FluroRouter()
+      ..define(
+        '/',
+        handler: Handler(
+          handlerFunc: (context, parameters) => MainScreen(),
+        ),
+      )
+      ..define(
+        '/login',
+        handler: Handler(
+          handlerFunc: (context, parameters) => LoginScreen(),
+        ),
+      )
+      ..define(
+        '/home',
+        handler: Handler(
+          handlerFunc: (context, parameters) => HomeScreen(),
+        ),
+      )
+      ..notFoundHandler = Handler(
+        handlerFunc: (context, parameters) => NotFoundScreen(),
+      );
+
+    return router;
+  },
+);
+
+final graphQlProvider = Provider<GraphQLClient>((ref) {
+  final authService = ref.watch(authServiceProvider);
+
+  final HttpLink httpLink = HttpLink(
+    uri: 'https://xantiagoma.herokuapp.com/graphql',
+  );
+
+  final AuthLink authLink = AuthLink(
+    getToken: () async {
+      final token = await authService.token;
+      return 'Bearer $token';
+    },
+  );
+
+  final Link link = authLink.concat(httpLink);
+
+  final graphQLClient = GraphQLClient(
+    cache: InMemoryCache(),
+    link: link,
+  );
+
+  return graphQLClient;
+});

@@ -1,13 +1,13 @@
 import 'package:dovy/general.dart';
+import 'package:dovy/providers/providers.dart';
 import 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 extension BuildContext_ on BuildContext {
   S get s => S.of(this);
   ThemeData get theme => Theme.of(this);
   MediaQueryData get media => MediaQuery.of(this);
   NavigatorState get navigator => Navigator.of(this);
-  GetIt get i => GetIt.I;
-  FluroRouter get router => GetIt.I<FluroRouter>();
   Future navigateTo(
     String path, {
     bool replace = false,
@@ -16,15 +16,15 @@ extension BuildContext_ on BuildContext {
     Duration transitionDuration = const Duration(milliseconds: 250),
     RouteTransitionsBuilder transitionBuilder,
   }) =>
-      GetIt.I<FluroRouter>().navigateTo(
-        this,
-        path,
-        replace: replace,
-        clearStack: clearStack,
-        transition: transition,
-        transitionDuration: transitionDuration,
-        transitionBuilder: transitionBuilder,
-      );
+      this.read(routerProvider).navigateTo(
+            this,
+            path,
+            replace: replace,
+            clearStack: clearStack,
+            transition: transition,
+            transitionDuration: transitionDuration,
+            transitionBuilder: transitionBuilder,
+          );
   Future<T> show<T>(Flushbar<T> flushbar) => flushbar.show(this);
   GraphQLClient get graphql => GraphQLProvider.of(this).value;
 }
