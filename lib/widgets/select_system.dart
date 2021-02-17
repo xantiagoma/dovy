@@ -1,5 +1,6 @@
 import 'package:dovy/general.dart';
-import 'package:dovy/hooks/graphql.dart';
+import 'package:dovy/providers/providers.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SelectSystem extends HookWidget {
   const SelectSystem({
@@ -8,72 +9,84 @@ class SelectSystem extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final systemSelectBloc = useBloc<SystemSelectCubit>();
+    final systemSelectState$ = useProvider(systemSelectProvider);
+    final systemsListState$ = useProvider(systemsListProvider);
+    final linesListState$ = useProvider(linesListProvider);
+    final stationsListState$ = useProvider(stationsListProvider);
 
-    return BlocBuilder<SystemsListCubit, List<dynamic>>(
-        builder: (context, systemsListState) {
-      return BlocBuilder<LinesListCubit, List<dynamic>>(
-          builder: (context, linesListState) {
-        return BlocBuilder<StationsListCubit, List<dynamic>>(
-            builder: (context, stationsListState) {
-          return BlocBuilder<SystemSelectCubit, SystemSelectState>(
-              builder: (context, systemSelectState) {
-            return Column(
-              children: <Widget>[
-                if (systemsListState.isNotEmpty)
-                  SearchableDropdown.single(
-                    value: systemSelectState.system,
-                    items: systemsListState
-                        .map(
-                          (system) => DropdownMenuItem(
-                            child: Text(system["name"]),
-                            value: system["id"],
-                          ),
-                        )
-                        .toList(),
-                    onChanged: systemSelectBloc.selectSystem,
-                    displayClearIcon: false,
-                    onClear: () => systemSelectBloc.selectSystem(null),
-                    hint: "System",
-                    searchHint: "Select a System",
+    final systemSelectState = systemSelectState$.state;
+    final systemsListState = systemsListState$.data?.value ?? [];
+    final linesListState = linesListState$.data?.value ?? [];
+    final stationsListState = stationsListState$.data?.value ?? [];
+
+    return Column(
+      children: <Widget>[
+        if (systemsListState.isNotEmpty)
+          SearchableDropdown.single(
+            value: systemSelectState.system,
+            items: systemsListState
+                .map(
+                  (system) => DropdownMenuItem(
+                    child: Text(system["name"]),
+                    value: system["id"],
                   ),
-                if (linesListState.isNotEmpty)
-                  SearchableDropdown.single(
-                    value: systemSelectState.line,
-                    items: linesListState
-                        .map(
-                          (line) => DropdownMenuItem(
-                            child: Text(line["name"]),
-                            value: line["id"],
-                          ),
-                        )
-                        .toList(),
-                    onChanged: systemSelectBloc.selectLine,
-                    onClear: () => systemSelectBloc.selectLine(null),
-                    hint: "Line",
-                    searchHint: "Select a Line",
+                )
+                .toList(),
+            onChanged: (res) {
+              systemSelectState$.state =
+                  systemSelectState$.state.setSystem(res);
+            },
+            displayClearIcon: false,
+            onClear: () {
+              systemSelectState$.state =
+                  systemSelectState$.state.setSystem(null);
+            },
+            hint: "System",
+            searchHint: "Select a System",
+          ),
+        if (linesListState.isNotEmpty)
+          SearchableDropdown.single(
+            value: systemSelectState.line,
+            items: linesListState
+                .map(
+                  (line) => DropdownMenuItem(
+                    child: Text(line["name"]),
+                    value: line["id"],
                   ),
-                if (stationsListState.isNotEmpty)
-                  SearchableDropdown.single(
-                    value: systemSelectState.station,
-                    items: stationsListState
-                        .map(
-                          (line) => DropdownMenuItem(
-                            child: Text(line["name"]),
-                            value: line["id"],
-                          ),
-                        )
-                        .toList(),
-                    onChanged: systemSelectBloc.selectStation,
-                    onClear: () => systemSelectBloc.selectStation(null),
-                    hint: "Station",
-                    searchHint: "Select a Station",
+                )
+                .toList(),
+            onChanged: (res) {
+              systemSelectState$.state = systemSelectState$.state.setLine(res);
+            },
+            onClear: () {
+              systemSelectState$.state = systemSelectState$.state.setLine(null);
+            },
+            hint: "Line",
+            searchHint: "Select a Line",
+          ),
+        if (stationsListState.isNotEmpty)
+          SearchableDropdown.single(
+            value: systemSelectState.station,
+            items: stationsListState
+                .map(
+                  (line) => DropdownMenuItem(
+                    child: Text(line["name"]),
+                    value: line["id"],
                   ),
-              ],
-            );
-          });
-        });
-      });
-    });
+                )
+                .toList(),
+            onChanged: (res) {
+              systemSelectState$.state =
+                  systemSelectState$.state.setStation(res);
+            },
+            onClear: () {
+              systemSelectState$.state =
+                  systemSelectState$.state.setStation(null);
+            },
+            hint: "Station",
+            searchHint: "Select a Station",
+          ),
+      ],
+    );
   }
 }

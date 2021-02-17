@@ -1,4 +1,6 @@
 import 'package:dovy/general.dart';
+import 'package:dovy/providers/providers.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LinesScreen extends StatefulHookWidget {
   const LinesScreen({
@@ -14,37 +16,44 @@ class _LinesScreenState extends State<LinesScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return MapStateBuilder(
-        builder: (context, select, systemsList, lines, stationsList) {
-      final systems = mapKeysFromList(systemsList, (k) => k["id"]);
-      final system = systems[select.system];
-      final name = system["name"];
-      return CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            title: Text("$name - Lines"),
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.settings),
-                onPressed: () {
-                  final message = Flushbar(
-                    title: "Options",
-                    messageText: SelectSystem(),
-                    margin: EdgeInsets.all(10),
-                    borderRadius: 20,
-                  );
-                  context.show(message);
-                },
-              )
-            ],
-          ),
-          SliverPadding(
-            padding: EdgeInsets.all(20),
-            sliver: buildGridView(lines), // TODO: Change
-          )
-        ],
-      );
-    });
+
+    final select = useProvider(systemSelectProvider).state;
+    final systemsList = useProvider(systemsListProvider).data.value;
+    final lines = useProvider(linesListProvider).data.value;
+
+    if (systemsList == null || lines == null) {
+      return CircularProgressIndicator();
+    }
+
+    final systems = mapKeysFromList(systemsList, (k) => k["id"]);
+    final system = systems[select.system];
+    final name = system["name"];
+
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverAppBar(
+          title: Text("$name - Lines"),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: () {
+                final message = Flushbar(
+                  title: "Options",
+                  messageText: SelectSystem(),
+                  margin: EdgeInsets.all(10),
+                  borderRadius: 20,
+                );
+                context.show(message);
+              },
+            )
+          ],
+        ),
+        SliverPadding(
+          padding: EdgeInsets.all(20),
+          sliver: buildGridView(lines), // TODO: Change
+        )
+      ],
+    );
   }
 
   SliverGrid buildGridView(List lines) {

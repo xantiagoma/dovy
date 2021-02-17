@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:dovy/extensions.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 AsyncSnapshot<QueryResult> useQuery(QueryOptions options) {
   final context = useContext();
@@ -49,10 +48,4 @@ AsyncSnapshot<T> useMemoizedFuture<T>(Future<T> future) {
   final memo = useMemoized(() => future);
   final snapshot = useFuture(memo);
   return snapshot;
-}
-
-C useBloc<C extends Cubit<Object>>() {
-  final context = useContext();
-  final bloc = context.bloc<C>();
-  return bloc;
 }

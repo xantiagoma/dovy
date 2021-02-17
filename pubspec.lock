@@ -7,7 +7,7 @@ packages:
       name: _fe_analyzer_shared
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "12.0.0"
+    version: "14.0.0"
   after_layout:
     dependency: "direct main"
     description:
@@ -21,7 +21,7 @@ packages:
       name: analyzer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.40.6"
+    version: "0.41.2"
   ansicolor:
     dependency: transitive
     description:
@@ -50,13 +50,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.5.0"
-  bloc:
-    dependency: "direct main"
-    description:
-      name: bloc
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.1.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -93,7 +86,7 @@ packages:
     source: hosted
     version: "1.5.3"
   build_runner:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: build_runner
       url: "https://pub.dartlang.org"
@@ -148,20 +141,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
-  chopper:
-    dependency: "direct main"
-    description:
-      name: chopper
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.6"
-  chopper_generator:
-    dependency: "direct dev"
-    description:
-      name: chopper_generator
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.6"
   cli_util:
     dependency: transitive
     description:
@@ -342,13 +321,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_bloc:
-    dependency: "direct main"
-    description:
-      name: flutter_bloc
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.1.1"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -369,7 +341,7 @@ packages:
       name: flutter_hooks
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.2"
+    version: "0.16.0-nullsafety.0"
   flutter_image:
     dependency: transitive
     description:
@@ -389,6 +361,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.10.1+1"
+  flutter_riverpod:
+    dependency: transitive
+    description:
+      name: flutter_riverpod
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.13.0-nullsafety.3"
   flutter_spinkit:
     dependency: "direct main"
     description:
@@ -406,6 +385,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  freezed_annotation:
+    dependency: transitive
+    description:
+      name: freezed_annotation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.13.0-nullsafety.0"
   get_it:
     dependency: "direct main"
     description:
@@ -469,6 +455,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.1"
+  hooks_riverpod:
+    dependency: "direct main"
+    description:
+      name: hooks_riverpod
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.13.0-nullsafety.3"
   http:
     dependency: transitive
     description:
@@ -519,19 +512,19 @@ packages:
     source: hosted
     version: "0.6.3"
   json_annotation:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: json_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.1"
+    version: "4.0.0"
   json_serializable:
     dependency: "direct dev"
     description:
       name: json_serializable
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.5.1"
+    version: "4.0.0"
   latlong:
     dependency: "direct main"
     description:
@@ -560,13 +553,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.5.1"
-  markdown:
-    dependency: transitive
-    description:
-      name: markdown
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
   matcher:
     dependency: transitive
     description:
@@ -602,13 +588,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.7"
-  nested:
-    dependency: transitive
-    description:
-      name: nested
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.4"
   node_interop:
     dependency: transitive
     description:
@@ -756,13 +735,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
-  provider:
-    dependency: transitive
-    description:
-      name: provider
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.3.3"
   pub_semver:
     dependency: transitive
     description:
@@ -784,20 +756,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.5"
-  recase:
+  riverpod:
     dependency: transitive
     description:
-      name: recase
+      name: riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
-  remove_from_coverage:
-    dependency: transitive
-    description:
-      name: remove_from_coverage
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.7"
+    version: "0.13.0-nullsafety.3"
   rxdart:
     dependency: transitive
     description:
@@ -837,7 +802,7 @@ packages:
       name: source_gen
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.7+1"
+    version: "0.9.10+2"
   source_span:
     dependency: transitive
     description:
@@ -866,6 +831,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0"
+  state_notifier:
+    dependency: transitive
+    description:
+      name: state_notifier
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.7.0-nullsafety.0"
   stream_channel:
     dependency: transitive
     description:
@@ -901,13 +873,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.0"
-  swagger_dart_code_generator:
-    dependency: "direct dev"
-    description:
-      name: swagger_dart_code_generator
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.6.6+2"
   synchronized:
     dependency: transitive
     description:
@@ -978,13 +943,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.4"
-  universal_io:
-    dependency: transitive
-    description:
-      name: universal_io
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.2"
   uuid:
     dependency: transitive
     description:
@@ -1069,13 +1027,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.1"
-  zone_local:
-    dependency: transitive
-    description:
-      name: zone_local
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
 sdks:
   dart: ">=2.12.0-259.8.beta <3.0.0"
   flutter: ">=1.22.2"
