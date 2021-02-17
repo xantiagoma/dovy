@@ -198,3 +198,11 @@ final graphQlProvider = Provider<GraphQLClient>((ref) {
 
   return graphQLClient;
 });
+
+final cmsServiceConfigsProvider = FutureProvider<Map<String, dynamic>>(
+  (ref) async {
+    final cmsService = ref.watch(cmsServiceProvider);
+    final configs = await cmsService.configs;
+    return configs;
+  },
+);

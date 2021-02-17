@@ -12,37 +12,34 @@ class Mapa extends HookWidget {
   Widget build(BuildContext context) {
     final cmsService = useProvider(cmsServiceProvider);
     final hookContext = useContext();
-    final snapshot = useMemoizedFuture(cmsService.configs);
     final select = useProvider(systemSelectProvider);
     final systemsList = useProvider(systemsListProvider);
     final linesList = useProvider(linesListProvider);
-
-    if (systemsList.data?.value == null || linesList.data?.value == null) {
-      return CircularProgressIndicator();
-    }
+    final options = useProvider(cmsServiceConfigsProvider).data?.value;
 
     useEffect(() {
       final system = select.state.system;
       if (system == null) {
         // First Load
         Future.microtask(() {
-          select.state =
-              select.state.setSystem(systemsList?.data?.value[0]["id"]);
+          final item = systemsList?.data?.value;
+          if (item != null) {
+            select.state = select.state.setSystem(item[0]["id"]);
+          }
         });
       }
 
       return () {};
-    }, [select.state.system]);
+    }, [select.state.system, systemsList.data?.value]);
 
-    if (snapshot.data == null) {
+    final mapController = MapController();
+
+    if (options == null) {
       return Center(
         child: CircularProgressIndicator(),
       );
     }
 
-    final mapController = MapController();
-
-    final options = snapshot.data;
     final String mapTileUrl = options['map_tile_url'];
     final List<String> mapTileSubdomains = List.from(
       options['map_tile_subdomains'],
@@ -58,8 +55,8 @@ class Mapa extends HookWidget {
 
     final double mapTileZoom = options['map_tile_zoom'].toDouble();
 
-    final systems = mapKeysFromList(systemsList.data.value, (s) => s['id']);
-    final lines = mapKeysFromList(linesList.data.value, (s) => s['id']);
+    final systems = mapKeysFromList(systemsList.data?.value, (s) => s['id']);
+    final lines = mapKeysFromList(linesList.data?.value, (s) => s['id']);
 
     final system = systems[select.state.system];
 
