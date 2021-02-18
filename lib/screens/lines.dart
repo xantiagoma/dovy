@@ -50,7 +50,7 @@ class _LinesScreenState extends State<LinesScreen>
         ),
         SliverPadding(
           padding: EdgeInsets.all(20),
-          sliver: buildGridView(lines), // TODO: Change
+          sliver: buildGridView(lines),
         )
       ],
     );

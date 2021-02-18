@@ -1,5 +1,4 @@
 import 'package:dovy/general.dart';
-import 'package:dovy/hooks/graphql.dart';
 import 'package:dovy/providers/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -35,48 +34,51 @@ class _ProfileScreenState extends State<ProfileScreen>
 class ProfileHook extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    final snap = useQuery(QueryOptions(
-      documentNode: gql("""
-        query {
-          me {
-            username
-            email
-          }
-        }
-      """),
-    ));
+    final snap = useProvider(userDataProvider);
 
-    if (snap.data == null) {
-      return Center(child: CircularProgressIndicator());
-    }
-    if (snap.data.hasException) {
-      return Text("Error");
-    }
-    final Map<String, dynamic> user = snap.data.data['me'];
+    final ipData = useProvider(ipDataProvider);
+
+    print("snap: $snap");
+
+    // if (snap.data == null) {
+    //   return Center(child: CircularProgressIndicator());
+    // }
+
+    // final Map<String, dynamic> user = snap.data.data['me'];
 
     return Column(
       children: <Widget>[
-        Text(
-          '@${user["username"]}',
-          style: context.theme.textTheme.headline5,
+        snap.when(
+          data: (data) {
+            return Column(
+              children: [
+                Text(
+                  '@${data["username"]}',
+                  style: context.theme.textTheme.headline5,
+                ),
+                Text(
+                  data["email"],
+                  style: context.theme.textTheme.headline6,
+                ),
+              ],
+            );
+          },
+          loading: () {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+          error: (e, _) {
+            return Text(e.toString());
+          },
         ),
-        Text(
-          user["email"],
-          style: context.theme.textTheme.headline6,
-        ),
-        FutureBuilder<Map<String, dynamic>>(
-          future: LocationService.getIpInfo(),
-          builder: (context, snapshot) {
-            if (snapshot.data == null) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
+        ipData.when(
+          data: (data) {
             return Padding(
               padding: const EdgeInsets.all(10.0),
               child: Table(
                 children: [
-                  for (final entry in snapshot.data.entries)
+                  for (final entry in data.entries)
                     TableRow(children: [
                       Text(entry.key),
                       Text(entry.value.toString()),
@@ -84,6 +86,14 @@ class ProfileHook extends HookWidget {
                 ],
               ),
             );
+          },
+          loading: () {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+          error: (e, _) {
+            return Text(e.toString());
           },
         ),
         Button(

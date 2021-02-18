@@ -1,5 +1,4 @@
 import 'package:dovy/general.dart';
-import 'package:dovy/hooks/graphql.dart';
 import 'package:dovy/providers/providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -10,7 +9,6 @@ class Mapa extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cmsService = useProvider(cmsServiceProvider);
     final hookContext = useContext();
     final select = useProvider(systemSelectProvider);
     final systemsList = useProvider(systemsListProvider);
@@ -79,10 +77,7 @@ class Mapa extends HookWidget {
         }
 
         final points = (line["shape"] as String)?.toLatLngList() ?? [];
-        //TODO
-        // if (points.isEmpty) {
-        //   return;
-        // }
+
         final polyline = Polyline(
           points: points,
           color: (line["color"] as String).toColor(),
@@ -222,15 +217,21 @@ void clickPlace(BuildContext context, LatLng point) {
     margin: EdgeInsets.all(10).copyWith(bottom: 120),
     borderRadius: 10,
     icon: Icon(Icons.info_outline),
-    messageText: FutureBuilder<Map<String, dynamic>>(
-      future: LocationService.getLocation(point),
-      builder: (context, snapshot) {
-        return Row(children: [
-          if (snapshot.connectionState == ConnectionState.done)
-            Expanded(child: Text(snapshot.data["display_name"]))
-          else
-            Expanded(child: Center(child: CircularProgressIndicator()))
-        ]);
+    messageText: Consumer(
+      builder: (context, watch, child) {
+        final location = watch(locationDataProvider(point));
+
+        return location.when(
+          data: (data) {
+            return Expanded(child: Text(data["display_name"]));
+          },
+          loading: () {
+            return Expanded(child: Center(child: CircularProgressIndicator()));
+          },
+          error: (e, s) {
+            return Expanded(child: Text(e.toString()));
+          },
+        );
       },
     ),
   );

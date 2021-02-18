@@ -128,7 +128,9 @@ final localStorageProvider = FutureProvider<HiveInterface>(
   },
 );
 
-final cmsServiceProvider = Provider((ref) => CmsService());
+final cmsServiceProvider = Provider(
+  (ref) => CmsService(),
+);
 
 final authServiceProvider = Provider<AuthService>(
   (ref) {
@@ -175,34 +177,72 @@ final routerProvider = Provider<FluroRouter>(
   },
 );
 
-final graphQlProvider = Provider<GraphQLClient>((ref) {
-  final authService = ref.watch(authServiceProvider);
+final graphQlProvider = Provider<GraphQLClient>(
+  (ref) {
+    final authService = ref.watch(authServiceProvider);
 
-  final HttpLink httpLink = HttpLink(
-    uri: 'https://xantiagoma.herokuapp.com/graphql',
-  );
+    final HttpLink httpLink = HttpLink(
+      uri: 'https://xantiagoma.herokuapp.com/graphql',
+    );
 
-  final AuthLink authLink = AuthLink(
-    getToken: () async {
-      final token = await authService.token;
-      return 'Bearer $token';
-    },
-  );
+    final AuthLink authLink = AuthLink(
+      getToken: () async {
+        final token = await authService.token;
+        return 'Bearer $token';
+      },
+    );
 
-  final Link link = authLink.concat(httpLink);
+    final Link link = authLink.concat(httpLink);
 
-  final graphQLClient = GraphQLClient(
-    cache: InMemoryCache(),
-    link: link,
-  );
+    final graphQLClient = GraphQLClient(
+      cache: InMemoryCache(),
+      link: link,
+    );
 
-  return graphQLClient;
-});
+    return graphQLClient;
+  },
+);
 
 final cmsServiceConfigsProvider = FutureProvider<Map<String, dynamic>>(
   (ref) async {
     final cmsService = ref.watch(cmsServiceProvider);
     final configs = await cmsService.configs;
     return configs;
+  },
+);
+
+final locationDataProvider =
+    FutureProvider.autoDispose.family<Map<String, dynamic>, LatLng>(
+  (ref, point) async {
+    return await LocationService.getLocation(point);
+  },
+);
+
+final ipDataProvider = FutureProvider<Map<String, dynamic>>(
+  (ref) async {
+    return await LocationService.getIpInfo();
+  },
+);
+
+final userDataProvider = FutureProvider<Map<String, dynamic>>(
+  (ref) async {
+    final graphQLClient = ref.watch(graphQlProvider);
+
+    final result = await graphQLClient.query(QueryOptions(
+      documentNode: gql("""
+        query {
+          me {
+            username
+            email
+          }
+        }
+      """),
+    ));
+
+    if (result.hasException) {
+      throw result.exception;
+    }
+
+    return result.data["me"];
   },
 );

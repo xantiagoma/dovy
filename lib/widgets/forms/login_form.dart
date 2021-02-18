@@ -12,8 +12,6 @@ class LoginForm extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final formKey = useState(GlobalKey<FormBuilderState>());
-    final loading = useState(false);
     final obscurePassword = useState(true);
     final id = useTextEditingController.fromValue(TextEditingValue.empty);
     final password = useTextEditingController.fromValue(TextEditingValue.empty);

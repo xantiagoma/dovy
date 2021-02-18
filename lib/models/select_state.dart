@@ -1,53 +1,29 @@
 import 'package:dovy/general.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'select_state.freezed.dart';
 
-class SelectState extends Equatable {
-  final String system;
-  final String line;
-  final String station;
+@freezed
+abstract class SelectState with _$SelectState {
+  factory SelectState({
+    @nullable String system,
+    @nullable String line,
+    @nullable String station,
+  }) = _SelectState;
+}
 
-  SelectState({
-    @required this.system,
-    @required this.line,
-    @required this.station,
-  });
-
-  SelectState copyWith({
-    String system,
-    String line,
-    String station,
-  }) =>
-      SelectState(
-        system: system ?? this.system,
-        line: line ?? this.line,
-        station: station ?? this.station,
-      );
-
-  SelectState setSystem(String system) => SelectState(
+extension SelectState_ on SelectState {
+  SelectState setSystem(String system) => this.copyWith(
         system: system,
         line: null,
         station: null,
       );
 
-  SelectState setLine(String line) => SelectState(
-        system: this.system,
+  SelectState setLine(String line) => this.copyWith(
         line: line,
         station: null,
       );
 
-  SelectState setStation(String station) => SelectState(
-        system: this.system,
-        line: this.line,
+  SelectState setStation(String station) => this.copyWith(
         station: station,
       );
-
-  @override
-  List<Object> get props => [
-        system,
-        line,
-        station,
-      ];
-
-  @override
-  bool get stringify => true;
 }

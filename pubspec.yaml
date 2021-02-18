@@ -29,22 +29,20 @@ dependencies:
   collection: ^1.14.12
   convex_bottom_bar: ^2.4.1
   cupertino_icons: ^0.1.3
-  dart_date: ^1.1.0-nullsafety.0
+  dart_date: ^1.0.9
   dart_strapi: ^0.0.3
   dio: ^3.0.9
-  equatable: ^1.2.6
   fl_chart: ^0.11.0
   fluro: ^1.7.8
   flushbar: ^1.10.4
-  flutter_hooks: ^0.16.0-nullsafety.0
+  flutter_hooks: ^0.15.0
   flutter_map: ^0.10.1+1
   flutter_spinkit: ^4.1.2+1
   google_polyline_algorithm: ^2.0.0
   graphql_flutter: ^3.1.0
   hive_flutter: ^0.3.0+2
   hive: ^1.4.1+1
-  hooks_riverpod: ^0.13.0-nullsafety.3
-  json_annotation: ^4.0.0
+  hooks_riverpod: ^0.12.4
   latlong: ^0.6.1
   lottie: ^0.5.1
   material_design_icons_flutter: ^4.0.5345
@@ -52,17 +50,15 @@ dependencies:
   searchable_dropdown: ^1.1.3
   supercharged: ^1.6.0
   tinycolor: ^1.0.2
+  freezed_annotation: ^0.12.0
 
 dev_dependencies:
+  freezed: ^0.12.7
   build_runner: ^1.10.1
-  json_serializable: ^4.0.0
   flutter_test:
     sdk: flutter
 
-dependency_overrides:
-  intl: ^0.17.0-nullsafety.2
-  collection: ^1.15.0-nullsafety.5
-  meta: ^1.3.0-nullsafety.6
+# dependency_overrides:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

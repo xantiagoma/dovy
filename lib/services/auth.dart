@@ -35,9 +35,6 @@ class AuthService {
       cmsService.token = token;
       final r = await cmsService.s.http.get("/users/me");
       if (r.statusCode < 400) {
-        // cmsService.s.http.interceptors.add(PrettyDioLogger(
-        //       responseBody: false,
-        //     ));
         return true;
       }
       return false;
