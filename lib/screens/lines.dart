@@ -17,8 +17,8 @@ class _LinesScreenState extends State<LinesScreen>
     super.build(context);
 
     final select = useProvider(systemSelectProvider).state;
-    final systemsList = useProvider(systemsListProvider).data.value;
-    final lines = useProvider(linesListProvider).data.value;
+    final systemsList = useProvider(systemsListProvider)?.data?.value ?? [];
+    final lines = useProvider(linesListProvider)?.data?.value ?? [];
 
     if (systemsList == null || lines == null) {
       return CircularProgressIndicator();
@@ -32,20 +32,7 @@ class _LinesScreenState extends State<LinesScreen>
       slivers: <Widget>[
         SliverAppBar(
           title: Text("$name - Lines"),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.settings),
-              onPressed: () {
-                final message = Flushbar(
-                  title: "Options",
-                  messageText: SelectSystem(),
-                  margin: EdgeInsets.all(10),
-                  borderRadius: 20,
-                );
-                context.show(message);
-              },
-            )
-          ],
+          actions: <Widget>[],
         ),
         SliverPadding(
           padding: EdgeInsets.all(20),
@@ -70,13 +57,18 @@ class _LinesScreenState extends State<LinesScreen>
           return Material(
             color: color,
             borderRadius: BorderRadius.all(Radius.circular(10)),
-            child: Center(
-              child: Text(
-                line["name"],
-                style: context.theme.textTheme.headline4.copyWith(
-                  color: color.inverseBW,
+            child: InkWell(
+              onTap: () {
+                print(line);
+              },
+              child: Center(
+                child: Text(
+                  line["name"],
+                  style: context.theme.textTheme.headline4.copyWith(
+                    color: color.inverseBW,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
             ),
           );

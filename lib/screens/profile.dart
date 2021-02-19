@@ -33,22 +33,16 @@ class _ProfileScreenState extends State<ProfileScreen>
 class ProfileHook extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    final snap = useProvider(userDataProvider);
-
+    final snap = useProvider(userProvider);
     final ipData = useProvider(ipDataProvider);
-
-    print("snap: $snap");
-
-    // if (snap.data == null) {
-    //   return Center(child: CircularProgressIndicator());
-    // }
-
-    // final Map<String, dynamic> user = snap.data.data['me'];
 
     return Column(
       children: <Widget>[
         snap.when(
           data: (data) {
+            if (data == null) {
+              return Center(child: CircularProgressIndicator());
+            }
             return Column(
               children: [
                 Text(
@@ -99,17 +93,27 @@ class ProfileHook extends HookWidget {
           onTap: () async {
             final authService = context.read(authServiceProvider);
             await authService.logout();
-            final msg = Flushbar(
-              icon: Icon(
-                Icons.info_outline,
-                color: Colors.orangeAccent,
-              ),
-              margin: EdgeInsets.all(8),
-              duration: 2.seconds,
-              borderRadius: 8,
-              message: 'Logged',
+
+            showFlash(
+              context: context,
+              duration: Duration(seconds: 3),
+              builder: (context, controller) {
+                return Flash(
+                  controller: controller,
+                  backgroundColor:
+                      context.theme.scaffoldBackgroundColor.lighten(),
+                  margin: EdgeInsets.all(18),
+                  borderRadius: BorderRadius.circular(10),
+                  child: FlashBar(
+                    icon: Icon(
+                      Icons.info_outline,
+                      color: Colors.orangeAccent,
+                    ),
+                    message: Text("Logged out"),
+                  ),
+                );
+              },
             );
-            await msg.show(context);
             context.navigateTo('/', clearStack: true);
           },
           width: context.media.size.width / 3,

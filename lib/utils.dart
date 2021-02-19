@@ -10,3 +10,5 @@ Map<T, S> mapKeysFromList<S, T>(Iterable<S> values, T key(S element)) {
 
 List<S> uniqBy<S, T>(Iterable<S> values, T key(S element)) =>
     mapKeysFromList(values, key).values.toList();
+
+S identity<S>([S s]) => s ?? null;

@@ -74,20 +74,26 @@ class LoginForm extends HookWidget {
           Button(
             text: "Submit",
             onTap: () async {
-              Flushbar msg;
               final authService = context.read(authServiceProvider);
 
               final r =
                   await authService.login(id.text, password.text).tryOrNull;
 
-              if (r == null) {
-                msg = getMessage(LoginResult.InvalidCredentials);
-              } else {
-                msg = getMessage(LoginResult.Success);
+              showFlash(
+                context: context,
+                duration: Duration(seconds: 3),
+                builder: (context, controller) {
+                  return getMessage(
+                      (r == null)
+                          ? LoginResult.InvalidCredentials
+                          : LoginResult.Success,
+                      controller);
+                },
+              );
+
+              if (r != null) {
                 context.navigateTo("/home", clearStack: true);
               }
-
-              msg.show(context);
             },
           ),
         ],
@@ -95,7 +101,7 @@ class LoginForm extends HookWidget {
     );
   }
 
-  Flushbar getMessage(LoginResult result) {
+  Flash getMessage(LoginResult result, FlashController controller) {
     Icon icon;
     String message;
 
@@ -130,12 +136,16 @@ class LoginForm extends HookWidget {
         break;
     }
 
-    return Flushbar(
-      icon: icon,
-      margin: EdgeInsets.all(8),
-      duration: 2.seconds,
-      borderRadius: 8,
-      message: message,
+    return Flash(
+      controller: controller,
+      backgroundColor:
+          controller.context.theme.scaffoldBackgroundColor.lighten(),
+      margin: EdgeInsets.all(18),
+      borderRadius: BorderRadius.circular(10),
+      child: FlashBar(
+        icon: icon,
+        message: Text(message),
+      ),
     );
   }
 }

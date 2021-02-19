@@ -1,4 +1,6 @@
 import 'package:dovy/general.dart';
+import './auth.dart';
+export './auth.dart';
 
 final positionProvider = StateProvider<MapPosition>(
   (ref) => null,
@@ -118,33 +120,6 @@ final stationsListProvider = FutureProvider<List>(
   },
 );
 
-final localStorageProvider = FutureProvider<HiveInterface>(
-  (ref) async {
-    await Hive.initFlutter();
-    return Hive;
-  },
-);
-
-final cmsServiceProvider = Provider(
-  (ref) => CmsService(),
-);
-
-final authServiceProvider = Provider<AuthService>(
-  (ref) {
-    final store = ref.watch(localStorageProvider).data?.value;
-    final cmsService = ref.watch(cmsServiceProvider);
-
-    if ([store, cmsService].any((element) => element == null)) {
-      return null;
-    }
-
-    return AuthService(
-      store: store,
-      cmsService: cmsService,
-    );
-  },
-);
-
 final routerProvider = Provider<FluroRouter>(
   (ref) {
     final router = FluroRouter()
@@ -177,6 +152,11 @@ final routerProvider = Provider<FluroRouter>(
 final graphQlProvider = Provider<GraphQLClient>(
   (ref) {
     final authService = ref.watch(authServiceProvider);
+    final token = ref.watch(authTokenProvider)?.data?.value;
+
+    if (token == null || authService == null) {
+      return null;
+    }
 
     final HttpLink httpLink = HttpLink(
       uri: 'https://xantiagoma.herokuapp.com/graphql',
@@ -184,7 +164,6 @@ final graphQlProvider = Provider<GraphQLClient>(
 
     final AuthLink authLink = AuthLink(
       getToken: () async {
-        final token = await authService.token;
         return 'Bearer $token';
       },
     );
@@ -197,14 +176,6 @@ final graphQlProvider = Provider<GraphQLClient>(
     );
 
     return graphQLClient;
-  },
-);
-
-final cmsServiceConfigsProvider = FutureProvider<Map<String, dynamic>>(
-  (ref) async {
-    final cmsService = ref.watch(cmsServiceProvider);
-    final configs = await cmsService.configs;
-    return configs;
   },
 );
 
@@ -221,25 +192,36 @@ final ipDataProvider = FutureProvider<Map<String, dynamic>>(
   },
 );
 
-final userDataProvider = FutureProvider<Map<String, dynamic>>(
-  (ref) async {
-    final graphQLClient = ref.watch(graphQlProvider);
-
-    final result = await graphQLClient.query(QueryOptions(
-      documentNode: gql("""
-        query {
-          me {
-            username
-            email
-          }
-        }
-      """),
-    ));
-
-    if (result.hasException) {
-      throw result.exception;
-    }
-
-    return result.data["me"];
+final strapiServiceProvider = Provider<Strapi>(
+  (ref) {
+    final token = ref.watch(authTokenProvider)?.data?.value;
+    final baseUrl = 'https://xantiagoma.herokuapp.com';
+    return Strapi.newClient()
+      ..initialize(
+        base_url: baseUrl,
+        token: token ?? '',
+      );
   },
 );
+
+final configsProvider = FutureProvider<Map<String, dynamic>>((ref) async {
+  final strapiService = ref.watch(strapiServiceProvider);
+  final response = await strapiService.http.get('/configs');
+  final configs = response.data;
+  return configs;
+});
+
+final stationsProvider =
+    FutureProvider<List<Map<String, dynamic>>>((ref) async {
+  final strapiService = ref.watch(strapiServiceProvider);
+  final stations =
+      (await strapiService.find('stations')).map((e) => e.data).toList();
+  return stations;
+});
+
+final linesProvider = FutureProvider<List<Map<String, dynamic>>>((ref) async {
+  final strapiService = ref.watch(strapiServiceProvider);
+  final stations =
+      (await strapiService.find('stations')).map((e) => e.data).toList();
+  return stations;
+});

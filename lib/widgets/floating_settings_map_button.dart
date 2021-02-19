@@ -21,13 +21,22 @@ class SettingsButton extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          final message = Flushbar(
-            title: "Options",
-            messageText: SelectSystem(),
-            margin: EdgeInsets.all(10),
-            borderRadius: 20,
+          showFlash(
+            context: context,
+            builder: (context, controller) {
+              return Flash(
+                controller: controller,
+                backgroundColor:
+                    context.theme.scaffoldBackgroundColor.lighten(),
+                margin: EdgeInsets.all(18),
+                borderRadius: BorderRadius.circular(10),
+                child: FlashBar(
+                  title: Text("Options"),
+                  message: SelectSystem(),
+                ),
+              );
+            },
           );
-          context.show(message);
         },
         child: Padding(
           padding: EdgeInsets.all(10),

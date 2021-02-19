@@ -23,7 +23,6 @@ extension BuildContext_ on BuildContext {
             transitionDuration: transitionDuration,
             transitionBuilder: transitionBuilder,
           );
-  Future<T> show<T>(Flushbar<T> flushbar) => flushbar.show(this);
   GraphQLClient get graphql => GraphQLProvider.of(this).value;
 }
 

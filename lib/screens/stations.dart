@@ -44,18 +44,7 @@ class _StationsScreenState extends State<StationsScreen>
         SliverAppBar(
           title: Text("$name - Stations"),
           actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.settings),
-              onPressed: () {
-                final message = Flushbar(
-                  title: "Options",
-                  messageText: SelectSystem(),
-                  margin: EdgeInsets.all(10),
-                  borderRadius: 20,
-                );
-                context.show(message);
-              },
-            )
+            // TODO
           ],
         ),
         SliverPadding(

@@ -12,7 +12,7 @@ class Mapa extends HookWidget {
     final select = useProvider(systemSelectProvider);
     final systemsList = useProvider(systemsListProvider);
     final linesList = useProvider(linesListProvider);
-    final options = useProvider(cmsServiceConfigsProvider).data?.value;
+    final options = useProvider(configsProvider).data?.value;
 
     useEffect(() {
       final system = select.state.system;
@@ -169,71 +169,85 @@ class Mapa extends HookWidget {
 }
 
 void clickStation(BuildContext context, station, List lines) {
-  Flushbar msg;
-  msg = Flushbar(
-    margin: EdgeInsets.all(10),
-    borderRadius: 10,
-    titleText: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Text(
-          station["name"],
-        ),
-        IconButton(
-          icon: Icon(Icons.close),
-          onPressed: () {
-            msg.dismiss();
-          },
-        ),
-      ],
-    ),
-    messageText: Row(
-      children: lines.map(
-        (l) {
-          final color = (l["color"] as String).toColor();
-          return Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: Chip(
-              label: Text(
-                l["name"],
-                style: TextStyle(
-                  color: color.inverseBW,
-                ),
+  showFlash(
+    context: context,
+    persistent: false,
+    builder: (context, controller) {
+      return Flash(
+        controller: controller,
+        backgroundColor: context.theme.scaffoldBackgroundColor.lighten(),
+        margin: EdgeInsets.all(18),
+        borderRadius: BorderRadius.circular(10),
+        child: FlashBar(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                station["name"],
               ),
-              backgroundColor: color,
-            ),
-          );
-        },
-      ).toList(),
-    ),
+              IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  controller.dismiss();
+                },
+              ),
+            ],
+          ),
+          message: Row(
+            children: lines.map(
+              (l) {
+                final color = (l["color"] as String).toColor();
+                return Padding(
+                  padding: EdgeInsets.only(right: 10),
+                  child: Chip(
+                    label: Text(
+                      l["name"],
+                      style: TextStyle(
+                        color: color.inverseBW,
+                      ),
+                    ),
+                    backgroundColor: color,
+                  ),
+                );
+              },
+            ).toList(),
+          ),
+        ),
+      );
+    },
   );
-  context.show(msg);
 }
 
 void clickPlace(BuildContext context, LatLng point) {
-  Flushbar msg;
-  msg = Flushbar(
-    margin: EdgeInsets.all(10).copyWith(bottom: 120),
-    borderRadius: 10,
-    icon: Icon(Icons.info_outline),
-    messageText: Consumer(
-      builder: (context, watch, child) {
-        final location = watch(locationDataProvider(point));
+  showFlash(
+    context: context,
+    builder: (context, controller) {
+      return Flash(
+        controller: controller,
+        backgroundColor: context.theme.scaffoldBackgroundColor.lighten(),
+        margin: EdgeInsets.all(18),
+        borderRadius: BorderRadius.circular(10),
+        child: FlashBar(
+          icon: Icon(Icons.info_outline),
+          message: Consumer(
+            builder: (context, watch, child) {
+              final location = watch(locationDataProvider(point));
 
-        return location.when(
-          data: (data) {
-            return Expanded(child: Text(data["display_name"]));
-          },
-          loading: () {
-            return Expanded(child: Center(child: CircularProgressIndicator()));
-          },
-          error: (e, s) {
-            return Expanded(child: Text(e.toString()));
-          },
-        );
-      },
-    ),
+              return location.when(
+                data: (data) {
+                  return Text(data["display_name"]);
+                },
+                loading: () {
+                  return Center(child: CircularProgressIndicator());
+                },
+                error: (e, s) {
+                  return Text(e.toString());
+                },
+              );
+            },
+          ),
+        ),
+      );
+    },
   );
-
-  context.show(msg);
 }

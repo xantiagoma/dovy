@@ -7,22 +7,34 @@ class MainScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final showLogin = useState(false);
-    final authService = useProvider(authServiceProvider);
+    final loaded = useProvider(loadedProvider);
+    final user = useProvider(userProvider);
 
-    useEffect(() {
-      authService?.checkUser?.then((value) {
-        if (value) {
-          context.navigateTo(
-            "/home",
-            clearStack: true,
-            transition: TransitionType.fadeIn,
-          );
-        } else {
-          showLogin.value = true;
+    useEffect(
+      () {
+        final u = user.when(
+          data: identity,
+          loading: () => null,
+          error: (_, _s) => null,
+        );
+        if (loaded) {
+          if (u != null) {
+            Future.microtask(() {
+              context.navigateTo(
+                "/home",
+                clearStack: true,
+                transition: TransitionType.fadeIn,
+              );
+            });
+          } else {
+            showLogin.value = true;
+          }
         }
-      });
-      return () => {};
-    }, [authService]);
+
+        return () => {};
+      },
+      [loaded, user],
+    );
 
     return Scaffold(
       body: Stack(

@@ -18,8 +18,6 @@ class SelectSystem extends HookWidget {
     final linesListState = linesListState$.data?.value ?? [];
     final stationsListState = stationsListState$.data?.value ?? [];
 
-    print('systemSelectState: $systemSelectState');
-
     return Column(
       children: <Widget>[
         if (systemsListState.isNotEmpty)
