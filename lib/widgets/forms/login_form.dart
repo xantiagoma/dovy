@@ -1,5 +1,5 @@
+import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
-import 'package:dovy/providers/providers.dart';
 
 enum LoginResult {
   NoValid,

@@ -1,5 +1,4 @@
 import 'package:dovy/general.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 part 'select_state.freezed.dart';
 
 @freezed

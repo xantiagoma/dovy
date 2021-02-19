@@ -1,7 +1,5 @@
+import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
-import 'package:dovy/providers/providers.dart';
-import 'package:dovy/theme.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

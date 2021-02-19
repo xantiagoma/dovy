@@ -1,7 +1,5 @@
+import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
-import 'package:dovy/providers/providers.dart';
-import 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 extension BuildContext_ on BuildContext {
   S get s => S.of(this);

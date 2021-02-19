@@ -1,4 +1,4 @@
-import 'package:dovy/general.dart';
+import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({
