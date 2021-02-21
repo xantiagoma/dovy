@@ -26,6 +26,7 @@ export 'package:searchable_dropdown/searchable_dropdown.dart';
 export 'package:supercharged/supercharged.dart';
 export 'package:tinycolor/tinycolor.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
+export 'package:json_annotation/json_annotation.dart';
 
 // App
 export 'package:dovy/extensions.dart';

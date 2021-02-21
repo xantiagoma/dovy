@@ -124,8 +124,8 @@ extension PolylineDecode_ on String {
       )
           .map(
             (p) => LatLng(
-              p.first,
-              p.last,
+              p.first.toDouble(),
+              p.last.toDouble(),
             ),
           )
           .toList();

@@ -10,8 +10,8 @@ class Mapa extends HookWidget {
   Widget build(BuildContext context) {
     final hookContext = useContext();
     final select = useProvider(systemSelectProvider);
-    final systemsList = useProvider(systemsListProvider);
-    final linesList = useProvider(linesListProvider);
+    final systemsList = useProvider(systemsProvider);
+    final linesList = useProvider(linesProvider);
     final options = useProvider(configsProvider).data?.value;
 
     useEffect(() {
@@ -21,7 +21,7 @@ class Mapa extends HookWidget {
         Future.microtask(() {
           final item = systemsList?.data?.value;
           if (item != null) {
-            select.state = select.state.setSystem(item[0]["id"]);
+            select.state = select.state.setSystem(item[0].id);
           }
         });
       }
@@ -52,8 +52,10 @@ class Mapa extends HookWidget {
 
     final double mapTileZoom = options['map_tile_zoom'].toDouble();
 
-    final systems = mapKeysFromList(systemsList.data?.value, (s) => s['id']);
-    final lines = mapKeysFromList(linesList.data?.value, (s) => s['id']);
+    final systems = mapKeysFromList(
+        systemsList.data?.value ?? <System>[], (System s) => s.id);
+    final lines =
+        mapKeysFromList(linesList.data?.value ?? <Line>[], (Line l) => l.id);
 
     final system = systems[select.state.system];
 
@@ -61,8 +63,8 @@ class Mapa extends HookWidget {
     final markers = <Marker>[];
 
     if (system != null) {
-      system["lines"].forEach((payload) {
-        final id = payload["id"];
+      system.lines?.forEach((payload) {
+        final id = payload.id;
         if (id == null) {
           return;
         }
@@ -75,24 +77,24 @@ class Mapa extends HookWidget {
           return;
         }
 
-        final points = (line["shape"] as String)?.toLatLngList() ?? [];
+        final points = line?.shape?.toLatLngList() ?? [];
 
         final polyline = Polyline(
           points: points,
-          color: (line["color"] as String).toColor(),
+          color: line?.color?.toColor(),
           strokeWidth: 2,
         );
         polylines.add(polyline);
 
-        final stations = line["stations"];
+        final stations = line?.stations ?? [];
 
         stations.forEach((station) {
-          final id = station["id"] as String;
+          final id = station?.id;
           if (select.state.station != null && select.state.station != id) {
             return;
           }
 
-          final location = station["location"];
+          final location = station?.location;
           if (location == null) {
             return;
           }
@@ -105,13 +107,13 @@ class Mapa extends HookWidget {
 
           final point = LatLng(latitude, longitude);
 
-          final List stationLines = station["lines"]
-              .map((payload) => payload["id"])
+          final List<Line> stationLines = station?.lines
+              .map((payload) => payload.id)
               .map((id) => lines[id])
               .toList();
           final colors = stationLines
-              .map((p) => p["color"])
-              .map((e) => (e.toString().toColor()))
+              .map((p) => p?.color)
+              .map((e) => (e?.toString()?.toColor()))
               .toList();
 
           final marker = Marker(

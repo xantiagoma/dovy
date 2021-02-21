@@ -1,6 +1,6 @@
 import 'package:dovy/general.dart';
 
-Map<T, S> mapKeysFromList<S, T>(Iterable<S> values, T key(S element)) {
+Map<T, S> mapKeysFromList<S, T>(Iterable<S> values, T Function(S) key) {
   final map = Map<T, S>();
   groupBy<S, T>(values ?? [], key).forEach((key, value) {
     map.putIfAbsent(key, () => value.first);

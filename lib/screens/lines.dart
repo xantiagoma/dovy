@@ -17,16 +17,16 @@ class _LinesScreenState extends State<LinesScreen>
     super.build(context);
 
     final select = useProvider(systemSelectProvider).state;
-    final systemsList = useProvider(systemsListProvider)?.data?.value ?? [];
-    final lines = useProvider(linesListProvider)?.data?.value ?? [];
+    final systemsList = useProvider(systemsProvider)?.data?.value ?? [];
+    final lines = useProvider(linesProvider)?.data?.value ?? [];
 
     if (systemsList == null || lines == null) {
       return CircularProgressIndicator();
     }
 
-    final systems = mapKeysFromList(systemsList, (k) => k["id"]);
+    final systems = mapKeysFromList(systemsList, (System k) => k.id);
     final system = systems[select.system];
-    final name = system["name"];
+    final name = system.name;
 
     return CustomScrollView(
       slivers: <Widget>[
@@ -42,7 +42,7 @@ class _LinesScreenState extends State<LinesScreen>
     );
   }
 
-  SliverGrid buildGridView(List lines) {
+  SliverGrid buildGridView(List<Line> lines) {
     return SliverGrid(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -52,18 +52,19 @@ class _LinesScreenState extends State<LinesScreen>
       delegate: SliverChildBuilderDelegate(
         (context, i) {
           final line = lines[i];
-          final color =
-              (line["color"] as String).toColor().desaturate().lighten();
+          final color = line.color.toColor().desaturate().lighten();
           return Material(
             color: color,
             borderRadius: BorderRadius.all(Radius.circular(10)),
             child: InkWell(
               onTap: () {
-                print(line);
+                context.navigateTo(
+                  '/line/${line.id}',
+                );
               },
               child: Center(
                 child: Text(
-                  line["name"],
+                  line.name,
                   style: context.theme.textTheme.headline4.copyWith(
                     color: color.inverseBW,
                   ),

@@ -14,78 +14,6 @@ final systemSelectProvider = StateProvider<SelectState>(
   ),
 );
 
-final systemsListProvider = FutureProvider<List>(
-  (ref) async {
-    final graphQLClient = ref.watch(graphQlProvider);
-    final value = await graphQLClient.query(
-      QueryOptions(
-        documentNode: gql(
-          """
-            query {
-              systems {
-                name
-                id
-                lines {
-                  id
-                }
-              }
-            }
-        """,
-        ),
-      ),
-    );
-    final systems = (value.data["systems"] as Iterable).toList();
-    return systems;
-  },
-);
-
-final linesListProvider = FutureProvider<List>(
-  (ref) async {
-    final graphQLClient = ref.watch(graphQlProvider);
-
-    final systemId = ref.watch(systemSelectProvider).state.system;
-
-    if (systemId == null) {
-      return [];
-    }
-
-    final value = await graphQLClient.query(
-      QueryOptions(
-        documentNode: gql(
-          """
-            query GetSystemLines(\$id: ID!) {
-              system(id: \$id) {
-                lines {
-                  id
-                  name
-                  color
-                  shape
-                  stations {
-                    id
-                    name
-                    location {
-                      latitude
-                      longitude
-                    }
-                    lines {
-                      id
-                    }
-                  }
-                }
-              }
-            }
-        """,
-        ),
-        variables: {
-          "id": systemId,
-        },
-      ),
-    );
-    final lines = (value.data["system"]["lines"] as Iterable).toList();
-    return lines;
-  },
-);
-
 final stationsListProvider = FutureProvider<List>(
   (ref) async {
     final graphQLClient = ref.watch(graphQlProvider);
@@ -139,6 +67,15 @@ final routerProvider = Provider<FluroRouter>(
         '/home',
         handler: Handler(
           handlerFunc: (context, parameters) => HomeScreen(),
+        ),
+      )
+      ..define(
+        '/line/:id',
+        handler: Handler(
+          handlerFunc: (context, parameters) {
+            // final args = context.settings.arguments as MyArgumentsDataClass;
+            return LineScreen(id: parameters["id"][0]);
+          },
         ),
       )
       ..notFoundHandler = Handler(
@@ -211,17 +148,35 @@ final configsProvider = FutureProvider<Map<String, dynamic>>((ref) async {
   return configs;
 });
 
-final stationsProvider =
-    FutureProvider<List<Map<String, dynamic>>>((ref) async {
+final systemsProvider = FutureProvider<List<System>>(
+  (ref) async {
+    final strapiService = ref.watch(strapiServiceProvider);
+    final systems = (await strapiService.find('systems'))
+        .map((e) => System.fromJson(e.data))
+        .toList();
+    return systems;
+  },
+);
+
+final stationsProvider = FutureProvider<List<Station>>((ref) async {
   final strapiService = ref.watch(strapiServiceProvider);
-  final stations =
-      (await strapiService.find('stations')).map((e) => e.data).toList();
+  final stations = (await strapiService.find('stations'))
+      .map((e) => Station.fromJson(e.data))
+      .toList();
   return stations;
 });
 
-final linesProvider = FutureProvider<List<Map<String, dynamic>>>((ref) async {
+final linesProvider = FutureProvider<List<Line>>((ref) async {
   final strapiService = ref.watch(strapiServiceProvider);
-  final stations =
-      (await strapiService.find('stations')).map((e) => e.data).toList();
-  return stations;
+  final lines = (await strapiService.find('lines'))
+      .map((e) => Line.fromJson(e.data))
+      .toList();
+  return lines;
+});
+
+final lineProvider =
+    FutureProvider.autoDispose.family<Line, String>((ref, id) async {
+  final strapiService = ref.watch(strapiServiceProvider);
+  final data = (await strapiService.findOne('lines', id)).data;
+  return Line.fromJson(data);
 });

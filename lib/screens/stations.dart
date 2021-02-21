@@ -17,27 +17,28 @@ class _StationsScreenState extends State<StationsScreen>
     super.build(context);
 
     final select = useProvider(systemSelectProvider).state;
-    final systemsList = useProvider(systemsListProvider).data.value;
-    final lines = useProvider(linesListProvider).data.value;
+    final systemsList = useProvider(systemsProvider)?.data?.value;
+    final lines = useProvider(linesProvider)?.data?.value;
 
     if (systemsList == null || lines == null) {
       return CircularProgressIndicator();
     }
 
-    final systems = mapKeysFromList(systemsList, (k) => k["id"]);
+    final systems = mapKeysFromList(systemsList, (System k) => k.id);
     final system = systems[select.system];
-    final name = system["name"];
+    final name = system.name;
 
+    // TODO
     final stations = uniqBy(
       lines
-          .map((line) => line["stations"])
+          .map((line) => line.stations)
           .toList()
           .expand((element) => element)
           .toList(),
-      (s) => s["id"],
+      (Station s) => s.id,
     );
 
-    final linesBy = mapKeysFromList(lines, (s) => s["id"]);
+    final linesBy = mapKeysFromList(lines, (Line l) => l.id);
 
     return CustomScrollView(
       slivers: <Widget>[
@@ -53,9 +54,9 @@ class _StationsScreenState extends State<StationsScreen>
             delegate: SliverChildBuilderDelegate(
               (context, i) {
                 final station = stations[i];
-                final name = station["name"];
-                final lines = station["lines"]
-                    .map((p) => p["id"])
+                final name = station.name;
+                final lines = station.lines
+                    .map((p) => p.id)
                     .map((id) => linesBy[id])
                     .toList();
                 return Row(
@@ -66,11 +67,11 @@ class _StationsScreenState extends State<StationsScreen>
                           Padding(
                             padding: const EdgeInsets.only(right: 10),
                             child: Builder(builder: (context) {
-                              final color = (line["color"] as String).toColor();
+                              final color = line.color.toColor();
                               return Chip(
                                 backgroundColor: color,
                                 label: Text(
-                                  line["name"],
+                                  line.name,
                                   style: TextStyle(
                                     color: color.inverseBW,
                                   ),

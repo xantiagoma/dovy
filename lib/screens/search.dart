@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:dovy/general.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends StatefulHookWidget {
   const SearchScreen({
     Key key,
   }) : super(key: key);
@@ -15,10 +16,21 @@ class _SearchScreenState extends State<SearchScreen>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return ListView.builder(
-      itemBuilder: (ctx, i) {
-        return Text("Item: $i");
-      },
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          title: Text("Search"),
+          floating: true,
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, i) {
+              return Text("Item: $i");
+            },
+            childCount: 100,
+          ),
+        ),
+      ],
     );
   }
 

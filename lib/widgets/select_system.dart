@@ -9,8 +9,8 @@ class SelectSystem extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final systemSelectState$ = useProvider(systemSelectProvider);
-    final systemsListState$ = useProvider(systemsListProvider);
-    final linesListState$ = useProvider(linesListProvider);
+    final systemsListState$ = useProvider(systemsProvider);
+    final linesListState$ = useProvider(linesProvider);
     final stationsListState$ = useProvider(stationsListProvider);
 
     final systemSelectState = systemSelectState$.state;
@@ -26,8 +26,8 @@ class SelectSystem extends HookWidget {
             items: systemsListState
                 .map(
                   (system) => DropdownMenuItem(
-                    child: Text(system["name"]),
-                    value: system["id"],
+                    child: Text(system.name),
+                    value: system.id,
                   ),
                 )
                 .toList(),
@@ -49,8 +49,8 @@ class SelectSystem extends HookWidget {
             items: linesListState
                 .map(
                   (line) => DropdownMenuItem(
-                    child: Text(line["name"]),
-                    value: line["id"],
+                    child: Text(line.name),
+                    value: line.id,
                   ),
                 )
                 .toList(),
