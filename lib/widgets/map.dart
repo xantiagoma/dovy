@@ -170,10 +170,9 @@ class Mapa extends HookWidget {
   }
 }
 
-void clickStation(BuildContext context, station, List lines) {
+void clickStation(BuildContext context, Station station, List<Line> lines) {
   showFlash(
     context: context,
-    persistent: false,
     builder: (context, controller) {
       return Flash(
         controller: controller,
@@ -185,7 +184,7 @@ void clickStation(BuildContext context, station, List lines) {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                station["name"],
+                station.name,
               ),
               IconButton(
                 icon: Icon(Icons.close),
@@ -198,12 +197,12 @@ void clickStation(BuildContext context, station, List lines) {
           message: Row(
             children: lines.map(
               (l) {
-                final color = (l["color"] as String).toColor();
+                final color = l.color.toColor();
                 return Padding(
                   padding: EdgeInsets.only(right: 10),
                   child: Chip(
                     label: Text(
-                      l["name"],
+                      l.name,
                       style: TextStyle(
                         color: color.inverseBW,
                       ),
