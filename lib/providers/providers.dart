@@ -14,40 +14,6 @@ final systemSelectProvider = StateProvider<SelectState>(
   ),
 );
 
-final stationsListProvider = FutureProvider<List>(
-  (ref) async {
-    final graphQLClient = ref.watch(graphQlProvider);
-
-    final lineId = ref.watch(systemSelectProvider).state.line;
-
-    if (lineId == null) {
-      return [];
-    }
-
-    final value = await graphQLClient.query(
-      QueryOptions(
-        documentNode: gql(
-          """
-              query GetLineStations(\$id: ID!) {
-                line(id: \$id) {
-                  stations {
-                    name
-                    id
-                  }
-                }
-              }
-        """,
-        ),
-        variables: {
-          "id": lineId,
-        },
-      ),
-    );
-    final lines = (value.data["line"]["stations"] as Iterable).toList();
-    return lines;
-  },
-);
-
 final routerProvider = Provider<FluroRouter>(
   (ref) {
     final router = FluroRouter()
@@ -83,36 +49,6 @@ final routerProvider = Provider<FluroRouter>(
       );
 
     return router;
-  },
-);
-
-final graphQlProvider = Provider<GraphQLClient>(
-  (ref) {
-    final authService = ref.watch(authServiceProvider);
-    final token = ref.watch(authTokenProvider)?.data?.value;
-
-    if (token == null || authService == null) {
-      return null;
-    }
-
-    final HttpLink httpLink = HttpLink(
-      uri: 'https://xantiagoma.herokuapp.com/graphql',
-    );
-
-    final AuthLink authLink = AuthLink(
-      getToken: () async {
-        return 'Bearer $token';
-      },
-    );
-
-    final Link link = authLink.concat(httpLink);
-
-    final graphQLClient = GraphQLClient(
-      cache: InMemoryCache(),
-      link: link,
-    );
-
-    return graphQLClient;
   },
 );
 

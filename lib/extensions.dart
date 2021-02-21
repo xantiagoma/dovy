@@ -23,7 +23,6 @@ extension BuildContext_ on BuildContext {
             transitionDuration: transitionDuration,
             transitionBuilder: transitionBuilder,
           );
-  GraphQLClient get graphql => GraphQLProvider.of(this).value;
 }
 
 extension Future_<T> on Future<T> {

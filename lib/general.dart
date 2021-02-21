@@ -4,7 +4,7 @@ export 'package:collection/collection.dart';
 export 'package:convex_bottom_bar/convex_bottom_bar.dart';
 export 'package:dart_date/dart_date.dart';
 export 'package:dart_strapi/dart_strapi.dart';
-export 'package:dio/dio.dart' hide BaseOptions;
+export 'package:dio/dio.dart';
 export 'package:fl_chart/fl_chart.dart';
 export 'package:flash/flash.dart';
 export 'package:fluro/fluro.dart';
@@ -13,8 +13,6 @@ export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:flutter_map/flutter_map.dart';
 export 'package:flutter_spinkit/flutter_spinkit.dart';
 export 'package:google_polyline_algorithm/google_polyline_algorithm.dart';
-export 'package:graphql_flutter/graphql_flutter.dart'
-    hide Location, JsonSerializable;
 export 'package:hive_flutter/hive_flutter.dart';
 export 'package:hive/hive.dart';
 export 'package:hooks_riverpod/hooks_riverpod.dart';

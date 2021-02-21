@@ -11,7 +11,7 @@ class SelectSystem extends HookWidget {
     final systemSelectState$ = useProvider(systemSelectProvider);
     final systemsListState$ = useProvider(systemsProvider);
     final linesListState$ = useProvider(linesProvider);
-    final stationsListState$ = useProvider(stationsListProvider);
+    final stationsListState$ = useProvider(stationsProvider);
 
     final systemSelectState = systemSelectState$.state;
     final systemsListState = systemsListState$.data?.value ?? [];
@@ -69,8 +69,8 @@ class SelectSystem extends HookWidget {
             items: stationsListState
                 .map(
                   (line) => DropdownMenuItem(
-                    child: Text(line["name"]),
-                    value: line["id"],
+                    child: Text(line.name),
+                    value: line.id,
                   ),
                 )
                 .toList(),
