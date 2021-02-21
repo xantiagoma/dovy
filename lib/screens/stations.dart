@@ -48,45 +48,54 @@ class _StationsScreenState extends State<StationsScreen>
             // TODO
           ],
         ),
-        SliverPadding(
-          padding: EdgeInsets.all(20),
-          sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, i) {
-                final station = stations[i];
-                final name = station.name;
-                final lines = station.lines
-                    .map((p) => p.id)
-                    .map((id) => linesBy[id])
-                    .toList();
-                return Row(
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        for (final line in lines)
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10),
-                            child: Builder(builder: (context) {
-                              final color = line.color.toColor();
-                              return Chip(
-                                backgroundColor: color,
-                                label: Text(
-                                  line.name,
-                                  style: TextStyle(
-                                    color: color.inverseBW,
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, i) {
+              final station = stations[i];
+              final name = station.name;
+              final lines = station.lines
+                  .map((p) => p.id)
+                  .map((id) => linesBy[id])
+                  .toList();
+              return InkWell(
+                onTap: () {
+                  context.navigateTo(
+                    '/station/${station.id}',
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          for (final line in lines)
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: Builder(builder: (context) {
+                                final color = line.color.toColor();
+                                return Chip(
+                                  backgroundColor: color,
+                                  label: Text(
+                                    line.name,
+                                    style: TextStyle(
+                                      color: color.inverseBW,
+                                    ),
                                   ),
-                                ),
-                              );
-                            }),
-                          ),
-                      ],
-                    ),
-                    Text(name),
-                  ],
-                );
-              },
-              childCount: stations.length,
-            ),
+                                );
+                              }),
+                            ),
+                        ],
+                      ),
+                      Text(name),
+                    ],
+                  ),
+                ),
+              );
+            },
+            childCount: stations.length,
           ),
         )
       ],

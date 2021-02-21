@@ -44,6 +44,15 @@ final routerProvider = Provider<FluroRouter>(
           },
         ),
       )
+      ..define(
+        '/station/:id',
+        handler: Handler(
+          handlerFunc: (context, parameters) {
+            // final args = context.settings.arguments as MyArgumentsDataClass;
+            return StationScreen(id: parameters["id"][0]);
+          },
+        ),
+      )
       ..notFoundHandler = Handler(
         handlerFunc: (context, parameters) => NotFoundScreen(),
       );
@@ -110,9 +119,18 @@ final linesProvider = FutureProvider<List<Line>>((ref) async {
   return lines;
 });
 
-final lineProvider =
-    FutureProvider.autoDispose.family<Line, String>((ref, id) async {
-  final strapiService = ref.watch(strapiServiceProvider);
-  final data = (await strapiService.findOne('lines', id)).data;
-  return Line.fromJson(data);
-});
+final lineProvider = FutureProvider.autoDispose.family<Line, String>(
+  (ref, id) async {
+    final strapiService = ref.watch(strapiServiceProvider);
+    final data = (await strapiService.findOne('lines', id)).data;
+    return Line.fromJson(data);
+  },
+);
+
+final stationProvider = FutureProvider.autoDispose.family<Station, String>(
+  (ref, id) async {
+    final strapiService = ref.watch(strapiServiceProvider);
+    final data = (await strapiService.findOne('stations', id)).data;
+    return Station.fromJson(data);
+  },
+);

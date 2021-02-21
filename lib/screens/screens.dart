@@ -7,4 +7,5 @@ export './map.dart';
 export './not_found.dart';
 export './profile.dart';
 export './search.dart';
+export './station.dart';
 export './stations.dart';
