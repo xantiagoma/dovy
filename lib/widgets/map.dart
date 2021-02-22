@@ -59,7 +59,7 @@ class Mapa extends HookWidget {
 
     final system = systems[select.state.system];
 
-    final polylines = <Polyline>[];
+    final polylines = <TaggedPolyline>[];
     final markers = <Marker>[];
 
     if (system != null) {
@@ -79,10 +79,11 @@ class Mapa extends HookWidget {
 
         final points = line?.shape?.toLatLngList() ?? [];
 
-        final polyline = Polyline(
+        final polyline = TaggedPolyline(
+          tag: line.id,
           points: points,
           color: line?.color?.toColor(),
-          strokeWidth: 2,
+          strokeWidth: 2.0,
         );
         polylines.add(polyline);
 
@@ -138,18 +139,22 @@ class Mapa extends HookWidget {
         return FlutterMap(
           mapController: mapController,
           options: MapOptions(
-              center: mapTileCenter,
-              zoom: mapTileZoom,
-              maxZoom: 18.49,
-              minZoom: 2,
-              onPositionChanged: (newPosition, _) {
-                Future.microtask(() {
-                  position.state = newPosition;
-                });
-              },
-              onTap: (l) {
-                clickPlace(context, l);
-              }),
+            center: mapTileCenter,
+            zoom: mapTileZoom,
+            maxZoom: 18.49,
+            minZoom: 2,
+            onPositionChanged: (newPosition, _) {
+              Future.microtask(() {
+                position.state = newPosition;
+              });
+            },
+            plugins: [
+              TappablePolylineMapPlugin(),
+            ],
+            onLongPress: (l) {
+              clickPlace(context, l);
+            },
+          ),
           layers: [
             TileLayerOptions(
               urlTemplate: mapTileUrl,
@@ -157,8 +162,14 @@ class Mapa extends HookWidget {
               additionalOptions: mapTileAdditionalOptions,
               backgroundColor: context.theme.scaffoldBackgroundColor,
             ),
-            PolylineLayerOptions(
+            // PolylineLayerOptions(
+            //   polylines: polylines,
+            // ),
+            TappablePolylineLayerOptions(
+              polylineCulling: true,
               polylines: polylines,
+              onTap: (TaggedPolyline polyline) => print(polyline.tag),
+              onMiss: () => print("No polyline tapped"),
             ),
             MarkerLayerOptions(
               markers: markers,
