@@ -45,12 +45,26 @@ class ProfileHook extends HookWidget {
             }
             return Column(
               children: [
+                Row(
+                  children: [
+                    if (data.firstname != null)
+                      Text(
+                        data.firstname ?? '',
+                        style: context.theme.textTheme.headline5,
+                      ),
+                    if (data.lastname != null)
+                      Text(
+                        data.lastname ?? '',
+                        style: context.theme.textTheme.headline5,
+                      ),
+                  ],
+                ),
                 Text(
-                  '@${data["username"]}',
+                  '@${data.username}',
                   style: context.theme.textTheme.headline5,
                 ),
                 Text(
-                  data["email"],
+                  data.email,
                   style: context.theme.textTheme.headline6,
                 ),
               ],

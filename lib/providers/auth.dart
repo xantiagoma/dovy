@@ -56,7 +56,7 @@ final authServiceProvider = Provider<AuthService>(
   },
 );
 
-final userProvider = FutureProvider<Map<String, dynamic>>(
+final userProvider = FutureProvider<User>(
   (ref) async {
     final jwt = ref.watch(authTokenProvider)?.data?.value;
     final strapi = ref.watch(strapiServiceProvider);
@@ -67,7 +67,7 @@ final userProvider = FutureProvider<Map<String, dynamic>>(
 
     try {
       final response = await strapi.http.get("/users/me");
-      return response.data;
+      return User.fromJson(response.data);
     } catch (e) {
       print("e: $e");
     }
