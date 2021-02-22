@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
@@ -16,18 +17,87 @@ class _SearchScreenState extends State<SearchScreen>
   Widget build(BuildContext context) {
     super.build(context);
 
+    final qController = useTextEditingController(text: '');
+    final q = useValueListenable(qController);
+
+    final stationsResult =
+        useProvider(stationsSearchProvider(q.text))?.data?.value ?? [];
+    final linesResult =
+        useProvider(linesSearchProvider(q.text))?.data?.value ?? [];
+
     return CustomScrollView(
       slivers: [
         SliverAppBar(
-          title: Text("Search"),
+          snap: true,
+          primary: true,
           floating: true,
+          title: CupertinoTextField(
+            placeholder: 'Search for...',
+            autofocus: true,
+            controller: qController,
+            textInputAction: TextInputAction.search,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            decoration: BoxDecoration(
+              color: Colors.black54,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          centerTitle: true,
+        ),
+        SliverGrid(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 5,
+          ),
+          delegate: SliverChildBuilderDelegate(
+            (context, i) {
+              final line = linesResult[i];
+              return InkWell(
+                onTap: () {
+                  context.navigateTo('/line/${line.id}');
+                },
+                child: Chip(
+                  label: Text(line.name),
+                  backgroundColor: line.color.toColor(),
+                ),
+              );
+            },
+            childCount: linesResult.length,
+          ),
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, i) {
-              return Text("Item: $i");
+              final station = stationsResult[i];
+
+              return InkWell(
+                onTap: () {
+                  context.navigateTo('/station/${station.id}');
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        width: 1,
+                        color: Colors.white12,
+                      ),
+                      top: BorderSide(
+                        width: i == 0 ? 1 : 0,
+                        color: Colors.white12,
+                      ),
+                    ),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 15,
+                  ),
+                  child: Text(station.name),
+                ),
+              );
             },
-            childCount: 100,
+            childCount: stationsResult.length,
           ),
         ),
       ],

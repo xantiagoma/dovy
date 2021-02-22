@@ -179,3 +179,77 @@ final mapControllerProvider = Provider<MapController>(
     return MapController();
   },
 );
+
+final stationsSearchProvider =
+    FutureProvider.autoDispose.family<List<Station>, String>(
+  (ref, q) async {
+    final select = ref.watch(selectProvider).state;
+
+    if (q == null) {
+      return [];
+    }
+    if (q == '') {
+      return [];
+    }
+    if (!(q is String)) {
+      return [];
+    }
+    if (q.trim().isEmpty) {
+      return [];
+    }
+
+    final strapiService = ref.watch(strapiServiceProvider);
+    final data = (await strapiService.find(
+      'stations',
+      queryParameters: {
+        '_q': q.trim(),
+        'lines.system.id': select.system ?? '',
+      },
+    ));
+    final list = data
+        .map((e) => e.data)
+        .map(
+          (e) => Station.fromJson(e),
+        )
+        .toList();
+
+    return list;
+  },
+);
+
+final linesSearchProvider =
+    FutureProvider.autoDispose.family<List<Line>, String>(
+  (ref, q) async {
+    final select = ref.watch(selectProvider).state;
+
+    if (q == null) {
+      return [];
+    }
+    if (q == '') {
+      return [];
+    }
+    if (!(q is String)) {
+      return [];
+    }
+    if (q.trim().isEmpty) {
+      return [];
+    }
+
+    final strapiService = ref.watch(strapiServiceProvider);
+    final data = (await strapiService.find(
+      'lines',
+      queryParameters: {
+        'system.id': select.system,
+        '_q': q.trim(),
+      },
+    ));
+    final list = data
+        .map((e) => e.data)
+        .map(
+          (e) => Line.fromJson(e),
+        )
+        .toList();
+
+    return list;
+  },
+);
