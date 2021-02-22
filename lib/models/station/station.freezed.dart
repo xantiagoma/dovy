@@ -21,8 +21,10 @@ class _$StationTearOff {
       {String id,
       String name,
       String code,
-      @JsonKey(fromJson: linesFromJson) List<Line> lines,
-      Map<String, dynamic> location}) {
+      @JsonKey(fromJson: linesFromJson)
+          List<Line> lines,
+      @JsonKey(fromJson: locationFromJson, toJson: locationToJson)
+          LatLng location}) {
     return _Station(
       id: id,
       name: name,
@@ -49,7 +51,8 @@ mixin _$Station {
   String get code;
   @JsonKey(fromJson: linesFromJson)
   List<Line> get lines;
-  Map<String, dynamic> get location;
+  @JsonKey(fromJson: locationFromJson, toJson: locationToJson)
+  LatLng get location;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -64,8 +67,10 @@ abstract class $StationCopyWith<$Res> {
       {String id,
       String name,
       String code,
-      @JsonKey(fromJson: linesFromJson) List<Line> lines,
-      Map<String, dynamic> location});
+      @JsonKey(fromJson: linesFromJson)
+          List<Line> lines,
+      @JsonKey(fromJson: locationFromJson, toJson: locationToJson)
+          LatLng location});
 }
 
 /// @nodoc
@@ -89,9 +94,7 @@ class _$StationCopyWithImpl<$Res> implements $StationCopyWith<$Res> {
       name: name == freezed ? _value.name : name as String,
       code: code == freezed ? _value.code : code as String,
       lines: lines == freezed ? _value.lines : lines as List<Line>,
-      location: location == freezed
-          ? _value.location
-          : location as Map<String, dynamic>,
+      location: location == freezed ? _value.location : location as LatLng,
     ));
   }
 }
@@ -105,8 +108,10 @@ abstract class _$StationCopyWith<$Res> implements $StationCopyWith<$Res> {
       {String id,
       String name,
       String code,
-      @JsonKey(fromJson: linesFromJson) List<Line> lines,
-      Map<String, dynamic> location});
+      @JsonKey(fromJson: linesFromJson)
+          List<Line> lines,
+      @JsonKey(fromJson: locationFromJson, toJson: locationToJson)
+          LatLng location});
 }
 
 /// @nodoc
@@ -131,9 +136,7 @@ class __$StationCopyWithImpl<$Res> extends _$StationCopyWithImpl<$Res>
       name: name == freezed ? _value.name : name as String,
       code: code == freezed ? _value.code : code as String,
       lines: lines == freezed ? _value.lines : lines as List<Line>,
-      location: location == freezed
-          ? _value.location
-          : location as Map<String, dynamic>,
+      location: location == freezed ? _value.location : location as LatLng,
     ));
   }
 }
@@ -146,8 +149,10 @@ class _$_Station implements _Station {
       {this.id,
       this.name,
       this.code,
-      @JsonKey(fromJson: linesFromJson) this.lines,
-      this.location});
+      @JsonKey(fromJson: linesFromJson)
+          this.lines,
+      @JsonKey(fromJson: locationFromJson, toJson: locationToJson)
+          this.location});
 
   factory _$_Station.fromJson(Map<String, dynamic> json) =>
       _$_$_StationFromJson(json);
@@ -162,7 +167,8 @@ class _$_Station implements _Station {
   @JsonKey(fromJson: linesFromJson)
   final List<Line> lines;
   @override
-  final Map<String, dynamic> location;
+  @JsonKey(fromJson: locationFromJson, toJson: locationToJson)
+  final LatLng location;
 
   @override
   String toString() {
@@ -211,8 +217,10 @@ abstract class _Station implements Station {
       {String id,
       String name,
       String code,
-      @JsonKey(fromJson: linesFromJson) List<Line> lines,
-      Map<String, dynamic> location}) = _$_Station;
+      @JsonKey(fromJson: linesFromJson)
+          List<Line> lines,
+      @JsonKey(fromJson: locationFromJson, toJson: locationToJson)
+          LatLng location}) = _$_Station;
 
   factory _Station.fromJson(Map<String, dynamic> json) = _$_Station.fromJson;
 
@@ -226,7 +234,8 @@ abstract class _Station implements Station {
   @JsonKey(fromJson: linesFromJson)
   List<Line> get lines;
   @override
-  Map<String, dynamic> get location;
+  @JsonKey(fromJson: locationFromJson, toJson: locationToJson)
+  LatLng get location;
   @override
   @JsonKey(ignore: true)
   _$StationCopyWith<_Station> get copyWith;

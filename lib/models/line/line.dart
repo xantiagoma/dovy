@@ -12,13 +12,16 @@ abstract class Line with _$Line {
     String shape,
     @JsonKey(
       fromJson: stationsFromJson,
-      // toJson: stationsToJson,
     )
         List<Station> stations,
     LineDescription description,
   }) = _Line;
 
   factory Line.fromJson(Map<String, dynamic> json) => _$LineFromJson(json);
+}
+
+extension Line_ on Line {
+  List<LatLng> get points => shape?.toLatLngList() ?? [];
 }
 
 List<Station> stationsFromJson(dynamic val) {

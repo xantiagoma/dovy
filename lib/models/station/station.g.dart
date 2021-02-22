@@ -12,7 +12,7 @@ _$_Station _$_$_StationFromJson(Map<String, dynamic> json) {
     name: json['name'] as String,
     code: json['code'] as String,
     lines: linesFromJson(json['lines']),
-    location: json['location'] as Map<String, dynamic>,
+    location: locationFromJson(json['location'] as Map<String, dynamic>),
   );
 }
 
@@ -22,5 +22,5 @@ Map<String, dynamic> _$_$_StationToJson(_$_Station instance) =>
       'name': instance.name,
       'code': instance.code,
       'lines': instance.lines?.map((e) => e?.toJson())?.toList(),
-      'location': instance.location,
+      'location': locationToJson(instance.location),
     };

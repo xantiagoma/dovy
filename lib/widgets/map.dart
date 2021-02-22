@@ -88,7 +88,7 @@ class Mapa extends HookWidget {
                 for (final line in lines)
                   TaggedPolyline(
                     tag: line.id,
-                    points: line?.shape?.toLatLngList() ?? <LatLng>[],
+                    points: line?.points,
                     color: line?.color?.toColor(),
                     strokeWidth: 2.0,
                   ),
@@ -103,10 +103,7 @@ class Mapa extends HookWidget {
                   if (station.id == select.state.station ||
                       select.state.station == null)
                     Marker(
-                      point: LatLng(
-                        station.location["latitude"],
-                        station.location["longitude"],
-                      ),
+                      point: station.location,
                       builder: (context) => DonutColors(
                         colors: [
                           for (final line in station.lines)

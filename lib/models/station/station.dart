@@ -13,7 +13,11 @@ abstract class Station with _$Station {
       // toJson: linesToJson,
     )
         List<Line> lines,
-    Map<String, dynamic> location,
+    @JsonKey(
+      fromJson: locationFromJson,
+      toJson: locationToJson,
+    )
+        LatLng location,
   }) = _Station;
 
   factory Station.fromJson(Map<String, dynamic> json) =>
@@ -33,6 +37,31 @@ List<Line> linesFromJson(dynamic val) {
       return Line.fromJson(e);
     }).toList();
   }
+}
+
+LatLng locationFromJson(Map<String, dynamic> json) {
+  if (json == null) {
+    return null;
+  }
+  if (json["latitude"] == null || json["longitude"] == null) {
+    return null;
+  }
+
+  return LatLng(
+    json["latitude"],
+    json["longitude"],
+  );
+}
+
+Map<String, dynamic> locationToJson(LatLng location) {
+  if (location == null) {
+    return null;
+  }
+
+  return {
+    "latitude": location.latitude,
+    "longitude": location.longitude,
+  };
 }
 
 // List<Map<String, dynamic>> linesToJson(List<Line> stations) {
