@@ -16,8 +16,10 @@ class _MapScreenState extends State<MapScreen>
   Widget build(BuildContext context) {
     super.build(context);
 
-    final select = useProvider(selectProvider).state;
-    final system = useProvider(systemProvider(select.system))?.data?.value;
+    final select = useProvider(selectProvider);
+    final system =
+        useProvider(systemProvider(select.state.system))?.data?.value;
+    final systems = useProvider(systemsProvider)?.data?.value ?? [];
     final showSelector = useState(false);
 
     return Stack(
@@ -53,7 +55,7 @@ class _MapScreenState extends State<MapScreen>
             alignment: Alignment.bottomCenter,
             child: Container(
               width: double.infinity,
-              height: 200,
+              height: 150,
               margin: EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 color: context.theme.scaffoldBackgroundColor.lighten(),
@@ -91,12 +93,58 @@ class _MapScreenState extends State<MapScreen>
               child: Material(
                 color: context.theme.primaryColor,
                 borderRadius: BorderRadius.circular(50),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8.0,
-                    horizontal: 20,
+                child: InkWell(
+                  onTap: systems.isNotEmpty
+                      ? () {
+                          showFlash(
+                            context: context,
+                            builder: (context, controller) {
+                              return Flash.dialog(
+                                controller: controller,
+                                alignment: Alignment.topCenter,
+                                margin: const EdgeInsets.only(
+                                  top: 50,
+                                  left: 80,
+                                  right: 80,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                                backgroundColor:
+                                    context.theme.scaffoldBackgroundColor,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    for (final system in systems)
+                                      InkWell(
+                                        onTap: () {
+                                          select.state =
+                                              select.state.setSystem(system.id);
+                                          controller.dismiss();
+                                        },
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 40,
+                                            vertical: 15,
+                                          ),
+                                          alignment: Alignment.center,
+                                          child: Text(system.name),
+                                        ),
+                                      )
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        }
+                      : null,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8.0,
+                      horizontal: 20,
+                    ),
+                    child: Text(system.name),
                   ),
-                  child: Text(system.name),
                 ),
               ),
             ),
