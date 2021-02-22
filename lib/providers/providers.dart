@@ -62,13 +62,13 @@ final routerProvider = Provider<FluroRouter>(
 );
 
 final locationDataProvider =
-    FutureProvider.autoDispose.family<Map<String, dynamic>, LatLng>(
+    FutureProvider.autoDispose.family<AddressDetails, LatLng>(
   (ref, point) async {
     return await LocationService.getLocation(point);
   },
 );
 
-final ipDataProvider = FutureProvider<Map<String, dynamic>>(
+final ipDataProvider = FutureProvider<IPData>(
   (ref) async {
     return await LocationService.getIpInfo();
   },

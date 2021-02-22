@@ -247,7 +247,7 @@ void clickPlace(BuildContext context, LatLng point) {
 
               return location.when(
                 data: (data) {
-                  return Text(data["display_name"]);
+                  return Text(data.displayName);
                 },
                 loading: () {
                   return Center(child: CircularProgressIndicator());

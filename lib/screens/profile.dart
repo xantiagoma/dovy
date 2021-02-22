@@ -69,15 +69,7 @@ class ProfileHook extends HookWidget {
           data: (data) {
             return Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Table(
-                children: [
-                  for (final entry in data.entries)
-                    TableRow(children: [
-                      Text(entry.key),
-                      Text(entry.value.toString()),
-                    ]),
-                ],
-              ),
+              child: Text(data.ip),
             );
           },
           loading: () {
