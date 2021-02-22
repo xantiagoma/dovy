@@ -55,8 +55,9 @@ class _LinesScreenState extends State<LinesScreen>
           final color = line.color.toColor().desaturate().lighten();
           return Material(
             color: color,
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderRadius: BorderRadius.circular(10),
             child: InkWell(
+              borderRadius: BorderRadius.circular(10),
               onTap: () {
                 context.navigateTo(
                   '/line/${line.id}',

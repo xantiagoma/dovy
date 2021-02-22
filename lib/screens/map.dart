@@ -39,6 +39,11 @@ class _MapScreenState extends State<MapScreen>
                   Radius.circular(100),
                 ),
                 child: InkWell(
+                  customBorder: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(100),
+                    ),
+                  ),
                   onTap: () {
                     showSelector.value = true;
                   },
@@ -94,6 +99,9 @@ class _MapScreenState extends State<MapScreen>
                 color: context.theme.primaryColor,
                 borderRadius: BorderRadius.circular(50),
                 child: InkWell(
+                  customBorder: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
                   onTap: systems.isNotEmpty
                       ? () {
                           showFlash(

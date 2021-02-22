@@ -15,6 +15,7 @@ abstract class Line with _$Line {
       // toJson: stationsToJson,
     )
         List<Station> stations,
+    LineDescription description,
   }) = _Line;
 
   factory Line.fromJson(Map<String, dynamic> json) => _$LineFromJson(json);
@@ -35,6 +36,12 @@ List<Station> stationsFromJson(dynamic val) {
   }
 }
 
-// List<Map<String, dynamic>> stationsToJson(List<Station> stations) {
-//   print(stations);
-// }
+@freezed
+abstract class LineDescription with _$LineDescription {
+  factory LineDescription({
+    @JsonKey(name: 'Body') String body,
+  }) = _LineDescription;
+
+  factory LineDescription.fromJson(Map<String, dynamic> json) =>
+      _$LineDescriptionFromJson(json);
+}

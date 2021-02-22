@@ -21,11 +21,28 @@ class LineScreen extends HookWidget {
       );
     }
 
+    final lineColor = line.color.toColor();
+
     return Scaffold(
-      appBar: AppBar(),
-      body: Container(
-        child: Text('line: $line'),
-      ),
-    );
+        body: CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          title: Text(
+            "${line.name}: ${line.description.body}",
+            style: TextStyle(color: lineColor.inverseBW),
+          ),
+          backgroundColor: lineColor,
+        ),
+        SliverToBoxAdapter(
+          child: Text("Stations:"),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+            final station = line.stations[index];
+            return Text(station.name);
+          }, childCount: line.stations.length),
+        ),
+      ],
+    ));
   }
 }

@@ -22,9 +22,40 @@ class StationScreen extends HookWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(),
-      body: Container(
-        child: Text('station: $station'),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            title: Text(station.name),
+          ),
+          SliverToBoxAdapter(
+            child: Text("Lines:"),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final line = station.lines[index];
+                return Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Chip(
+                        label: Text(
+                          line.name,
+                          style: TextStyle(
+                            color: line.color.toColor().inverseBW,
+                          ),
+                        ),
+                        backgroundColor: line.color.toColor(),
+                      ),
+                    ),
+                    Text(line.description.body),
+                  ],
+                );
+              },
+              childCount: station.lines.length,
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -123,7 +123,7 @@ class Mapa extends HookWidget {
               colors: colors,
               radius: 5,
               centerRatio: 0.1,
-              onTap: () => clickStation(hookContext, station, stationLines),
+              onTap: () => clickStation(hookContext, station),
             ),
           );
 
@@ -168,8 +168,8 @@ class Mapa extends HookWidget {
             TappablePolylineLayerOptions(
               polylineCulling: true,
               polylines: polylines,
-              onTap: (TaggedPolyline polyline) => print(polyline.tag),
-              onMiss: () => print("No polyline tapped"),
+              onTap: (TaggedPolyline polyline) =>
+                  clickLine(context, polyline.tag),
             ),
             MarkerLayerOptions(
               markers: markers,
@@ -181,50 +181,25 @@ class Mapa extends HookWidget {
   }
 }
 
-void clickStation(BuildContext context, Station station, List<Line> lines) {
+void clickStation(BuildContext context, Station station) {
   showFlash(
     context: context,
     builder: (context, controller) {
-      return Flash(
+      return StationCard(
         controller: controller,
-        backgroundColor: context.theme.scaffoldBackgroundColor.lighten(),
-        margin: EdgeInsets.all(18),
-        borderRadius: BorderRadius.circular(10),
-        child: FlashBar(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                station.name,
-              ),
-              IconButton(
-                icon: Icon(Icons.close),
-                onPressed: () {
-                  controller.dismiss();
-                },
-              ),
-            ],
-          ),
-          message: Row(
-            children: lines.map(
-              (l) {
-                final color = l.color.toColor();
-                return Padding(
-                  padding: EdgeInsets.only(right: 10),
-                  child: Chip(
-                    label: Text(
-                      l.name,
-                      style: TextStyle(
-                        color: color.inverseBW,
-                      ),
-                    ),
-                    backgroundColor: color,
-                  ),
-                );
-              },
-            ).toList(),
-          ),
-        ),
+        stationId: station.id,
+      );
+    },
+  );
+}
+
+void clickLine(BuildContext context, String lineId) {
+  showFlash(
+    context: context,
+    builder: (context, controller) {
+      return LineCard(
+        controller: controller,
+        lineId: lineId,
       );
     },
   );
@@ -234,31 +209,9 @@ void clickPlace(BuildContext context, LatLng point) {
   showFlash(
     context: context,
     builder: (context, controller) {
-      return Flash(
+      return PlaceCard(
         controller: controller,
-        backgroundColor: context.theme.scaffoldBackgroundColor.lighten(),
-        margin: EdgeInsets.all(18),
-        borderRadius: BorderRadius.circular(10),
-        child: FlashBar(
-          icon: Icon(Icons.info_outline),
-          message: Consumer(
-            builder: (context, watch, child) {
-              final location = watch(locationDataProvider(point));
-
-              return location.when(
-                data: (data) {
-                  return Text(data.displayName);
-                },
-                loading: () {
-                  return Center(child: CircularProgressIndicator());
-                },
-                error: (e, s) {
-                  return Text(e.toString());
-                },
-              );
-            },
-          ),
-        ),
+        point: point,
       );
     },
   );

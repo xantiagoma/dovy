@@ -23,7 +23,8 @@ class _$LineTearOff {
       String name,
       String code,
       String shape,
-      @JsonKey(fromJson: stationsFromJson) List<Station> stations}) {
+      @JsonKey(fromJson: stationsFromJson) List<Station> stations,
+      LineDescription description}) {
     return _Line(
       id: id,
       color: color,
@@ -31,6 +32,7 @@ class _$LineTearOff {
       code: code,
       shape: shape,
       stations: stations,
+      description: description,
     );
   }
 
@@ -53,6 +55,7 @@ mixin _$Line {
   String get shape;
   @JsonKey(fromJson: stationsFromJson)
   List<Station> get stations;
+  LineDescription get description;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -69,7 +72,10 @@ abstract class $LineCopyWith<$Res> {
       String name,
       String code,
       String shape,
-      @JsonKey(fromJson: stationsFromJson) List<Station> stations});
+      @JsonKey(fromJson: stationsFromJson) List<Station> stations,
+      LineDescription description});
+
+  $LineDescriptionCopyWith<$Res> get description;
 }
 
 /// @nodoc
@@ -88,6 +94,7 @@ class _$LineCopyWithImpl<$Res> implements $LineCopyWith<$Res> {
     Object code = freezed,
     Object shape = freezed,
     Object stations = freezed,
+    Object description = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as String,
@@ -97,7 +104,20 @@ class _$LineCopyWithImpl<$Res> implements $LineCopyWith<$Res> {
       shape: shape == freezed ? _value.shape : shape as String,
       stations:
           stations == freezed ? _value.stations : stations as List<Station>,
+      description: description == freezed
+          ? _value.description
+          : description as LineDescription,
     ));
+  }
+
+  @override
+  $LineDescriptionCopyWith<$Res> get description {
+    if (_value.description == null) {
+      return null;
+    }
+    return $LineDescriptionCopyWith<$Res>(_value.description, (value) {
+      return _then(_value.copyWith(description: value));
+    });
   }
 }
 
@@ -112,7 +132,11 @@ abstract class _$LineCopyWith<$Res> implements $LineCopyWith<$Res> {
       String name,
       String code,
       String shape,
-      @JsonKey(fromJson: stationsFromJson) List<Station> stations});
+      @JsonKey(fromJson: stationsFromJson) List<Station> stations,
+      LineDescription description});
+
+  @override
+  $LineDescriptionCopyWith<$Res> get description;
 }
 
 /// @nodoc
@@ -132,6 +156,7 @@ class __$LineCopyWithImpl<$Res> extends _$LineCopyWithImpl<$Res>
     Object code = freezed,
     Object shape = freezed,
     Object stations = freezed,
+    Object description = freezed,
   }) {
     return _then(_Line(
       id: id == freezed ? _value.id : id as String,
@@ -141,6 +166,9 @@ class __$LineCopyWithImpl<$Res> extends _$LineCopyWithImpl<$Res>
       shape: shape == freezed ? _value.shape : shape as String,
       stations:
           stations == freezed ? _value.stations : stations as List<Station>,
+      description: description == freezed
+          ? _value.description
+          : description as LineDescription,
     ));
   }
 }
@@ -155,7 +183,8 @@ class _$_Line implements _Line {
       this.name,
       this.code,
       this.shape,
-      @JsonKey(fromJson: stationsFromJson) this.stations});
+      @JsonKey(fromJson: stationsFromJson) this.stations,
+      this.description});
 
   factory _$_Line.fromJson(Map<String, dynamic> json) =>
       _$_$_LineFromJson(json);
@@ -173,10 +202,12 @@ class _$_Line implements _Line {
   @override
   @JsonKey(fromJson: stationsFromJson)
   final List<Station> stations;
+  @override
+  final LineDescription description;
 
   @override
   String toString() {
-    return 'Line(id: $id, color: $color, name: $name, code: $code, shape: $shape, stations: $stations)';
+    return 'Line(id: $id, color: $color, name: $name, code: $code, shape: $shape, stations: $stations, description: $description)';
   }
 
   @override
@@ -195,7 +226,10 @@ class _$_Line implements _Line {
                 const DeepCollectionEquality().equals(other.shape, shape)) &&
             (identical(other.stations, stations) ||
                 const DeepCollectionEquality()
-                    .equals(other.stations, stations)));
+                    .equals(other.stations, stations)) &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)));
   }
 
   @override
@@ -206,7 +240,8 @@ class _$_Line implements _Line {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(code) ^
       const DeepCollectionEquality().hash(shape) ^
-      const DeepCollectionEquality().hash(stations);
+      const DeepCollectionEquality().hash(stations) ^
+      const DeepCollectionEquality().hash(description);
 
   @JsonKey(ignore: true)
   @override
@@ -226,7 +261,8 @@ abstract class _Line implements Line {
       String name,
       String code,
       String shape,
-      @JsonKey(fromJson: stationsFromJson) List<Station> stations}) = _$_Line;
+      @JsonKey(fromJson: stationsFromJson) List<Station> stations,
+      LineDescription description}) = _$_Line;
 
   factory _Line.fromJson(Map<String, dynamic> json) = _$_Line.fromJson;
 
@@ -244,6 +280,157 @@ abstract class _Line implements Line {
   @JsonKey(fromJson: stationsFromJson)
   List<Station> get stations;
   @override
+  LineDescription get description;
+  @override
   @JsonKey(ignore: true)
   _$LineCopyWith<_Line> get copyWith;
+}
+
+LineDescription _$LineDescriptionFromJson(Map<String, dynamic> json) {
+  return _LineDescription.fromJson(json);
+}
+
+/// @nodoc
+class _$LineDescriptionTearOff {
+  const _$LineDescriptionTearOff();
+
+// ignore: unused_element
+  _LineDescription call({@JsonKey(name: 'Body') String body}) {
+    return _LineDescription(
+      body: body,
+    );
+  }
+
+// ignore: unused_element
+  LineDescription fromJson(Map<String, Object> json) {
+    return LineDescription.fromJson(json);
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $LineDescription = _$LineDescriptionTearOff();
+
+/// @nodoc
+mixin _$LineDescription {
+  @JsonKey(name: 'Body')
+  String get body;
+
+  Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
+  $LineDescriptionCopyWith<LineDescription> get copyWith;
+}
+
+/// @nodoc
+abstract class $LineDescriptionCopyWith<$Res> {
+  factory $LineDescriptionCopyWith(
+          LineDescription value, $Res Function(LineDescription) then) =
+      _$LineDescriptionCopyWithImpl<$Res>;
+  $Res call({@JsonKey(name: 'Body') String body});
+}
+
+/// @nodoc
+class _$LineDescriptionCopyWithImpl<$Res>
+    implements $LineDescriptionCopyWith<$Res> {
+  _$LineDescriptionCopyWithImpl(this._value, this._then);
+
+  final LineDescription _value;
+  // ignore: unused_field
+  final $Res Function(LineDescription) _then;
+
+  @override
+  $Res call({
+    Object body = freezed,
+  }) {
+    return _then(_value.copyWith(
+      body: body == freezed ? _value.body : body as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$LineDescriptionCopyWith<$Res>
+    implements $LineDescriptionCopyWith<$Res> {
+  factory _$LineDescriptionCopyWith(
+          _LineDescription value, $Res Function(_LineDescription) then) =
+      __$LineDescriptionCopyWithImpl<$Res>;
+  @override
+  $Res call({@JsonKey(name: 'Body') String body});
+}
+
+/// @nodoc
+class __$LineDescriptionCopyWithImpl<$Res>
+    extends _$LineDescriptionCopyWithImpl<$Res>
+    implements _$LineDescriptionCopyWith<$Res> {
+  __$LineDescriptionCopyWithImpl(
+      _LineDescription _value, $Res Function(_LineDescription) _then)
+      : super(_value, (v) => _then(v as _LineDescription));
+
+  @override
+  _LineDescription get _value => super._value as _LineDescription;
+
+  @override
+  $Res call({
+    Object body = freezed,
+  }) {
+    return _then(_LineDescription(
+      body: body == freezed ? _value.body : body as String,
+    ));
+  }
+}
+
+@JsonSerializable()
+
+/// @nodoc
+class _$_LineDescription implements _LineDescription {
+  _$_LineDescription({@JsonKey(name: 'Body') this.body});
+
+  factory _$_LineDescription.fromJson(Map<String, dynamic> json) =>
+      _$_$_LineDescriptionFromJson(json);
+
+  @override
+  @JsonKey(name: 'Body')
+  final String body;
+
+  @override
+  String toString() {
+    return 'LineDescription(body: $body)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _LineDescription &&
+            (identical(other.body, body) ||
+                const DeepCollectionEquality().equals(other.body, body)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(body);
+
+  @JsonKey(ignore: true)
+  @override
+  _$LineDescriptionCopyWith<_LineDescription> get copyWith =>
+      __$LineDescriptionCopyWithImpl<_LineDescription>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_LineDescriptionToJson(this);
+  }
+}
+
+abstract class _LineDescription implements LineDescription {
+  factory _LineDescription({@JsonKey(name: 'Body') String body}) =
+      _$_LineDescription;
+
+  factory _LineDescription.fromJson(Map<String, dynamic> json) =
+      _$_LineDescription.fromJson;
+
+  @override
+  @JsonKey(name: 'Body')
+  String get body;
+  @override
+  @JsonKey(ignore: true)
+  _$LineDescriptionCopyWith<_LineDescription> get copyWith;
 }
