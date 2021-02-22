@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dovy/general.dart';
+import 'package:dovy/general.dart' hide Listener;
 
 class SelectSystem extends HookWidget {
   const SelectSystem({
@@ -8,82 +8,72 @@ class SelectSystem extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final systemSelectState$ = useProvider(systemSelectProvider);
-    final systemsListState$ = useProvider(systemsProvider);
-    final linesListState$ = useProvider(linesProvider);
-    final stationsListState$ = useProvider(stationsProvider);
-
-    final systemSelectState = systemSelectState$.state;
-    final systemsListState = systemsListState$.data?.value ?? [];
-    final linesListState = linesListState$.data?.value ?? [];
-    final stationsListState = stationsListState$.data?.value ?? [];
+    final selectState = useProvider(selectProvider);
+    final systems = useProvider(systemsProvider).data?.value ?? [];
+    final lines = useProvider(linesProvider).data?.value ?? [];
+    final stations = useProvider(stationsProvider).data?.value ?? [];
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        if (systemsListState.isNotEmpty)
-          SearchableDropdown.single(
-            value: systemSelectState.system,
-            items: systemsListState
-                .map(
-                  (system) => DropdownMenuItem(
-                    child: Text(system.name),
-                    value: system.id,
-                  ),
+        if (systems.isNotEmpty)
+          DropdownButton(
+            isExpanded: true,
+            value: selectState.state.system,
+            items: [
+              for (final system in systems)
+                DropdownMenuItem<String>(
+                  value: system.id,
+                  child: Text(system.name),
                 )
-                .toList(),
-            onChanged: (res) {
-              systemSelectState$.state =
-                  systemSelectState$.state.setSystem(res);
+            ],
+            onChanged: (val) {
+              selectState.state = selectState.state.setSystem(val);
             },
-            displayClearIcon: false,
-            onClear: () {
-              systemSelectState$.state =
-                  systemSelectState$.state.setSystem(null);
-            },
-            hint: "System",
-            searchHint: "Select a System",
           ),
-        if (linesListState.isNotEmpty)
-          SearchableDropdown.single(
-            value: systemSelectState.line,
-            items: linesListState
-                .map(
-                  (line) => DropdownMenuItem(
-                    child: Text(line.name),
-                    value: line.id,
-                  ),
+        if (lines.isNotEmpty)
+          DropdownButton(
+            isExpanded: true,
+            hint: Text("Select a line"),
+            value: selectState.state.line,
+            icon: IconButton(
+              icon: Icon(Icons.clear),
+              onPressed: () {
+                selectState.state = selectState.state.setLine(null);
+              },
+            ),
+            items: [
+              for (final line in lines)
+                DropdownMenuItem<String>(
+                  value: line.id,
+                  child: Text(line.name),
                 )
-                .toList(),
-            onChanged: (res) {
-              systemSelectState$.state = systemSelectState$.state.setLine(res);
+            ],
+            onChanged: (val) {
+              selectState.state = selectState.state.setLine(val);
             },
-            onClear: () {
-              systemSelectState$.state = systemSelectState$.state.setLine(null);
-            },
-            hint: "Line",
-            searchHint: "Select a Line",
           ),
-        if (stationsListState.isNotEmpty)
-          SearchableDropdown.single(
-            value: systemSelectState.station,
-            items: stationsListState
-                .map(
-                  (line) => DropdownMenuItem(
-                    child: Text(line.name),
-                    value: line.id,
-                  ),
+        if (stations.isNotEmpty && selectState.state.line != null)
+          DropdownButton(
+            isExpanded: true,
+            hint: Text("Select a station"),
+            value: selectState.state.station,
+            icon: IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () {
+                selectState.state = selectState.state.setStation(null);
+              },
+            ),
+            items: [
+              for (final station in stations)
+                DropdownMenuItem<String>(
+                  value: station.id,
+                  child: Text(station.name),
                 )
-                .toList(),
-            onChanged: (res) {
-              systemSelectState$.state =
-                  systemSelectState$.state.setStation(res);
+            ],
+            onChanged: (val) {
+              selectState.state = selectState.state.setStation(val);
             },
-            onClear: () {
-              systemSelectState$.state =
-                  systemSelectState$.state.setStation(null);
-            },
-            hint: "Station",
-            searchHint: "Select a Station",
           ),
       ],
     );

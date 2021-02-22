@@ -9,7 +9,7 @@ class Mapa extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final hookContext = useContext();
-    final select = useProvider(systemSelectProvider);
+    final select = useProvider(selectProvider);
     final systemsList = useProvider(systemsProvider);
     final linesList = useProvider(linesProvider);
     final options = useProvider(configsProvider).data?.value;

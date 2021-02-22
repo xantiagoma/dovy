@@ -6,7 +6,7 @@ final positionProvider = StateProvider<MapPosition>(
   (ref) => null,
 );
 
-final systemSelectProvider = StateProvider<SelectState>(
+final selectProvider = StateProvider<SelectState>(
   (ref) => SelectState(
     system: null,
     line: null,
@@ -86,12 +86,14 @@ final strapiServiceProvider = Provider<Strapi>(
   },
 );
 
-final configsProvider = FutureProvider<Map<String, dynamic>>((ref) async {
-  final strapiService = ref.watch(strapiServiceProvider);
-  final response = await strapiService.http.get('/configs');
-  final configs = response.data;
-  return configs;
-});
+final configsProvider = FutureProvider<Map<String, dynamic>>(
+  (ref) async {
+    final strapiService = ref.watch(strapiServiceProvider);
+    final response = await strapiService.http.get('/configs');
+    final configs = response.data;
+    return configs;
+  },
+);
 
 final systemsProvider = FutureProvider<List<System>>(
   (ref) async {
@@ -103,24 +105,56 @@ final systemsProvider = FutureProvider<List<System>>(
   },
 );
 
-final stationsProvider = FutureProvider<List<Station>>((ref) async {
-  final strapiService = ref.watch(strapiServiceProvider);
-  final stations = (await strapiService.find('stations'))
-      .map((e) => Station.fromJson(e.data))
-      .toList();
-  return stations;
-});
+final stationsProvider = FutureProvider<List<Station>>(
+  (ref) async {
+    final select = ref.watch(selectProvider).state;
+    final strapiService = ref.watch(strapiServiceProvider);
 
-final linesProvider = FutureProvider<List<Line>>((ref) async {
-  final strapiService = ref.watch(strapiServiceProvider);
-  final lines = (await strapiService.find('lines'))
-      .map((e) => Line.fromJson(e.data))
-      .toList();
-  return lines;
-});
+    final stations = (await strapiService.find(
+      'stations',
+      queryParameters: {
+        if (select.line != null) 'lines.id': select.line,
+      },
+    ))
+        .map((e) => Station.fromJson(e.data))
+        .toList();
+    return stations;
+  },
+);
+
+final linesProvider = FutureProvider<List<Line>>(
+  (ref) async {
+    final select = ref.watch(selectProvider).state;
+    final strapiService = ref.watch(strapiServiceProvider);
+
+    final lines = (await strapiService.find(
+      'lines',
+      queryParameters: {
+        'system.id': select.system,
+      },
+    ))
+        .map((e) => Line.fromJson(e.data))
+        .toList();
+    return lines;
+  },
+);
+
+final systemProvider = FutureProvider.autoDispose.family<System, String>(
+  (ref, id) async {
+    if (id == null) {
+      return null;
+    }
+    final strapiService = ref.watch(strapiServiceProvider);
+    final data = (await strapiService.findOne('systems', id)).data;
+    return System.fromJson(data);
+  },
+);
 
 final lineProvider = FutureProvider.autoDispose.family<Line, String>(
   (ref, id) async {
+    if (id == null) {
+      return null;
+    }
     final strapiService = ref.watch(strapiServiceProvider);
     final data = (await strapiService.findOne('lines', id)).data;
     return Line.fromJson(data);
@@ -129,6 +163,9 @@ final lineProvider = FutureProvider.autoDispose.family<Line, String>(
 
 final stationProvider = FutureProvider.autoDispose.family<Station, String>(
   (ref, id) async {
+    if (id == null) {
+      return null;
+    }
     final strapiService = ref.watch(strapiServiceProvider);
     final data = (await strapiService.findOne('stations', id)).data;
     return Station.fromJson(data);

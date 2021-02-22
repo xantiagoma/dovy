@@ -16,7 +16,7 @@ class _LinesScreenState extends State<LinesScreen>
   Widget build(BuildContext context) {
     super.build(context);
 
-    final select = useProvider(systemSelectProvider).state;
+    final select = useProvider(selectProvider).state;
     final systemsList = useProvider(systemsProvider)?.data?.value ?? [];
     final lines = useProvider(linesProvider)?.data?.value ?? [];
 
