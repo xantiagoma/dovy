@@ -24,25 +24,34 @@ class LineScreen extends HookWidget {
     final lineColor = line.color.toColor();
 
     return Scaffold(
-        body: CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          title: Text(
-            "${line.name}: ${line.description.body}",
-            style: TextStyle(color: lineColor.inverseBW),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            title: Text(
+              "${line.name}: ${line.description.body}",
+              style: TextStyle(color: lineColor.inverseBW),
+            ),
+            backgroundColor: lineColor,
           ),
-          backgroundColor: lineColor,
-        ),
-        SliverToBoxAdapter(
-          child: Text("Stations:"),
-        ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            final station = line.stations[index];
-            return Text(station.name);
-          }, childCount: line.stations.length),
-        ),
-      ],
-    ));
+          SliverToBoxAdapter(
+            child: Text("Stations:"),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final station = line.stations[index];
+              return InkWell(
+                onTap: () {
+                  context.navigateTo('/station/${station.id}');
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(station.name),
+                ),
+              );
+            }, childCount: line.stations.length),
+          ),
+        ],
+      ),
+    );
   }
 }

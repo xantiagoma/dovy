@@ -34,22 +34,27 @@ class StationScreen extends HookWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 final line = station.lines[index];
-                return Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Chip(
-                        label: Text(
-                          line.name,
-                          style: TextStyle(
-                            color: line.color.toColor().inverseBW,
+                return InkWell(
+                  onTap: () {
+                    context.navigateTo('/line/${line.id}');
+                  },
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Chip(
+                          label: Text(
+                            line.name,
+                            style: TextStyle(
+                              color: line.color.toColor().inverseBW,
+                            ),
                           ),
+                          backgroundColor: line.color.toColor(),
                         ),
-                        backgroundColor: line.color.toColor(),
                       ),
-                    ),
-                    Text(line.description.body),
-                  ],
+                      Text(line.description.body),
+                    ],
+                  ),
                 );
               },
               childCount: station.lines.length,
