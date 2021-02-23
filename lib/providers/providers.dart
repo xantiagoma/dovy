@@ -1,6 +1,8 @@
 import 'package:dovy/general.dart';
 import './auth.dart';
 export './auth.dart';
+import './local.dart';
+export './local.dart';
 
 final positionProvider = StateProvider<MapPosition>(
   (ref) => null,

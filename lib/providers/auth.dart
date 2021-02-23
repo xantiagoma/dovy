@@ -1,22 +1,18 @@
 import 'package:dovy/general.dart';
 
-final localStorageProvider = FutureProvider<HiveInterface>(
-  (ref) async {
-    await Hive.initFlutter();
-    return Hive;
-  },
-);
-
 final authBoxProvider = FutureProvider<Box<String>>(
   (ref) async {
-    final res = ref.watch(localStorageProvider);
+    final store = ref.watch(localStorageProvider)?.data?.value;
+    final encryptionKey = ref.watch(encryptionKeyProvider)?.data?.value;
 
-    if (res?.data?.value == null) {
+    if (store == null || encryptionKey == null) {
       return null;
     }
 
-    final store = res?.data?.value;
-    final box = await store.openBox<String>('auth_box');
+    final box = await store.openBox<String>(
+      'authBox',
+      encryptionCipher: HiveAesCipher(encryptionKey),
+    );
     return box;
   },
 );
