@@ -26,6 +26,7 @@ class LineCard<T> extends HookWidget {
       borderRadius: borderRadius,
       child: FlashBar(
         showProgressIndicator: line == null,
+        progressIndicatorBackgroundColor: Colors.transparent,
         icon: IconButton(
           icon: Icon(Icons.arrow_upward),
           onPressed: () {

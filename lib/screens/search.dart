@@ -20,10 +20,13 @@ class _SearchScreenState extends State<SearchScreen>
     final qController = useTextEditingController(text: '');
     final q = useValueListenable(qController);
 
-    final stationsResult =
-        useProvider(stationsSearchProvider(q.text))?.data?.value ?? [];
-    final linesResult =
-        useProvider(linesSearchProvider(q.text))?.data?.value ?? [];
+    final stationsResult$ = useProvider(stationsSearchProvider(q.text));
+    final linesResult$ = useProvider(linesSearchProvider(q.text));
+
+    final stationsResult = stationsResult$?.data?.value ?? [];
+    final linesResult = linesResult$?.data?.value ?? [];
+
+    final loading = stationsResult$.loading && linesResult$.loading;
 
     return CustomScrollView(
       slivers: [
@@ -44,9 +47,25 @@ class _SearchScreenState extends State<SearchScreen>
             style: TextStyle(
               color: Colors.white,
             ),
+            clearButtonMode: OverlayVisibilityMode.editing,
           ),
           centerTitle: true,
         ),
+        if (loading)
+          SliverFillRemaining(
+            child: SpinKitDoubleBounce(
+              color: Colors.white,
+            ),
+          ),
+        if (!loading &&
+            stationsResult.isEmpty &&
+            linesResult.isEmpty &&
+            q.text.isNotEmpty)
+          SliverFillRemaining(
+            child: Center(
+              child: Text("Not found"),
+            ),
+          ),
         SliverGrid(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 5,

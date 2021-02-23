@@ -70,22 +70,29 @@ class _MapScreenState extends State<MapScreen>
                 ),
               ),
               child: Stack(
+                clipBehavior: Clip.none,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: 30,
                       left: 40,
                       right: 40,
                     ),
-                    child: SelectSystem(),
+                    child: Center(
+                      child: SelectSystem(),
+                    ),
                   ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_downward),
-                      onPressed: () {
-                        showSelector.value = false;
-                      },
+                  Positioned(
+                    top: -15,
+                    right: -15,
+                    child: Material(
+                      color: context.theme.scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(50),
+                      child: IconButton(
+                        icon: Icon(Icons.close),
+                        onPressed: () {
+                          showSelector.value = false;
+                        },
+                      ),
                     ),
                   ),
                 ],

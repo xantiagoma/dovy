@@ -16,7 +16,9 @@ class StationScreen extends HookWidget {
     if (station == null) {
       return Scaffold(
         body: Center(
-          child: CircularProgressIndicator(),
+          child: SpinKitFadingFour(
+            color: Colors.white,
+          ),
         ),
       );
     }

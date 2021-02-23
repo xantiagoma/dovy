@@ -16,7 +16,9 @@ class LineScreen extends HookWidget {
     if (line == null) {
       return Scaffold(
         body: Center(
-          child: CircularProgressIndicator(),
+          child: SpinKitFadingFour(
+            color: Colors.white,
+          ),
         ),
       );
     }

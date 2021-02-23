@@ -133,3 +133,11 @@ extension PolylineDecode_ on String {
     }
   }
 }
+
+extension AsyncValueLoadingt_<T> on AsyncValue<T> {
+  bool get loading => this.when(
+        data: (_) => false,
+        loading: () => true,
+        error: (_, _st) => false,
+      );
+}

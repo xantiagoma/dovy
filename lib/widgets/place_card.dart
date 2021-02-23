@@ -37,7 +37,9 @@ class PlaceCard<T> extends HookWidget {
           },
           loading: () {
             return Center(
-              child: CircularProgressIndicator(),
+              child: SpinKitPulse(
+                color: Colors.white,
+              ),
             );
           },
           error: (_, _st) => SizedBox(),
