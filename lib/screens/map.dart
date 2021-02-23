@@ -21,6 +21,7 @@ class _MapScreenState extends State<MapScreen>
         useProvider(systemProvider(select.state.system))?.data?.value;
     final systems = useProvider(systemsProvider)?.data?.value ?? [];
     final showSelector = useState(false);
+    final flashController = useState<FlashController>();
 
     return Stack(
       children: <Widget>[
@@ -103,10 +104,22 @@ class _MapScreenState extends State<MapScreen>
                     borderRadius: BorderRadius.circular(50),
                   ),
                   onTap: systems.isNotEmpty
-                      ? () {
-                          showFlash(
+                      ? () async {
+                          if (flashController.value != null) {
+                            flashController.value.dismiss();
+                            flashController.value = null;
+                            return;
+                          }
+
+                          await showFlash(
                             context: context,
                             builder: (context, controller) {
+                              Future.microtask(() {
+                                try {
+                                  flashController.value = controller;
+                                } catch (_) {}
+                              });
+
                               return Flash.dialog(
                                 controller: controller,
                                 alignment: Alignment.topCenter,
@@ -144,6 +157,8 @@ class _MapScreenState extends State<MapScreen>
                               );
                             },
                           );
+
+                          flashController.value = null;
                         }
                       : null,
                   child: Padding(
