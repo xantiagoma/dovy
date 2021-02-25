@@ -5,7 +5,6 @@ export 'package:convex_bottom_bar/convex_bottom_bar.dart';
 export 'package:dart_date/dart_date.dart';
 export 'package:dart_strapi/dart_strapi.dart';
 export 'package:dio/dio.dart';
-export 'package:fl_chart/fl_chart.dart';
 export 'package:flash/flash.dart';
 export 'package:fluro/fluro.dart';
 export 'package:flutter_hooks/flutter_hooks.dart';

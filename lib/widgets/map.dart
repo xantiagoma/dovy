@@ -103,15 +103,22 @@ class Mapa extends HookWidget {
                   if (station.id == select.state.station ||
                       select.state.station == null)
                     Marker(
+                      height: 18,
+                      width: 18,
                       point: station.location,
-                      builder: (context) => DonutColors(
-                        colors: [
-                          for (final line in station.lines)
-                            line.color.toColor(),
-                        ],
-                        radius: 5,
-                        centerRatio: 0.1,
-                        onTap: () => clickStation(hookContext, station),
+                      builder: (context) => Material(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(18),
+                        child: InkWell(
+                          onTap: () => clickStation(hookContext, station),
+                          child: CircleDonut(
+                            colors: [
+                              for (final line in station.lines)
+                                line.color.toColor(),
+                            ],
+                            thickness: 4,
+                          ),
+                        ),
                       ),
                     ),
               ],

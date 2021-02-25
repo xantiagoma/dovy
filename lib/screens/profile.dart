@@ -1,5 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:dovy/general.dart';
+import 'package:dovy/general.dart' hide Path;
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({
