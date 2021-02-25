@@ -21,12 +21,16 @@ class _LinesScreenState extends State<LinesScreen>
     final lines = useProvider(linesProvider)?.data?.value ?? [];
 
     if (systemsList == null || lines == null) {
-      return CircularProgressIndicator();
+      return Center(
+        child: SpinKitFadingFour(
+          color: Colors.white,
+        ),
+      );
     }
 
     final systems = mapKeysFromList(systemsList, (System k) => k.id);
     final system = systems[select.system];
-    final name = system.name;
+    final name = system?.name;
 
     return CustomScrollView(
       slivers: <Widget>[

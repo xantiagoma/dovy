@@ -29,6 +29,8 @@ final authTokenProvider = StreamProvider<String>(
       }
       // ref.onDispose(() => stream.);
     }
+
+    yield null;
   },
 );
 

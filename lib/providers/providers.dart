@@ -22,7 +22,7 @@ final routerProvider = Provider<FluroRouter>(
       ..define(
         '/',
         handler: Handler(
-          handlerFunc: (context, parameters) => MainScreen(),
+          handlerFunc: (context, parameters) => HomeScreen(),
         ),
       )
       ..define(

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
@@ -33,7 +34,9 @@ class Mapa extends HookWidget {
 
     if (options == null) {
       return Center(
-        child: CircularProgressIndicator(),
+        child: SpinKitFadingFour(
+          color: Colors.white,
+        ),
       );
     }
 
@@ -82,21 +85,34 @@ class Mapa extends HookWidget {
               additionalOptions: mapTileAdditionalOptions,
               backgroundColor: context.theme.scaffoldBackgroundColor,
             ),
-            TappablePolylineLayerOptions(
-              polylineCulling: true,
-              polylines: [
-                for (final line in lines)
-                  TaggedPolyline(
-                    tag: line.id,
-                    points: line?.points,
-                    color: line?.color?.toColor(),
-                    strokeWidth: 2.0,
-                  ),
-              ],
-              onTap: (TaggedPolyline polyline) =>
-                  clickLine(context, polyline.tag),
-              onMiss: () {},
-            ),
+            if (!kIsWeb)
+              TappablePolylineLayerOptions(
+                polylineCulling: true,
+                polylines: [
+                  for (final line in lines)
+                    TaggedPolyline(
+                      tag: line.id,
+                      points: line?.points,
+                      color: line?.color?.toColor(),
+                      strokeWidth: 2.0,
+                    ),
+                ],
+                onTap: (TaggedPolyline polyline) =>
+                    clickLine(context, polyline.tag),
+                onMiss: () {},
+              ),
+            if (kIsWeb)
+              PolylineLayerOptions(
+                // polylineCulling: true,
+                polylines: [
+                  for (final line in lines)
+                    Polyline(
+                      points: line?.points,
+                      color: line?.color?.toColor(),
+                      strokeWidth: 2.0,
+                    ),
+                ],
+              ),
             MarkerLayerOptions(
               markers: [
                 for (final station in stations)

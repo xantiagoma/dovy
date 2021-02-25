@@ -1,4 +1,4 @@
-package com.example.dovy
+package com.xantiagoma.metro.dovy
 
 import io.flutter.embedding.android.FlutterActivity
 

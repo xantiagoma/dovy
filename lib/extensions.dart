@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
+import 'package:maps_toolkit/maps_toolkit.dart' hide LatLng;
 
 extension BuildContext_ on BuildContext {
   S get s => S.of(this);
@@ -117,18 +118,18 @@ extension MapPosition_ on MapPosition {
 extension PolylineDecode_ on String {
   List<LatLng> toLatLngList({int accuracyExponent = 5}) {
     try {
-      return decodePolyline(
+      return PolygonUtil.decode(
         this,
-        accuracyExponent: accuracyExponent,
       )
           .map(
             (p) => LatLng(
-              p.first.toDouble(),
-              p.last.toDouble(),
+              p.latitude,
+              p.longitude,
             ),
           )
           .toList();
     } catch (e) {
+      print("PolylineDecode_error: $e\n$this");
       return [];
     }
   }

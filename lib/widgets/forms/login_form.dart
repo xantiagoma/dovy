@@ -15,6 +15,7 @@ class LoginForm extends HookWidget {
     final obscurePassword = useState(true);
     final id = useTextEditingController.fromValue(TextEditingValue.empty);
     final password = useTextEditingController.fromValue(TextEditingValue.empty);
+    final authService = useProvider(authServiceProvider);
 
     final dec = InputDecoration(
       fillColor: Colors.white,
@@ -74,8 +75,6 @@ class LoginForm extends HookWidget {
           Button(
             text: "Submit",
             onTap: () async {
-              final authService = context.read(authServiceProvider);
-
               final r =
                   await authService.login(id.text, password.text).tryOrNull;
 

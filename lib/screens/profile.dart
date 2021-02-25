@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart' hide Path;
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatefulHookWidget {
   const ProfileScreen({
     Key key,
   }) : super(key: key);
@@ -18,14 +18,37 @@ class _ProfileScreenState extends State<ProfileScreen>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverAppBar(
-          title: Text('Profile'),
+    final loaded = useProvider(loadedProvider);
+    final token = useProvider(authTokenProvider);
+    final user = useProvider(userProvider)?.data?.value;
+
+    if (!loaded) {
+      return Center(
+        child: SpinKitRing(
+          color: Colors.white,
         ),
-        SliverToBoxAdapter(child: ProfileHook()),
-      ],
-    );
+      );
+    } else if (loaded && user != null) {
+      return CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            title: Text('Profile'),
+          ),
+          SliverToBoxAdapter(child: ProfileHook()),
+        ],
+      );
+    } else {
+      return CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            title: Text('Login'),
+          ),
+          SliverFillRemaining(
+            child: MainScreen(),
+          ),
+        ],
+      );
+    }
   }
 
   @override
