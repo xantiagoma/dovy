@@ -4,6 +4,8 @@ export './auth.dart';
 import './local.dart';
 export './local.dart';
 
+final futureProviderAutoDisposeFamily = FutureProvider.autoDispose.family;
+
 final positionProvider = StateProvider<MapPosition>(
   (ref) => null,
 );
@@ -64,7 +66,7 @@ final routerProvider = Provider<FluroRouter>(
 );
 
 final locationDataProvider =
-    FutureProvider.autoDispose.family<AddressDetails, LatLng>(
+    futureProviderAutoDisposeFamily<AddressDetails, LatLng>(
   (ref, point) async {
     return await LocationService.getLocation(point);
   },
@@ -143,7 +145,7 @@ final stationsProvider = FutureProvider<List<Station>>(
   },
 );
 
-final systemProvider = FutureProvider.autoDispose.family<System, String>(
+final systemProvider = futureProviderAutoDisposeFamily<System, String>(
   (ref, id) async {
     if (id == null) {
       return null;
@@ -154,7 +156,7 @@ final systemProvider = FutureProvider.autoDispose.family<System, String>(
   },
 );
 
-final lineProvider = FutureProvider.autoDispose.family<Line, String>(
+final lineProvider = futureProviderAutoDisposeFamily<Line, String>(
   (ref, id) async {
     if (id == null) {
       return null;
@@ -165,7 +167,7 @@ final lineProvider = FutureProvider.autoDispose.family<Line, String>(
   },
 );
 
-final stationProvider = FutureProvider.autoDispose.family<Station, String>(
+final stationProvider = futureProviderAutoDisposeFamily<Station, String>(
   (ref, id) async {
     if (id == null) {
       return null;
@@ -183,7 +185,7 @@ final mapControllerProvider = Provider<MapController>(
 );
 
 final stationsSearchProvider =
-    FutureProvider.autoDispose.family<List<Station>, String>(
+    futureProviderAutoDisposeFamily<List<Station>, String>(
   (ref, q) async {
     final select = ref.watch(selectProvider).state;
 
@@ -219,8 +221,7 @@ final stationsSearchProvider =
   },
 );
 
-final linesSearchProvider =
-    FutureProvider.autoDispose.family<List<Line>, String>(
+final linesSearchProvider = futureProviderAutoDisposeFamily<List<Line>, String>(
   (ref, q) async {
     final select = ref.watch(selectProvider).state;
 
