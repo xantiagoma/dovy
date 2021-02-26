@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
@@ -48,11 +49,17 @@ class _LinesScreenState extends State<LinesScreen>
 
   SliverGrid buildGridView(List<Line> lines) {
     return SliverGrid(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 20,
-        crossAxisSpacing: 20,
-      ),
+      gridDelegate: kIsWeb
+          ? SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 20,
+            )
+          : SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 20,
+            ),
       delegate: SliverChildBuilderDelegate(
         (context, i) {
           final line = lines[i];

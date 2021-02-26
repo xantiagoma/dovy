@@ -116,22 +116,8 @@ extension MapPosition_ on MapPosition {
 }
 
 extension PolylineDecode_ on String {
-  List<LatLng> toLatLngList({int accuracyExponent = 5}) {
-    try {
-      return PolygonUtil.decode(
-        this,
-      )
-          .map(
-            (p) => LatLng(
-              p.latitude,
-              p.longitude,
-            ),
-          )
-          .toList();
-    } catch (e) {
-      print("PolylineDecode_error: $e\n$this");
-      return [];
-    }
+  List<LatLng> toLatLngList() {
+    return decodeEncodedPolyline(this);
   }
 }
 

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
@@ -70,6 +71,7 @@ class _StationsScreenState extends State<StationsScreen>
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,
+                    vertical: kIsWeb ? 10 : 0,
                   ),
                   child: Row(
                     children: <Widget>[

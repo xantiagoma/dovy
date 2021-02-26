@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
@@ -103,77 +104,80 @@ class _MapScreenState extends State<MapScreen>
           Align(
             alignment: Alignment.topCenter,
             child: SafeArea(
-              child: Material(
-                color: context.theme.primaryColor,
-                borderRadius: BorderRadius.circular(50),
-                child: InkWell(
-                  customBorder: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  onTap: systems.isNotEmpty
-                      ? () async {
-                          if (flashController.value != null) {
-                            flashController.value.dismiss();
-                            flashController.value = null;
-                            return;
-                          }
-
-                          await showFlash(
-                            context: context,
-                            builder: (context, controller) {
-                              Future.microtask(() {
-                                try {
-                                  flashController.value = controller;
-                                } catch (_) {}
-                              });
-
-                              return Flash.dialog(
-                                controller: controller,
-                                alignment: Alignment.topCenter,
-                                margin: const EdgeInsets.only(
-                                  top: 50,
-                                  left: 80,
-                                  right: 80,
-                                ),
-                                borderRadius: BorderRadius.circular(8),
-                                backgroundColor:
-                                    context.theme.scaffoldBackgroundColor,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    for (final system in systems)
-                                      InkWell(
-                                        onTap: () {
-                                          select.state =
-                                              select.state.setSystem(system.id);
-                                          controller.dismiss();
-                                        },
-                                        child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 40,
-                                            vertical: 15,
-                                          ),
-                                          alignment: Alignment.center,
-                                          child: Text(system.name),
-                                        ),
-                                      )
-                                  ],
-                                ),
-                              );
-                            },
-                          );
-
-                          flashController.value = null;
-                        }
-                      : null,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 8.0,
-                      horizontal: 20,
+              child: Padding(
+                padding: EdgeInsets.only(top: kIsWeb ? 10 : 0),
+                child: Material(
+                  color: context.theme.primaryColor,
+                  borderRadius: BorderRadius.circular(50),
+                  child: InkWell(
+                    customBorder: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
                     ),
-                    child: Text(system.name),
+                    onTap: systems.isNotEmpty
+                        ? () async {
+                            if (flashController.value != null) {
+                              flashController.value.dismiss();
+                              flashController.value = null;
+                              return;
+                            }
+
+                            await showFlash(
+                              context: context,
+                              builder: (context, controller) {
+                                Future.microtask(() {
+                                  try {
+                                    flashController.value = controller;
+                                  } catch (_) {}
+                                });
+
+                                return Flash.dialog(
+                                  controller: controller,
+                                  alignment: Alignment.topCenter,
+                                  margin: const EdgeInsets.only(
+                                    top: 50,
+                                    left: 80,
+                                    right: 80,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                  backgroundColor:
+                                      context.theme.scaffoldBackgroundColor,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      for (final system in systems)
+                                        InkWell(
+                                          onTap: () {
+                                            select.state = select.state
+                                                .setSystem(system.id);
+                                            controller.dismiss();
+                                          },
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 40,
+                                              vertical: 15,
+                                            ),
+                                            alignment: Alignment.center,
+                                            child: Text(system.name),
+                                          ),
+                                        )
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+
+                            flashController.value = null;
+                          }
+                        : null,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 8.0,
+                        horizontal: 20,
+                      ),
+                      child: Text(system.name),
+                    ),
                   ),
                 ),
               ),
