@@ -79,7 +79,7 @@ class _SearchScreenState extends State<SearchScreen>
                 },
                 child: Chip(
                   label: Text(line.name),
-                  backgroundColor: line.color.toColor(),
+                  backgroundColor: getColor(line.color),
                 ),
               );
             },

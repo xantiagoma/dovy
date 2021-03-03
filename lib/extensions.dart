@@ -128,3 +128,7 @@ extension AsyncValueLoadingt_<T> on AsyncValue<T> {
         error: (_, _st) => false,
       );
 }
+
+extension MapController_ on MapController {
+  zoomBy([factor = 1]) => this.move(center, zoom + factor);
+}

@@ -82,7 +82,7 @@ class _StationsScreenState extends State<StationsScreen>
                               padding: const EdgeInsets.only(right: 10),
                               child: Builder(builder: (context) {
                                 final color =
-                                    line?.color?.toColor() ?? Colors.white;
+                                    getColor(line?.color) ?? Colors.white;
                                 return Chip(
                                   backgroundColor: color,
                                   label: Text(

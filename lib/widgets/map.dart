@@ -93,7 +93,7 @@ class Mapa extends HookWidget {
                     TaggedPolyline(
                       tag: line.id,
                       points: line?.points,
-                      color: line?.color?.toColor(),
+                      color: getColor(line?.color),
                       strokeWidth: 2.0,
                     ),
                 ],
@@ -108,7 +108,7 @@ class Mapa extends HookWidget {
                   for (final line in lines)
                     Polyline(
                       points: line?.points,
-                      color: line?.color?.toColor(),
+                      color: getColor(line?.color),
                       strokeWidth: 2.0,
                     ),
                 ],
@@ -130,7 +130,7 @@ class Mapa extends HookWidget {
                           child: CircleDonut(
                             colors: [
                               for (final line in station.lines)
-                                line.color.toColor(),
+                                getColor(line.color),
                             ],
                             thickness: 4,
                           ),

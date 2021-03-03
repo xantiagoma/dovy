@@ -56,10 +56,10 @@ class StationCard<T> extends HookWidget {
                             label: Text(
                               line.name,
                               style: TextStyle(
-                                color: line.color.toColor().inverseBW,
+                                color: getColor(line.color).inverseBW,
                               ),
                             ),
-                            backgroundColor: line.color.toColor(),
+                            backgroundColor: getColor(line.color),
                           ),
                         ),
                     ],

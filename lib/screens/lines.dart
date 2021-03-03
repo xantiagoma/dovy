@@ -63,7 +63,7 @@ class _LinesScreenState extends State<LinesScreen>
       delegate: SliverChildBuilderDelegate(
         (context, i) {
           final line = lines[i];
-          final color = line.color.toColor().desaturate().lighten();
+          final color = getColor(line.color).desaturate().lighten();
           return Material(
             color: color,
             borderRadius: BorderRadius.circular(10),

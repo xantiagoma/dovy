@@ -23,7 +23,7 @@ class LineScreen extends HookWidget {
       );
     }
 
-    final lineColor = line.color.toColor();
+    final lineColor = getColor(line.color);
 
     return Scaffold(
       body: CustomScrollView(
