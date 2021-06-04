@@ -4,35 +4,35 @@ import 'package:dovy/general.dart';
 class Button extends StatelessWidget {
   final AlignmentGeometry alignment;
   final bool borderOnForeground;
-  final BorderRadiusGeometry borderRadius;
+  final BorderRadius borderRadius;
   final Clip clipBehavior;
-  final Color color;
+  final Color? color;
   final Color shadowColor;
-  final Color textColor;
+  final Color? textColor;
   final double elevation;
   final double fontSize;
   final double height;
   final double width;
   final Duration animationDuration;
-  final ShapeBorder shape;
-  final String text;
-  final TextStyle textStyle;
+  final ShapeBorder? shape;
+  final String? text;
+  final TextStyle? textStyle;
   final void Function() onTap;
-  final BoxBorder border;
-  final Widget child;
+  final BoxBorder? border;
+  final Widget? child;
 
-  final Color splashColor;
-  final ShapeBorder customBorder;
-  final double radius;
-  final InteractiveInkFeatureFactory splashFactory;
-  final Color focusColor;
-  final Color hoverColor;
-  final Color highlightColor;
+  final Color? splashColor;
+  final ShapeBorder? customBorder;
+  final double? radius;
+  final InteractiveInkFeatureFactory? splashFactory;
+  final Color? focusColor;
+  final Color? hoverColor;
+  final Color? highlightColor;
 
   static void voidCallback() {}
 
   Button({
-    Key key,
+    Key? key,
     this.alignment = Alignment.center,
     this.animationDuration = kThemeChangeDuration,
     this.borderOnForeground = true,
@@ -98,7 +98,7 @@ class Button extends StatelessWidget {
             border: border,
             borderRadius: borderRadius,
           ),
-          child: child ?? Text(text),
+          child: child ?? Text(text!),
         ),
       ),
     );

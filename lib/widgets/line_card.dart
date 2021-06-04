@@ -6,14 +6,14 @@ class LineCard<T> extends HookWidget {
   final String lineId;
 
   LineCard({
-    Key key,
-    @required this.controller,
-    @required this.lineId,
+    Key? key,
+    required this.controller,
+    required this.lineId,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final line = useProvider(lineProvider(lineId))?.data?.value;
+    final line = useProvider(lineProvider(lineId)).data?.value;
 
     final backgroundColor = context.theme.scaffoldBackgroundColor.lighten();
     final margin = EdgeInsets.all(18);
@@ -31,7 +31,7 @@ class LineCard<T> extends HookWidget {
           icon: Icon(Icons.arrow_upward),
           onPressed: () {
             controller.dismiss();
-            context.navigateTo('/line/${line.id}');
+            context.navigateTo('/line/${line!.id}');
           },
         ),
         primaryAction: IconButton(
@@ -47,15 +47,15 @@ class LineCard<T> extends HookWidget {
                     padding: EdgeInsets.only(right: 10),
                     child: Chip(
                       label: Text(
-                        line.name,
+                        line.name!,
                         style: TextStyle(
-                          color: getColor(line.color).inverseBW,
+                          color: getColor(line.color)!.inverseBW,
                         ),
                       ),
                       backgroundColor: getColor(line.color),
                     ),
                   ),
-                  Text(line.description.body),
+                  Text(line.description!.body!),
                 ],
               )
             : SizedBox(),

@@ -27,7 +27,7 @@ class App extends HookWidget {
       supportedLocales: S.delegate.supportedLocales,
       // End Localization
       debugShowCheckedModeBanner: false,
-      title: S?.current?.appName ?? 'Dovy',
+      title: 'Dovy',
       theme: lightTheme,
       onGenerateRoute: router.generator,
     );

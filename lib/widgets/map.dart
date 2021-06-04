@@ -2,9 +2,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
+T logAndReturn<T>(T val, {String tag = 'default'}) {
+  print('> Log (${tag}): $val');
+  return val;
+}
+
 class Mapa extends HookWidget {
   const Mapa({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -12,8 +17,11 @@ class Mapa extends HookWidget {
     final hookContext = useContext();
     final select = useProvider(selectProvider);
     final systems = useProvider(systemsProvider);
-    final lines = useProvider(linesProvider)?.data?.value ?? [];
-    final stations = useProvider(stationsProvider)?.data?.value ?? [];
+    final lines = useProvider(linesProvider).maybeWhen(
+      orElse: () => null,
+      data: (d) => d,
+    );
+    final stations = useProvider(stationsProvider).data?.value ?? [];
     final options = useProvider(configsProvider).data?.value;
     final mapController = useProvider(mapControllerProvider);
 
@@ -22,9 +30,9 @@ class Mapa extends HookWidget {
       if (system == null) {
         // First Load
         Future.microtask(() {
-          final item = systems?.data?.value;
+          final item = systems.data?.value;
           if (item != null) {
-            select.state = select.state.setSystem(item[0].id);
+            select.state = select.state.setSystem(item[0].id!);
           }
         });
       }
@@ -71,9 +79,7 @@ class Mapa extends HookWidget {
                 position.state = newPosition;
               });
             },
-            plugins: [
-              TappablePolylineMapPlugin(),
-            ],
+            // plugins: [],
             onLongPress: (l) {
               clickPlace(context, l);
             },
@@ -85,34 +91,34 @@ class Mapa extends HookWidget {
               additionalOptions: mapTileAdditionalOptions,
               backgroundColor: context.theme.scaffoldBackgroundColor,
             ),
-            if (!kIsWeb)
-              TappablePolylineLayerOptions(
-                polylineCulling: true,
-                polylines: [
-                  for (final line in lines)
-                    TaggedPolyline(
-                      tag: line.id,
-                      points: line?.points,
-                      color: getColor(line?.color),
-                      strokeWidth: 2.0,
-                    ),
-                ],
-                onTap: (TaggedPolyline polyline) =>
-                    clickLine(context, polyline.tag),
-                onMiss: () {},
-              ),
-            if (kIsWeb)
-              PolylineLayerOptions(
-                // polylineCulling: true,
-                polylines: [
-                  for (final line in lines)
-                    Polyline(
-                      points: line?.points,
-                      color: getColor(line?.color),
-                      strokeWidth: 2.0,
-                    ),
-                ],
-              ),
+            // if (!kIsWeb)
+            //   TappablePolylineLayerOptions(
+            //     polylineCulling: true,
+            //     polylines: [
+            //       for (final line in (lines ?? <Line>[]))
+            //         TaggedPolyline(
+            //           tag: line.id!,
+            //           points: logAndReturn(line.points, tag: 'Line ${line.id}'),
+            //           color: Colors.red, // getColor(line.color),
+            //           strokeWidth: 2.0,
+            //         ),
+            //     ],
+            //     onTap: (TaggedPolyline polyline) =>
+            //         clickLine(context, polyline.tag),
+            //     onMiss: () {},
+            //   ),
+            // if (kIsWeb)
+            PolylineLayerOptions(
+              // polylineCulling: true,
+              polylines: [
+                for (final line in (lines ?? <Line>[]))
+                  Polyline(
+                    points: line.points,
+                    color: getColor(line.color)!,
+                    strokeWidth: 2.0,
+                  ),
+              ],
+            ),
             MarkerLayerOptions(
               markers: [
                 for (final station in stations)
@@ -121,7 +127,7 @@ class Mapa extends HookWidget {
                     Marker(
                       height: 18,
                       width: 18,
-                      point: station.location,
+                      point: station.location!,
                       builder: (context) => Material(
                         color: Colors.black,
                         borderRadius: BorderRadius.circular(18),
@@ -129,8 +135,8 @@ class Mapa extends HookWidget {
                           onTap: () => clickStation(hookContext, station),
                           child: CircleDonut(
                             colors: [
-                              for (final line in station.lines)
-                                getColor(line.color),
+                              for (final line in station.lines!)
+                                getColor(line.color) ?? Colors.grey,
                             ],
                             thickness: 4,
                           ),
@@ -152,7 +158,7 @@ void clickStation(BuildContext context, Station station) {
     builder: (context, controller) {
       return StationCard(
         controller: controller,
-        stationId: station.id,
+        stationId: station.id!,
       );
     },
   );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
 class HomeScreen extends HookWidget {
-  const HomeScreen({Key key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

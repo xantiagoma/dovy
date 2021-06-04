@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'station.dart';
 
@@ -8,6 +8,10 @@ part of 'station.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 Station _$StationFromJson(Map<String, dynamic> json) {
   return _Station.fromJson(json);
 }
@@ -16,15 +20,14 @@ Station _$StationFromJson(Map<String, dynamic> json) {
 class _$StationTearOff {
   const _$StationTearOff();
 
-// ignore: unused_element
   _Station call(
-      {String id,
-      String name,
-      String code,
+      {String? id,
+      String? name,
+      String? code,
       @JsonKey(fromJson: linesFromJson)
-          List<Line> lines,
+          List<Line>? lines,
       @JsonKey(fromJson: locationFromJson, toJson: locationToJson)
-          LatLng location}) {
+          LatLng? location}) {
     return _Station(
       id: id,
       name: name,
@@ -34,29 +37,27 @@ class _$StationTearOff {
     );
   }
 
-// ignore: unused_element
   Station fromJson(Map<String, Object> json) {
     return Station.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $Station = _$StationTearOff();
 
 /// @nodoc
 mixin _$Station {
-  String get id;
-  String get name;
-  String get code;
+  String? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get code => throw _privateConstructorUsedError;
   @JsonKey(fromJson: linesFromJson)
-  List<Line> get lines;
+  List<Line>? get lines => throw _privateConstructorUsedError;
   @JsonKey(fromJson: locationFromJson, toJson: locationToJson)
-  LatLng get location;
+  LatLng? get location => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $StationCopyWith<Station> get copyWith;
+  $StationCopyWith<Station> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -64,13 +65,13 @@ abstract class $StationCopyWith<$Res> {
   factory $StationCopyWith(Station value, $Res Function(Station) then) =
       _$StationCopyWithImpl<$Res>;
   $Res call(
-      {String id,
-      String name,
-      String code,
+      {String? id,
+      String? name,
+      String? code,
       @JsonKey(fromJson: linesFromJson)
-          List<Line> lines,
+          List<Line>? lines,
       @JsonKey(fromJson: locationFromJson, toJson: locationToJson)
-          LatLng location});
+          LatLng? location});
 }
 
 /// @nodoc
@@ -83,18 +84,33 @@ class _$StationCopyWithImpl<$Res> implements $StationCopyWith<$Res> {
 
   @override
   $Res call({
-    Object id = freezed,
-    Object name = freezed,
-    Object code = freezed,
-    Object lines = freezed,
-    Object location = freezed,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? code = freezed,
+    Object? lines = freezed,
+    Object? location = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed ? _value.id : id as String,
-      name: name == freezed ? _value.name : name as String,
-      code: code == freezed ? _value.code : code as String,
-      lines: lines == freezed ? _value.lines : lines as List<Line>,
-      location: location == freezed ? _value.location : location as LatLng,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lines: lines == freezed
+          ? _value.lines
+          : lines // ignore: cast_nullable_to_non_nullable
+              as List<Line>?,
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as LatLng?,
     ));
   }
 }
@@ -105,13 +121,13 @@ abstract class _$StationCopyWith<$Res> implements $StationCopyWith<$Res> {
       __$StationCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
-      String name,
-      String code,
+      {String? id,
+      String? name,
+      String? code,
       @JsonKey(fromJson: linesFromJson)
-          List<Line> lines,
+          List<Line>? lines,
       @JsonKey(fromJson: locationFromJson, toJson: locationToJson)
-          LatLng location});
+          LatLng? location});
 }
 
 /// @nodoc
@@ -125,25 +141,39 @@ class __$StationCopyWithImpl<$Res> extends _$StationCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object id = freezed,
-    Object name = freezed,
-    Object code = freezed,
-    Object lines = freezed,
-    Object location = freezed,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? code = freezed,
+    Object? lines = freezed,
+    Object? location = freezed,
   }) {
     return _then(_Station(
-      id: id == freezed ? _value.id : id as String,
-      name: name == freezed ? _value.name : name as String,
-      code: code == freezed ? _value.code : code as String,
-      lines: lines == freezed ? _value.lines : lines as List<Line>,
-      location: location == freezed ? _value.location : location as LatLng,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lines: lines == freezed
+          ? _value.lines
+          : lines // ignore: cast_nullable_to_non_nullable
+              as List<Line>?,
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as LatLng?,
     ));
   }
 }
 
-@JsonSerializable()
-
 /// @nodoc
+@JsonSerializable()
 class _$_Station implements _Station {
   _$_Station(
       {this.id,
@@ -158,17 +188,17 @@ class _$_Station implements _Station {
       _$_$_StationFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
-  final String name;
+  final String? name;
   @override
-  final String code;
+  final String? code;
   @override
   @JsonKey(fromJson: linesFromJson)
-  final List<Line> lines;
+  final List<Line>? lines;
   @override
   @JsonKey(fromJson: locationFromJson, toJson: locationToJson)
-  final LatLng location;
+  final LatLng? location;
 
   @override
   String toString() {
@@ -214,29 +244,30 @@ class _$_Station implements _Station {
 
 abstract class _Station implements Station {
   factory _Station(
-      {String id,
-      String name,
-      String code,
+      {String? id,
+      String? name,
+      String? code,
       @JsonKey(fromJson: linesFromJson)
-          List<Line> lines,
+          List<Line>? lines,
       @JsonKey(fromJson: locationFromJson, toJson: locationToJson)
-          LatLng location}) = _$_Station;
+          LatLng? location}) = _$_Station;
 
   factory _Station.fromJson(Map<String, dynamic> json) = _$_Station.fromJson;
 
   @override
-  String get id;
+  String? get id => throw _privateConstructorUsedError;
   @override
-  String get name;
+  String? get name => throw _privateConstructorUsedError;
   @override
-  String get code;
+  String? get code => throw _privateConstructorUsedError;
   @override
   @JsonKey(fromJson: linesFromJson)
-  List<Line> get lines;
+  List<Line>? get lines => throw _privateConstructorUsedError;
   @override
   @JsonKey(fromJson: locationFromJson, toJson: locationToJson)
-  LatLng get location;
+  LatLng? get location => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$StationCopyWith<_Station> get copyWith;
+  _$StationCopyWith<_Station> get copyWith =>
+      throw _privateConstructorUsedError;
 }

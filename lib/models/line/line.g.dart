@@ -8,12 +8,12 @@ part of 'line.dart';
 
 _$_Line _$_$_LineFromJson(Map<String, dynamic> json) {
   return _$_Line(
-    id: json['id'] as String,
-    color: json['color'] as String,
-    name: json['name'] as String,
-    code: json['code'] as String,
-    shape: json['shape'] as String,
-    stations: stationsFromJson(json['stations']),
+    id: json['id'] as String?,
+    color: json['color'] as String?,
+    name: json['name'] as String?,
+    code: json['code'] as String?,
+    shape: json['shape'] as String?,
+    stations: stationsFromJson(json['stations'] as List?),
     description: json['description'] == null
         ? null
         : LineDescription.fromJson(json['description'] as Map<String, dynamic>),
@@ -26,13 +26,13 @@ Map<String, dynamic> _$_$_LineToJson(_$_Line instance) => <String, dynamic>{
       'name': instance.name,
       'code': instance.code,
       'shape': instance.shape,
-      'stations': instance.stations?.map((e) => e?.toJson())?.toList(),
+      'stations': instance.stations?.map((e) => e.toJson()).toList(),
       'description': instance.description?.toJson(),
     };
 
 _$_LineDescription _$_$_LineDescriptionFromJson(Map<String, dynamic> json) {
   return _$_LineDescription(
-    body: json['Body'] as String,
+    body: json['Body'] as String?,
   );
 }
 

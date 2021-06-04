@@ -5,13 +5,13 @@ class StationScreen extends HookWidget {
   final String id;
 
   const StationScreen({
-    Key key,
-    @required this.id,
+    Key? key,
+    required this.id,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final station = useProvider(stationProvider(id))?.data?.value;
+    final station = useProvider(stationProvider(id)).data?.value;
 
     if (station == null) {
       return Scaffold(
@@ -27,7 +27,7 @@ class StationScreen extends HookWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            title: Text(station.name),
+            title: Text(station.name!),
           ),
           SliverToBoxAdapter(
             child: Text("Lines:"),
@@ -35,7 +35,7 @@ class StationScreen extends HookWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                final line = station.lines[index];
+                final line = station.lines![index];
                 return InkWell(
                   onTap: () {
                     context.navigateTo('/line/${line.id}');
@@ -46,20 +46,20 @@ class StationScreen extends HookWidget {
                         padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Chip(
                           label: Text(
-                            line.name,
+                            line.name!,
                             style: TextStyle(
-                              color: getColor(line.color).inverseBW,
+                              color: getColor(line.color)!.inverseBW,
                             ),
                           ),
                           backgroundColor: getColor(line.color),
                         ),
                       ),
-                      Text(line.description.body),
+                      Text(line.description!.body!),
                     ],
                   ),
                 );
               },
-              childCount: station.lines.length,
+              childCount: station.lines!.length,
             ),
           ),
         ],

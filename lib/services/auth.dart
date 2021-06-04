@@ -6,8 +6,8 @@ class AuthService {
   final Strapi strapi;
 
   AuthService({
-    @required this.box,
-    @required this.strapi,
+    required this.box,
+    required this.strapi,
   });
 
   Future<Map<String, dynamic>> login(String id, String password) async {

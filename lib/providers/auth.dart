@@ -1,9 +1,9 @@
 import 'package:dovy/general.dart';
 
-final authBoxProvider = FutureProvider<Box<String>>(
+final authBoxProvider = FutureProvider<Box<String>?>(
   (ref) async {
-    final store = ref.watch(localStorageProvider)?.data?.value;
-    final encryptionKey = ref.watch(encryptionKeyProvider)?.data?.value;
+    final store = ref.watch(localStorageProvider).data?.value;
+    final encryptionKey = ref.watch(encryptionKeyProvider).data?.value;
 
     if (store == null || encryptionKey == null) {
       return null;
@@ -17,9 +17,9 @@ final authBoxProvider = FutureProvider<Box<String>>(
   },
 );
 
-final authTokenProvider = StreamProvider<String>(
+final authTokenProvider = StreamProvider<String?>(
   (ref) async* {
-    final authBox = ref.watch(authBoxProvider)?.data?.value;
+    final authBox = ref.watch(authBoxProvider).data?.value;
 
     if (authBox != null) {
       yield authBox.get('jwt');
@@ -34,16 +34,12 @@ final authTokenProvider = StreamProvider<String>(
   },
 );
 
-final authServiceProvider = Provider<AuthService>(
+final authServiceProvider = Provider<AuthService?>(
   (ref) {
-    final box = ref.watch(authBoxProvider)?.data?.value;
+    final box = ref.watch(authBoxProvider).data?.value;
     final strapi = ref.watch(strapiServiceProvider);
 
     if (box == null) {
-      return null;
-    }
-
-    if (strapi == null) {
       return null;
     }
 
@@ -54,12 +50,12 @@ final authServiceProvider = Provider<AuthService>(
   },
 );
 
-final userProvider = FutureProvider<User>(
+final userProvider = FutureProvider<User?>(
   (ref) async {
-    final jwt = ref.watch(authTokenProvider)?.data?.value;
+    final jwt = ref.watch(authTokenProvider).data?.value;
     final strapi = ref.watch(strapiServiceProvider);
 
-    if (jwt == null || strapi == null) {
+    if (jwt == null) {
       return null;
     }
 

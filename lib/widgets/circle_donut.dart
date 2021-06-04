@@ -9,8 +9,8 @@ class CircleDonut extends StatelessWidget {
   final double startAngle;
 
   CircleDonut({
-    Key key,
-    @required this.colors,
+    Key? key,
+    required this.colors,
     this.thickness = 20.0,
     this.startAngle = -pi / 2,
   }) : super(key: key);
@@ -33,7 +33,7 @@ class DrawCircle extends CustomPainter {
   final double startAngle;
 
   DrawCircle({
-    @required this.colors,
+    required this.colors,
     this.thickness = 20.0,
     this.startAngle = -pi / 2,
   });

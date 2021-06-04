@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'line.dart';
 
@@ -8,6 +8,10 @@ part of 'line.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 Line _$LineFromJson(Map<String, dynamic> json) {
   return _Line.fromJson(json);
 }
@@ -16,15 +20,14 @@ Line _$LineFromJson(Map<String, dynamic> json) {
 class _$LineTearOff {
   const _$LineTearOff();
 
-// ignore: unused_element
   _Line call(
-      {String id,
-      String color,
-      String name,
-      String code,
-      String shape,
-      @JsonKey(fromJson: stationsFromJson) List<Station> stations,
-      LineDescription description}) {
+      {String? id,
+      String? color,
+      String? name,
+      String? code,
+      String? shape,
+      @JsonKey(fromJson: stationsFromJson) List<Station>? stations,
+      LineDescription? description}) {
     return _Line(
       id: id,
       color: color,
@@ -36,30 +39,28 @@ class _$LineTearOff {
     );
   }
 
-// ignore: unused_element
   Line fromJson(Map<String, Object> json) {
     return Line.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $Line = _$LineTearOff();
 
 /// @nodoc
 mixin _$Line {
-  String get id;
-  String get color;
-  String get name;
-  String get code;
-  String get shape;
+  String? get id => throw _privateConstructorUsedError;
+  String? get color => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get code => throw _privateConstructorUsedError;
+  String? get shape => throw _privateConstructorUsedError;
   @JsonKey(fromJson: stationsFromJson)
-  List<Station> get stations;
-  LineDescription get description;
+  List<Station>? get stations => throw _privateConstructorUsedError;
+  LineDescription? get description => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $LineCopyWith<Line> get copyWith;
+  $LineCopyWith<Line> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -67,15 +68,15 @@ abstract class $LineCopyWith<$Res> {
   factory $LineCopyWith(Line value, $Res Function(Line) then) =
       _$LineCopyWithImpl<$Res>;
   $Res call(
-      {String id,
-      String color,
-      String name,
-      String code,
-      String shape,
-      @JsonKey(fromJson: stationsFromJson) List<Station> stations,
-      LineDescription description});
+      {String? id,
+      String? color,
+      String? name,
+      String? code,
+      String? shape,
+      @JsonKey(fromJson: stationsFromJson) List<Station>? stations,
+      LineDescription? description});
 
-  $LineDescriptionCopyWith<$Res> get description;
+  $LineDescriptionCopyWith<$Res>? get description;
 }
 
 /// @nodoc
@@ -88,34 +89,53 @@ class _$LineCopyWithImpl<$Res> implements $LineCopyWith<$Res> {
 
   @override
   $Res call({
-    Object id = freezed,
-    Object color = freezed,
-    Object name = freezed,
-    Object code = freezed,
-    Object shape = freezed,
-    Object stations = freezed,
-    Object description = freezed,
+    Object? id = freezed,
+    Object? color = freezed,
+    Object? name = freezed,
+    Object? code = freezed,
+    Object? shape = freezed,
+    Object? stations = freezed,
+    Object? description = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed ? _value.id : id as String,
-      color: color == freezed ? _value.color : color as String,
-      name: name == freezed ? _value.name : name as String,
-      code: code == freezed ? _value.code : code as String,
-      shape: shape == freezed ? _value.shape : shape as String,
-      stations:
-          stations == freezed ? _value.stations : stations as List<Station>,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      color: color == freezed
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      shape: shape == freezed
+          ? _value.shape
+          : shape // ignore: cast_nullable_to_non_nullable
+              as String?,
+      stations: stations == freezed
+          ? _value.stations
+          : stations // ignore: cast_nullable_to_non_nullable
+              as List<Station>?,
       description: description == freezed
           ? _value.description
-          : description as LineDescription,
+          : description // ignore: cast_nullable_to_non_nullable
+              as LineDescription?,
     ));
   }
 
   @override
-  $LineDescriptionCopyWith<$Res> get description {
+  $LineDescriptionCopyWith<$Res>? get description {
     if (_value.description == null) {
       return null;
     }
-    return $LineDescriptionCopyWith<$Res>(_value.description, (value) {
+
+    return $LineDescriptionCopyWith<$Res>(_value.description!, (value) {
       return _then(_value.copyWith(description: value));
     });
   }
@@ -127,16 +147,16 @@ abstract class _$LineCopyWith<$Res> implements $LineCopyWith<$Res> {
       __$LineCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
-      String color,
-      String name,
-      String code,
-      String shape,
-      @JsonKey(fromJson: stationsFromJson) List<Station> stations,
-      LineDescription description});
+      {String? id,
+      String? color,
+      String? name,
+      String? code,
+      String? shape,
+      @JsonKey(fromJson: stationsFromJson) List<Station>? stations,
+      LineDescription? description});
 
   @override
-  $LineDescriptionCopyWith<$Res> get description;
+  $LineDescriptionCopyWith<$Res>? get description;
 }
 
 /// @nodoc
@@ -150,32 +170,49 @@ class __$LineCopyWithImpl<$Res> extends _$LineCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object id = freezed,
-    Object color = freezed,
-    Object name = freezed,
-    Object code = freezed,
-    Object shape = freezed,
-    Object stations = freezed,
-    Object description = freezed,
+    Object? id = freezed,
+    Object? color = freezed,
+    Object? name = freezed,
+    Object? code = freezed,
+    Object? shape = freezed,
+    Object? stations = freezed,
+    Object? description = freezed,
   }) {
     return _then(_Line(
-      id: id == freezed ? _value.id : id as String,
-      color: color == freezed ? _value.color : color as String,
-      name: name == freezed ? _value.name : name as String,
-      code: code == freezed ? _value.code : code as String,
-      shape: shape == freezed ? _value.shape : shape as String,
-      stations:
-          stations == freezed ? _value.stations : stations as List<Station>,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      color: color == freezed
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      shape: shape == freezed
+          ? _value.shape
+          : shape // ignore: cast_nullable_to_non_nullable
+              as String?,
+      stations: stations == freezed
+          ? _value.stations
+          : stations // ignore: cast_nullable_to_non_nullable
+              as List<Station>?,
       description: description == freezed
           ? _value.description
-          : description as LineDescription,
+          : description // ignore: cast_nullable_to_non_nullable
+              as LineDescription?,
     ));
   }
 }
 
-@JsonSerializable()
-
 /// @nodoc
+@JsonSerializable()
 class _$_Line implements _Line {
   _$_Line(
       {this.id,
@@ -190,20 +227,20 @@ class _$_Line implements _Line {
       _$_$_LineFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
-  final String color;
+  final String? color;
   @override
-  final String name;
+  final String? name;
   @override
-  final String code;
+  final String? code;
   @override
-  final String shape;
+  final String? shape;
   @override
   @JsonKey(fromJson: stationsFromJson)
-  final List<Station> stations;
+  final List<Station>? stations;
   @override
-  final LineDescription description;
+  final LineDescription? description;
 
   @override
   String toString() {
@@ -256,34 +293,34 @@ class _$_Line implements _Line {
 
 abstract class _Line implements Line {
   factory _Line(
-      {String id,
-      String color,
-      String name,
-      String code,
-      String shape,
-      @JsonKey(fromJson: stationsFromJson) List<Station> stations,
-      LineDescription description}) = _$_Line;
+      {String? id,
+      String? color,
+      String? name,
+      String? code,
+      String? shape,
+      @JsonKey(fromJson: stationsFromJson) List<Station>? stations,
+      LineDescription? description}) = _$_Line;
 
   factory _Line.fromJson(Map<String, dynamic> json) = _$_Line.fromJson;
 
   @override
-  String get id;
+  String? get id => throw _privateConstructorUsedError;
   @override
-  String get color;
+  String? get color => throw _privateConstructorUsedError;
   @override
-  String get name;
+  String? get name => throw _privateConstructorUsedError;
   @override
-  String get code;
+  String? get code => throw _privateConstructorUsedError;
   @override
-  String get shape;
+  String? get shape => throw _privateConstructorUsedError;
   @override
   @JsonKey(fromJson: stationsFromJson)
-  List<Station> get stations;
+  List<Station>? get stations => throw _privateConstructorUsedError;
   @override
-  LineDescription get description;
+  LineDescription? get description => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$LineCopyWith<_Line> get copyWith;
+  _$LineCopyWith<_Line> get copyWith => throw _privateConstructorUsedError;
 }
 
 LineDescription _$LineDescriptionFromJson(Map<String, dynamic> json) {
@@ -294,31 +331,29 @@ LineDescription _$LineDescriptionFromJson(Map<String, dynamic> json) {
 class _$LineDescriptionTearOff {
   const _$LineDescriptionTearOff();
 
-// ignore: unused_element
-  _LineDescription call({@JsonKey(name: 'Body') String body}) {
+  _LineDescription call({@JsonKey(name: 'Body') String? body}) {
     return _LineDescription(
       body: body,
     );
   }
 
-// ignore: unused_element
   LineDescription fromJson(Map<String, Object> json) {
     return LineDescription.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $LineDescription = _$LineDescriptionTearOff();
 
 /// @nodoc
 mixin _$LineDescription {
   @JsonKey(name: 'Body')
-  String get body;
+  String? get body => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $LineDescriptionCopyWith<LineDescription> get copyWith;
+  $LineDescriptionCopyWith<LineDescription> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -326,7 +361,7 @@ abstract class $LineDescriptionCopyWith<$Res> {
   factory $LineDescriptionCopyWith(
           LineDescription value, $Res Function(LineDescription) then) =
       _$LineDescriptionCopyWithImpl<$Res>;
-  $Res call({@JsonKey(name: 'Body') String body});
+  $Res call({@JsonKey(name: 'Body') String? body});
 }
 
 /// @nodoc
@@ -340,10 +375,13 @@ class _$LineDescriptionCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object body = freezed,
+    Object? body = freezed,
   }) {
     return _then(_value.copyWith(
-      body: body == freezed ? _value.body : body as String,
+      body: body == freezed
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -355,7 +393,7 @@ abstract class _$LineDescriptionCopyWith<$Res>
           _LineDescription value, $Res Function(_LineDescription) then) =
       __$LineDescriptionCopyWithImpl<$Res>;
   @override
-  $Res call({@JsonKey(name: 'Body') String body});
+  $Res call({@JsonKey(name: 'Body') String? body});
 }
 
 /// @nodoc
@@ -371,17 +409,19 @@ class __$LineDescriptionCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object body = freezed,
+    Object? body = freezed,
   }) {
     return _then(_LineDescription(
-      body: body == freezed ? _value.body : body as String,
+      body: body == freezed
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
-@JsonSerializable()
-
 /// @nodoc
+@JsonSerializable()
 class _$_LineDescription implements _LineDescription {
   _$_LineDescription({@JsonKey(name: 'Body') this.body});
 
@@ -390,7 +430,7 @@ class _$_LineDescription implements _LineDescription {
 
   @override
   @JsonKey(name: 'Body')
-  final String body;
+  final String? body;
 
   @override
   String toString() {
@@ -421,7 +461,7 @@ class _$_LineDescription implements _LineDescription {
 }
 
 abstract class _LineDescription implements LineDescription {
-  factory _LineDescription({@JsonKey(name: 'Body') String body}) =
+  factory _LineDescription({@JsonKey(name: 'Body') String? body}) =
       _$_LineDescription;
 
   factory _LineDescription.fromJson(Map<String, dynamic> json) =
@@ -429,8 +469,9 @@ abstract class _LineDescription implements LineDescription {
 
   @override
   @JsonKey(name: 'Body')
-  String get body;
+  String? get body => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$LineDescriptionCopyWith<_LineDescription> get copyWith;
+  _$LineDescriptionCopyWith<_LineDescription> get copyWith =>
+      throw _privateConstructorUsedError;
 }

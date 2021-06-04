@@ -6,14 +6,14 @@ class StationCard<T> extends HookWidget {
   final String stationId;
 
   StationCard({
-    Key key,
-    @required this.controller,
-    @required this.stationId,
+    Key? key,
+    required this.controller,
+    required this.stationId,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final station = useProvider(stationProvider(stationId))?.data?.value;
+    final station = useProvider(stationProvider(stationId)).data?.value;
 
     final backgroundColor = context.theme.scaffoldBackgroundColor.lighten();
     final margin = EdgeInsets.all(18);
@@ -31,7 +31,7 @@ class StationCard<T> extends HookWidget {
           icon: Icon(Icons.arrow_upward),
           onPressed: () {
             controller.dismiss();
-            context.navigateTo('/station/${station.id}');
+            context.navigateTo('/station/${station!.id}');
           },
         ),
         primaryAction: IconButton(
@@ -45,18 +45,18 @@ class StationCard<T> extends HookWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    station.name,
+                    station.name!,
                   ),
                   Row(
                     children: [
-                      for (final line in station.lines)
+                      for (final line in station.lines!)
                         Padding(
                           padding: EdgeInsets.only(right: 10),
                           child: Chip(
                             label: Text(
-                              line.name,
+                              line.name!,
                               style: TextStyle(
-                                color: getColor(line.color).inverseBW,
+                                color: getColor(line.color)!.inverseBW,
                               ),
                             ),
                             backgroundColor: getColor(line.color),

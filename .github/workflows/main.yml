@@ -14,8 +14,8 @@ jobs:
           java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
-          channel: 'beta' # or: 'stable', 'beta' or 'dev'
-          # flutter-version: "1.26.0-17.6.pre"
+          channel: 'stable' # or: 'stable', 'beta' or 'dev'
+          flutter-version: '2.0.5'
       - run: flutter pub get
       - run: flutter build apk -t lib/main.dart --split-per-abi
       #   - run: flutter build ios --release --no-codesign

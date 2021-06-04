@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'select_state.dart';
 
@@ -9,15 +9,14 @@ part of 'select_state.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$SelectStateTearOff {
   const _$SelectStateTearOff();
 
-// ignore: unused_element
-  _SelectState call(
-      {@nullable String system,
-      @nullable String line,
-      @nullable String station}) {
+  _SelectState call({String? system, String? line, String? station}) {
     return _SelectState(
       system: system,
       line: line,
@@ -27,20 +26,17 @@ class _$SelectStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $SelectState = _$SelectStateTearOff();
 
 /// @nodoc
 mixin _$SelectState {
-  @nullable
-  String get system;
-  @nullable
-  String get line;
-  @nullable
-  String get station;
+  String? get system => throw _privateConstructorUsedError;
+  String? get line => throw _privateConstructorUsedError;
+  String? get station => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SelectStateCopyWith<SelectState> get copyWith;
+  $SelectStateCopyWith<SelectState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -48,10 +44,7 @@ abstract class $SelectStateCopyWith<$Res> {
   factory $SelectStateCopyWith(
           SelectState value, $Res Function(SelectState) then) =
       _$SelectStateCopyWithImpl<$Res>;
-  $Res call(
-      {@nullable String system,
-      @nullable String line,
-      @nullable String station});
+  $Res call({String? system, String? line, String? station});
 }
 
 /// @nodoc
@@ -64,14 +57,23 @@ class _$SelectStateCopyWithImpl<$Res> implements $SelectStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object system = freezed,
-    Object line = freezed,
-    Object station = freezed,
+    Object? system = freezed,
+    Object? line = freezed,
+    Object? station = freezed,
   }) {
     return _then(_value.copyWith(
-      system: system == freezed ? _value.system : system as String,
-      line: line == freezed ? _value.line : line as String,
-      station: station == freezed ? _value.station : station as String,
+      system: system == freezed
+          ? _value.system
+          : system // ignore: cast_nullable_to_non_nullable
+              as String?,
+      line: line == freezed
+          ? _value.line
+          : line // ignore: cast_nullable_to_non_nullable
+              as String?,
+      station: station == freezed
+          ? _value.station
+          : station // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -83,10 +85,7 @@ abstract class _$SelectStateCopyWith<$Res>
           _SelectState value, $Res Function(_SelectState) then) =
       __$SelectStateCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {@nullable String system,
-      @nullable String line,
-      @nullable String station});
+  $Res call({String? system, String? line, String? station});
 }
 
 /// @nodoc
@@ -101,32 +100,38 @@ class __$SelectStateCopyWithImpl<$Res> extends _$SelectStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object system = freezed,
-    Object line = freezed,
-    Object station = freezed,
+    Object? system = freezed,
+    Object? line = freezed,
+    Object? station = freezed,
   }) {
     return _then(_SelectState(
-      system: system == freezed ? _value.system : system as String,
-      line: line == freezed ? _value.line : line as String,
-      station: station == freezed ? _value.station : station as String,
+      system: system == freezed
+          ? _value.system
+          : system // ignore: cast_nullable_to_non_nullable
+              as String?,
+      line: line == freezed
+          ? _value.line
+          : line // ignore: cast_nullable_to_non_nullable
+              as String?,
+      station: station == freezed
+          ? _value.station
+          : station // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
+
 class _$_SelectState implements _SelectState {
-  _$_SelectState(
-      {@nullable this.system, @nullable this.line, @nullable this.station});
+  _$_SelectState({this.system, this.line, this.station});
 
   @override
-  @nullable
-  final String system;
+  final String? system;
   @override
-  @nullable
-  final String line;
+  final String? line;
   @override
-  @nullable
-  final String station;
+  final String? station;
 
   @override
   String toString() {
@@ -159,21 +164,17 @@ class _$_SelectState implements _SelectState {
 }
 
 abstract class _SelectState implements SelectState {
-  factory _SelectState(
-      {@nullable String system,
-      @nullable String line,
-      @nullable String station}) = _$_SelectState;
+  factory _SelectState({String? system, String? line, String? station}) =
+      _$_SelectState;
 
   @override
-  @nullable
-  String get system;
+  String? get system => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get line;
+  String? get line => throw _privateConstructorUsedError;
   @override
-  @nullable
-  String get station;
+  String? get station => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$SelectStateCopyWith<_SelectState> get copyWith;
+  _$SelectStateCopyWith<_SelectState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

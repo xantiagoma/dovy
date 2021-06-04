@@ -19,7 +19,7 @@ final localSecureStorageProvider = Provider<FlutterSecureStorage>(
   },
 );
 
-final encryptionKeyProvider = FutureProvider<Uint8List>(
+final encryptionKeyProvider = FutureProvider<Uint8List?>(
   (ref) async {
     final secureStorage = ref.watch(localSecureStorageProvider);
 
@@ -31,7 +31,13 @@ final encryptionKeyProvider = FutureProvider<Uint8List>(
         await prefs.setString('key', base64UrlEncode(key));
       }
 
-      final encryptionKey = base64Url.decode(prefs.getString('key'));
+      final key = prefs.getString('key');
+
+      if (key == null) {
+        return null;
+      }
+
+      final encryptionKey = base64Url.decode(key);
       return encryptionKey;
     }
     // END WEB
@@ -42,8 +48,11 @@ final encryptionKeyProvider = FutureProvider<Uint8List>(
       await secureStorage.write(key: 'key', value: base64UrlEncode(key));
     }
 
-    final encryptionKey =
-        base64Url.decode(await secureStorage.read(key: 'key'));
+    final key = await secureStorage.read(key: 'key');
+    if (key == null) {
+      return null;
+    }
+    final encryptionKey = base64Url.decode(key);
     return encryptionKey;
   },
 );

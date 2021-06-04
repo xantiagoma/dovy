@@ -4,7 +4,7 @@ import 'package:dovy/general.dart';
 
 class LinesScreen extends StatefulHookWidget {
   const LinesScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -18,8 +18,8 @@ class _LinesScreenState extends State<LinesScreen>
     super.build(context);
 
     final select = useProvider(selectProvider).state;
-    final systemsList = useProvider(systemsProvider)?.data?.value ?? [];
-    final lines = useProvider(linesProvider)?.data?.value ?? [];
+    final systemsList = useProvider(systemsProvider).data?.value ?? [];
+    final lines = useProvider(linesProvider).data?.value ?? [];
 
     if (systemsList == null || lines == null) {
       return Center(
@@ -63,7 +63,7 @@ class _LinesScreenState extends State<LinesScreen>
       delegate: SliverChildBuilderDelegate(
         (context, i) {
           final line = lines[i];
-          final color = getColor(line.color).desaturate().lighten();
+          final color = getColor(line.color)!.desaturate().lighten();
           return Material(
             color: color,
             borderRadius: BorderRadius.circular(10),
@@ -76,8 +76,8 @@ class _LinesScreenState extends State<LinesScreen>
               },
               child: Center(
                 child: Text(
-                  line.name,
-                  style: context.theme.textTheme.headline4.copyWith(
+                  line.name!,
+                  style: context.theme.textTheme.headline4!.copyWith(
                     color: color.inverseBW,
                   ),
                   textAlign: TextAlign.center,

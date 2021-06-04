@@ -8,7 +8,7 @@ enum LoginResult {
 }
 
 class LoginForm extends HookWidget {
-  const LoginForm({Key key}) : super(key: key);
+  const LoginForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class LoginForm extends HookWidget {
             text: "Submit",
             onTap: () async {
               final r =
-                  await authService.login(id.text, password.text).tryOrNull;
+                  await authService!.login(id.text, password.text).tryOrNull;
 
               showFlash(
                 context: context,

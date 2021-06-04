@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
 class MainScreen extends HookWidget {
-  const MainScreen({Key key}) : super(key: key);
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class MainScreen extends HookWidget {
             SafeArea(
               child: Text(
                 context.s.appName,
-                style: context.theme.textTheme.headline3.copyWith(
+                style: context.theme.textTheme.headline3!.copyWith(
                   color: context.theme.primaryColor,
                 ),
               ),

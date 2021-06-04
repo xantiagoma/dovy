@@ -4,7 +4,7 @@ import 'package:dovy/general.dart';
 
 class StationsScreen extends StatefulHookWidget {
   const StationsScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -18,8 +18,8 @@ class _StationsScreenState extends State<StationsScreen>
     super.build(context);
 
     final select = useProvider(selectProvider).state;
-    final systemsList = useProvider(systemsProvider)?.data?.value;
-    final lines = useProvider(linesProvider)?.data?.value;
+    final systemsList = useProvider(systemsProvider).data?.value;
+    final lines = useProvider(linesProvider).data?.value;
 
     if (systemsList == null || lines == null) {
       return Center(
@@ -33,13 +33,16 @@ class _StationsScreenState extends State<StationsScreen>
     final system = systems[select.system];
     final name = system?.name;
 
+    final validLines = lines
+        .map((line) => line.stations)
+        .toList()
+        .expand((element) => element ?? <Station>[])
+        .toList()
+        .valid;
+
     // TODO
     final stations = uniqBy(
-      lines
-          .map((line) => line.stations)
-          .toList()
-          .expand((element) => element)
-          .toList(),
+      validLines,
       (Station s) => s.id,
     );
 
@@ -58,7 +61,7 @@ class _StationsScreenState extends State<StationsScreen>
             (context, i) {
               final station = stations[i];
               final name = station.name;
-              final lines = station.lines
+              final lines = station.lines!
                   .map((p) => p.id)
                   .map((id) => linesBy[id])
                   .toList();
@@ -86,7 +89,7 @@ class _StationsScreenState extends State<StationsScreen>
                                 return Chip(
                                   backgroundColor: color,
                                   label: Text(
-                                    line.name,
+                                    line!.name!,
                                     style: TextStyle(
                                       color: color.inverseBW,
                                     ),
@@ -96,7 +99,7 @@ class _StationsScreenState extends State<StationsScreen>
                             ),
                         ],
                       ),
-                      Text(name),
+                      Text(name!),
                     ],
                   ),
                 ),

@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'user.dart';
 
@@ -8,6 +8,10 @@ part of 'user.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 User _$UserFromJson(Map<String, dynamic> json) {
   return _User.fromJson(json);
 }
@@ -16,23 +20,22 @@ User _$UserFromJson(Map<String, dynamic> json) {
 class _$UserTearOff {
   const _$UserTearOff();
 
-// ignore: unused_element
   _User call(
-      {bool blocked,
-      bool confirmed,
-      bool isActive,
-      DateTime createdAt,
-      DateTime updatedAt,
-      int v,
-      List<UserRole> roles,
-      String email,
-      String firstname,
-      String id,
-      String lastname,
-      String provider,
-      String userId,
-      String username,
-      UserRole role}) {
+      {bool? blocked,
+      bool? confirmed,
+      bool? isActive,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      int? v,
+      List<UserRole>? roles,
+      String? email,
+      String? firstname,
+      String? id,
+      String? lastname,
+      String? provider,
+      String? userId,
+      String? username,
+      UserRole? role}) {
     return _User(
       blocked: blocked,
       confirmed: confirmed,
@@ -52,37 +55,35 @@ class _$UserTearOff {
     );
   }
 
-// ignore: unused_element
   User fromJson(Map<String, Object> json) {
     return User.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $User = _$UserTearOff();
 
 /// @nodoc
 mixin _$User {
-  bool get blocked;
-  bool get confirmed;
-  bool get isActive;
-  DateTime get createdAt;
-  DateTime get updatedAt;
-  int get v;
-  List<UserRole> get roles;
-  String get email;
-  String get firstname;
-  String get id;
-  String get lastname;
-  String get provider;
-  String get userId;
-  String get username;
-  UserRole get role;
+  bool? get blocked => throw _privateConstructorUsedError;
+  bool? get confirmed => throw _privateConstructorUsedError;
+  bool? get isActive => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  int? get v => throw _privateConstructorUsedError;
+  List<UserRole>? get roles => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  String? get firstname => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get lastname => throw _privateConstructorUsedError;
+  String? get provider => throw _privateConstructorUsedError;
+  String? get userId => throw _privateConstructorUsedError;
+  String? get username => throw _privateConstructorUsedError;
+  UserRole? get role => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserCopyWith<User> get copyWith;
+  $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -90,23 +91,23 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
   $Res call(
-      {bool blocked,
-      bool confirmed,
-      bool isActive,
-      DateTime createdAt,
-      DateTime updatedAt,
-      int v,
-      List<UserRole> roles,
-      String email,
-      String firstname,
-      String id,
-      String lastname,
-      String provider,
-      String userId,
-      String username,
-      UserRole role});
+      {bool? blocked,
+      bool? confirmed,
+      bool? isActive,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      int? v,
+      List<UserRole>? roles,
+      String? email,
+      String? firstname,
+      String? id,
+      String? lastname,
+      String? provider,
+      String? userId,
+      String? username,
+      UserRole? role});
 
-  $UserRoleCopyWith<$Res> get role;
+  $UserRoleCopyWith<$Res>? get role;
 }
 
 /// @nodoc
@@ -119,49 +120,93 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
 
   @override
   $Res call({
-    Object blocked = freezed,
-    Object confirmed = freezed,
-    Object isActive = freezed,
-    Object createdAt = freezed,
-    Object updatedAt = freezed,
-    Object v = freezed,
-    Object roles = freezed,
-    Object email = freezed,
-    Object firstname = freezed,
-    Object id = freezed,
-    Object lastname = freezed,
-    Object provider = freezed,
-    Object userId = freezed,
-    Object username = freezed,
-    Object role = freezed,
+    Object? blocked = freezed,
+    Object? confirmed = freezed,
+    Object? isActive = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? v = freezed,
+    Object? roles = freezed,
+    Object? email = freezed,
+    Object? firstname = freezed,
+    Object? id = freezed,
+    Object? lastname = freezed,
+    Object? provider = freezed,
+    Object? userId = freezed,
+    Object? username = freezed,
+    Object? role = freezed,
   }) {
     return _then(_value.copyWith(
-      blocked: blocked == freezed ? _value.blocked : blocked as bool,
-      confirmed: confirmed == freezed ? _value.confirmed : confirmed as bool,
-      isActive: isActive == freezed ? _value.isActive : isActive as bool,
-      createdAt:
-          createdAt == freezed ? _value.createdAt : createdAt as DateTime,
-      updatedAt:
-          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
-      v: v == freezed ? _value.v : v as int,
-      roles: roles == freezed ? _value.roles : roles as List<UserRole>,
-      email: email == freezed ? _value.email : email as String,
-      firstname: firstname == freezed ? _value.firstname : firstname as String,
-      id: id == freezed ? _value.id : id as String,
-      lastname: lastname == freezed ? _value.lastname : lastname as String,
-      provider: provider == freezed ? _value.provider : provider as String,
-      userId: userId == freezed ? _value.userId : userId as String,
-      username: username == freezed ? _value.username : username as String,
-      role: role == freezed ? _value.role : role as UserRole,
+      blocked: blocked == freezed
+          ? _value.blocked
+          : blocked // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      confirmed: confirmed == freezed
+          ? _value.confirmed
+          : confirmed // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isActive: isActive == freezed
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: updatedAt == freezed
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      v: v == freezed
+          ? _value.v
+          : v // ignore: cast_nullable_to_non_nullable
+              as int?,
+      roles: roles == freezed
+          ? _value.roles
+          : roles // ignore: cast_nullable_to_non_nullable
+              as List<UserRole>?,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      firstname: firstname == freezed
+          ? _value.firstname
+          : firstname // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastname: lastname == freezed
+          ? _value.lastname
+          : lastname // ignore: cast_nullable_to_non_nullable
+              as String?,
+      provider: provider == freezed
+          ? _value.provider
+          : provider // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      username: username == freezed
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: role == freezed
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as UserRole?,
     ));
   }
 
   @override
-  $UserRoleCopyWith<$Res> get role {
+  $UserRoleCopyWith<$Res>? get role {
     if (_value.role == null) {
       return null;
     }
-    return $UserRoleCopyWith<$Res>(_value.role, (value) {
+
+    return $UserRoleCopyWith<$Res>(_value.role!, (value) {
       return _then(_value.copyWith(role: value));
     });
   }
@@ -173,24 +218,24 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$UserCopyWithImpl<$Res>;
   @override
   $Res call(
-      {bool blocked,
-      bool confirmed,
-      bool isActive,
-      DateTime createdAt,
-      DateTime updatedAt,
-      int v,
-      List<UserRole> roles,
-      String email,
-      String firstname,
-      String id,
-      String lastname,
-      String provider,
-      String userId,
-      String username,
-      UserRole role});
+      {bool? blocked,
+      bool? confirmed,
+      bool? isActive,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      int? v,
+      List<UserRole>? roles,
+      String? email,
+      String? firstname,
+      String? id,
+      String? lastname,
+      String? provider,
+      String? userId,
+      String? username,
+      UserRole? role});
 
   @override
-  $UserRoleCopyWith<$Res> get role;
+  $UserRoleCopyWith<$Res>? get role;
 }
 
 /// @nodoc
@@ -204,47 +249,89 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object blocked = freezed,
-    Object confirmed = freezed,
-    Object isActive = freezed,
-    Object createdAt = freezed,
-    Object updatedAt = freezed,
-    Object v = freezed,
-    Object roles = freezed,
-    Object email = freezed,
-    Object firstname = freezed,
-    Object id = freezed,
-    Object lastname = freezed,
-    Object provider = freezed,
-    Object userId = freezed,
-    Object username = freezed,
-    Object role = freezed,
+    Object? blocked = freezed,
+    Object? confirmed = freezed,
+    Object? isActive = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? v = freezed,
+    Object? roles = freezed,
+    Object? email = freezed,
+    Object? firstname = freezed,
+    Object? id = freezed,
+    Object? lastname = freezed,
+    Object? provider = freezed,
+    Object? userId = freezed,
+    Object? username = freezed,
+    Object? role = freezed,
   }) {
     return _then(_User(
-      blocked: blocked == freezed ? _value.blocked : blocked as bool,
-      confirmed: confirmed == freezed ? _value.confirmed : confirmed as bool,
-      isActive: isActive == freezed ? _value.isActive : isActive as bool,
-      createdAt:
-          createdAt == freezed ? _value.createdAt : createdAt as DateTime,
-      updatedAt:
-          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
-      v: v == freezed ? _value.v : v as int,
-      roles: roles == freezed ? _value.roles : roles as List<UserRole>,
-      email: email == freezed ? _value.email : email as String,
-      firstname: firstname == freezed ? _value.firstname : firstname as String,
-      id: id == freezed ? _value.id : id as String,
-      lastname: lastname == freezed ? _value.lastname : lastname as String,
-      provider: provider == freezed ? _value.provider : provider as String,
-      userId: userId == freezed ? _value.userId : userId as String,
-      username: username == freezed ? _value.username : username as String,
-      role: role == freezed ? _value.role : role as UserRole,
+      blocked: blocked == freezed
+          ? _value.blocked
+          : blocked // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      confirmed: confirmed == freezed
+          ? _value.confirmed
+          : confirmed // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isActive: isActive == freezed
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: updatedAt == freezed
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      v: v == freezed
+          ? _value.v
+          : v // ignore: cast_nullable_to_non_nullable
+              as int?,
+      roles: roles == freezed
+          ? _value.roles
+          : roles // ignore: cast_nullable_to_non_nullable
+              as List<UserRole>?,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      firstname: firstname == freezed
+          ? _value.firstname
+          : firstname // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastname: lastname == freezed
+          ? _value.lastname
+          : lastname // ignore: cast_nullable_to_non_nullable
+              as String?,
+      provider: provider == freezed
+          ? _value.provider
+          : provider // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      username: username == freezed
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: role == freezed
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as UserRole?,
     ));
   }
 }
 
-@JsonSerializable()
-
 /// @nodoc
+@JsonSerializable()
 class _$_User implements _User {
   _$_User(
       {this.blocked,
@@ -267,35 +354,35 @@ class _$_User implements _User {
       _$_$_UserFromJson(json);
 
   @override
-  final bool blocked;
+  final bool? blocked;
   @override
-  final bool confirmed;
+  final bool? confirmed;
   @override
-  final bool isActive;
+  final bool? isActive;
   @override
-  final DateTime createdAt;
+  final DateTime? createdAt;
   @override
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
   @override
-  final int v;
+  final int? v;
   @override
-  final List<UserRole> roles;
+  final List<UserRole>? roles;
   @override
-  final String email;
+  final String? email;
   @override
-  final String firstname;
+  final String? firstname;
   @override
-  final String id;
+  final String? id;
   @override
-  final String lastname;
+  final String? lastname;
   @override
-  final String provider;
+  final String? provider;
   @override
-  final String userId;
+  final String? userId;
   @override
-  final String username;
+  final String? username;
   @override
-  final UserRole role;
+  final UserRole? role;
 
   @override
   String toString() {
@@ -379,57 +466,57 @@ class _$_User implements _User {
 
 abstract class _User implements User {
   factory _User(
-      {bool blocked,
-      bool confirmed,
-      bool isActive,
-      DateTime createdAt,
-      DateTime updatedAt,
-      int v,
-      List<UserRole> roles,
-      String email,
-      String firstname,
-      String id,
-      String lastname,
-      String provider,
-      String userId,
-      String username,
-      UserRole role}) = _$_User;
+      {bool? blocked,
+      bool? confirmed,
+      bool? isActive,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      int? v,
+      List<UserRole>? roles,
+      String? email,
+      String? firstname,
+      String? id,
+      String? lastname,
+      String? provider,
+      String? userId,
+      String? username,
+      UserRole? role}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
-  bool get blocked;
+  bool? get blocked => throw _privateConstructorUsedError;
   @override
-  bool get confirmed;
+  bool? get confirmed => throw _privateConstructorUsedError;
   @override
-  bool get isActive;
+  bool? get isActive => throw _privateConstructorUsedError;
   @override
-  DateTime get createdAt;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
   @override
-  DateTime get updatedAt;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
   @override
-  int get v;
+  int? get v => throw _privateConstructorUsedError;
   @override
-  List<UserRole> get roles;
+  List<UserRole>? get roles => throw _privateConstructorUsedError;
   @override
-  String get email;
+  String? get email => throw _privateConstructorUsedError;
   @override
-  String get firstname;
+  String? get firstname => throw _privateConstructorUsedError;
   @override
-  String get id;
+  String? get id => throw _privateConstructorUsedError;
   @override
-  String get lastname;
+  String? get lastname => throw _privateConstructorUsedError;
   @override
-  String get provider;
+  String? get provider => throw _privateConstructorUsedError;
   @override
-  String get userId;
+  String? get userId => throw _privateConstructorUsedError;
   @override
-  String get username;
+  String? get username => throw _privateConstructorUsedError;
   @override
-  UserRole get role;
+  UserRole? get role => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$UserCopyWith<_User> get copyWith;
+  _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;
 }
 
 UserRole _$UserRoleFromJson(Map<String, dynamic> json) {
@@ -440,17 +527,16 @@ UserRole _$UserRoleFromJson(Map<String, dynamic> json) {
 class _$UserRoleTearOff {
   const _$UserRoleTearOff();
 
-// ignore: unused_element
   _UserRole call(
-      {DateTime createdAt,
-      DateTime updatedAt,
-      int v,
-      String code,
-      String description,
-      String id,
-      String name,
-      String roleId,
-      String type}) {
+      {DateTime? createdAt,
+      DateTime? updatedAt,
+      int? v,
+      String? code,
+      String? description,
+      String? id,
+      String? name,
+      String? roleId,
+      String? type}) {
     return _UserRole(
       createdAt: createdAt,
       updatedAt: updatedAt,
@@ -464,31 +550,30 @@ class _$UserRoleTearOff {
     );
   }
 
-// ignore: unused_element
   UserRole fromJson(Map<String, Object> json) {
     return UserRole.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $UserRole = _$UserRoleTearOff();
 
 /// @nodoc
 mixin _$UserRole {
-  DateTime get createdAt;
-  DateTime get updatedAt;
-  int get v;
-  String get code;
-  String get description;
-  String get id;
-  String get name;
-  String get roleId;
-  String get type;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  int? get v => throw _privateConstructorUsedError;
+  String? get code => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get roleId => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserRoleCopyWith<UserRole> get copyWith;
+  $UserRoleCopyWith<UserRole> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -496,15 +581,15 @@ abstract class $UserRoleCopyWith<$Res> {
   factory $UserRoleCopyWith(UserRole value, $Res Function(UserRole) then) =
       _$UserRoleCopyWithImpl<$Res>;
   $Res call(
-      {DateTime createdAt,
-      DateTime updatedAt,
-      int v,
-      String code,
-      String description,
-      String id,
-      String name,
-      String roleId,
-      String type});
+      {DateTime? createdAt,
+      DateTime? updatedAt,
+      int? v,
+      String? code,
+      String? description,
+      String? id,
+      String? name,
+      String? roleId,
+      String? type});
 }
 
 /// @nodoc
@@ -517,29 +602,53 @@ class _$UserRoleCopyWithImpl<$Res> implements $UserRoleCopyWith<$Res> {
 
   @override
   $Res call({
-    Object createdAt = freezed,
-    Object updatedAt = freezed,
-    Object v = freezed,
-    Object code = freezed,
-    Object description = freezed,
-    Object id = freezed,
-    Object name = freezed,
-    Object roleId = freezed,
-    Object type = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? v = freezed,
+    Object? code = freezed,
+    Object? description = freezed,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? roleId = freezed,
+    Object? type = freezed,
   }) {
     return _then(_value.copyWith(
-      createdAt:
-          createdAt == freezed ? _value.createdAt : createdAt as DateTime,
-      updatedAt:
-          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
-      v: v == freezed ? _value.v : v as int,
-      code: code == freezed ? _value.code : code as String,
-      description:
-          description == freezed ? _value.description : description as String,
-      id: id == freezed ? _value.id : id as String,
-      name: name == freezed ? _value.name : name as String,
-      roleId: roleId == freezed ? _value.roleId : roleId as String,
-      type: type == freezed ? _value.type : type as String,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: updatedAt == freezed
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      v: v == freezed
+          ? _value.v
+          : v // ignore: cast_nullable_to_non_nullable
+              as int?,
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      roleId: roleId == freezed
+          ? _value.roleId
+          : roleId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -550,15 +659,15 @@ abstract class _$UserRoleCopyWith<$Res> implements $UserRoleCopyWith<$Res> {
       __$UserRoleCopyWithImpl<$Res>;
   @override
   $Res call(
-      {DateTime createdAt,
-      DateTime updatedAt,
-      int v,
-      String code,
-      String description,
-      String id,
-      String name,
-      String roleId,
-      String type});
+      {DateTime? createdAt,
+      DateTime? updatedAt,
+      int? v,
+      String? code,
+      String? description,
+      String? id,
+      String? name,
+      String? roleId,
+      String? type});
 }
 
 /// @nodoc
@@ -572,36 +681,59 @@ class __$UserRoleCopyWithImpl<$Res> extends _$UserRoleCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object createdAt = freezed,
-    Object updatedAt = freezed,
-    Object v = freezed,
-    Object code = freezed,
-    Object description = freezed,
-    Object id = freezed,
-    Object name = freezed,
-    Object roleId = freezed,
-    Object type = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? v = freezed,
+    Object? code = freezed,
+    Object? description = freezed,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? roleId = freezed,
+    Object? type = freezed,
   }) {
     return _then(_UserRole(
-      createdAt:
-          createdAt == freezed ? _value.createdAt : createdAt as DateTime,
-      updatedAt:
-          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
-      v: v == freezed ? _value.v : v as int,
-      code: code == freezed ? _value.code : code as String,
-      description:
-          description == freezed ? _value.description : description as String,
-      id: id == freezed ? _value.id : id as String,
-      name: name == freezed ? _value.name : name as String,
-      roleId: roleId == freezed ? _value.roleId : roleId as String,
-      type: type == freezed ? _value.type : type as String,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: updatedAt == freezed
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      v: v == freezed
+          ? _value.v
+          : v // ignore: cast_nullable_to_non_nullable
+              as int?,
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      roleId: roleId == freezed
+          ? _value.roleId
+          : roleId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
-@JsonSerializable()
-
 /// @nodoc
+@JsonSerializable()
 class _$_UserRole implements _UserRole {
   _$_UserRole(
       {this.createdAt,
@@ -618,23 +750,23 @@ class _$_UserRole implements _UserRole {
       _$_$_UserRoleFromJson(json);
 
   @override
-  final DateTime createdAt;
+  final DateTime? createdAt;
   @override
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
   @override
-  final int v;
+  final int? v;
   @override
-  final String code;
+  final String? code;
   @override
-  final String description;
+  final String? description;
   @override
-  final String id;
+  final String? id;
   @override
-  final String name;
+  final String? name;
   @override
-  final String roleId;
+  final String? roleId;
   @override
-  final String type;
+  final String? type;
 
   @override
   String toString() {
@@ -694,37 +826,38 @@ class _$_UserRole implements _UserRole {
 
 abstract class _UserRole implements UserRole {
   factory _UserRole(
-      {DateTime createdAt,
-      DateTime updatedAt,
-      int v,
-      String code,
-      String description,
-      String id,
-      String name,
-      String roleId,
-      String type}) = _$_UserRole;
+      {DateTime? createdAt,
+      DateTime? updatedAt,
+      int? v,
+      String? code,
+      String? description,
+      String? id,
+      String? name,
+      String? roleId,
+      String? type}) = _$_UserRole;
 
   factory _UserRole.fromJson(Map<String, dynamic> json) = _$_UserRole.fromJson;
 
   @override
-  DateTime get createdAt;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
   @override
-  DateTime get updatedAt;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
   @override
-  int get v;
+  int? get v => throw _privateConstructorUsedError;
   @override
-  String get code;
+  String? get code => throw _privateConstructorUsedError;
   @override
-  String get description;
+  String? get description => throw _privateConstructorUsedError;
   @override
-  String get id;
+  String? get id => throw _privateConstructorUsedError;
   @override
-  String get name;
+  String? get name => throw _privateConstructorUsedError;
   @override
-  String get roleId;
+  String? get roleId => throw _privateConstructorUsedError;
   @override
-  String get type;
+  String? get type => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$UserRoleCopyWith<_UserRole> get copyWith;
+  _$UserRoleCopyWith<_UserRole> get copyWith =>
+      throw _privateConstructorUsedError;
 }

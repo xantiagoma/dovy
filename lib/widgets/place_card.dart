@@ -6,9 +6,9 @@ class PlaceCard<T> extends HookWidget {
   final LatLng point;
 
   PlaceCard({
-    Key key,
-    @required this.controller,
-    @required this.point,
+    Key? key,
+    required this.controller,
+    required this.point,
   }) : super(key: key);
 
   @override
@@ -33,7 +33,7 @@ class PlaceCard<T> extends HookWidget {
         ),
         message: location.when(
           data: (details) {
-            return Text(details.displayName);
+            return Text(details.displayName!);
           },
           loading: () {
             return Center(

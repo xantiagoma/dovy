@@ -5,13 +5,13 @@ class LineScreen extends HookWidget {
   final String id;
 
   const LineScreen({
-    Key key,
-    @required this.id,
+    Key? key,
+    required this.id,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final line = useProvider(lineProvider(id))?.data?.value;
+    final line = useProvider(lineProvider(id)).data?.value;
 
     if (line == null) {
       return Scaffold(
@@ -30,8 +30,8 @@ class LineScreen extends HookWidget {
         slivers: [
           SliverAppBar(
             title: Text(
-              "${line.name}: ${line.description.body}",
-              style: TextStyle(color: lineColor.inverseBW),
+              "${line.name}: ${line.description?.body}",
+              style: TextStyle(color: lineColor?.inverseBW),
             ),
             backgroundColor: lineColor,
           ),
@@ -40,17 +40,17 @@ class LineScreen extends HookWidget {
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
-              final station = line.stations[index];
+              final station = line.stations![index];
               return InkWell(
                 onTap: () {
                   context.navigateTo('/station/${station.id}');
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(station.name),
+                  child: Text(station.name!),
                 ),
               );
-            }, childCount: line.stations.length),
+            }, childCount: line.stations!.length),
           ),
         ],
       ),

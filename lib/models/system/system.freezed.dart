@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'system.dart';
 
@@ -8,6 +8,10 @@ part of 'system.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 System _$SystemFromJson(Map<String, dynamic> json) {
   return _System.fromJson(json);
 }
@@ -16,8 +20,7 @@ System _$SystemFromJson(Map<String, dynamic> json) {
 class _$SystemTearOff {
   const _$SystemTearOff();
 
-// ignore: unused_element
-  _System call({String id, String name, String code, List<Line> lines}) {
+  _System call({String? id, String? name, String? code, List<Line>? lines}) {
     return _System(
       id: id,
       name: name,
@@ -26,33 +29,31 @@ class _$SystemTearOff {
     );
   }
 
-// ignore: unused_element
   System fromJson(Map<String, Object> json) {
     return System.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $System = _$SystemTearOff();
 
 /// @nodoc
 mixin _$System {
-  String get id;
-  String get name;
-  String get code;
-  List<Line> get lines;
+  String? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get code => throw _privateConstructorUsedError;
+  List<Line>? get lines => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SystemCopyWith<System> get copyWith;
+  $SystemCopyWith<System> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $SystemCopyWith<$Res> {
   factory $SystemCopyWith(System value, $Res Function(System) then) =
       _$SystemCopyWithImpl<$Res>;
-  $Res call({String id, String name, String code, List<Line> lines});
+  $Res call({String? id, String? name, String? code, List<Line>? lines});
 }
 
 /// @nodoc
@@ -65,16 +66,28 @@ class _$SystemCopyWithImpl<$Res> implements $SystemCopyWith<$Res> {
 
   @override
   $Res call({
-    Object id = freezed,
-    Object name = freezed,
-    Object code = freezed,
-    Object lines = freezed,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? code = freezed,
+    Object? lines = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed ? _value.id : id as String,
-      name: name == freezed ? _value.name : name as String,
-      code: code == freezed ? _value.code : code as String,
-      lines: lines == freezed ? _value.lines : lines as List<Line>,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lines: lines == freezed
+          ? _value.lines
+          : lines // ignore: cast_nullable_to_non_nullable
+              as List<Line>?,
     ));
   }
 }
@@ -84,7 +97,7 @@ abstract class _$SystemCopyWith<$Res> implements $SystemCopyWith<$Res> {
   factory _$SystemCopyWith(_System value, $Res Function(_System) then) =
       __$SystemCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String name, String code, List<Line> lines});
+  $Res call({String? id, String? name, String? code, List<Line>? lines});
 }
 
 /// @nodoc
@@ -98,23 +111,34 @@ class __$SystemCopyWithImpl<$Res> extends _$SystemCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object id = freezed,
-    Object name = freezed,
-    Object code = freezed,
-    Object lines = freezed,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? code = freezed,
+    Object? lines = freezed,
   }) {
     return _then(_System(
-      id: id == freezed ? _value.id : id as String,
-      name: name == freezed ? _value.name : name as String,
-      code: code == freezed ? _value.code : code as String,
-      lines: lines == freezed ? _value.lines : lines as List<Line>,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lines: lines == freezed
+          ? _value.lines
+          : lines // ignore: cast_nullable_to_non_nullable
+              as List<Line>?,
     ));
   }
 }
 
-@JsonSerializable()
-
 /// @nodoc
+@JsonSerializable()
 class _$_System implements _System {
   _$_System({this.id, this.name, this.code, this.lines});
 
@@ -122,13 +146,13 @@ class _$_System implements _System {
       _$_$_SystemFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
-  final String name;
+  final String? name;
   @override
-  final String code;
+  final String? code;
   @override
-  final List<Line> lines;
+  final List<Line>? lines;
 
   @override
   String toString() {
@@ -169,20 +193,20 @@ class _$_System implements _System {
 }
 
 abstract class _System implements System {
-  factory _System({String id, String name, String code, List<Line> lines}) =
+  factory _System({String? id, String? name, String? code, List<Line>? lines}) =
       _$_System;
 
   factory _System.fromJson(Map<String, dynamic> json) = _$_System.fromJson;
 
   @override
-  String get id;
+  String? get id => throw _privateConstructorUsedError;
   @override
-  String get name;
+  String? get name => throw _privateConstructorUsedError;
   @override
-  String get code;
+  String? get code => throw _privateConstructorUsedError;
   @override
-  List<Line> get lines;
+  List<Line>? get lines => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$SystemCopyWith<_System> get copyWith;
+  _$SystemCopyWith<_System> get copyWith => throw _privateConstructorUsedError;
 }

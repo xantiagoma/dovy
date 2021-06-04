@@ -5,41 +5,51 @@ part 'station.g.dart';
 @freezed
 abstract class Station with _$Station {
   factory Station({
-    String id,
-    String name,
-    String code,
+    String? id,
+    String? name,
+    String? code,
     @JsonKey(
       fromJson: linesFromJson,
       // toJson: linesToJson,
     )
-        List<Line> lines,
+        List<Line>? lines,
     @JsonKey(
       fromJson: locationFromJson,
       toJson: locationToJson,
     )
-        LatLng location,
+        LatLng? location,
   }) = _Station;
 
   factory Station.fromJson(Map<String, dynamic> json) =>
       _$StationFromJson(json);
 }
 
-List<Line> linesFromJson(dynamic val) {
+List<Line> linesFromJson(List<dynamic>? val) {
   if (val == null) {
     return [];
   }
 
   if (val is List) {
-    return val.map((e) {
-      if (e is String) {
-        e = {"id": e};
-      }
-      return Line.fromJson(e);
-    }).toList();
+    return val
+        .map((e) {
+          Map<String, dynamic>? result;
+          if (e is String) {
+            result = {"id": e};
+          }
+          if (e is Map<String, dynamic>) {
+            result = e;
+          }
+
+          return result == null ? null : Line.fromJson(result);
+        })
+        .toList()
+        .valid;
   }
+
+  return [];
 }
 
-LatLng locationFromJson(Map<String, dynamic> json) {
+LatLng? locationFromJson(Map<String, dynamic>? json) {
   if (json == null) {
     return null;
   }
@@ -53,7 +63,7 @@ LatLng locationFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> locationToJson(LatLng location) {
+Map<String, dynamic>? locationToJson(LatLng? location) {
   if (location == null) {
     return null;
   }

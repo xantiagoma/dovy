@@ -4,7 +4,7 @@ import 'package:dovy/general.dart';
 
 class MapScreen extends StatefulHookWidget {
   const MapScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -18,11 +18,10 @@ class _MapScreenState extends State<MapScreen>
     super.build(context);
 
     final select = useProvider(selectProvider);
-    final system =
-        useProvider(systemProvider(select.state.system))?.data?.value;
-    final systems = useProvider(systemsProvider)?.data?.value ?? [];
+    final system = useProvider(systemProvider(select.state.system)).data?.value;
+    final systems = useProvider(systemsProvider).data?.value ?? [];
     final showSelector = useState(false);
-    final flashController = useState<FlashController>();
+    final flashController = useState<FlashController?>(null);
 
     return Stack(
       children: <Widget>[
@@ -156,7 +155,7 @@ class _MapScreenState extends State<MapScreen>
                     onTap: systems.isNotEmpty
                         ? () async {
                             if (flashController.value != null) {
-                              flashController.value.dismiss();
+                              flashController.value!.dismiss();
                               flashController.value = null;
                               return;
                             }
@@ -190,7 +189,7 @@ class _MapScreenState extends State<MapScreen>
                                         InkWell(
                                           onTap: () {
                                             select.state = select.state
-                                                .setSystem(system.id);
+                                                .setSystem(system.id!);
                                             controller.dismiss();
                                           },
                                           child: Container(
@@ -199,7 +198,7 @@ class _MapScreenState extends State<MapScreen>
                                               vertical: 15,
                                             ),
                                             alignment: Alignment.center,
-                                            child: Text(system.name),
+                                            child: Text(system.name!),
                                           ),
                                         )
                                     ],
@@ -216,7 +215,7 @@ class _MapScreenState extends State<MapScreen>
                         vertical: 8.0,
                         horizontal: 20,
                       ),
-                      child: Text(system.name),
+                      child: Text(system.name!),
                     ),
                   ),
                 ),

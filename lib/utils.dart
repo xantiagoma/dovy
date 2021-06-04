@@ -1,7 +1,7 @@
 import 'package:dovy/general.dart';
 import 'package:flutter/material.dart';
 
-Map<T, S> mapKeysFromList<S, T>(Iterable<S> values, T Function(S) key) {
+Map<T, S> mapKeysFromList<S, T>(Iterable<S>? values, T Function(S) key) {
   final map = Map<T, S>();
   groupBy<S, T>(values ?? [], key).forEach((key, value) {
     map.putIfAbsent(key, () => value.first);
@@ -12,7 +12,7 @@ Map<T, S> mapKeysFromList<S, T>(Iterable<S> values, T Function(S) key) {
 List<S> uniqBy<S, T>(Iterable<S> values, T key(S element)) =>
     mapKeysFromList(values, key).values.toList();
 
-S identity<S>([S s]) => s ?? null;
+S? identity<S>([S? s]) => s ?? null;
 
 List<LatLng> decodeEncodedPolyline(String encoded) {
   List<LatLng> poly = [];
@@ -59,15 +59,19 @@ List<LatLng> decodeEncodedPolyline(String encoded) {
   return poly;
 }
 
-Color getColor(String color) {
+Color? getColor(String? color) {
+  if (color == null) {
+    return null;
+  }
+
   color = color.trim();
 
-  Color rgbColor = getRGBColorFromString(color);
+  Color? rgbColor = getRGBColorFromString(color);
   if (rgbColor != null) {
     return rgbColor;
   }
 
-  Color finalColor;
+  late Color? finalColor;
   if (hasCorrectHexPattern(color)) {
     color = color.replaceAll("#", "");
     int size = color.length;
@@ -104,7 +108,7 @@ Color getColor(String color) {
   return null;
 }
 
-Color getRGBColorFromString(String string) {
+Color? getRGBColorFromString(String string) {
   string = string.replaceAll(" ", ""); // pseudo-trimming
   if (string.startsWith("rgb(") && string.endsWith(")")) {
     // Correct

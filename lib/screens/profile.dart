@@ -5,7 +5,7 @@ import 'package:dovy/general.dart' hide Path;
 
 class ProfileScreen extends StatefulHookWidget {
   const ProfileScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -20,7 +20,7 @@ class _ProfileScreenState extends State<ProfileScreen>
 
     final loaded = useProvider(loadedProvider);
     final token = useProvider(authTokenProvider);
-    final user = useProvider(userProvider)?.data?.value;
+    final user = useProvider(userProvider).data?.value;
 
     if (!loaded) {
       return Center(
@@ -89,7 +89,7 @@ class ProfileHook extends HookWidget {
                   style: context.theme.textTheme.headline5,
                 ),
                 Text(
-                  data.email,
+                  data.email!,
                   style: context.theme.textTheme.headline6,
                 ),
               ],
@@ -108,7 +108,7 @@ class ProfileHook extends HookWidget {
           data: (data) {
             return Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Text(data.ip),
+              child: Text(data.ip!),
             );
           },
           loading: () {
@@ -123,7 +123,7 @@ class ProfileHook extends HookWidget {
         Button(
           onTap: () async {
             final authService = context.read(authServiceProvider);
-            await authService.logout();
+            await authService!.logout();
 
             showFlash(
               context: context,

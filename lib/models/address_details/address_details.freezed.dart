@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'address_details.dart';
 
@@ -8,6 +8,10 @@ part of 'address_details.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 AddressDetails _$AddressDetailsFromJson(Map<String, dynamic> json) {
   return _AddressDetails.fromJson(json);
 }
@@ -16,25 +20,24 @@ AddressDetails _$AddressDetailsFromJson(Map<String, dynamic> json) {
 class _$AddressDetailsTearOff {
   const _$AddressDetailsTearOff();
 
-// ignore: unused_element
   _AddressDetails call(
-      {@JsonKey(name: 'place_id') int placeId,
-      String licence,
-      @JsonKey(name: 'osm_type') String osmType,
-      @JsonKey(name: 'osm_id') int osmId,
-      String lat,
-      String lon,
-      @JsonKey(name: 'place_rank') int placeRank,
-      String category,
-      String type,
-      double importance,
-      String addresstype,
-      String name,
-      @JsonKey(name: 'display_name') String displayName,
-      Address address,
-      Map<String, dynamic> extratags,
-      Namedetails namedetails,
-      List<String> boundingbox}) {
+      {@JsonKey(name: 'place_id') required int? placeId,
+      required String? licence,
+      @JsonKey(name: 'osm_type') required String? osmType,
+      @JsonKey(name: 'osm_id') required int? osmId,
+      required String? lat,
+      required String? lon,
+      @JsonKey(name: 'place_rank') required int? placeRank,
+      required String? category,
+      required String? type,
+      required double? importance,
+      required String? addresstype,
+      required String? name,
+      @JsonKey(name: 'display_name') required String? displayName,
+      required Address? address,
+      required Map<String, dynamic>? extratags,
+      required Namedetails? namedetails,
+      required List<String>? boundingbox}) {
     return _AddressDetails(
       placeId: placeId,
       licence: licence,
@@ -56,44 +59,43 @@ class _$AddressDetailsTearOff {
     );
   }
 
-// ignore: unused_element
   AddressDetails fromJson(Map<String, Object> json) {
     return AddressDetails.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $AddressDetails = _$AddressDetailsTearOff();
 
 /// @nodoc
 mixin _$AddressDetails {
   @JsonKey(name: 'place_id')
-  int get placeId;
-  String get licence;
+  int? get placeId => throw _privateConstructorUsedError;
+  String? get licence => throw _privateConstructorUsedError;
   @JsonKey(name: 'osm_type')
-  String get osmType;
+  String? get osmType => throw _privateConstructorUsedError;
   @JsonKey(name: 'osm_id')
-  int get osmId;
-  String get lat;
-  String get lon;
+  int? get osmId => throw _privateConstructorUsedError;
+  String? get lat => throw _privateConstructorUsedError;
+  String? get lon => throw _privateConstructorUsedError;
   @JsonKey(name: 'place_rank')
-  int get placeRank;
-  String get category;
-  String get type;
-  double get importance;
-  String get addresstype;
-  String get name;
+  int? get placeRank => throw _privateConstructorUsedError;
+  String? get category => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
+  double? get importance => throw _privateConstructorUsedError;
+  String? get addresstype => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'display_name')
-  String get displayName;
-  Address get address;
-  Map<String, dynamic> get extratags;
-  Namedetails get namedetails;
-  List<String> get boundingbox;
+  String? get displayName => throw _privateConstructorUsedError;
+  Address? get address => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get extratags => throw _privateConstructorUsedError;
+  Namedetails? get namedetails => throw _privateConstructorUsedError;
+  List<String>? get boundingbox => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AddressDetailsCopyWith<AddressDetails> get copyWith;
+  $AddressDetailsCopyWith<AddressDetails> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -102,26 +104,26 @@ abstract class $AddressDetailsCopyWith<$Res> {
           AddressDetails value, $Res Function(AddressDetails) then) =
       _$AddressDetailsCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'place_id') int placeId,
-      String licence,
-      @JsonKey(name: 'osm_type') String osmType,
-      @JsonKey(name: 'osm_id') int osmId,
-      String lat,
-      String lon,
-      @JsonKey(name: 'place_rank') int placeRank,
-      String category,
-      String type,
-      double importance,
-      String addresstype,
-      String name,
-      @JsonKey(name: 'display_name') String displayName,
-      Address address,
-      Map<String, dynamic> extratags,
-      Namedetails namedetails,
-      List<String> boundingbox});
+      {@JsonKey(name: 'place_id') int? placeId,
+      String? licence,
+      @JsonKey(name: 'osm_type') String? osmType,
+      @JsonKey(name: 'osm_id') int? osmId,
+      String? lat,
+      String? lon,
+      @JsonKey(name: 'place_rank') int? placeRank,
+      String? category,
+      String? type,
+      double? importance,
+      String? addresstype,
+      String? name,
+      @JsonKey(name: 'display_name') String? displayName,
+      Address? address,
+      Map<String, dynamic>? extratags,
+      Namedetails? namedetails,
+      List<String>? boundingbox});
 
-  $AddressCopyWith<$Res> get address;
-  $NamedetailsCopyWith<$Res> get namedetails;
+  $AddressCopyWith<$Res>? get address;
+  $NamedetailsCopyWith<$Res>? get namedetails;
 }
 
 /// @nodoc
@@ -135,70 +137,114 @@ class _$AddressDetailsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object placeId = freezed,
-    Object licence = freezed,
-    Object osmType = freezed,
-    Object osmId = freezed,
-    Object lat = freezed,
-    Object lon = freezed,
-    Object placeRank = freezed,
-    Object category = freezed,
-    Object type = freezed,
-    Object importance = freezed,
-    Object addresstype = freezed,
-    Object name = freezed,
-    Object displayName = freezed,
-    Object address = freezed,
-    Object extratags = freezed,
-    Object namedetails = freezed,
-    Object boundingbox = freezed,
+    Object? placeId = freezed,
+    Object? licence = freezed,
+    Object? osmType = freezed,
+    Object? osmId = freezed,
+    Object? lat = freezed,
+    Object? lon = freezed,
+    Object? placeRank = freezed,
+    Object? category = freezed,
+    Object? type = freezed,
+    Object? importance = freezed,
+    Object? addresstype = freezed,
+    Object? name = freezed,
+    Object? displayName = freezed,
+    Object? address = freezed,
+    Object? extratags = freezed,
+    Object? namedetails = freezed,
+    Object? boundingbox = freezed,
   }) {
     return _then(_value.copyWith(
-      placeId: placeId == freezed ? _value.placeId : placeId as int,
-      licence: licence == freezed ? _value.licence : licence as String,
-      osmType: osmType == freezed ? _value.osmType : osmType as String,
-      osmId: osmId == freezed ? _value.osmId : osmId as int,
-      lat: lat == freezed ? _value.lat : lat as String,
-      lon: lon == freezed ? _value.lon : lon as String,
-      placeRank: placeRank == freezed ? _value.placeRank : placeRank as int,
-      category: category == freezed ? _value.category : category as String,
-      type: type == freezed ? _value.type : type as String,
-      importance:
-          importance == freezed ? _value.importance : importance as double,
-      addresstype:
-          addresstype == freezed ? _value.addresstype : addresstype as String,
-      name: name == freezed ? _value.name : name as String,
-      displayName:
-          displayName == freezed ? _value.displayName : displayName as String,
-      address: address == freezed ? _value.address : address as Address,
+      placeId: placeId == freezed
+          ? _value.placeId
+          : placeId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      licence: licence == freezed
+          ? _value.licence
+          : licence // ignore: cast_nullable_to_non_nullable
+              as String?,
+      osmType: osmType == freezed
+          ? _value.osmType
+          : osmType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      osmId: osmId == freezed
+          ? _value.osmId
+          : osmId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      lat: lat == freezed
+          ? _value.lat
+          : lat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lon: lon == freezed
+          ? _value.lon
+          : lon // ignore: cast_nullable_to_non_nullable
+              as String?,
+      placeRank: placeRank == freezed
+          ? _value.placeRank
+          : placeRank // ignore: cast_nullable_to_non_nullable
+              as int?,
+      category: category == freezed
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      importance: importance == freezed
+          ? _value.importance
+          : importance // ignore: cast_nullable_to_non_nullable
+              as double?,
+      addresstype: addresstype == freezed
+          ? _value.addresstype
+          : addresstype // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      displayName: displayName == freezed
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: address == freezed
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as Address?,
       extratags: extratags == freezed
           ? _value.extratags
-          : extratags as Map<String, dynamic>,
+          : extratags // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
       namedetails: namedetails == freezed
           ? _value.namedetails
-          : namedetails as Namedetails,
+          : namedetails // ignore: cast_nullable_to_non_nullable
+              as Namedetails?,
       boundingbox: boundingbox == freezed
           ? _value.boundingbox
-          : boundingbox as List<String>,
+          : boundingbox // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 
   @override
-  $AddressCopyWith<$Res> get address {
+  $AddressCopyWith<$Res>? get address {
     if (_value.address == null) {
       return null;
     }
-    return $AddressCopyWith<$Res>(_value.address, (value) {
+
+    return $AddressCopyWith<$Res>(_value.address!, (value) {
       return _then(_value.copyWith(address: value));
     });
   }
 
   @override
-  $NamedetailsCopyWith<$Res> get namedetails {
+  $NamedetailsCopyWith<$Res>? get namedetails {
     if (_value.namedetails == null) {
       return null;
     }
-    return $NamedetailsCopyWith<$Res>(_value.namedetails, (value) {
+
+    return $NamedetailsCopyWith<$Res>(_value.namedetails!, (value) {
       return _then(_value.copyWith(namedetails: value));
     });
   }
@@ -212,28 +258,28 @@ abstract class _$AddressDetailsCopyWith<$Res>
       __$AddressDetailsCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'place_id') int placeId,
-      String licence,
-      @JsonKey(name: 'osm_type') String osmType,
-      @JsonKey(name: 'osm_id') int osmId,
-      String lat,
-      String lon,
-      @JsonKey(name: 'place_rank') int placeRank,
-      String category,
-      String type,
-      double importance,
-      String addresstype,
-      String name,
-      @JsonKey(name: 'display_name') String displayName,
-      Address address,
-      Map<String, dynamic> extratags,
-      Namedetails namedetails,
-      List<String> boundingbox});
+      {@JsonKey(name: 'place_id') int? placeId,
+      String? licence,
+      @JsonKey(name: 'osm_type') String? osmType,
+      @JsonKey(name: 'osm_id') int? osmId,
+      String? lat,
+      String? lon,
+      @JsonKey(name: 'place_rank') int? placeRank,
+      String? category,
+      String? type,
+      double? importance,
+      String? addresstype,
+      String? name,
+      @JsonKey(name: 'display_name') String? displayName,
+      Address? address,
+      Map<String, dynamic>? extratags,
+      Namedetails? namedetails,
+      List<String>? boundingbox});
 
   @override
-  $AddressCopyWith<$Res> get address;
+  $AddressCopyWith<$Res>? get address;
   @override
-  $NamedetailsCopyWith<$Res> get namedetails;
+  $NamedetailsCopyWith<$Res>? get namedetails;
 }
 
 /// @nodoc
@@ -249,120 +295,161 @@ class __$AddressDetailsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object placeId = freezed,
-    Object licence = freezed,
-    Object osmType = freezed,
-    Object osmId = freezed,
-    Object lat = freezed,
-    Object lon = freezed,
-    Object placeRank = freezed,
-    Object category = freezed,
-    Object type = freezed,
-    Object importance = freezed,
-    Object addresstype = freezed,
-    Object name = freezed,
-    Object displayName = freezed,
-    Object address = freezed,
-    Object extratags = freezed,
-    Object namedetails = freezed,
-    Object boundingbox = freezed,
+    Object? placeId = freezed,
+    Object? licence = freezed,
+    Object? osmType = freezed,
+    Object? osmId = freezed,
+    Object? lat = freezed,
+    Object? lon = freezed,
+    Object? placeRank = freezed,
+    Object? category = freezed,
+    Object? type = freezed,
+    Object? importance = freezed,
+    Object? addresstype = freezed,
+    Object? name = freezed,
+    Object? displayName = freezed,
+    Object? address = freezed,
+    Object? extratags = freezed,
+    Object? namedetails = freezed,
+    Object? boundingbox = freezed,
   }) {
     return _then(_AddressDetails(
-      placeId: placeId == freezed ? _value.placeId : placeId as int,
-      licence: licence == freezed ? _value.licence : licence as String,
-      osmType: osmType == freezed ? _value.osmType : osmType as String,
-      osmId: osmId == freezed ? _value.osmId : osmId as int,
-      lat: lat == freezed ? _value.lat : lat as String,
-      lon: lon == freezed ? _value.lon : lon as String,
-      placeRank: placeRank == freezed ? _value.placeRank : placeRank as int,
-      category: category == freezed ? _value.category : category as String,
-      type: type == freezed ? _value.type : type as String,
-      importance:
-          importance == freezed ? _value.importance : importance as double,
-      addresstype:
-          addresstype == freezed ? _value.addresstype : addresstype as String,
-      name: name == freezed ? _value.name : name as String,
-      displayName:
-          displayName == freezed ? _value.displayName : displayName as String,
-      address: address == freezed ? _value.address : address as Address,
+      placeId: placeId == freezed
+          ? _value.placeId
+          : placeId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      licence: licence == freezed
+          ? _value.licence
+          : licence // ignore: cast_nullable_to_non_nullable
+              as String?,
+      osmType: osmType == freezed
+          ? _value.osmType
+          : osmType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      osmId: osmId == freezed
+          ? _value.osmId
+          : osmId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      lat: lat == freezed
+          ? _value.lat
+          : lat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lon: lon == freezed
+          ? _value.lon
+          : lon // ignore: cast_nullable_to_non_nullable
+              as String?,
+      placeRank: placeRank == freezed
+          ? _value.placeRank
+          : placeRank // ignore: cast_nullable_to_non_nullable
+              as int?,
+      category: category == freezed
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      importance: importance == freezed
+          ? _value.importance
+          : importance // ignore: cast_nullable_to_non_nullable
+              as double?,
+      addresstype: addresstype == freezed
+          ? _value.addresstype
+          : addresstype // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      displayName: displayName == freezed
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: address == freezed
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as Address?,
       extratags: extratags == freezed
           ? _value.extratags
-          : extratags as Map<String, dynamic>,
+          : extratags // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
       namedetails: namedetails == freezed
           ? _value.namedetails
-          : namedetails as Namedetails,
+          : namedetails // ignore: cast_nullable_to_non_nullable
+              as Namedetails?,
       boundingbox: boundingbox == freezed
           ? _value.boundingbox
-          : boundingbox as List<String>,
+          : boundingbox // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 }
 
-@JsonSerializable()
-
 /// @nodoc
+@JsonSerializable()
 class _$_AddressDetails implements _AddressDetails {
   _$_AddressDetails(
-      {@JsonKey(name: 'place_id') this.placeId,
-      this.licence,
-      @JsonKey(name: 'osm_type') this.osmType,
-      @JsonKey(name: 'osm_id') this.osmId,
-      this.lat,
-      this.lon,
-      @JsonKey(name: 'place_rank') this.placeRank,
-      this.category,
-      this.type,
-      this.importance,
-      this.addresstype,
-      this.name,
-      @JsonKey(name: 'display_name') this.displayName,
-      this.address,
-      this.extratags,
-      this.namedetails,
-      this.boundingbox});
+      {@JsonKey(name: 'place_id') required this.placeId,
+      required this.licence,
+      @JsonKey(name: 'osm_type') required this.osmType,
+      @JsonKey(name: 'osm_id') required this.osmId,
+      required this.lat,
+      required this.lon,
+      @JsonKey(name: 'place_rank') required this.placeRank,
+      required this.category,
+      required this.type,
+      required this.importance,
+      required this.addresstype,
+      required this.name,
+      @JsonKey(name: 'display_name') required this.displayName,
+      required this.address,
+      required this.extratags,
+      required this.namedetails,
+      required this.boundingbox});
 
   factory _$_AddressDetails.fromJson(Map<String, dynamic> json) =>
       _$_$_AddressDetailsFromJson(json);
 
   @override
   @JsonKey(name: 'place_id')
-  final int placeId;
+  final int? placeId;
   @override
-  final String licence;
+  final String? licence;
   @override
   @JsonKey(name: 'osm_type')
-  final String osmType;
+  final String? osmType;
   @override
   @JsonKey(name: 'osm_id')
-  final int osmId;
+  final int? osmId;
   @override
-  final String lat;
+  final String? lat;
   @override
-  final String lon;
+  final String? lon;
   @override
   @JsonKey(name: 'place_rank')
-  final int placeRank;
+  final int? placeRank;
   @override
-  final String category;
+  final String? category;
   @override
-  final String type;
+  final String? type;
   @override
-  final double importance;
+  final double? importance;
   @override
-  final String addresstype;
+  final String? addresstype;
   @override
-  final String name;
+  final String? name;
   @override
   @JsonKey(name: 'display_name')
-  final String displayName;
+  final String? displayName;
   @override
-  final Address address;
+  final Address? address;
   @override
-  final Map<String, dynamic> extratags;
+  final Map<String, dynamic>? extratags;
   @override
-  final Namedetails namedetails;
+  final Namedetails? namedetails;
   @override
-  final List<String> boundingbox;
+  final List<String>? boundingbox;
 
   @override
   String toString() {
@@ -455,69 +542,70 @@ class _$_AddressDetails implements _AddressDetails {
 
 abstract class _AddressDetails implements AddressDetails {
   factory _AddressDetails(
-      {@JsonKey(name: 'place_id') int placeId,
-      String licence,
-      @JsonKey(name: 'osm_type') String osmType,
-      @JsonKey(name: 'osm_id') int osmId,
-      String lat,
-      String lon,
-      @JsonKey(name: 'place_rank') int placeRank,
-      String category,
-      String type,
-      double importance,
-      String addresstype,
-      String name,
-      @JsonKey(name: 'display_name') String displayName,
-      Address address,
-      Map<String, dynamic> extratags,
-      Namedetails namedetails,
-      List<String> boundingbox}) = _$_AddressDetails;
+      {@JsonKey(name: 'place_id') required int? placeId,
+      required String? licence,
+      @JsonKey(name: 'osm_type') required String? osmType,
+      @JsonKey(name: 'osm_id') required int? osmId,
+      required String? lat,
+      required String? lon,
+      @JsonKey(name: 'place_rank') required int? placeRank,
+      required String? category,
+      required String? type,
+      required double? importance,
+      required String? addresstype,
+      required String? name,
+      @JsonKey(name: 'display_name') required String? displayName,
+      required Address? address,
+      required Map<String, dynamic>? extratags,
+      required Namedetails? namedetails,
+      required List<String>? boundingbox}) = _$_AddressDetails;
 
   factory _AddressDetails.fromJson(Map<String, dynamic> json) =
       _$_AddressDetails.fromJson;
 
   @override
   @JsonKey(name: 'place_id')
-  int get placeId;
+  int? get placeId => throw _privateConstructorUsedError;
   @override
-  String get licence;
+  String? get licence => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'osm_type')
-  String get osmType;
+  String? get osmType => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'osm_id')
-  int get osmId;
+  int? get osmId => throw _privateConstructorUsedError;
   @override
-  String get lat;
+  String? get lat => throw _privateConstructorUsedError;
   @override
-  String get lon;
+  String? get lon => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'place_rank')
-  int get placeRank;
+  int? get placeRank => throw _privateConstructorUsedError;
   @override
-  String get category;
+  String? get category => throw _privateConstructorUsedError;
   @override
-  String get type;
+  String? get type => throw _privateConstructorUsedError;
   @override
-  double get importance;
+  double? get importance => throw _privateConstructorUsedError;
   @override
-  String get addresstype;
+  String? get addresstype => throw _privateConstructorUsedError;
   @override
-  String get name;
+  String? get name => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'display_name')
-  String get displayName;
+  String? get displayName => throw _privateConstructorUsedError;
   @override
-  Address get address;
+  Address? get address => throw _privateConstructorUsedError;
   @override
-  Map<String, dynamic> get extratags;
+  Map<String, dynamic>? get extratags => throw _privateConstructorUsedError;
   @override
-  Namedetails get namedetails;
+  Namedetails? get namedetails => throw _privateConstructorUsedError;
   @override
-  List<String> get boundingbox;
+  List<String>? get boundingbox => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$AddressDetailsCopyWith<_AddressDetails> get copyWith;
+  _$AddressDetailsCopyWith<_AddressDetails> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 Address _$AddressFromJson(Map<String, dynamic> json) {
@@ -528,18 +616,17 @@ Address _$AddressFromJson(Map<String, dynamic> json) {
 class _$AddressTearOff {
   const _$AddressTearOff();
 
-// ignore: unused_element
   _Address call(
-      {String neighbourhood,
-      String suburb,
-      @JsonKey(name: 'city_district') String cityDistrict,
-      String city,
-      @JsonKey(name: 'state_district') String stateDistrict,
-      String state,
-      String region,
-      String postcode,
-      String country,
-      @JsonKey(name: 'country_code') String countryCode}) {
+      {String? neighbourhood,
+      String? suburb,
+      @JsonKey(name: 'city_district') String? cityDistrict,
+      String? city,
+      @JsonKey(name: 'state_district') String? stateDistrict,
+      String? state,
+      String? region,
+      String? postcode,
+      String? country,
+      @JsonKey(name: 'country_code') String? countryCode}) {
     return _Address(
       neighbourhood: neighbourhood,
       suburb: suburb,
@@ -554,35 +641,33 @@ class _$AddressTearOff {
     );
   }
 
-// ignore: unused_element
   Address fromJson(Map<String, Object> json) {
     return Address.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $Address = _$AddressTearOff();
 
 /// @nodoc
 mixin _$Address {
-  String get neighbourhood;
-  String get suburb;
+  String? get neighbourhood => throw _privateConstructorUsedError;
+  String? get suburb => throw _privateConstructorUsedError;
   @JsonKey(name: 'city_district')
-  String get cityDistrict;
-  String get city;
+  String? get cityDistrict => throw _privateConstructorUsedError;
+  String? get city => throw _privateConstructorUsedError;
   @JsonKey(name: 'state_district')
-  String get stateDistrict;
-  String get state;
-  String get region;
-  String get postcode;
-  String get country;
+  String? get stateDistrict => throw _privateConstructorUsedError;
+  String? get state => throw _privateConstructorUsedError;
+  String? get region => throw _privateConstructorUsedError;
+  String? get postcode => throw _privateConstructorUsedError;
+  String? get country => throw _privateConstructorUsedError;
   @JsonKey(name: 'country_code')
-  String get countryCode;
+  String? get countryCode => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AddressCopyWith<Address> get copyWith;
+  $AddressCopyWith<Address> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -590,16 +675,16 @@ abstract class $AddressCopyWith<$Res> {
   factory $AddressCopyWith(Address value, $Res Function(Address) then) =
       _$AddressCopyWithImpl<$Res>;
   $Res call(
-      {String neighbourhood,
-      String suburb,
-      @JsonKey(name: 'city_district') String cityDistrict,
-      String city,
-      @JsonKey(name: 'state_district') String stateDistrict,
-      String state,
-      String region,
-      String postcode,
-      String country,
-      @JsonKey(name: 'country_code') String countryCode});
+      {String? neighbourhood,
+      String? suburb,
+      @JsonKey(name: 'city_district') String? cityDistrict,
+      String? city,
+      @JsonKey(name: 'state_district') String? stateDistrict,
+      String? state,
+      String? region,
+      String? postcode,
+      String? country,
+      @JsonKey(name: 'country_code') String? countryCode});
 }
 
 /// @nodoc
@@ -612,35 +697,58 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
 
   @override
   $Res call({
-    Object neighbourhood = freezed,
-    Object suburb = freezed,
-    Object cityDistrict = freezed,
-    Object city = freezed,
-    Object stateDistrict = freezed,
-    Object state = freezed,
-    Object region = freezed,
-    Object postcode = freezed,
-    Object country = freezed,
-    Object countryCode = freezed,
+    Object? neighbourhood = freezed,
+    Object? suburb = freezed,
+    Object? cityDistrict = freezed,
+    Object? city = freezed,
+    Object? stateDistrict = freezed,
+    Object? state = freezed,
+    Object? region = freezed,
+    Object? postcode = freezed,
+    Object? country = freezed,
+    Object? countryCode = freezed,
   }) {
     return _then(_value.copyWith(
       neighbourhood: neighbourhood == freezed
           ? _value.neighbourhood
-          : neighbourhood as String,
-      suburb: suburb == freezed ? _value.suburb : suburb as String,
+          : neighbourhood // ignore: cast_nullable_to_non_nullable
+              as String?,
+      suburb: suburb == freezed
+          ? _value.suburb
+          : suburb // ignore: cast_nullable_to_non_nullable
+              as String?,
       cityDistrict: cityDistrict == freezed
           ? _value.cityDistrict
-          : cityDistrict as String,
-      city: city == freezed ? _value.city : city as String,
+          : cityDistrict // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: city == freezed
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
       stateDistrict: stateDistrict == freezed
           ? _value.stateDistrict
-          : stateDistrict as String,
-      state: state == freezed ? _value.state : state as String,
-      region: region == freezed ? _value.region : region as String,
-      postcode: postcode == freezed ? _value.postcode : postcode as String,
-      country: country == freezed ? _value.country : country as String,
-      countryCode:
-          countryCode == freezed ? _value.countryCode : countryCode as String,
+          : stateDistrict // ignore: cast_nullable_to_non_nullable
+              as String?,
+      state: state == freezed
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as String?,
+      region: region == freezed
+          ? _value.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as String?,
+      postcode: postcode == freezed
+          ? _value.postcode
+          : postcode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      country: country == freezed
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String?,
+      countryCode: countryCode == freezed
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -651,16 +759,16 @@ abstract class _$AddressCopyWith<$Res> implements $AddressCopyWith<$Res> {
       __$AddressCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String neighbourhood,
-      String suburb,
-      @JsonKey(name: 'city_district') String cityDistrict,
-      String city,
-      @JsonKey(name: 'state_district') String stateDistrict,
-      String state,
-      String region,
-      String postcode,
-      String country,
-      @JsonKey(name: 'country_code') String countryCode});
+      {String? neighbourhood,
+      String? suburb,
+      @JsonKey(name: 'city_district') String? cityDistrict,
+      String? city,
+      @JsonKey(name: 'state_district') String? stateDistrict,
+      String? state,
+      String? region,
+      String? postcode,
+      String? country,
+      @JsonKey(name: 'country_code') String? countryCode});
 }
 
 /// @nodoc
@@ -674,42 +782,64 @@ class __$AddressCopyWithImpl<$Res> extends _$AddressCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object neighbourhood = freezed,
-    Object suburb = freezed,
-    Object cityDistrict = freezed,
-    Object city = freezed,
-    Object stateDistrict = freezed,
-    Object state = freezed,
-    Object region = freezed,
-    Object postcode = freezed,
-    Object country = freezed,
-    Object countryCode = freezed,
+    Object? neighbourhood = freezed,
+    Object? suburb = freezed,
+    Object? cityDistrict = freezed,
+    Object? city = freezed,
+    Object? stateDistrict = freezed,
+    Object? state = freezed,
+    Object? region = freezed,
+    Object? postcode = freezed,
+    Object? country = freezed,
+    Object? countryCode = freezed,
   }) {
     return _then(_Address(
       neighbourhood: neighbourhood == freezed
           ? _value.neighbourhood
-          : neighbourhood as String,
-      suburb: suburb == freezed ? _value.suburb : suburb as String,
+          : neighbourhood // ignore: cast_nullable_to_non_nullable
+              as String?,
+      suburb: suburb == freezed
+          ? _value.suburb
+          : suburb // ignore: cast_nullable_to_non_nullable
+              as String?,
       cityDistrict: cityDistrict == freezed
           ? _value.cityDistrict
-          : cityDistrict as String,
-      city: city == freezed ? _value.city : city as String,
+          : cityDistrict // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: city == freezed
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
       stateDistrict: stateDistrict == freezed
           ? _value.stateDistrict
-          : stateDistrict as String,
-      state: state == freezed ? _value.state : state as String,
-      region: region == freezed ? _value.region : region as String,
-      postcode: postcode == freezed ? _value.postcode : postcode as String,
-      country: country == freezed ? _value.country : country as String,
-      countryCode:
-          countryCode == freezed ? _value.countryCode : countryCode as String,
+          : stateDistrict // ignore: cast_nullable_to_non_nullable
+              as String?,
+      state: state == freezed
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as String?,
+      region: region == freezed
+          ? _value.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as String?,
+      postcode: postcode == freezed
+          ? _value.postcode
+          : postcode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      country: country == freezed
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String?,
+      countryCode: countryCode == freezed
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
-@JsonSerializable()
-
 /// @nodoc
+@JsonSerializable()
 class _$_Address implements _Address {
   _$_Address(
       {this.neighbourhood,
@@ -727,28 +857,28 @@ class _$_Address implements _Address {
       _$_$_AddressFromJson(json);
 
   @override
-  final String neighbourhood;
+  final String? neighbourhood;
   @override
-  final String suburb;
+  final String? suburb;
   @override
   @JsonKey(name: 'city_district')
-  final String cityDistrict;
+  final String? cityDistrict;
   @override
-  final String city;
+  final String? city;
   @override
   @JsonKey(name: 'state_district')
-  final String stateDistrict;
+  final String? stateDistrict;
   @override
-  final String state;
+  final String? state;
   @override
-  final String region;
+  final String? region;
   @override
-  final String postcode;
+  final String? postcode;
   @override
-  final String country;
+  final String? country;
   @override
   @JsonKey(name: 'country_code')
-  final String countryCode;
+  final String? countryCode;
 
   @override
   String toString() {
@@ -814,45 +944,46 @@ class _$_Address implements _Address {
 
 abstract class _Address implements Address {
   factory _Address(
-      {String neighbourhood,
-      String suburb,
-      @JsonKey(name: 'city_district') String cityDistrict,
-      String city,
-      @JsonKey(name: 'state_district') String stateDistrict,
-      String state,
-      String region,
-      String postcode,
-      String country,
-      @JsonKey(name: 'country_code') String countryCode}) = _$_Address;
+      {String? neighbourhood,
+      String? suburb,
+      @JsonKey(name: 'city_district') String? cityDistrict,
+      String? city,
+      @JsonKey(name: 'state_district') String? stateDistrict,
+      String? state,
+      String? region,
+      String? postcode,
+      String? country,
+      @JsonKey(name: 'country_code') String? countryCode}) = _$_Address;
 
   factory _Address.fromJson(Map<String, dynamic> json) = _$_Address.fromJson;
 
   @override
-  String get neighbourhood;
+  String? get neighbourhood => throw _privateConstructorUsedError;
   @override
-  String get suburb;
+  String? get suburb => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'city_district')
-  String get cityDistrict;
+  String? get cityDistrict => throw _privateConstructorUsedError;
   @override
-  String get city;
+  String? get city => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'state_district')
-  String get stateDistrict;
+  String? get stateDistrict => throw _privateConstructorUsedError;
   @override
-  String get state;
+  String? get state => throw _privateConstructorUsedError;
   @override
-  String get region;
+  String? get region => throw _privateConstructorUsedError;
   @override
-  String get postcode;
+  String? get postcode => throw _privateConstructorUsedError;
   @override
-  String get country;
+  String? get country => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'country_code')
-  String get countryCode;
+  String? get countryCode => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$AddressCopyWith<_Address> get copyWith;
+  _$AddressCopyWith<_Address> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 Namedetails _$NamedetailsFromJson(Map<String, dynamic> json) {
@@ -863,30 +994,28 @@ Namedetails _$NamedetailsFromJson(Map<String, dynamic> json) {
 class _$NamedetailsTearOff {
   const _$NamedetailsTearOff();
 
-// ignore: unused_element
-  _Namedetails call({String name}) {
+  _Namedetails call({String? name}) {
     return _Namedetails(
       name: name,
     );
   }
 
-// ignore: unused_element
   Namedetails fromJson(Map<String, Object> json) {
     return Namedetails.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $Namedetails = _$NamedetailsTearOff();
 
 /// @nodoc
 mixin _$Namedetails {
-  String get name;
+  String? get name => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $NamedetailsCopyWith<Namedetails> get copyWith;
+  $NamedetailsCopyWith<Namedetails> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -894,7 +1023,7 @@ abstract class $NamedetailsCopyWith<$Res> {
   factory $NamedetailsCopyWith(
           Namedetails value, $Res Function(Namedetails) then) =
       _$NamedetailsCopyWithImpl<$Res>;
-  $Res call({String name});
+  $Res call({String? name});
 }
 
 /// @nodoc
@@ -907,10 +1036,13 @@ class _$NamedetailsCopyWithImpl<$Res> implements $NamedetailsCopyWith<$Res> {
 
   @override
   $Res call({
-    Object name = freezed,
+    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed ? _value.name : name as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -922,7 +1054,7 @@ abstract class _$NamedetailsCopyWith<$Res>
           _Namedetails value, $Res Function(_Namedetails) then) =
       __$NamedetailsCopyWithImpl<$Res>;
   @override
-  $Res call({String name});
+  $Res call({String? name});
 }
 
 /// @nodoc
@@ -937,17 +1069,19 @@ class __$NamedetailsCopyWithImpl<$Res> extends _$NamedetailsCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object name = freezed,
+    Object? name = freezed,
   }) {
     return _then(_Namedetails(
-      name: name == freezed ? _value.name : name as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
-@JsonSerializable()
-
 /// @nodoc
+@JsonSerializable()
 class _$_Namedetails implements _Namedetails {
   _$_Namedetails({this.name});
 
@@ -955,7 +1089,7 @@ class _$_Namedetails implements _Namedetails {
       _$_$_NamedetailsFromJson(json);
 
   @override
-  final String name;
+  final String? name;
 
   @override
   String toString() {
@@ -986,14 +1120,15 @@ class _$_Namedetails implements _Namedetails {
 }
 
 abstract class _Namedetails implements Namedetails {
-  factory _Namedetails({String name}) = _$_Namedetails;
+  factory _Namedetails({String? name}) = _$_Namedetails;
 
   factory _Namedetails.fromJson(Map<String, dynamic> json) =
       _$_Namedetails.fromJson;
 
   @override
-  String get name;
+  String? get name => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$NamedetailsCopyWith<_Namedetails> get copyWith;
+  _$NamedetailsCopyWith<_Namedetails> get copyWith =>
+      throw _privateConstructorUsedError;
 }

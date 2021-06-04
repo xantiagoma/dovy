@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:dovy/general.dart' hide Listener;
+import 'package:dovy/general.dart';
 
 class SelectSystem extends HookWidget {
   const SelectSystem({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class SelectSystem extends HookWidget {
             borderRadius: BorderRadius.circular(5),
             child: ButtonTheme(
               alignedDropdown: true,
-              child: DropdownButton(
+              child: DropdownButton<String>(
                 isExpanded: true,
                 underline: DropdownButtonHideUnderline(child: Container()),
                 hint: Text("Select a line"),
@@ -37,7 +37,7 @@ class SelectSystem extends HookWidget {
                   for (final line in lines)
                     DropdownMenuItem<String>(
                       value: line.id,
-                      child: Text(line.name),
+                      child: Text(line.name!),
                     )
                 ],
                 onChanged: (val) {
@@ -55,7 +55,7 @@ class SelectSystem extends HookWidget {
             borderRadius: BorderRadius.circular(5),
             child: ButtonTheme(
               alignedDropdown: true,
-              child: DropdownButton(
+              child: DropdownButton<String>(
                 isExpanded: true,
                 underline: DropdownButtonHideUnderline(child: Container()),
                 hint: Text("Select a station"),
@@ -70,7 +70,7 @@ class SelectSystem extends HookWidget {
                   for (final station in stations)
                     DropdownMenuItem<String>(
                       value: station.id,
-                      child: Text(station.name),
+                      child: Text(station.name!),
                     )
                 ],
                 onChanged: (val) {

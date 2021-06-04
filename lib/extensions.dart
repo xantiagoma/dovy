@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
-import 'package:maps_toolkit/maps_toolkit.dart' hide LatLng;
 
 extension BuildContext_ on BuildContext {
   S get s => S.of(this);
@@ -11,23 +10,29 @@ extension BuildContext_ on BuildContext {
     String path, {
     bool replace = false,
     bool clearStack = false,
-    TransitionType transition,
-    Duration transitionDuration = const Duration(milliseconds: 250),
-    RouteTransitionsBuilder transitionBuilder,
+    bool maintainState = true,
+    bool rootNavigator = false,
+    TransitionType? transition,
+    Duration? transitionDuration,
+    RouteTransitionsBuilder? transitionBuilder,
+    RouteSettings? routeSettings,
   }) =>
-      this.read(routerProvider).navigateTo(
-            this,
-            path,
-            replace: replace,
-            clearStack: clearStack,
-            transition: transition,
-            transitionDuration: transitionDuration,
-            transitionBuilder: transitionBuilder,
-          );
+      read(routerProvider).navigateTo(
+        this,
+        path,
+        replace: replace,
+        clearStack: clearStack,
+        maintainState: maintainState,
+        rootNavigator: rootNavigator,
+        transition: transition,
+        transitionDuration: transitionDuration,
+        transitionBuilder: transitionBuilder,
+        routeSettings: routeSettings,
+      );
 }
 
 extension Future_<T> on Future<T> {
-  Future<T> get tryOrNull async {
+  Future<T?> get tryOrNull async {
     try {
       return await this;
     } catch (_) {
@@ -44,12 +49,10 @@ extension Kolor on Color {
   static Color fromCSSColor(CSSColor color) => Pigment.fromCSSColor(color);
   static Color fromHSL(HslColor hsl) => TinyColor.fromHSL(hsl).color;
   static Color fromHSV(HSVColor hsv) => TinyColor.fromHSV(hsv).color;
-  static Color fromRGB({int r, int g, int b, int a}) =>
-      TinyColor.fromRGB(r: null, g: null, b: null).color;
+
   static Color fromRGBO(int r, int g, int b, double opacity) =>
       Color.fromRGBO(r, g, b, opacity);
   static Color fromString(String color) => Pigment.fromString(color);
-  static Color lerp(Color a, Color b, double t) => Color.lerp(a, b, t);
   static int getAlphaFromOpacity(double opacity) =>
       Color.getAlphaFromOpacity(opacity);
 
@@ -65,11 +68,14 @@ extension Kolor on Color {
 }
 
 extension MapLatLng_ on Map<String, num> {
-  LatLng get latlng {
+  LatLng? get latlng {
     if (!this.containsKey('latitude') || !this.containsKey('longitude')) {
       return null;
     }
-    return LatLng(this['latitude'].toDouble(), this['longitude'].toDouble());
+    return LatLng(
+      this['latitude']?.toDouble() ?? 0,
+      this['longitude']?.toDouble() ?? 0,
+    );
   }
 }
 
@@ -84,7 +90,9 @@ extension LatLng_ on LatLng {
       };
 }
 
-String latLngBoundsToString(LatLngBounds t) => """\n
+String latLngBoundsToString(LatLngBounds? t) => t == null
+    ? 'NullLatLng'
+    : """\n
         ${t.runtimeType} {
           isValid: ${t.isValid},
           west: ${t.west},
@@ -131,4 +139,13 @@ extension AsyncValueLoadingt_<T> on AsyncValue<T> {
 
 extension MapController_ on MapController {
   zoomBy([factor = 1]) => this.move(center, zoom + factor);
+}
+
+extension ListNull_<T> on Iterable<T?> {
+  List<T> get valid {
+    return [
+      for (final item in this)
+        if (item != null) item,
+    ];
+  }
 }

@@ -4,7 +4,7 @@ import 'package:dovy/general.dart';
 
 class SearchScreen extends StatefulHookWidget {
   const SearchScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -23,8 +23,8 @@ class _SearchScreenState extends State<SearchScreen>
     final stationsResult$ = useProvider(stationsSearchProvider(q.text));
     final linesResult$ = useProvider(linesSearchProvider(q.text));
 
-    final stationsResult = stationsResult$?.data?.value ?? [];
-    final linesResult = linesResult$?.data?.value ?? [];
+    final stationsResult = stationsResult$.data?.value ?? [];
+    final linesResult = linesResult$.data?.value ?? [];
 
     final loading = stationsResult$.loading && linesResult$.loading;
 
@@ -78,7 +78,7 @@ class _SearchScreenState extends State<SearchScreen>
                   context.navigateTo('/line/${line.id}');
                 },
                 child: Chip(
-                  label: Text(line.name),
+                  label: Text(line.name!),
                   backgroundColor: getColor(line.color),
                 ),
               );
@@ -112,7 +112,7 @@ class _SearchScreenState extends State<SearchScreen>
                     horizontal: 20,
                     vertical: 15,
                   ),
-                  child: Text(station.name),
+                  child: Text(station.name!),
                 ),
               );
             },
