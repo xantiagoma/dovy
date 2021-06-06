@@ -34,7 +34,7 @@ dependencies:
   dio: ^4.0.0
   flash: ^1.5.1
   fluro: ^2.0.3
-  flutter_hooks: ^0.16.0
+  flutter_hooks: ^0.17.0
   # flutter_map_tappable_polyline: ^1.2.0
   flutter_map: #^0.10.1+1
     git:
@@ -47,7 +47,7 @@ dependencies:
   # maps_toolkit: ^1.1.0+2
   hive_flutter: ^1.0.0
   hive: ^2.0.4
-  hooks_riverpod: ^0.14.0+2
+  hooks_riverpod: ^0.14.0+4
   json_annotation: ^4.0.1
   latlong2: ^0.8.0
   lottie: ^1.0.1
