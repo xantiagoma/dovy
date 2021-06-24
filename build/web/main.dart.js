@@ -46971,7 +46971,7 @@ $1:function(a){return this.WZ(a)},
 WZ:function(a){var s=0,r=P.U(t.nA),q
 var $async$$1=P.N(function(b,c){if(b===1)return P.R(c,r)
 while(true)switch(s){case 0:s=3
-return P.W(a.dS($.jx(),t.Na).vZ("configs"),$async$$1)
+return P.W(a.dS($.jx(),t.Na).vZ("configs/group"),$async$$1)
 case 3:q=c.kg(new Q.auI(),new Q.auJ())
 s=1
 break

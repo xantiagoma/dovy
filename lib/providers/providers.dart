@@ -89,7 +89,7 @@ final strapiServiceProvider = Provider<Strapi>(
 final configsProvider = FutureProvider<Map<String, dynamic>?>(
   (ref) async {
     final strapiService = ref.watch(strapiServiceProvider);
-    final response = (await strapiService.getPage('configs')).maybeWhen(
+    final response = (await strapiService.getPage('configs/group')).maybeWhen(
       orElse: () => null,
       ok: (r) => r as Map<String, dynamic>,
     );
