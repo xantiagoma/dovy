@@ -3,7 +3,7 @@ part 'ip_data.freezed.dart';
 part 'ip_data.g.dart';
 
 @freezed
-abstract class IPData with _$IPData {
+class IPData with _$IPData {
   factory IPData({
     String? ip,
     String? version,

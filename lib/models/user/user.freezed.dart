@@ -30,7 +30,7 @@ class _$UserTearOff {
       List<UserRole>? roles,
       String? email,
       String? firstname,
-      String? id,
+      int? id,
       String? lastname,
       String? provider,
       String? userId,
@@ -74,7 +74,7 @@ mixin _$User {
   List<UserRole>? get roles => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get firstname => throw _privateConstructorUsedError;
-  String? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String? get lastname => throw _privateConstructorUsedError;
   String? get provider => throw _privateConstructorUsedError;
   String? get userId => throw _privateConstructorUsedError;
@@ -100,7 +100,7 @@ abstract class $UserCopyWith<$Res> {
       List<UserRole>? roles,
       String? email,
       String? firstname,
-      String? id,
+      int? id,
       String? lastname,
       String? provider,
       String? userId,
@@ -176,7 +176,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       lastname: lastname == freezed
           ? _value.lastname
           : lastname // ignore: cast_nullable_to_non_nullable
@@ -227,7 +227,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       List<UserRole>? roles,
       String? email,
       String? firstname,
-      String? id,
+      int? id,
       String? lastname,
       String? provider,
       String? userId,
@@ -305,7 +305,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       lastname: lastname == freezed
           ? _value.lastname
           : lastname // ignore: cast_nullable_to_non_nullable
@@ -372,7 +372,7 @@ class _$_User implements _User {
   @override
   final String? firstname;
   @override
-  final String? id;
+  final int? id;
   @override
   final String? lastname;
   @override
@@ -475,7 +475,7 @@ abstract class _User implements User {
       List<UserRole>? roles,
       String? email,
       String? firstname,
-      String? id,
+      int? id,
       String? lastname,
       String? provider,
       String? userId,
@@ -503,7 +503,7 @@ abstract class _User implements User {
   @override
   String? get firstname => throw _privateConstructorUsedError;
   @override
-  String? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   @override
   String? get lastname => throw _privateConstructorUsedError;
   @override
@@ -533,7 +533,7 @@ class _$UserRoleTearOff {
       int? v,
       String? code,
       String? description,
-      String? id,
+      int? id,
       String? name,
       String? roleId,
       String? type}) {
@@ -565,7 +565,7 @@ mixin _$UserRole {
   int? get v => throw _privateConstructorUsedError;
   String? get code => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  String? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get roleId => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
@@ -586,7 +586,7 @@ abstract class $UserRoleCopyWith<$Res> {
       int? v,
       String? code,
       String? description,
-      String? id,
+      int? id,
       String? name,
       String? roleId,
       String? type});
@@ -636,7 +636,7 @@ class _$UserRoleCopyWithImpl<$Res> implements $UserRoleCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -664,7 +664,7 @@ abstract class _$UserRoleCopyWith<$Res> implements $UserRoleCopyWith<$Res> {
       int? v,
       String? code,
       String? description,
-      String? id,
+      int? id,
       String? name,
       String? roleId,
       String? type});
@@ -715,7 +715,7 @@ class __$UserRoleCopyWithImpl<$Res> extends _$UserRoleCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -760,7 +760,7 @@ class _$_UserRole implements _UserRole {
   @override
   final String? description;
   @override
-  final String? id;
+  final int? id;
   @override
   final String? name;
   @override
@@ -831,7 +831,7 @@ abstract class _UserRole implements UserRole {
       int? v,
       String? code,
       String? description,
-      String? id,
+      int? id,
       String? name,
       String? roleId,
       String? type}) = _$_UserRole;
@@ -849,7 +849,7 @@ abstract class _UserRole implements UserRole {
   @override
   String? get description => throw _privateConstructorUsedError;
   @override
-  String? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   @override
   String? get name => throw _privateConstructorUsedError;
   @override

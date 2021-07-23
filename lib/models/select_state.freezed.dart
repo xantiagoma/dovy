@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$SelectStateTearOff {
   const _$SelectStateTearOff();
 
-  _SelectState call({String? system, String? line, String? station}) {
+  _SelectState call({int? system, int? line, int? station}) {
     return _SelectState(
       system: system,
       line: line,
@@ -30,9 +30,9 @@ const $SelectState = _$SelectStateTearOff();
 
 /// @nodoc
 mixin _$SelectState {
-  String? get system => throw _privateConstructorUsedError;
-  String? get line => throw _privateConstructorUsedError;
-  String? get station => throw _privateConstructorUsedError;
+  int? get system => throw _privateConstructorUsedError;
+  int? get line => throw _privateConstructorUsedError;
+  int? get station => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SelectStateCopyWith<SelectState> get copyWith =>
@@ -44,7 +44,7 @@ abstract class $SelectStateCopyWith<$Res> {
   factory $SelectStateCopyWith(
           SelectState value, $Res Function(SelectState) then) =
       _$SelectStateCopyWithImpl<$Res>;
-  $Res call({String? system, String? line, String? station});
+  $Res call({int? system, int? line, int? station});
 }
 
 /// @nodoc
@@ -65,15 +65,15 @@ class _$SelectStateCopyWithImpl<$Res> implements $SelectStateCopyWith<$Res> {
       system: system == freezed
           ? _value.system
           : system // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       line: line == freezed
           ? _value.line
           : line // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       station: station == freezed
           ? _value.station
           : station // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
     ));
   }
 }
@@ -85,7 +85,7 @@ abstract class _$SelectStateCopyWith<$Res>
           _SelectState value, $Res Function(_SelectState) then) =
       __$SelectStateCopyWithImpl<$Res>;
   @override
-  $Res call({String? system, String? line, String? station});
+  $Res call({int? system, int? line, int? station});
 }
 
 /// @nodoc
@@ -108,15 +108,15 @@ class __$SelectStateCopyWithImpl<$Res> extends _$SelectStateCopyWithImpl<$Res>
       system: system == freezed
           ? _value.system
           : system // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       line: line == freezed
           ? _value.line
           : line // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       station: station == freezed
           ? _value.station
           : station // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
     ));
   }
 }
@@ -127,11 +127,11 @@ class _$_SelectState implements _SelectState {
   _$_SelectState({this.system, this.line, this.station});
 
   @override
-  final String? system;
+  final int? system;
   @override
-  final String? line;
+  final int? line;
   @override
-  final String? station;
+  final int? station;
 
   @override
   String toString() {
@@ -164,15 +164,14 @@ class _$_SelectState implements _SelectState {
 }
 
 abstract class _SelectState implements SelectState {
-  factory _SelectState({String? system, String? line, String? station}) =
-      _$_SelectState;
+  factory _SelectState({int? system, int? line, int? station}) = _$_SelectState;
 
   @override
-  String? get system => throw _privateConstructorUsedError;
+  int? get system => throw _privateConstructorUsedError;
   @override
-  String? get line => throw _privateConstructorUsedError;
+  int? get line => throw _privateConstructorUsedError;
   @override
-  String? get station => throw _privateConstructorUsedError;
+  int? get station => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$SelectStateCopyWith<_SelectState> get copyWith =>

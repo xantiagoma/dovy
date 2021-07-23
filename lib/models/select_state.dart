@@ -2,27 +2,27 @@ import 'package:dovy/general.dart';
 part 'select_state.freezed.dart';
 
 @freezed
-abstract class SelectState with _$SelectState {
+class SelectState with _$SelectState {
   factory SelectState({
-    String? system,
-    String? line,
-    String? station,
+    int? system,
+    int? line,
+    int? station,
   }) = _SelectState;
 }
 
 extension SelectState_ on SelectState {
-  SelectState setSystem(String? system) => this.copyWith(
+  SelectState setSystem(int? system) => this.copyWith(
         system: system,
         line: null,
         station: null,
       );
 
-  SelectState setLine(String? line) => this.copyWith(
+  SelectState setLine(int? line) => this.copyWith(
         line: line,
         station: null,
       );
 
-  SelectState setStation(String? station) => this.copyWith(
+  SelectState setStation(int? station) => this.copyWith(
         station: station,
       );
 }

@@ -3,9 +3,9 @@ part 'line.freezed.dart';
 part 'line.g.dart';
 
 @freezed
-abstract class Line with _$Line {
+class Line with _$Line {
   factory Line({
-    String? id,
+    int? id,
     String? color,
     String? name,
     String? code,
@@ -31,7 +31,7 @@ List<Station> stationsFromJson(List<dynamic>? val) {
 
   if (val is List) {
     return val.map((e) {
-      if (e is String) {
+      if (e is int) {
         e = {"id": e};
       }
       return Station.fromJson(e);
@@ -42,7 +42,7 @@ List<Station> stationsFromJson(List<dynamic>? val) {
 }
 
 @freezed
-abstract class LineDescription with _$LineDescription {
+class LineDescription with _$LineDescription {
   factory LineDescription({
     @JsonKey(name: 'Body') String? body,
   }) = _LineDescription;

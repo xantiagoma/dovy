@@ -8,11 +8,11 @@ part of 'station.dart';
 
 _$_Station _$_$_StationFromJson(Map<String, dynamic> json) {
   return _$_Station(
-    id: json['id'] as String?,
+    id: json['id'] as int?,
     name: json['name'] as String?,
     code: json['code'] as String?,
     lines: linesFromJson(json['lines'] as List?),
-    location: locationFromJson(json['location'] as Map<String, dynamic>),
+    location: locationFromJson(json['location'] as Map<String, dynamic>?),
   );
 }
 

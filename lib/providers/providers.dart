@@ -50,7 +50,8 @@ final routerProvider = Provider<FluroRouter>(
         handler: Handler(
           handlerFunc: (context, parameters) {
             // final args = context.settings.arguments as MyArgumentsDataClass;
-            return StationScreen(id: parameters["id"]![0]); // TODO
+            final id = parameters["id"]![0].toInt();
+            return StationScreen(id: id!); // TODO
           },
         ),
       )
@@ -100,6 +101,7 @@ final configsProvider = FutureProvider<Map<String, dynamic>?>(
 final systemsProvider = FutureProvider<List<System>?>(
   (ref) async {
     final strapiService = ref.watch(strapiServiceProvider);
+
     final response = (await strapiService.find('systems')).maybeWhen(
       orElse: () => null,
       ok: (r) => r,
@@ -175,7 +177,7 @@ final stationsProvider = FutureProvider<List<Station>?>(
   },
 );
 
-final systemProvider = AutoDisposeFutureProviderFamily<System?, String?>(
+final systemProvider = AutoDisposeFutureProviderFamily<System?, int?>(
   (ref, id) async {
     if (id == null) {
       return null;
@@ -183,7 +185,8 @@ final systemProvider = AutoDisposeFutureProviderFamily<System?, String?>(
 
     final strapiService = ref.watch(strapiServiceProvider);
 
-    final response = (await strapiService.findOne('systems', id)).maybeWhen(
+    final response =
+        (await strapiService.findOne('systems', id.toString())).maybeWhen(
       orElse: () => null,
       ok: (r) => r,
     );
@@ -216,13 +219,14 @@ final lineProvider = AutoDisposeFutureProviderFamily<Line?, String?>(
   },
 );
 
-final stationProvider = AutoDisposeFutureProviderFamily<Station?, String?>(
+final stationProvider = AutoDisposeFutureProviderFamily<Station?, int?>(
   (ref, id) async {
     if (id == null) {
       return null;
     }
     final strapiService = ref.watch(strapiServiceProvider);
-    final response = (await strapiService.findOne('stations', id)).maybeWhen(
+    final response =
+        (await strapiService.findOne('stations', id.toString())).maybeWhen(
       orElse: () => null,
       ok: (r) => r,
     );

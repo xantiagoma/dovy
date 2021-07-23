@@ -21,7 +21,7 @@ class _$LineTearOff {
   const _$LineTearOff();
 
   _Line call(
-      {String? id,
+      {int? id,
       String? color,
       String? name,
       String? code,
@@ -49,7 +49,7 @@ const $Line = _$LineTearOff();
 
 /// @nodoc
 mixin _$Line {
-  String? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String? get color => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get code => throw _privateConstructorUsedError;
@@ -68,7 +68,7 @@ abstract class $LineCopyWith<$Res> {
   factory $LineCopyWith(Line value, $Res Function(Line) then) =
       _$LineCopyWithImpl<$Res>;
   $Res call(
-      {String? id,
+      {int? id,
       String? color,
       String? name,
       String? code,
@@ -101,7 +101,7 @@ class _$LineCopyWithImpl<$Res> implements $LineCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       color: color == freezed
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
@@ -147,7 +147,7 @@ abstract class _$LineCopyWith<$Res> implements $LineCopyWith<$Res> {
       __$LineCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? id,
+      {int? id,
       String? color,
       String? name,
       String? code,
@@ -182,7 +182,7 @@ class __$LineCopyWithImpl<$Res> extends _$LineCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       color: color == freezed
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
@@ -227,7 +227,7 @@ class _$_Line implements _Line {
       _$_$_LineFromJson(json);
 
   @override
-  final String? id;
+  final int? id;
   @override
   final String? color;
   @override
@@ -293,7 +293,7 @@ class _$_Line implements _Line {
 
 abstract class _Line implements Line {
   factory _Line(
-      {String? id,
+      {int? id,
       String? color,
       String? name,
       String? code,
@@ -304,7 +304,7 @@ abstract class _Line implements Line {
   factory _Line.fromJson(Map<String, dynamic> json) = _$_Line.fromJson;
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   @override
   String? get color => throw _privateConstructorUsedError;
   @override

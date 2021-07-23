@@ -3,7 +3,7 @@ part 'user.freezed.dart';
 part 'user.g.dart';
 
 @freezed
-abstract class User with _$User {
+class User with _$User {
   factory User({
     bool? blocked,
     bool? confirmed,
@@ -14,7 +14,7 @@ abstract class User with _$User {
     List<UserRole>? roles,
     String? email,
     String? firstname,
-    String? id,
+    int? id,
     String? lastname,
     String? provider,
     String? userId,
@@ -26,14 +26,14 @@ abstract class User with _$User {
 }
 
 @freezed
-abstract class UserRole with _$UserRole {
+class UserRole with _$UserRole {
   factory UserRole({
     DateTime? createdAt,
     DateTime? updatedAt,
     int? v,
     String? code,
     String? description,
-    String? id,
+    int? id,
     String? name,
     String? roleId,
     String? type,

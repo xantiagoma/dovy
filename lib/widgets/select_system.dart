@@ -22,7 +22,7 @@ class SelectSystem extends HookWidget {
             borderRadius: BorderRadius.circular(5),
             child: ButtonTheme(
               alignedDropdown: true,
-              child: DropdownButton<String>(
+              child: DropdownButton<int>(
                 isExpanded: true,
                 underline: DropdownButtonHideUnderline(child: Container()),
                 hint: Text("Select a line"),
@@ -35,7 +35,7 @@ class SelectSystem extends HookWidget {
                 ),
                 items: [
                   for (final line in lines)
-                    DropdownMenuItem<String>(
+                    DropdownMenuItem<int>(
                       value: line.id,
                       child: Text(line.name!),
                     )
@@ -55,7 +55,7 @@ class SelectSystem extends HookWidget {
             borderRadius: BorderRadius.circular(5),
             child: ButtonTheme(
               alignedDropdown: true,
-              child: DropdownButton<String>(
+              child: DropdownButton<int>(
                 isExpanded: true,
                 underline: DropdownButtonHideUnderline(child: Container()),
                 hint: Text("Select a station"),
@@ -68,7 +68,7 @@ class SelectSystem extends HookWidget {
                 ),
                 items: [
                   for (final station in stations)
-                    DropdownMenuItem<String>(
+                    DropdownMenuItem<int>(
                       value: station.id,
                       child: Text(station.name!),
                     )

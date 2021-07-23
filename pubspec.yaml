@@ -30,7 +30,7 @@ dependencies:
   convex_bottom_bar: ^3.0.0
   cupertino_icons: ^1.0.2
   dart_date: ^1.1.0
-  dart_strapi: ^1.1.0
+  dart_strapi: ^1.2.0
   dio: ^4.0.0
   flash: ^1.5.1
   fluro: ^2.0.3

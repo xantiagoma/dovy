@@ -8,7 +8,7 @@ part of 'system.dart';
 
 _$_System _$_$_SystemFromJson(Map<String, dynamic> json) {
   return _$_System(
-    id: json['id'] as String?,
+    id: json['id'] as int?,
     name: json['name'] as String?,
     code: json['code'] as String?,
     lines: (json['lines'] as List<dynamic>?)

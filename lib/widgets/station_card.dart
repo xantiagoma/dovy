@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class StationCard<T> extends HookWidget {
   final FlashController<T> controller;
-  final String stationId;
+  final int stationId;
 
   StationCard({
     Key? key,

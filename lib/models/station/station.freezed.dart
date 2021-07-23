@@ -21,7 +21,7 @@ class _$StationTearOff {
   const _$StationTearOff();
 
   _Station call(
-      {String? id,
+      {int? id,
       String? name,
       String? code,
       @JsonKey(fromJson: linesFromJson)
@@ -47,7 +47,7 @@ const $Station = _$StationTearOff();
 
 /// @nodoc
 mixin _$Station {
-  String? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get code => throw _privateConstructorUsedError;
   @JsonKey(fromJson: linesFromJson)
@@ -65,7 +65,7 @@ abstract class $StationCopyWith<$Res> {
   factory $StationCopyWith(Station value, $Res Function(Station) then) =
       _$StationCopyWithImpl<$Res>;
   $Res call(
-      {String? id,
+      {int? id,
       String? name,
       String? code,
       @JsonKey(fromJson: linesFromJson)
@@ -94,7 +94,7 @@ class _$StationCopyWithImpl<$Res> implements $StationCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -121,7 +121,7 @@ abstract class _$StationCopyWith<$Res> implements $StationCopyWith<$Res> {
       __$StationCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? id,
+      {int? id,
       String? name,
       String? code,
       @JsonKey(fromJson: linesFromJson)
@@ -151,7 +151,7 @@ class __$StationCopyWithImpl<$Res> extends _$StationCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -188,7 +188,7 @@ class _$_Station implements _Station {
       _$_$_StationFromJson(json);
 
   @override
-  final String? id;
+  final int? id;
   @override
   final String? name;
   @override
@@ -244,7 +244,7 @@ class _$_Station implements _Station {
 
 abstract class _Station implements Station {
   factory _Station(
-      {String? id,
+      {int? id,
       String? name,
       String? code,
       @JsonKey(fromJson: linesFromJson)
@@ -255,7 +255,7 @@ abstract class _Station implements Station {
   factory _Station.fromJson(Map<String, dynamic> json) = _$_Station.fromJson;
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   @override
   String? get name => throw _privateConstructorUsedError;
   @override

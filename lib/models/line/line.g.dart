@@ -8,7 +8,7 @@ part of 'line.dart';
 
 _$_Line _$_$_LineFromJson(Map<String, dynamic> json) {
   return _$_Line(
-    id: json['id'] as String?,
+    id: json['id'] as int?,
     color: json['color'] as String?,
     name: json['name'] as String?,
     code: json['code'] as String?,

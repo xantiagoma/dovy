@@ -3,9 +3,9 @@ part 'system.freezed.dart';
 part 'system.g.dart';
 
 @freezed
-abstract class System with _$System {
+class System with _$System {
   factory System({
-    String? id,
+    int? id,
     String? name,
     String? code,
     List<Line>? lines,

@@ -3,9 +3,9 @@ part 'station.freezed.dart';
 part 'station.g.dart';
 
 @freezed
-abstract class Station with _$Station {
+class Station with _$Station {
   factory Station({
-    String? id,
+    int? id,
     String? name,
     String? code,
     @JsonKey(
@@ -33,7 +33,7 @@ List<Line> linesFromJson(List<dynamic>? val) {
     return val
         .map((e) {
           Map<String, dynamic>? result;
-          if (e is String) {
+          if (e is int) {
             result = {"id": e};
           }
           if (e is Map<String, dynamic>) {

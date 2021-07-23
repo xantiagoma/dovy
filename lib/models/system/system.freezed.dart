@@ -20,7 +20,7 @@ System _$SystemFromJson(Map<String, dynamic> json) {
 class _$SystemTearOff {
   const _$SystemTearOff();
 
-  _System call({String? id, String? name, String? code, List<Line>? lines}) {
+  _System call({int? id, String? name, String? code, List<Line>? lines}) {
     return _System(
       id: id,
       name: name,
@@ -39,7 +39,7 @@ const $System = _$SystemTearOff();
 
 /// @nodoc
 mixin _$System {
-  String? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get code => throw _privateConstructorUsedError;
   List<Line>? get lines => throw _privateConstructorUsedError;
@@ -53,7 +53,7 @@ mixin _$System {
 abstract class $SystemCopyWith<$Res> {
   factory $SystemCopyWith(System value, $Res Function(System) then) =
       _$SystemCopyWithImpl<$Res>;
-  $Res call({String? id, String? name, String? code, List<Line>? lines});
+  $Res call({int? id, String? name, String? code, List<Line>? lines});
 }
 
 /// @nodoc
@@ -75,7 +75,7 @@ class _$SystemCopyWithImpl<$Res> implements $SystemCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -97,7 +97,7 @@ abstract class _$SystemCopyWith<$Res> implements $SystemCopyWith<$Res> {
   factory _$SystemCopyWith(_System value, $Res Function(_System) then) =
       __$SystemCopyWithImpl<$Res>;
   @override
-  $Res call({String? id, String? name, String? code, List<Line>? lines});
+  $Res call({int? id, String? name, String? code, List<Line>? lines});
 }
 
 /// @nodoc
@@ -120,7 +120,7 @@ class __$SystemCopyWithImpl<$Res> extends _$SystemCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -146,7 +146,7 @@ class _$_System implements _System {
       _$_$_SystemFromJson(json);
 
   @override
-  final String? id;
+  final int? id;
   @override
   final String? name;
   @override
@@ -193,13 +193,13 @@ class _$_System implements _System {
 }
 
 abstract class _System implements System {
-  factory _System({String? id, String? name, String? code, List<Line>? lines}) =
+  factory _System({int? id, String? name, String? code, List<Line>? lines}) =
       _$_System;
 
   factory _System.fromJson(Map<String, dynamic> json) = _$_System.fromJson;
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   @override
   String? get name => throw _privateConstructorUsedError;
   @override

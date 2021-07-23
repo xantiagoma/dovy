@@ -3,7 +3,7 @@ part 'address_details.freezed.dart';
 part 'address_details.g.dart';
 
 @freezed
-abstract class AddressDetails with _$AddressDetails {
+class AddressDetails with _$AddressDetails {
   factory AddressDetails({
     @JsonKey(name: 'place_id') required int? placeId,
     required String? licence,
@@ -29,7 +29,7 @@ abstract class AddressDetails with _$AddressDetails {
 }
 
 @freezed
-abstract class Address with _$Address {
+class Address with _$Address {
   factory Address({
     String? neighbourhood,
     String? suburb,
@@ -48,7 +48,7 @@ abstract class Address with _$Address {
 }
 
 @freezed
-abstract class Namedetails with _$Namedetails {
+class Namedetails with _$Namedetails {
   factory Namedetails({String? name}) = _Namedetails;
 
   factory Namedetails.fromJson(Map<String, dynamic> json) =>
