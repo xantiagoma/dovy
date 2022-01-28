@@ -7,15 +7,16 @@ enum LoginResult {
   Success,
 }
 
-class LoginForm extends HookWidget {
+class LoginForm extends HookConsumerWidget {
   const LoginForm({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final obscurePassword = useState(true);
     final id = useTextEditingController.fromValue(TextEditingValue.empty);
     final password = useTextEditingController.fromValue(TextEditingValue.empty);
-    final authService = useProvider(authServiceProvider);
+    final authService = ref.watch(authServiceProvider);
+    final router = ref.watch(routerProvider);
 
     final dec = InputDecoration(
       fillColor: Colors.white,
@@ -91,7 +92,7 @@ class LoginForm extends HookWidget {
               );
 
               if (r != null) {
-                context.navigateTo("/home", clearStack: true);
+                router.navigateTo(context, "/home", clearStack: true);
               }
             },
           ),

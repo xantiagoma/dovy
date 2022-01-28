@@ -1,7 +1,7 @@
 import 'package:dovy/general.dart';
 import 'package:flutter/material.dart';
 
-class PlaceCard<T> extends HookWidget {
+class PlaceCard<T> extends HookConsumerWidget {
   final FlashController<T> controller;
   final LatLng point;
 
@@ -12,8 +12,8 @@ class PlaceCard<T> extends HookWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final location = useProvider(locationDataProvider(point));
+  Widget build(BuildContext context, WidgetRef ref) {
+    final location = ref.watch(locationDataProvider(point));
 
     final backgroundColor = context.theme.scaffoldBackgroundColor.lighten();
     final margin = EdgeInsets.all(18);

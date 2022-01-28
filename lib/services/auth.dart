@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
 class AuthService {
@@ -11,7 +10,7 @@ class AuthService {
   });
 
   Future<Map<String, dynamic>> login(String id, String password) async {
-    final r = await strapi.http.post("/auth/local", data: {
+    final r = await strapi.http.post("api/auth/local", data: {
       "identifier": id,
       "password": password,
     });

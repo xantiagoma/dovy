@@ -3,14 +3,15 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
-class MainScreen extends HookWidget {
+class MainScreen extends HookConsumerWidget {
   const MainScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final showLogin = useState(false);
-    final loaded = useProvider(loadedProvider);
-    final user = useProvider(userProvider);
+    final loaded = ref.watch(loadedProvider);
+    final user = ref.watch(userProvider);
+    final router = ref.watch(routerProvider);
 
     useEffect(
       () {
@@ -22,7 +23,8 @@ class MainScreen extends HookWidget {
         if (loaded) {
           if (u != null) {
             Future.microtask(() {
-              context.navigateTo(
+              router.navigateTo(
+                context,
                 "/home",
                 clearStack: true,
                 transition: TransitionType.fadeIn,
@@ -111,7 +113,8 @@ class MainScreen extends HookWidget {
                             child: Button(
                               text: 'Login',
                               onTap: () {
-                                context.navigateTo(
+                                router.navigateTo(
+                                  context,
                                   "/login",
                                   transition:
                                       TransitionType.materialFullScreenDialog,
@@ -128,7 +131,8 @@ class MainScreen extends HookWidget {
                             child: Button(
                               text: 'Sign Up',
                               onTap: () {
-                                context.navigateTo(
+                                router.navigateTo(
+                                  context,
                                   "/signup",
                                   transition: TransitionType.cupertino,
                                 );

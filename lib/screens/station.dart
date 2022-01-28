@@ -1,7 +1,7 @@
 import 'package:dovy/general.dart';
 import 'package:flutter/material.dart';
 
-class StationScreen extends HookWidget {
+class StationScreen extends HookConsumerWidget {
   final int id;
 
   const StationScreen({
@@ -10,8 +10,9 @@ class StationScreen extends HookWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final station = useProvider(stationProvider(id)).data?.value;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final station = ref.watch(stationProvider(id)).asData?.value;
+    final router = ref.watch(routerProvider);
 
     if (station == null) {
       return Scaffold(
@@ -27,7 +28,7 @@ class StationScreen extends HookWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            title: Text(station.name!),
+            title: Text(station['attributes']['name']),
           ),
           SliverToBoxAdapter(
             child: Text("Lines:"),
@@ -35,10 +36,10 @@ class StationScreen extends HookWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                final line = station.lines![index];
+                final line = station['attributes']['lines']['data'][index];
                 return InkWell(
                   onTap: () {
-                    context.navigateTo('/line/${line.id}');
+                    router.navigateTo(context, '/line/${line['id']}');
                   },
                   child: Row(
                     children: [
@@ -46,20 +47,23 @@ class StationScreen extends HookWidget {
                         padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Chip(
                           label: Text(
-                            line.name!,
+                            line['attributes']['name'],
                             style: TextStyle(
-                              color: getColor(line.color)!.inverseBW,
+                              color: getColor(line['attributes']['color'])!
+                                  .inverseBW,
                             ),
                           ),
-                          backgroundColor: getColor(line.color),
+                          backgroundColor:
+                              getColor(line['attributes']['color']),
                         ),
                       ),
-                      Text(line.description!.body!),
+                      if (line['attributes']['description'] != null)
+                        Text(line['attributes']['description']),
                     ],
                   ),
                 );
               },
-              childCount: station.lines!.length,
+              childCount: station['attributes']['lines']['data'].length,
             ),
           ),
         ],

@@ -1,7 +1,7 @@
 import 'package:dovy/general.dart';
 import 'package:flutter/material.dart';
 
-class StationCard<T> extends HookWidget {
+class StationCard<T> extends HookConsumerWidget {
   final FlashController<T> controller;
   final int stationId;
 
@@ -12,8 +12,9 @@ class StationCard<T> extends HookWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final station = useProvider(stationProvider(stationId)).data?.value;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final station = ref.watch(stationProvider(stationId)).asData?.value;
+    final router = ref.watch(routerProvider);
 
     final backgroundColor = context.theme.scaffoldBackgroundColor.lighten();
     final margin = EdgeInsets.all(18);
@@ -31,7 +32,7 @@ class StationCard<T> extends HookWidget {
           icon: Icon(Icons.arrow_upward),
           onPressed: () {
             controller.dismiss();
-            context.navigateTo('/station/${station!.id}');
+            router.navigateTo(context, '/station/${station?['id']}');
           },
         ),
         primaryAction: IconButton(
@@ -45,21 +46,23 @@ class StationCard<T> extends HookWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    station.name!,
+                    station['attributes']['name'],
                   ),
                   Row(
                     children: [
-                      for (final line in station.lines!)
+                      for (final line in station['attributes']['lines']['data'])
                         Padding(
                           padding: EdgeInsets.only(right: 10),
                           child: Chip(
                             label: Text(
-                              line.name!,
+                              line['attributes']['name'],
                               style: TextStyle(
-                                color: getColor(line.color)!.inverseBW,
+                                color: getColor(line['attributes']['color'])!
+                                    .inverseBW,
                               ),
                             ),
-                            backgroundColor: getColor(line.color),
+                            backgroundColor:
+                                getColor(line['attributes']['color']),
                           ),
                         ),
                     ],

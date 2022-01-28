@@ -1,18 +1,22 @@
+import 'package:dovy/contants.dart';
 import 'package:dovy/general.dart';
-import './auth.dart';
 export './auth.dart';
 export './local.dart';
 
-final positionProvider = StateProvider<MapPosition?>(
+final selectSystemProvider = StateProvider<int?>(
   (ref) => null,
 );
 
-final selectProvider = StateProvider<SelectState>(
-  (ref) => SelectState(
-    system: null,
-    line: null,
-    station: null,
-  ),
+final selectLineProvider = StateProvider<int?>(
+  (ref) => null,
+);
+
+final selectStationProvider = StateProvider<int?>(
+  (ref) => null,
+);
+
+final positionProvider = StateProvider<MapPosition?>(
+  (ref) => null,
 );
 
 final routerProvider = Provider<FluroRouter>(
@@ -41,7 +45,12 @@ final routerProvider = Provider<FluroRouter>(
         handler: Handler(
           handlerFunc: (context, parameters) {
             // final args = context.settings.arguments as MyArgumentsDataClass;
-            return LineScreen(id: parameters["id"]![0]); // TODO
+            final id = parameters["id"]?[0].toInt();
+            if (id == null) {
+              throw ArgumentError("Invalid id");
+            }
+
+            return LineScreen(id: id);
           },
         ),
       )
@@ -50,8 +59,10 @@ final routerProvider = Provider<FluroRouter>(
         handler: Handler(
           handlerFunc: (context, parameters) {
             // final args = context.settings.arguments as MyArgumentsDataClass;
-            final id = parameters["id"]![0].toInt();
-            return StationScreen(id: id!); // TODO
+            final id = parameters["id"]?[0].toInt();
+            if (id != null) {
+              return StationScreen(id: id); // TODO
+            }
           },
         ),
       )
@@ -76,166 +87,155 @@ final ipDataProvider = FutureProvider<IPData>(
   },
 );
 
-final strapiServiceProvider = Provider<Strapi>(
+final strapiClientProvider = Provider<Strapi>(
   (ref) {
-    final token = ref.watch(authTokenProvider).data?.value;
-    final baseUrl = 'https://xantiagoma.herokuapp.com';
+    final token = ref.watch(authTokenProvider).asData?.value;
+    final baseUrl = 'https://server.xantiagoma.com';
     return Strapi(
       baseUrl,
-      token: token,
+      token: token ?? publicToken,
     );
   },
 );
 
-final configsProvider = FutureProvider<Map<String, dynamic>?>(
+final systemsProvider = FutureProvider<List<Map<String, dynamic>>?>(
   (ref) async {
-    final strapiService = ref.watch(strapiServiceProvider);
-    final response = (await strapiService.getPage('configs/group')).maybeWhen(
-      orElse: () => null,
-      ok: (r) => r as Map<String, dynamic>,
-    );
-    return response;
-  },
-);
+    final client = ref.watch(strapiClientProvider);
 
-final systemsProvider = FutureProvider<List<System>?>(
-  (ref) async {
-    final strapiService = ref.watch(strapiServiceProvider);
+    final response = await client.collection.get('systems');
+    final data = response.item1;
 
-    final response = (await strapiService.find('systems')).maybeWhen(
-      orElse: () => null,
-      ok: (r) => r,
-    );
-
-    if (response == null) {
+    if (data == null) {
       return null;
     }
 
-    final systems = response
-        .map((e) => System.fromJson(e.data as Map<String, dynamic>))
-        .toList();
-
-    return systems;
+    return data;
   },
 );
 
-final linesProvider = FutureProvider<List<Line>?>(
+final linesProvider = FutureProvider<List<Map<String, dynamic>>?>(
   (ref) async {
-    final select = ref.watch(selectProvider).state;
-    final strapiService = ref.watch(strapiServiceProvider);
+    final client = ref.watch(strapiClientProvider);
+    final system = ref.watch(selectSystemProvider);
+    final line = ref.watch(selectLineProvider);
 
-    final response = (await strapiService.find(
+    final response = (await client.collection.get(
       'lines',
       queryParameters: {
-        'system.id': select.system,
-        if (select.line != null) 'id': select.line,
+        'pagination[pageSize]': 100,
+        'populate': 'stations',
+        'filters[systems][id]': system,
+        if (line != null) 'id': line,
       },
-    ))
-        .maybeWhen(
-      orElse: () => null,
-      ok: (l) => l,
-    );
+    ));
 
-    if (response == null) {
+    final data = response.item1;
+
+    if (data == null) {
       return null;
     }
 
-    final lines = response
-        .map((e) => Line.fromJson(e.data as Map<String, dynamic>))
-        .toList();
-
-    return lines;
+    return data;
   },
 );
 
-final stationsProvider = FutureProvider<List<Station>?>(
+final stationsProvider = FutureProvider<List<Map<String, dynamic>>?>(
   (ref) async {
-    final select = ref.watch(selectProvider).state;
-    final strapiService = ref.watch(strapiServiceProvider);
+    // final line = ref.watch(selectLineProvider);
+    final system = ref.watch(selectSystemProvider);
+    final strapiService = ref.watch(strapiClientProvider);
 
-    final response = (await strapiService.find(
+    final response = await strapiService.collection.get(
       'stations',
       queryParameters: {
-        if (select.line != null) 'lines.id': select.line ?? '',
-        if (select.line == null) 'lines.system.id': select.system ?? '',
+        'populate': 'lines',
+        // populate[lines][populate]: 'systems',
+        r'filters[lines][systems][id][$eq]': system,
+        // TODO: Check this
+        'pagination[pageSize]': 200,
+        // if (line != null) 'lines.id': line,
+        // if (line == null) 'lines.system.id': system,
       },
-    ))
-        .maybeWhen(
-      orElse: () => null,
-      ok: (l) => l,
     );
 
-    if (response == null) {
+    final data = response.item1;
+
+    if (data == null) {
       return null;
     }
 
-    final stations = response
-        .map((e) => Station.fromJson(e.data as Map<String, dynamic>))
-        .toList();
-
-    return stations;
+    return data;
   },
 );
 
-final systemProvider = AutoDisposeFutureProviderFamily<System?, int?>(
+final systemProvider =
+    AutoDisposeFutureProviderFamily<Map<String, dynamic>?, int?>(
   (ref, id) async {
     if (id == null) {
       return null;
     }
 
-    final strapiService = ref.watch(strapiServiceProvider);
+    final client = ref.watch(strapiClientProvider);
 
-    final response =
-        (await strapiService.findOne('systems', id.toString())).maybeWhen(
-      orElse: () => null,
-      ok: (r) => r,
-    );
+    final response = await client.collection.getOne('systems', id);
 
-    if (response == null) {
+    final data = response.item1;
+
+    if (data == null) {
       return null;
     }
 
-    return System.fromJson(response.data as Map<String, dynamic>);
+    return data;
   },
 );
 
-final lineProvider = AutoDisposeFutureProviderFamily<Line?, String?>(
+final lineProvider =
+    AutoDisposeFutureProviderFamily<Map<String, dynamic>?, int?>(
   (ref, id) async {
     if (id == null) {
       return null;
     }
 
-    final strapiService = ref.watch(strapiServiceProvider);
-    final response = (await strapiService.findOne('lines', id)).maybeWhen(
-      orElse: () => null,
-      ok: (r) => r,
+    final client = ref.watch(strapiClientProvider);
+    final response = await client.collection.getOne(
+      'lines',
+      id,
+      queryParameters: {
+        'populate': 'stations',
+      },
     );
+    final data = response.item1;
 
-    if (response == null) {
+    if (data == null) {
       return null;
     }
 
-    return Line.fromJson(response.data as Map<String, dynamic>);
+    return data;
   },
 );
 
-final stationProvider = AutoDisposeFutureProviderFamily<Station?, int?>(
+final stationProvider =
+    AutoDisposeFutureProviderFamily<Map<String, dynamic>?, int?>(
   (ref, id) async {
     if (id == null) {
       return null;
     }
-    final strapiService = ref.watch(strapiServiceProvider);
-    final response =
-        (await strapiService.findOne('stations', id.toString())).maybeWhen(
-      orElse: () => null,
-      ok: (r) => r,
+    final client = ref.watch(strapiClientProvider);
+    final response = await client.collection.getOne(
+      'stations',
+      id,
+      queryParameters: {
+        'populate': 'lines',
+      },
     );
 
-    if (response == null) {
+    final data = response.item1;
+
+    if (data == null) {
       return null;
     }
 
-    return Station.fromJson(response.data as Map<String, dynamic>);
+    return data;
   },
 );
 
@@ -246,9 +246,10 @@ final mapControllerProvider = Provider<MapController>(
 );
 
 final stationsSearchProvider =
-    AutoDisposeFutureProviderFamily<List<Station>?, String?>(
+    AutoDisposeFutureProviderFamily<List<Map<String, dynamic>>?, String?>(
   (ref, q) async {
-    final select = ref.watch(selectProvider).state;
+    final system = ref.watch(selectSystemProvider);
+    final client = ref.watch(strapiClientProvider);
 
     if (q == null) {
       return [];
@@ -263,37 +264,29 @@ final stationsSearchProvider =
       return [];
     }
 
-    final strapiService = ref.watch(strapiServiceProvider);
-    final response = (await strapiService.find(
+    final response = await client.collection.get(
       'stations',
       queryParameters: {
         '_q': q.trim(),
-        'lines.system.id': select.system ?? '',
+        'lines.system.id': system,
       },
-    ))
-        .maybeWhen(
-      orElse: () => null,
-      ok: (r) => r,
     );
 
-    if (response == null) {
+    final data = response.item1;
+
+    if (data == null) {
       return null;
     }
 
-    final list = response
-        .map(
-          (e) => Station.fromJson(e.data as Map<String, dynamic>),
-        )
-        .toList();
-
-    return list;
+    return data;
   },
 );
 
 final linesSearchProvider =
-    AutoDisposeFutureProviderFamily<List<Line>?, String?>(
+    AutoDisposeFutureProviderFamily<List<Map<String, dynamic>>?, String?>(
   (ref, q) async {
-    final select = ref.watch(selectProvider).state;
+    final system = ref.watch(selectSystemProvider);
+    final client = ref.watch(strapiClientProvider);
 
     if (q == null) {
       return [];
@@ -308,29 +301,21 @@ final linesSearchProvider =
       return [];
     }
 
-    final strapiService = ref.watch(strapiServiceProvider);
-    final response = (await strapiService.find(
+    final response = await client.collection.get(
       'lines',
       queryParameters: {
-        'system.id': select.system,
         '_q': q.trim(),
+        'filters[systems][id]': system,
+        'pagination[pageSize]': 100,
       },
-    ))
-        .maybeWhen(
-      orElse: () => null,
-      ok: (r) => r,
     );
 
-    if (response == null) {
+    final data = response.item1;
+
+    if (data == null) {
       return null;
     }
 
-    final list = response
-        .map(
-          (e) => Line.fromJson(e.data as Map<String, dynamic>),
-        )
-        .toList();
-
-    return list;
+    return data;
   },
 );

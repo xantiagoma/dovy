@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
-class StationsScreen extends StatefulHookWidget {
+class StationsScreen extends StatefulHookConsumerWidget {
   const StationsScreen({
     Key? key,
   }) : super(key: key);
@@ -11,17 +11,18 @@ class StationsScreen extends StatefulHookWidget {
   _StationsScreenState createState() => _StationsScreenState();
 }
 
-class _StationsScreenState extends State<StationsScreen>
+class _StationsScreenState extends ConsumerState<StationsScreen>
     with AutomaticKeepAliveClientMixin<StationsScreen> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
-    final select = useProvider(selectProvider).state;
-    final systemsList = useProvider(systemsProvider).data?.value;
-    final lines = useProvider(linesProvider).data?.value;
+    final systemId = ref.watch(selectSystemProvider);
+    final systemsList = ref.watch(systemsProvider).asData?.value;
+    final stations = ref.watch(stationsProvider).asData?.value;
+    final router = ref.watch(routerProvider);
 
-    if (systemsList == null || lines == null) {
+    if (stations == null) {
       return Center(
         child: SpinKitFadingFour(
           color: Colors.white,
@@ -29,29 +30,10 @@ class _StationsScreenState extends State<StationsScreen>
       );
     }
 
-    final systems = mapKeysFromList(systemsList, (System k) => k.id);
-    final system = systems[select.system];
-    final name = system?.name;
-
-    final validLines = lines
-        .map((line) => line.stations)
-        .toList()
-        .expand((element) => element ?? <Station>[])
-        .toList()
-        .valid;
-
-    // TODO
-    final stations = uniqBy(
-      validLines,
-      (Station s) => s.id,
-    );
-
-    final linesBy = mapKeysFromList(lines, (Line l) => l.id);
-
     return CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
-          title: Text("$name - Stations"),
+          title: Text("Stations"),
           actions: <Widget>[
             // TODO
           ],
@@ -60,45 +42,43 @@ class _StationsScreenState extends State<StationsScreen>
           delegate: SliverChildBuilderDelegate(
             (context, i) {
               final station = stations[i];
-              final name = station.name;
-              final lines = station.lines!
-                  .map((p) => p.id)
-                  .map((id) => linesBy[id])
-                  .toList();
+              final name = station['attributes']['name'];
+
               return InkWell(
                 onTap: () {
-                  context.navigateTo(
-                    '/station/${station.id}',
+                  router.navigateTo(
+                    context,
+                    '/station/${station['id']}',
                   );
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                     horizontal: 20,
                     vertical: kIsWeb ? 10 : 0,
                   ),
                   child: Row(
                     children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          for (final line in lines)
-                            Padding(
-                              padding: const EdgeInsets.only(right: 10),
-                              child: Builder(builder: (context) {
-                                final color =
-                                    getColor(line?.color) ?? Colors.white;
-                                return Chip(
-                                  backgroundColor: color,
-                                  label: Text(
-                                    line!.name!,
-                                    style: TextStyle(
-                                      color: color.inverseBW,
-                                    ),
-                                  ),
-                                );
-                              }),
-                            ),
-                        ],
-                      ),
+                      // Row(
+                      //   children: <Widget>[
+                      //     for (final line in lines)
+                      //       Padding(
+                      //         padding: const EdgeInsets.only(right: 10),
+                      //         child: Builder(builder: (context) {
+                      //           final color =
+                      //               getColor(line?.color) ?? Colors.white;
+                      //           return Chip(
+                      //             backgroundColor: color,
+                      //             label: Text(
+                      //               line!.name!,
+                      //               style: TextStyle(
+                      //                 color: color.inverseBW,
+                      //               ),
+                      //             ),
+                      //           );
+                      //         }),
+                      //       ),
+                      //   ],
+                      // ),
                       Text(name!),
                     ],
                   ),

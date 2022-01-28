@@ -1,8 +1,8 @@
 import 'package:dovy/general.dart';
 import 'package:flutter/material.dart';
 
-class LineScreen extends HookWidget {
-  final String id;
+class LineScreen extends HookConsumerWidget {
+  final int id;
 
   const LineScreen({
     Key? key,
@@ -10,8 +10,9 @@ class LineScreen extends HookWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final line = useProvider(lineProvider(id)).data?.value;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final line = ref.watch(lineProvider(id)).asData?.value;
+    final router = ref.watch(routerProvider);
 
     if (line == null) {
       return Scaffold(
@@ -23,14 +24,14 @@ class LineScreen extends HookWidget {
       );
     }
 
-    final lineColor = getColor(line.color);
+    final lineColor = getColor(line['attributes']['color']);
 
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
             title: Text(
-              "${line.name}: ${line.description?.body}",
+              "${line['attributes']['name']}: ${line['attributes']['description'] ?? ''}",
               style: TextStyle(color: lineColor?.inverseBW),
             ),
             backgroundColor: lineColor,
@@ -40,17 +41,17 @@ class LineScreen extends HookWidget {
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
-              final station = line.stations![index];
+              final station = line['attributes']['stations']['data'][index];
               return InkWell(
                 onTap: () {
-                  context.navigateTo('/station/${station.id}');
+                  router.navigateTo(context, '/station/${station['id']}');
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(station.name!),
+                  child: Text(station['attributes']['name']),
                 ),
               );
-            }, childCount: line.stations!.length),
+            }, childCount: line['attributes']['stations']['data'].length),
           ),
         ],
       ),

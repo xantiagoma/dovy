@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
-class LinesScreen extends StatefulHookWidget {
+class LinesScreen extends StatefulHookConsumerWidget {
   const LinesScreen({
     Key? key,
   }) : super(key: key);
@@ -11,15 +11,15 @@ class LinesScreen extends StatefulHookWidget {
   _LinesScreenState createState() => _LinesScreenState();
 }
 
-class _LinesScreenState extends State<LinesScreen>
+class _LinesScreenState extends ConsumerState<LinesScreen>
     with AutomaticKeepAliveClientMixin<LinesScreen> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
-    final select = useProvider(selectProvider).state;
-    final systemsList = useProvider(systemsProvider).data?.value ?? [];
-    final lines = useProvider(linesProvider).data?.value ?? [];
+    final systemsList = ref.watch(systemsProvider).asData?.value;
+    final lines = ref.watch(linesProvider).asData?.value;
+    final systemId = ref.watch(selectSystemProvider);
 
     if (systemsList == null || lines == null) {
       return Center(
@@ -29,9 +29,10 @@ class _LinesScreenState extends State<LinesScreen>
       );
     }
 
-    final systems = mapKeysFromList(systemsList, (System k) => k.id);
-    final system = systems[select.system];
-    final name = system?.name;
+    final systems =
+        mapKeysFromList(systemsList, (Map<String, dynamic> k) => k['id']);
+    final system = systems[systemId];
+    final name = system?['attributes']['name'];
 
     return CustomScrollView(
       slivers: <Widget>[
@@ -47,7 +48,7 @@ class _LinesScreenState extends State<LinesScreen>
     );
   }
 
-  SliverGrid buildGridView(List<Line> lines) {
+  SliverGrid buildGridView(List<Map<String, dynamic>> lines) {
     return SliverGrid(
       gridDelegate: kIsWeb
           ? SliverGridDelegateWithMaxCrossAxisExtent(
@@ -63,20 +64,21 @@ class _LinesScreenState extends State<LinesScreen>
       delegate: SliverChildBuilderDelegate(
         (context, i) {
           final line = lines[i];
-          final color = getColor(line.color)!.desaturate().lighten();
+          final color =
+              getColor(line['attributes']['color'])!.desaturate().lighten();
           return Material(
             color: color,
             borderRadius: BorderRadius.circular(10),
             child: InkWell(
               borderRadius: BorderRadius.circular(10),
               onTap: () {
-                context.navigateTo(
-                  '/line/${line.id}',
-                );
+                ref
+                    .read(routerProvider)
+                    .navigateTo(context, '/line/${line['id']}');
               },
               child: Center(
                 child: Text(
-                  line.name!,
+                  line['attributes']['name'],
                   style: context.theme.textTheme.headline4!.copyWith(
                     color: color.inverseBW,
                   ),

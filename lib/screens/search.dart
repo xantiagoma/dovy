@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
-class SearchScreen extends StatefulHookWidget {
+class SearchScreen extends StatefulHookConsumerWidget {
   const SearchScreen({
     Key? key,
   }) : super(key: key);
@@ -11,7 +11,7 @@ class SearchScreen extends StatefulHookWidget {
   _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen>
+class _SearchScreenState extends ConsumerState<SearchScreen>
     with AutomaticKeepAliveClientMixin<SearchScreen> {
   @override
   Widget build(BuildContext context) {
@@ -20,11 +20,12 @@ class _SearchScreenState extends State<SearchScreen>
     final qController = useTextEditingController(text: '');
     final q = useValueListenable(qController);
 
-    final stationsResult$ = useProvider(stationsSearchProvider(q.text));
-    final linesResult$ = useProvider(linesSearchProvider(q.text));
+    final stationsResult$ = ref.watch(stationsSearchProvider(q.text));
+    final linesResult$ = ref.watch(linesSearchProvider(q.text));
+    final router = ref.watch(routerProvider);
 
-    final stationsResult = stationsResult$.data?.value ?? [];
-    final linesResult = linesResult$.data?.value ?? [];
+    final stationsResult = stationsResult$.asData?.value ?? [];
+    final linesResult = linesResult$.asData?.value ?? [];
 
     final loading = stationsResult$.loading && linesResult$.loading;
 
@@ -75,11 +76,11 @@ class _SearchScreenState extends State<SearchScreen>
               final line = linesResult[i];
               return InkWell(
                 onTap: () {
-                  context.navigateTo('/line/${line.id}');
+                  router.navigateTo(context, '/line/${line['id']}');
                 },
                 child: Chip(
-                  label: Text(line.name!),
-                  backgroundColor: getColor(line.color),
+                  label: Text(line['attributes']['name']),
+                  backgroundColor: getColor(line['color']),
                 ),
               );
             },
@@ -93,7 +94,7 @@ class _SearchScreenState extends State<SearchScreen>
 
               return InkWell(
                 onTap: () {
-                  context.navigateTo('/station/${station.id}');
+                  router.navigateTo(context, '/station/${station['id']}');
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -112,7 +113,7 @@ class _SearchScreenState extends State<SearchScreen>
                     horizontal: 20,
                     vertical: 15,
                   ),
-                  child: Text(station.name!),
+                  child: Text(station['attributese']['name']),
                 ),
               );
             },

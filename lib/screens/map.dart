@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
-class MapScreen extends StatefulHookWidget {
+class MapScreen extends StatefulHookConsumerWidget {
   const MapScreen({
     Key? key,
   }) : super(key: key);
@@ -11,15 +11,16 @@ class MapScreen extends StatefulHookWidget {
   _MapScreenState createState() => _MapScreenState();
 }
 
-class _MapScreenState extends State<MapScreen>
+class _MapScreenState extends ConsumerState<MapScreen>
     with AutomaticKeepAliveClientMixin<MapScreen> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
-    final select = useProvider(selectProvider);
-    final system = useProvider(systemProvider(select.state.system)).data?.value;
-    final systems = useProvider(systemsProvider).data?.value ?? [];
+    final router = ref.watch(routerProvider);
+    final systemId = ref.watch(selectSystemProvider);
+    final system = ref.watch(systemProvider(systemId)).asData?.value;
+    final systems = ref.watch(systemsProvider).asData?.value ?? [];
     final showSelector = useState(false);
     final flashController = useState<FlashController?>(null);
 
@@ -43,7 +44,7 @@ class _MapScreenState extends State<MapScreen>
                         color: Colors.black,
                       ),
                       onPressed: () {
-                        context.read(mapControllerProvider).zoomBy(1);
+                        ref.read(mapControllerProvider).zoomBy(1);
                       },
                     ),
                     Container(
@@ -57,7 +58,7 @@ class _MapScreenState extends State<MapScreen>
                         color: Colors.black,
                       ),
                       onPressed: () {
-                        context.read(mapControllerProvider).zoomBy(-1);
+                        ref.read(mapControllerProvider).zoomBy(-1);
                       },
                     ),
                   ],
@@ -188,8 +189,11 @@ class _MapScreenState extends State<MapScreen>
                                       for (final system in systems)
                                         InkWell(
                                           onTap: () {
-                                            select.state = select.state
-                                                .setSystem(system.id!);
+                                            ref
+                                                .read(selectSystemProvider
+                                                    .notifier)
+                                                .update(
+                                                    (state) => system['id']);
                                             controller.dismiss();
                                           },
                                           child: Container(
@@ -198,7 +202,9 @@ class _MapScreenState extends State<MapScreen>
                                               vertical: 15,
                                             ),
                                             alignment: Alignment.center,
-                                            child: Text(system.name!),
+                                            child: Text(
+                                              system['attributes']['name'],
+                                            ),
                                           ),
                                         )
                                     ],
@@ -215,7 +221,7 @@ class _MapScreenState extends State<MapScreen>
                         vertical: 8.0,
                         horizontal: 20,
                       ),
-                      child: Text(system.name!),
+                      child: Text(system['attributes']['name']),
                     ),
                   ),
                 ),

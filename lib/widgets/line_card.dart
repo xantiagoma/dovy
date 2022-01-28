@@ -1,9 +1,9 @@
 import 'package:dovy/general.dart';
 import 'package:flutter/material.dart';
 
-class LineCard<T> extends HookWidget {
+class LineCard<T> extends HookConsumerWidget {
   final FlashController<T> controller;
-  final String lineId;
+  final int lineId;
 
   LineCard({
     Key? key,
@@ -12,8 +12,9 @@ class LineCard<T> extends HookWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final line = useProvider(lineProvider(lineId)).data?.value;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final line = ref.watch(lineProvider(lineId)).asData?.value;
+    final router = ref.watch(routerProvider);
 
     final backgroundColor = context.theme.scaffoldBackgroundColor.lighten();
     final margin = EdgeInsets.all(18);
@@ -31,7 +32,7 @@ class LineCard<T> extends HookWidget {
           icon: Icon(Icons.arrow_upward),
           onPressed: () {
             controller.dismiss();
-            context.navigateTo('/line/${line!.id}');
+            router.navigateTo(context, '/line/${line?['id']}');
           },
         ),
         primaryAction: IconButton(
@@ -47,15 +48,15 @@ class LineCard<T> extends HookWidget {
                     padding: EdgeInsets.only(right: 10),
                     child: Chip(
                       label: Text(
-                        line.name!,
+                        line['name'],
                         style: TextStyle(
-                          color: getColor(line.color)!.inverseBW,
+                          color: getColor(line['color'])?.inverseBW,
                         ),
                       ),
-                      backgroundColor: getColor(line.color),
+                      backgroundColor: getColor(line['color']),
                     ),
                   ),
-                  Text(line.description!.body!),
+                  Text(line['description']),
                 ],
               )
             : SizedBox(),

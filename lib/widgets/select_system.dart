@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
-class SelectSystem extends HookWidget {
+class SelectSystem extends HookConsumerWidget {
   const SelectSystem({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final selectState = useProvider(selectProvider);
-    final lines = useProvider(linesProvider).data?.value ?? [];
-    final stations = useProvider(stationsProvider).data?.value ?? [];
+  Widget build(BuildContext context, WidgetRef ref) {
+    final lineId = ref.watch(selectLineProvider);
+    final stationId = ref.watch(selectStationProvider);
+
+    final lines = ref.watch(linesProvider).asData?.value ?? [];
+    final stations = ref.watch(stationsProvider).asData?.value ?? [];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -26,22 +28,24 @@ class SelectSystem extends HookWidget {
                 isExpanded: true,
                 underline: DropdownButtonHideUnderline(child: Container()),
                 hint: Text("Select a line"),
-                value: selectState.state.line,
+                value: lineId,
                 icon: IconButton(
                   icon: Icon(Icons.clear),
                   onPressed: () {
-                    selectState.state = selectState.state.setLine(null);
+                    ref
+                        .read(selectLineProvider.notifier)
+                        .update((state) => null);
                   },
                 ),
                 items: [
                   for (final line in lines)
                     DropdownMenuItem<int>(
-                      value: line.id,
-                      child: Text(line.name!),
+                      value: line['id'],
+                      child: Text(line['attributes']['name']),
                     )
                 ],
                 onChanged: (val) {
-                  selectState.state = selectState.state.setLine(val);
+                  ref.read(selectLineProvider.notifier).update((state) => val);
                 },
               ),
             ),
@@ -49,7 +53,7 @@ class SelectSystem extends HookWidget {
         SizedBox(
           height: 10,
         ),
-        if (stations.isNotEmpty && selectState.state.line != null)
+        if (stations.isNotEmpty && lineId != null)
           Material(
             color: Colors.black12,
             borderRadius: BorderRadius.circular(5),
@@ -59,22 +63,26 @@ class SelectSystem extends HookWidget {
                 isExpanded: true,
                 underline: DropdownButtonHideUnderline(child: Container()),
                 hint: Text("Select a station"),
-                value: selectState.state.station,
+                value: stationId,
                 icon: IconButton(
                   icon: Icon(Icons.close),
                   onPressed: () {
-                    selectState.state = selectState.state.setStation(null);
+                    ref
+                        .read(selectStationProvider.notifier)
+                        .update((state) => null);
                   },
                 ),
                 items: [
                   for (final station in stations)
                     DropdownMenuItem<int>(
-                      value: station.id,
-                      child: Text(station.name!),
+                      value: station['id'],
+                      child: Text(station['attributes']['name']),
                     )
                 ],
                 onChanged: (val) {
-                  selectState.state = selectState.state.setStation(val);
+                  ref
+                      .read(selectStationProvider.notifier)
+                      .update((state) => val);
                 },
               ),
             ),

@@ -6,29 +6,6 @@ extension BuildContext_ on BuildContext {
   ThemeData get theme => Theme.of(this);
   MediaQueryData get media => MediaQuery.of(this);
   NavigatorState get navigator => Navigator.of(this);
-  Future navigateTo(
-    String path, {
-    bool replace = false,
-    bool clearStack = false,
-    bool maintainState = true,
-    bool rootNavigator = false,
-    TransitionType? transition,
-    Duration? transitionDuration,
-    RouteTransitionsBuilder? transitionBuilder,
-    RouteSettings? routeSettings,
-  }) =>
-      read(routerProvider).navigateTo(
-        this,
-        path,
-        replace: replace,
-        clearStack: clearStack,
-        maintainState: maintainState,
-        rootNavigator: rootNavigator,
-        transition: transition,
-        transitionDuration: transitionDuration,
-        transitionBuilder: transitionBuilder,
-        routeSettings: routeSettings,
-      );
 }
 
 extension Future_<T> on Future<T> {

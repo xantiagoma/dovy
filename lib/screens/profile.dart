@@ -1,9 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart' hide Path;
 
-class ProfileScreen extends StatefulHookWidget {
+class ProfileScreen extends StatefulHookConsumerWidget {
   const ProfileScreen({
     Key? key,
   }) : super(key: key);
@@ -12,15 +10,14 @@ class ProfileScreen extends StatefulHookWidget {
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen>
+class _ProfileScreenState extends ConsumerState<ProfileScreen>
     with AutomaticKeepAliveClientMixin<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
-    final loaded = useProvider(loadedProvider);
-    final token = useProvider(authTokenProvider);
-    final user = useProvider(userProvider).data?.value;
+    final loaded = ref.watch(loadedProvider);
+    final user = ref.watch(userProvider).asData?.value;
 
     if (!loaded) {
       return Center(
@@ -55,11 +52,12 @@ class _ProfileScreenState extends State<ProfileScreen>
   bool get wantKeepAlive => true;
 }
 
-class ProfileHook extends HookWidget {
+class ProfileHook extends HookConsumerWidget {
   @override
-  Widget build(BuildContext context) {
-    final snap = useProvider(userProvider);
-    final ipData = useProvider(ipDataProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final snap = ref.watch(userProvider);
+    final ipData = ref.watch(ipDataProvider);
+    final router = ref.watch(routerProvider);
 
     return Column(
       children: <Widget>[
@@ -122,7 +120,7 @@ class ProfileHook extends HookWidget {
         ),
         Button(
           onTap: () async {
-            final authService = context.read(authServiceProvider);
+            final authService = ref.read(authServiceProvider);
             await authService!.logout();
 
             showFlash(
@@ -145,7 +143,7 @@ class ProfileHook extends HookWidget {
                 );
               },
             );
-            context.navigateTo('/', clearStack: true);
+            router.navigateTo(context, '/', clearStack: true);
           },
           width: context.media.size.width / 3,
           text: "Logout",

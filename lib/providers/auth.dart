@@ -2,8 +2,8 @@ import 'package:dovy/general.dart';
 
 final authBoxProvider = FutureProvider<Box<String>?>(
   (ref) async {
-    final store = ref.watch(localStorageProvider).data?.value;
-    final encryptionKey = ref.watch(encryptionKeyProvider).data?.value;
+    final store = ref.watch(localStorageProvider).asData?.value;
+    final encryptionKey = ref.watch(encryptionKeyProvider).asData?.value;
 
     if (store == null || encryptionKey == null) {
       return null;
@@ -19,13 +19,13 @@ final authBoxProvider = FutureProvider<Box<String>?>(
 
 final authTokenProvider = StreamProvider<String?>(
   (ref) async* {
-    final authBox = ref.watch(authBoxProvider).data?.value;
+    final authBox = ref.watch(authBoxProvider).asData?.value;
 
     if (authBox != null) {
       yield authBox.get('jwt');
       final stream = authBox.watch(key: 'jwt');
       await for (final event in stream) {
-        yield event.value;
+        yield event.value as String;
       }
       // ref.onDispose(() => stream.);
     }
@@ -36,8 +36,8 @@ final authTokenProvider = StreamProvider<String?>(
 
 final authServiceProvider = Provider<AuthService?>(
   (ref) {
-    final box = ref.watch(authBoxProvider).data?.value;
-    final strapi = ref.watch(strapiServiceProvider);
+    final box = ref.watch(authBoxProvider).asData?.value;
+    final strapi = ref.watch(strapiClientProvider);
 
     if (box == null) {
       return null;
@@ -50,18 +50,18 @@ final authServiceProvider = Provider<AuthService?>(
   },
 );
 
-final userProvider = FutureProvider<User?>(
+final userProvider = FutureProvider<dynamic>(
   (ref) async {
-    final jwt = ref.watch(authTokenProvider).data?.value;
-    final strapi = ref.watch(strapiServiceProvider);
+    final jwt = ref.watch(authTokenProvider).asData?.value;
+    final strapi = ref.watch(strapiClientProvider);
 
     if (jwt == null) {
       return null;
     }
 
     try {
-      final response = await strapi.http.get("/users/me");
-      return User.fromJson(response.data);
+      final response = await strapi.http.get("/api/users/me");
+      return response;
     } catch (e) {
       print("e: $e");
     }
