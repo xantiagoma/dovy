@@ -1,5 +1,6 @@
 import 'package:dovy/contants.dart';
 import 'package:dovy/general.dart';
+import 'package:flutter/foundation.dart';
 export './auth.dart';
 export './local.dart';
 
@@ -81,8 +82,11 @@ final locationDataProvider =
   },
 );
 
-final ipDataProvider = FutureProvider<IPData>(
+final ipDataProvider = FutureProvider<IPData?>(
   (ref) async {
+    if (kIsWeb) {
+      return null;
+    }
     return await LocationService.getIpInfo();
   },
 );

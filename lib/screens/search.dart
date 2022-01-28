@@ -113,7 +113,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen>
                     horizontal: 20,
                     vertical: 15,
                   ),
-                  child: Text(station['attributese']['name']),
+                  child: Text(station['attributes']?['name'] ?? '-'),
                 ),
               );
             },

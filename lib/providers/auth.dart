@@ -61,7 +61,7 @@ final userProvider = FutureProvider<dynamic>(
 
     try {
       final response = await strapi.http.get("/api/users/me");
-      return response;
+      return response.data;
     } catch (e) {
       print("e: $e");
     }

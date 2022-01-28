@@ -10,10 +10,18 @@ class AuthService {
   });
 
   Future<Map<String, dynamic>> login(String id, String password) async {
-    final r = await strapi.http.post("api/auth/local", data: {
-      "identifier": id,
-      "password": password,
-    });
+    final r = await strapi.http.post(
+      "api/auth/local",
+      data: {
+        "identifier": id,
+        "password": password,
+      },
+      options: Options(
+        headers: {
+          "Authorization": "Bearer ",
+        },
+      ),
+    );
 
     final authResponse = r.data;
 

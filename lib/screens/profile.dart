@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart' hide Path;
 
@@ -68,26 +69,12 @@ class ProfileHook extends HookConsumerWidget {
             }
             return Column(
               children: [
-                Row(
-                  children: [
-                    if (data.firstname != null)
-                      Text(
-                        data.firstname ?? '',
-                        style: context.theme.textTheme.headline5,
-                      ),
-                    if (data.lastname != null)
-                      Text(
-                        data.lastname ?? '',
-                        style: context.theme.textTheme.headline5,
-                      ),
-                  ],
+                Text(
+                  data['username'],
+                  style: context.theme.textTheme.headline6,
                 ),
                 Text(
-                  '@${data.username}',
-                  style: context.theme.textTheme.headline5,
-                ),
-                Text(
-                  data.email!,
+                  data['email'],
                   style: context.theme.textTheme.headline6,
                 ),
               ],
@@ -102,22 +89,26 @@ class ProfileHook extends HookConsumerWidget {
             return Text(e.toString());
           },
         ),
-        ipData.when(
-          data: (data) {
-            return Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(data.ip!),
-            );
-          },
-          loading: () {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-          error: (e, _) {
-            return Text(e.toString());
-          },
-        ),
+        if (!kIsWeb)
+          ipData.when(
+            data: (data) {
+              if (data == null) {
+                return SizedBox.shrink();
+              }
+              return Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(data.ip!),
+              );
+            },
+            loading: () {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+            error: (e, _) {
+              return Text(e.toString());
+            },
+          ),
         Button(
           onTap: () async {
             final authService = ref.read(authServiceProvider);
