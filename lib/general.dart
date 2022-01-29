@@ -10,8 +10,7 @@ export 'package:fluro/fluro.dart';
 export 'package:flutter_hooks/flutter_hooks.dart';
 export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:flutter_map/flutter_map.dart';
-export 'package:flutter_secure_storage/flutter_secure_storage.dart'
-    hide Options;
+export 'package:flutter_secure_storage/flutter_secure_storage.dart';
 export 'package:flutter_spinkit/flutter_spinkit.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:hive_flutter/hive_flutter.dart';
@@ -35,3 +34,4 @@ export 'package:dovy/services/services.dart';
 export 'package:dovy/utils.dart';
 export 'package:dovy/widgets/widgets.dart';
 export 'package:dovy/theme.dart';
+export 'package:dovy/constants.dart';

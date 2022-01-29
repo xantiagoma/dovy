@@ -142,9 +142,10 @@ class LoginForm extends HookConsumerWidget {
           controller.context.theme.scaffoldBackgroundColor.lighten(),
       margin: EdgeInsets.all(18),
       borderRadius: BorderRadius.circular(10),
+      alignment: Alignment.bottomCenter,
       child: FlashBar(
         icon: icon,
-        message: Text(message),
+        content: Text(message),
       ),
     );
   }

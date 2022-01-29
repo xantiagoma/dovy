@@ -23,50 +23,52 @@ class _MapScreenState extends ConsumerState<MapScreen>
     final systems = ref.watch(systemsProvider).asData?.value ?? [];
     final showSelector = useState(false);
     final flashController = useState<FlashController?>(null);
+    final mapController = ref.watch(mapControllerProvider);
 
     return Stack(
       children: <Widget>[
         Mapa(),
-        Align(
-          alignment: Alignment.topLeft,
-          child: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.only(left: 10, top: 10),
-              child: Material(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(5),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.add,
-                        color: Colors.black,
+        if (mapController != null)
+          Align(
+            alignment: Alignment.topLeft,
+            child: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.only(left: 10, top: 10),
+                child: Material(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.add,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          mapController.zoomBy(1);
+                        },
                       ),
-                      onPressed: () {
-                        ref.read(mapControllerProvider).zoomBy(1);
-                      },
-                    ),
-                    Container(
-                      color: Colors.blueGrey,
-                      height: 1,
-                      width: 30,
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.remove,
-                        color: Colors.black,
+                      Container(
+                        color: Colors.blueGrey,
+                        height: 1,
+                        width: 30,
                       ),
-                      onPressed: () {
-                        ref.read(mapControllerProvider).zoomBy(-1);
-                      },
-                    ),
-                  ],
+                      IconButton(
+                        icon: Icon(
+                          Icons.remove,
+                          color: Colors.black,
+                        ),
+                        onPressed: () {
+                          mapController.zoomBy(-1);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
         if (!showSelector.value)
           Align(
             alignment: Alignment.bottomRight,

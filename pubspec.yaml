@@ -32,15 +32,12 @@ dependencies:
   dart_date: ^1.1.1
   dart_strapi: ^2.0.0
   dio: ^4.0.4
-  flash: ^1.5.1
+  flash: ^2.0.3+2
   fluro: ^2.0.3
   flutter_hooks: ^0.18.2
   # flutter_map_tappable_polyline: ^1.2.0
-  flutter_map: #^0.10.1+1
-    git:
-      url: git@github.com:fleaflet/flutter_map.git
-      ref: issues/829-nullsafety
-  flutter_secure_storage: ^4.1.0
+  flutter_map: ^0.14.0
+  flutter_secure_storage: ^5.0.2
   shared_preferences: ^2.0.5
   flutter_spinkit: ^5.0.0
   freezed_annotation: ^1.1.0

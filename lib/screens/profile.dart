@@ -119,6 +119,7 @@ class ProfileHook extends HookConsumerWidget {
               duration: Duration(seconds: 3),
               builder: (context, controller) {
                 return Flash(
+                  alignment: Alignment.bottomCenter,
                   controller: controller,
                   backgroundColor:
                       context.theme.scaffoldBackgroundColor.lighten(),
@@ -129,7 +130,7 @@ class ProfileHook extends HookConsumerWidget {
                       Icons.info_outline,
                       color: Colors.orangeAccent,
                     ),
-                    message: Text("Logged out"),
+                    content: Text("Logged out"),
                   ),
                 );
               },

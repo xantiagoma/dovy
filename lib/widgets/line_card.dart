@@ -21,6 +21,7 @@ class LineCard<T> extends HookConsumerWidget {
     final borderRadius = BorderRadius.circular(10);
 
     return Flash(
+      alignment: Alignment.bottomCenter,
       controller: controller,
       backgroundColor: backgroundColor,
       margin: margin,
@@ -41,7 +42,7 @@ class LineCard<T> extends HookConsumerWidget {
             controller.dismiss();
           },
         ),
-        message: line != null
+        content: line != null
             ? Row(
                 children: [
                   Padding(

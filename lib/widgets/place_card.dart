@@ -20,6 +20,7 @@ class PlaceCard<T> extends HookConsumerWidget {
     final borderRadius = BorderRadius.circular(10);
 
     return Flash(
+      alignment: Alignment.bottomCenter,
       controller: controller,
       backgroundColor: backgroundColor,
       margin: margin,
@@ -31,7 +32,7 @@ class PlaceCard<T> extends HookConsumerWidget {
             controller.dismiss();
           },
         ),
-        message: location.when(
+        content: location.when(
           data: (details) {
             return Text(details.displayName!);
           },

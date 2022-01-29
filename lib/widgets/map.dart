@@ -46,10 +46,9 @@ class Mapa extends HookConsumerWidget {
     final Map<String, String> mapTileAdditionalOptions = {"r": "@2x"};
     final LatLng mapTileCenter = LatLng(6.2466949, -75.5851195);
     final double mapTileZoom = 13.75;
-    final position = ref.watch(positionProvider);
 
     return FlutterMap(
-      mapController: mapController,
+      // mapController: mapController,
       options: MapOptions(
         center: mapTileCenter,
         zoom: mapTileZoom,
@@ -57,12 +56,21 @@ class Mapa extends HookConsumerWidget {
         minZoom: 2,
         onPositionChanged: (newPosition, _) {
           Future.microtask(() {
-            ref.read(positionProvider.notifier).update((state) => newPosition);
+            ref.read(positionProvider.notifier).update(
+                  (state) => newPosition,
+                );
           });
         },
         // plugins: [],
-        onLongPress: (l) {
+        onLongPress: (position, l) {
           clickPlace(context, l);
+        },
+        onMapCreated: (mapController) {
+          Future.microtask(() {
+            ref.read(mapControllerProvider.notifier).update(
+                  (state) => mapController,
+                );
+          });
         },
       ),
       layers: [

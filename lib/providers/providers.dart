@@ -1,4 +1,3 @@
-import 'package:dovy/contants.dart';
 import 'package:dovy/general.dart';
 import 'package:flutter/foundation.dart';
 export './auth.dart';
@@ -94,10 +93,9 @@ final ipDataProvider = FutureProvider<IPData?>(
 final strapiClientProvider = Provider<Strapi>(
   (ref) {
     final token = ref.watch(authTokenProvider).asData?.value;
-    final baseUrl = 'https://server.xantiagoma.com';
     return Strapi(
-      baseUrl,
-      token: token ?? publicToken,
+      Constants.baseUrl,
+      token: token ?? Constants.publicToken,
     );
   },
 );
@@ -243,9 +241,9 @@ final stationProvider =
   },
 );
 
-final mapControllerProvider = Provider<MapController>(
+final mapControllerProvider = StateProvider<MapController?>(
   (ref) {
-    return MapController();
+    return null;
   },
 );
 
@@ -261,9 +259,7 @@ final stationsSearchProvider =
     if (q == '') {
       return [];
     }
-    if (!(q is String)) {
-      return [];
-    }
+
     if (q.trim().isEmpty) {
       return [];
     }
@@ -298,9 +294,7 @@ final linesSearchProvider =
     if (q == '') {
       return [];
     }
-    if (!(q is String)) {
-      return [];
-    }
+
     if (q.trim().isEmpty) {
       return [];
     }
