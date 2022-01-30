@@ -22,7 +22,7 @@ export 'package:lottie/lottie.dart' hide Marker;
 export 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 export 'package:pigment/pigment.dart';
 export 'package:supercharged/supercharged.dart';
-export 'package:tinycolor/tinycolor.dart';
+export 'package:tinycolor2/tinycolor2.dart';
 
 // App
 export 'package:dovy/extensions.dart';

@@ -462,6 +462,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.8.1"
+  lint:
+    dependency: transitive
+    description:
+      name: lint
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.8.2"
   lists:
     dependency: transitive
     description:
@@ -584,12 +591,10 @@ packages:
   pigment:
     dependency: "direct main"
     description:
-      path: "."
-      ref: "1610b5756b2eba54be9426f8773a4954e5da7301"
-      resolved-ref: "1610b5756b2eba54be9426f8773a4954e5da7301"
-      url: "git@github.com:bregydoc/pigment.git"
-    source: git
-    version: "1.0.3"
+      name: pigment
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   platform:
     dependency: transitive
     description:
@@ -833,15 +838,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
-  tinycolor:
+  tinycolor2:
     dependency: "direct main"
     description:
-      path: "."
-      ref: "8c302ef477b56747252b2c876ca6c7ad9d8b841b"
-      resolved-ref: "8c302ef477b56747252b2c876ca6c7ad9d8b841b"
-      url: "git@github.com:lslv1243/tinycolor.git"
-    source: git
-    version: "1.0.3"
+      name: tinycolor2
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   transparent_image:
     dependency: transitive
     description:
