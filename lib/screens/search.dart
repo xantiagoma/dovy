@@ -35,6 +35,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen>
           snap: true,
           primary: true,
           floating: true,
+          backgroundColor: context.theme.scaffoldBackgroundColor.darken(),
           title: CupertinoTextField(
             placeholder: 'Search for...',
             autofocus: true,

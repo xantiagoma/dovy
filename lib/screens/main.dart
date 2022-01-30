@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
@@ -70,103 +71,110 @@ class MainScreen extends HookConsumerWidget {
             ),
           ),
         ),
-        Column(
-          children: <Widget>[
-            SafeArea(
-              child: Text(
-                context.s.appName,
-                style: context.theme.textTheme.headline3!.copyWith(
-                  color: context.theme.primaryColor,
-                ),
-              ),
+        Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: 375,
+              maxHeight: 600,
             ),
-            Text(context.s.appDescription),
-            Container(
-              decoration: BoxDecoration(
-                color: context.theme.accentColor,
-                shape: BoxShape.circle,
-              ),
-              width: min(context.media.size.width, 200),
-              height: min(context.media.size.width, 200),
-              margin: EdgeInsets.all(context.media.size.width * 0.1),
-              child: Lottie.asset(
-                "assets/lottie/map-location.json",
-                fit: BoxFit.contain,
-              ),
-            ),
-            if (showLogin.value)
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20,
+            child: Column(
+              children: <Widget>[
+                SafeArea(
+                  child: Text(
+                    context.s.appName,
+                    style: context.theme.textTheme.headline3!.copyWith(
+                      color: context.theme.primaryColor,
+                    ),
+                  ),
                 ),
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 20,
+                Text(context.s.appDescription),
+                Lottie.asset(
+                  // "https://assets9.lottiefiles.com/packages/lf20_UVNhCL.json",
+                  "assets/lottie/map-location.json",
+                  width: 300,
+                  height: 300,
+                  fit: BoxFit.contain,
+                  onWarning: print,
+                  frameRate: FrameRate.max,
+                  options: LottieOptions(
+                    enableMergePaths: true,
+                  ),
+                ),
+                if (showLogin.value)
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20,
                     ),
-                    Container(
-                      height: 50,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Expanded(
-                            child: Button(
-                              text: 'Login',
-                              onTap: () {
-                                router.navigateTo(
-                                  context,
-                                  "/login",
-                                  transition:
-                                      TransitionType.materialFullScreenDialog,
-                                );
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Expanded(
-                            // width: double.infinity,
-                            // color: Colors.blue,
-                            child: Button(
-                              text: 'Sign Up',
-                              onTap: () {
-                                router.navigateTo(
-                                  context,
-                                  "/signup",
-                                  transition: TransitionType.cupertino,
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 20,
-                      ),
-                      child: Button(
-                        text: "Forgot Password",
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.zero,
-                        highlightColor: Colors.transparent,
-                        customBorder: ContinuousRectangleBorder(
-                          borderRadius: BorderRadius.circular(28.0),
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 20,
                         ),
-                        onTap: () {},
-                      ),
+                        Container(
+                          height: 50,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Expanded(
+                                child: Button(
+                                  text: 'Login',
+                                  onTap: () {
+                                    router.navigateTo(
+                                      context,
+                                      "/login",
+                                      transition: TransitionType
+                                          .materialFullScreenDialog,
+                                    );
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Expanded(
+                                // width: double.infinity,
+                                // color: Colors.blue,
+                                child: Button(
+                                  text: 'Sign Up',
+                                  onTap: () {
+                                    router.navigateTo(
+                                      context,
+                                      "/signup",
+                                      transition: TransitionType.cupertino,
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 20,
+                          ),
+                          child: Button(
+                            text: "Forgot Password",
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.zero,
+                            highlightColor: Colors.transparent,
+                            customBorder: ContinuousRectangleBorder(
+                              borderRadius: BorderRadius.circular(28.0),
+                            ),
+                            onTap: () {},
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              )
-            else
-              Center(
-                child: SpinKitDoubleBounce(
-                  color: context.theme.primaryColor,
-                ),
-              )
-          ],
+                  )
+                else
+                  Center(
+                    child: SpinKitDoubleBounce(
+                      color: context.theme.primaryColor,
+                    ),
+                  )
+              ],
+            ),
+          ),
         ),
       ],
     );

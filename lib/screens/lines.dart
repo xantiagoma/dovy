@@ -37,6 +37,7 @@ class _LinesScreenState extends ConsumerState<LinesScreen>
     return CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
+          backgroundColor: context.theme.scaffoldBackgroundColor.darken(),
           title: Text("$name - Lines"),
           actions: <Widget>[],
         ),

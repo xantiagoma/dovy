@@ -183,33 +183,39 @@ class _MapScreenState extends ConsumerState<MapScreen>
                                   borderRadius: BorderRadius.circular(8),
                                   backgroundColor:
                                       context.theme.scaffoldBackgroundColor,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    children: [
-                                      for (final system in systems)
-                                        InkWell(
-                                          onTap: () {
-                                            ref
-                                                .read(selectSystemProvider
-                                                    .notifier)
-                                                .update(
-                                                    (state) => system['id']);
-                                            controller.dismiss();
-                                          },
-                                          child: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 40,
-                                              vertical: 15,
+                                  child: ConstrainedBox(
+                                    constraints: BoxConstraints(
+                                      maxWidth: 300,
+                                    ),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        for (final system in systems)
+                                          InkWell(
+                                            onTap: () {
+                                              ref
+                                                  .read(selectSystemProvider
+                                                      .notifier)
+                                                  .update(
+                                                      (state) => system['id']);
+                                              controller.dismiss();
+                                            },
+                                            child: Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: 40,
+                                                vertical: 15,
+                                              ),
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                system['attributes']['name'],
+                                              ),
                                             ),
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              system['attributes']['name'],
-                                            ),
-                                          ),
-                                        )
-                                    ],
+                                          )
+                                      ],
+                                    ),
                                   ),
                                 );
                               },

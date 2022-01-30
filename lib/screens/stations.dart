@@ -34,6 +34,7 @@ class _StationsScreenState extends ConsumerState<StationsScreen>
       slivers: <Widget>[
         SliverAppBar(
           title: Text("Stations"),
+          backgroundColor: context.theme.scaffoldBackgroundColor.darken(),
           actions: <Widget>[
             // TODO
           ],

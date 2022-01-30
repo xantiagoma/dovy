@@ -40,6 +40,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen>
         slivers: <Widget>[
           SliverAppBar(
             title: Text('Login'),
+            backgroundColor: context.theme.scaffoldBackgroundColor.darken(),
           ),
           SliverFillRemaining(
             child: MainScreen(),
