@@ -25,16 +25,11 @@ class AuthService {
 
     final authResponse = r.data;
 
-    if (box == null) {
-      throw 'Not box';
-    }
-
     await box.put('jwt', authResponse["jwt"]);
     return authResponse;
   }
 
   Future<void> logout() async {
-    strapi.http.interceptors.clear();
     return box.delete('jwt');
   }
 }

@@ -52,6 +52,7 @@ dependencies:
   pigment: ^1.0.4
   supercharged: ^2.0.0
   tinycolor2: ^2.0.0
+  geocore: ^0.7.2
 
 dev_dependencies:
   freezed: ^1.1.1

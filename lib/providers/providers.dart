@@ -1,7 +1,162 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:dovy/general.dart';
 import 'package:flutter/foundation.dart';
-export './auth.dart';
-export './local.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+// LOCAL
+final localStorageProvider = FutureProvider<HiveInterface>(
+  (ref) async {
+    await Hive.initFlutter();
+    return Hive;
+  },
+);
+
+final localSecureStorageProvider = Provider<FlutterSecureStorage>(
+  (ref) {
+    final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+    return secureStorage;
+  },
+);
+
+final encryptionKeyProvider = FutureProvider<Uint8List?>(
+  (ref) async {
+    final secureStorage = ref.watch(localSecureStorageProvider);
+
+    // START WEB
+    if (kIsWeb) {
+      final prefs = await SharedPreferences.getInstance();
+      if (!prefs.containsKey('key')) {
+        final key = Hive.generateSecureKey();
+        await prefs.setString('key', base64UrlEncode(key));
+      }
+
+      final key = prefs.getString('key');
+
+      if (key == null) {
+        return null;
+      }
+
+      final encryptionKey = base64Url.decode(key);
+      return encryptionKey;
+    }
+    // END WEB
+
+    final containsEncryptionKey = await secureStorage.containsKey(key: 'key');
+    if (!containsEncryptionKey) {
+      final key = Hive.generateSecureKey();
+      await secureStorage.write(key: 'key', value: base64UrlEncode(key));
+    }
+
+    final key = await secureStorage.read(key: 'key');
+    if (key == null) {
+      return null;
+    }
+    final encryptionKey = base64Url.decode(key);
+    return encryptionKey;
+  },
+);
+
+// AUTH
+
+final authBoxProvider = FutureProvider<Box<String>?>(
+  (ref) async {
+    final store = ref.watch(localStorageProvider).asData?.value;
+    final encryptionKey = ref.watch(encryptionKeyProvider).asData?.value;
+
+    if (store == null || encryptionKey == null) {
+      return null;
+    }
+
+    final box = await store.openBox<String>(
+      'authBox',
+      encryptionCipher: HiveAesCipher(encryptionKey),
+    );
+    return box;
+  },
+);
+
+final authTokenProvider = StreamProvider<String?>(
+  (ref) async* {
+    final authBox = ref.watch(authBoxProvider).asData?.value;
+
+    if (authBox != null) {
+      yield authBox.get('jwt');
+      final stream = authBox.watch(key: 'jwt');
+      await for (final event in stream) {
+        yield event.value as String;
+      }
+      // ref.onDispose(() => stream.);
+    }
+
+    yield null;
+  },
+);
+
+final authServiceProvider = Provider<AuthService?>(
+  (ref) {
+    final box = ref.watch(authBoxProvider).asData?.value;
+    final strapi = ref.watch(strapiPublicClientProvider);
+
+    if (box == null) {
+      return null;
+    }
+
+    return AuthService(
+      strapi: strapi,
+      box: box,
+    );
+  },
+);
+
+final userProvider = FutureProvider<Map<String, dynamic>?>(
+  (ref) async {
+    final jwt = ref.watch(authTokenProvider).asData?.value;
+    final authBox = ref.watch(authServiceProvider);
+
+    if (jwt == null) {
+      return null;
+    }
+
+    try {
+      final response = await Strapi(
+        Constants.baseUrl,
+        token: jwt,
+      ).http.get("/api/users/me");
+      return response.data;
+    } on DioError catch (e) {
+      if (e.response?.statusCode == HttpStatus.unauthorized) {
+        authBox?.logout();
+      }
+    } catch (e) {
+      print("e: $e");
+    }
+
+    return null;
+  },
+);
+
+final loadedProvider = Provider<bool>(
+  (ref) {
+    final tokenLoaded = ref.watch(authTokenProvider).when(
+          data: (_) => true,
+          loading: () => false,
+          error: (_, _s) => true,
+        );
+
+    final userLoaded = ref.watch(userProvider).when(
+          data: (_) => true,
+          loading: () => false,
+          error: (_, _s) => true,
+        );
+
+    return tokenLoaded && userLoaded;
+  },
+);
+
+// DATA
 
 final selectSystemProvider = StateProvider<int?>(
   (ref) => null,
@@ -90,21 +245,29 @@ final ipDataProvider = FutureProvider<IPData?>(
   },
 );
 
-final strapiClientProvider = Provider<Strapi>(
+final strapiPublicClientProvider = Provider<Strapi>(
   (ref) {
-    final token = ref.watch(authTokenProvider).asData?.value;
     return Strapi(
       Constants.baseUrl,
-      token: token ?? Constants.publicToken,
+      token: Constants.publicToken,
     );
   },
 );
 
 final systemsProvider = FutureProvider<List<Map<String, dynamic>>?>(
   (ref) async {
-    final client = ref.watch(strapiClientProvider);
+    final client = ref.watch(strapiPublicClientProvider);
 
-    final response = await client.collection.get('systems');
+    final response = await client.collection.get(
+      'systems',
+      queryParameters: {
+        'fields': [
+          'name',
+          'code',
+        ],
+      },
+    );
+
     final data = response.item1;
 
     if (data == null) {
@@ -117,7 +280,7 @@ final systemsProvider = FutureProvider<List<Map<String, dynamic>>?>(
 
 final linesProvider = FutureProvider<List<Map<String, dynamic>>?>(
   (ref) async {
-    final client = ref.watch(strapiClientProvider);
+    final client = ref.watch(strapiPublicClientProvider);
     final system = ref.watch(selectSystemProvider);
     final line = ref.watch(selectLineProvider);
 
@@ -145,7 +308,7 @@ final stationsProvider = FutureProvider<List<Map<String, dynamic>>?>(
   (ref) async {
     // final line = ref.watch(selectLineProvider);
     final system = ref.watch(selectSystemProvider);
-    final strapiService = ref.watch(strapiClientProvider);
+    final strapiService = ref.watch(strapiPublicClientProvider);
 
     final response = await strapiService.collection.get(
       'stations',
@@ -177,7 +340,7 @@ final systemProvider =
       return null;
     }
 
-    final client = ref.watch(strapiClientProvider);
+    final client = ref.watch(strapiPublicClientProvider);
 
     final response = await client.collection.getOne('systems', id);
 
@@ -198,7 +361,7 @@ final lineProvider =
       return null;
     }
 
-    final client = ref.watch(strapiClientProvider);
+    final client = ref.watch(strapiPublicClientProvider);
     final response = await client.collection.getOne(
       'lines',
       id,
@@ -222,7 +385,7 @@ final stationProvider =
     if (id == null) {
       return null;
     }
-    final client = ref.watch(strapiClientProvider);
+    final client = ref.watch(strapiPublicClientProvider);
     final response = await client.collection.getOne(
       'stations',
       id,
@@ -251,7 +414,7 @@ final stationsSearchProvider =
     AutoDisposeFutureProviderFamily<List<Map<String, dynamic>>?, String?>(
   (ref, q) async {
     final system = ref.watch(selectSystemProvider);
-    final client = ref.watch(strapiClientProvider);
+    final client = ref.watch(strapiPublicClientProvider);
 
     if (q == null) {
       return [];
@@ -286,7 +449,7 @@ final linesSearchProvider =
     AutoDisposeFutureProviderFamily<List<Map<String, dynamic>>?, String?>(
   (ref, q) async {
     final system = ref.watch(selectSystemProvider);
-    final client = ref.watch(strapiClientProvider);
+    final client = ref.watch(strapiPublicClientProvider);
 
     if (q == null) {
       return [];

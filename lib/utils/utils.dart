@@ -1,5 +1,6 @@
 import 'package:dovy/general.dart';
 import 'package:flutter/material.dart';
+export './geojson.dart';
 
 Map<T, S> mapKeysFromList<S, T>(Iterable<S>? values, T Function(S) key) {
   final map = Map<T, S>();
@@ -151,4 +152,9 @@ bool hasCorrectHexPattern(String string) {
     }
   }
   return true;
+}
+
+T logAndReturn<T>(T val, {String tag = 'default'}) {
+  print('> Log (${tag})[${T.runtimeType}]: $val');
+  return val;
 }

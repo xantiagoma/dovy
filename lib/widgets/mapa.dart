@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
-
-T logAndReturn<T>(T val, {String tag = 'default'}) {
-  print('> Log (${tag}): $val');
-  return val;
-}
+import 'package:geocore/geocore.dart' as geocore;
 
 class Mapa extends HookConsumerWidget {
   const Mapa({
@@ -17,6 +13,7 @@ class Mapa extends HookConsumerWidget {
     final systemId = ref.watch(selectSystemProvider);
     final stationId = ref.watch(selectStationProvider);
     final systems = ref.watch(systemsProvider);
+    final system = ref.watch(systemProvider(systemId));
     final lines = ref.watch(linesProvider).maybeWhen(
           orElse: () => null,
           data: (d) => d,
@@ -31,8 +28,12 @@ class Mapa extends HookConsumerWidget {
           final item = systems.asData?.value;
           if (item != null) {
             ref
-                .read(selectSystemProvider.notifier)
-                .update((state) => item[0]['id']);
+                .read(
+                  selectSystemProvider.notifier,
+                )
+                .update(
+                  (state) => item[0]['id'],
+                );
           }
         });
       }
@@ -46,6 +47,9 @@ class Mapa extends HookConsumerWidget {
     final Map<String, String> mapTileAdditionalOptions = {"r": "@2x"};
     final LatLng mapTileCenter = LatLng(6.2466949, -75.5851195);
     final double mapTileZoom = 13.75;
+
+    final geoJsonRaw = system.asData?.value?['attributes']?['geojson'];
+    final geoJson = parseGeoJSON(geoJsonRaw ?? '');
 
     return FlutterMap(
       // mapController: mapController,
@@ -80,23 +84,7 @@ class Mapa extends HookConsumerWidget {
           additionalOptions: mapTileAdditionalOptions,
           backgroundColor: context.theme.scaffoldBackgroundColor,
         ),
-        // if (!kIsWeb)
-        //   TappablePolylineLayerOptions(
-        //     polylineCulling: true,
-        //     polylines: [
-        //       for (final line in (lines ?? <Line>[]))
-        //         TaggedPolyline(
-        //           tag: line.id!,
-        //           points: logAndReturn(line.points, tag: 'Line ${line.id}'),
-        //           color: Colors.red, // getColor(line.color),
-        //           strokeWidth: 2.0,
-        //         ),
-        //     ],
-        //     onTap: (TaggedPolyline polyline) =>
-        //         clickLine(context, polyline.tag),
-        //     onMiss: () {},
-        //   ),
-        // if (kIsWeb)
+        if (geoJson != null) ..._renderGeoJSON(geoJson),
         if (lines != null && lines.isNotEmpty)
           PolylineLayerOptions(
             // polylineCulling: true,
@@ -142,6 +130,88 @@ class Mapa extends HookConsumerWidget {
       ],
     );
   }
+}
+
+List<LayerOptions> _renderGeoJSON(
+  geocore.FeatureCollection<geocore.Feature<geocore.Geometry>> geoJson,
+) {
+  return [
+    MarkerLayerOptions(
+      markers: [
+        for (final point in geoJson.points)
+          if (point.geometry is geocore.GeoPoint2)
+            Marker(
+              height: 18,
+              width: 18,
+              point: LatLng(
+                (point.geometry as geocore.GeoPoint2).lat,
+                (point.geometry as geocore.GeoPoint2).lon,
+              ),
+              builder: (BuildContext context) {
+                return Container(
+                  color: Colors.yellow,
+                );
+              },
+            ),
+      ],
+    ),
+    PolylineLayerOptions(
+      polylines: [
+        for (final polyline in geoJson.polylines)
+          if (polyline.geometry is geocore.LineString<geocore.GeoPoint>)
+            Polyline(
+              points: [
+                for (final point in (polyline.geometry
+                        as geocore.LineString<geocore.GeoPoint>)
+                    .chain)
+                  LatLng(
+                    point.lat,
+                    point.lon,
+                  )
+              ],
+            )
+      ],
+    ),
+    PolylineLayerOptions(
+      polylines: [
+        for (final multiline in geoJson.multilines)
+          if (multiline.geometry is geocore.MultiLineString<geocore.GeoPoint>)
+            for (final line in (multiline.geometry
+                    as geocore.MultiLineString<geocore.GeoPoint>)
+                .lineStrings)
+              Polyline(
+                color: Colors.blue,
+                points: [
+                  for (final point in line.chain)
+                    LatLng(
+                      point.lat,
+                      point.lon,
+                    )
+                ],
+              )
+      ],
+    ),
+    PolygonLayerOptions(
+      polygons: [
+        for (final polyline in geoJson.polygons)
+          // if (logAndReturn(polyline.geometry) != null)
+          if (polyline.geometry is geocore.Polygon<geocore.GeoPoint>)
+            Polygon(
+              color: Colors.red,
+              points: [
+                for (final point
+                    in (polyline.geometry as geocore.Polygon<geocore.GeoPoint>)
+                        .exterior
+                        .chain)
+                  LatLng(
+                    point.lat,
+                    point.lon,
+                  )
+              ],
+            )
+      ],
+    )
+  ];
 }
 
 void clickStation(BuildContext context, Map<String, dynamic> station) {

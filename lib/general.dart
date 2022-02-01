@@ -25,13 +25,13 @@ export 'package:supercharged/supercharged.dart';
 export 'package:tinycolor2/tinycolor2.dart';
 
 // App
+export 'package:dovy/constants.dart';
 export 'package:dovy/extensions.dart';
 export 'package:dovy/generated/l10n.dart';
 export 'package:dovy/models/models.dart';
 export 'package:dovy/providers/providers.dart';
 export 'package:dovy/screens/screens.dart';
 export 'package:dovy/services/services.dart';
-export 'package:dovy/utils.dart';
-export 'package:dovy/widgets/widgets.dart';
 export 'package:dovy/theme.dart';
-export 'package:dovy/constants.dart';
+export 'package:dovy/utils/utils.dart';
+export 'package:dovy/widgets/widgets.dart';
