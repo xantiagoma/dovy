@@ -15,7 +15,11 @@ List<S> uniqBy<S, T>(Iterable<S> values, T key(S element)) =>
 
 S? identity<S>([S? s]) => s ?? null;
 
-List<LatLng> decodeEncodedPolyline(String encoded) {
+List<LatLng> decodeEncodedPolyline(String? encoded) {
+  if (encoded == null) {
+    return [];
+  }
+  
   List<LatLng> poly = [];
   int index = 0, len = encoded.length;
   int lat = 0, lng = 0;
