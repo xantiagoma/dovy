@@ -2,17 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
-class SearchScreen extends StatefulHookConsumerWidget {
-  const SearchScreen({
+class SearchHomeTab extends StatefulHookConsumerWidget {
+  const SearchHomeTab({
     Key? key,
   }) : super(key: key);
 
   @override
-  _SearchScreenState createState() => _SearchScreenState();
+  _SearchHomeTabState createState() => _SearchHomeTabState();
 }
 
-class _SearchScreenState extends ConsumerState<SearchScreen>
-    with AutomaticKeepAliveClientMixin<SearchScreen> {
+class _SearchHomeTabState extends ConsumerState<SearchHomeTab>
+    with AutomaticKeepAliveClientMixin<SearchHomeTab> {
   @override
   Widget build(BuildContext context) {
     super.build(context);

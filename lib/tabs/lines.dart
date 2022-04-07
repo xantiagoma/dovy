@@ -2,17 +2,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
-class LinesScreen extends StatefulHookConsumerWidget {
-  const LinesScreen({
+class LinesHomeTab extends StatefulHookConsumerWidget {
+  const LinesHomeTab({
     Key? key,
   }) : super(key: key);
 
   @override
-  _LinesScreenState createState() => _LinesScreenState();
+  _LinesHomeTabState createState() => _LinesHomeTabState();
 }
 
-class _LinesScreenState extends ConsumerState<LinesScreen>
-    with AutomaticKeepAliveClientMixin<LinesScreen> {
+class _LinesHomeTabState extends ConsumerState<LinesHomeTab>
+    with AutomaticKeepAliveClientMixin<LinesHomeTab> {
   @override
   Widget build(BuildContext context) {
     super.build(context);

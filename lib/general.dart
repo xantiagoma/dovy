@@ -32,6 +32,7 @@ export 'package:dovy/models/models.dart';
 export 'package:dovy/providers/providers.dart';
 export 'package:dovy/screens/screens.dart';
 export 'package:dovy/services/services.dart';
+export 'package:dovy/tabs/tabs.dart';
 export 'package:dovy/theme.dart';
 export 'package:dovy/utils/utils.dart';
 export 'package:dovy/widgets/widgets.dart';

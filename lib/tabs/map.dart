@@ -2,17 +2,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
-class MapScreen extends StatefulHookConsumerWidget {
-  const MapScreen({
+class MapHomeTab extends StatefulHookConsumerWidget {
+  const MapHomeTab({
     Key? key,
   }) : super(key: key);
 
   @override
-  _MapScreenState createState() => _MapScreenState();
+  _MapHomeTabState createState() => _MapHomeTabState();
 }
 
-class _MapScreenState extends ConsumerState<MapScreen>
-    with AutomaticKeepAliveClientMixin<MapScreen> {
+class _MapHomeTabState extends ConsumerState<MapHomeTab>
+    with AutomaticKeepAliveClientMixin<MapHomeTab> {
   @override
   Widget build(BuildContext context) {
     super.build(context);

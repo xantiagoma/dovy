@@ -1,11 +1,5 @@
 export './home.dart';
 export './line.dart';
-export './lines.dart';
 export './login.dart';
-export './main.dart';
-export './map.dart';
 export './not_found.dart';
-export './profile.dart';
-export './search.dart';
 export './station.dart';
-export './stations.dart';

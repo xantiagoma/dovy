@@ -2,17 +2,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart' hide Path;
 
-class ProfileScreen extends StatefulHookConsumerWidget {
-  const ProfileScreen({
+class ProfileHomeTab extends StatefulHookConsumerWidget {
+  const ProfileHomeTab({
     Key? key,
   }) : super(key: key);
 
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  _ProfileHomeTabState createState() => _ProfileHomeTabState();
 }
 
-class _ProfileScreenState extends ConsumerState<ProfileScreen>
-    with AutomaticKeepAliveClientMixin<ProfileScreen> {
+class _ProfileHomeTabState extends ConsumerState<ProfileHomeTab>
+    with AutomaticKeepAliveClientMixin<ProfileHomeTab> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -32,7 +32,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen>
           SliverAppBar(
             title: Text('Profile'),
           ),
-          SliverToBoxAdapter(child: ProfileHook()),
+          SliverToBoxAdapter(
+            child: ProfileHook(),
+          ),
         ],
       );
     } else {
@@ -43,7 +45,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen>
             backgroundColor: context.theme.scaffoldBackgroundColor.darken(),
           ),
           SliverFillRemaining(
-            child: MainScreen(),
+            child: LoginTab(),
           ),
         ],
       );

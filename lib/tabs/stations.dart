@@ -2,17 +2,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dovy/general.dart';
 
-class StationsScreen extends StatefulHookConsumerWidget {
-  const StationsScreen({
+class StationsHomeTab extends StatefulHookConsumerWidget {
+  const StationsHomeTab({
     Key? key,
   }) : super(key: key);
 
   @override
-  _StationsScreenState createState() => _StationsScreenState();
+  _StationsHomeTabState createState() => _StationsHomeTabState();
 }
 
-class _StationsScreenState extends ConsumerState<StationsScreen>
-    with AutomaticKeepAliveClientMixin<StationsScreen> {
+class _StationsHomeTabState extends ConsumerState<StationsHomeTab>
+    with AutomaticKeepAliveClientMixin<StationsHomeTab> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -52,34 +52,21 @@ class _StationsScreenState extends ConsumerState<StationsScreen>
                     '/station/${station['id']}',
                   );
                 },
-                child: Padding(
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        width: 1,
+                        color: Colors.white10,
+                      ),
+                    ),
+                  ),
                   padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: kIsWeb ? 10 : 0,
+                    horizontal: 24,
+                    vertical: 16,
                   ),
                   child: Row(
                     children: <Widget>[
-                      // Row(
-                      //   children: <Widget>[
-                      //     for (final line in lines)
-                      //       Padding(
-                      //         padding: const EdgeInsets.only(right: 10),
-                      //         child: Builder(builder: (context) {
-                      //           final color =
-                      //               getColor(line?.color) ?? Colors.white;
-                      //           return Chip(
-                      //             backgroundColor: color,
-                      //             label: Text(
-                      //               line!.name!,
-                      //               style: TextStyle(
-                      //                 color: color.inverseBW,
-                      //               ),
-                      //             ),
-                      //           );
-                      //         }),
-                      //       ),
-                      //   ],
-                      // ),
                       Text(name!),
                     ],
                   ),

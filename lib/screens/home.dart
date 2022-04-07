@@ -34,11 +34,11 @@ class HomeScreen extends HookWidget {
       controller: tabController,
       physics: index == 0 ? NeverScrollableScrollPhysics() : null,
       children: [
-        MapScreen(),
-        LinesScreen(),
-        StationsScreen(),
-        SearchScreen(),
-        ProfileScreen(),
+        MapHomeTab(),
+        LinesHomeTab(),
+        StationsHomeTab(),
+        SearchHomeTab(),
+        ProfileHomeTab(),
       ],
     );
   }
