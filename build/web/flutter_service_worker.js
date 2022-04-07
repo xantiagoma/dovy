@@ -6,22 +6,22 @@ const RESOURCES = {
   "version.json": "5bf5ec1b10568c34c88426add1df4e89",
 "index.html": "9d75a4440039a183540381b94c667fcb",
 "/": "9d75a4440039a183540381b94c667fcb",
-"main.dart.js": "29b0c2a6416ec841b2a6b3ce9c0eb6cd",
+"main.dart.js": "6f65d495658b3b09795656c05073972d",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "manifest.json": "bbbca47f609621bb71c6f6d9aad43f72",
 "assets/AssetManifest.json": "0c8c89f6e324516d0fc56c1683fe484d",
-"assets/NOTICES": "8307ec8e5fdd5d6f0092640acc984701",
+"assets/NOTICES": "bbbb509543a986a2670c2c4c2c2f9070",
 "assets/FontManifest.json": "1b1e7812d9eb9f666db8444d7dde1b20",
 "assets/packages/material_design_icons_flutter/lib/fonts/materialdesignicons-webfont.ttf": "b62641afc9ab487008e996a5c5865e56",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
-"assets/fonts/MaterialIcons-Regular.otf": "4e6447691c9509f7acdbf8a931a85ca1",
+"assets/fonts/MaterialIcons-Regular.otf": "7e7a6cccddf6d7b20012a548461d5d81",
 "assets/assets/lottie/map-location.json": "c86a8e16d81cb6e4ee6fd422611f5407",
-"canvaskit/canvaskit.js": "43fa9e17039a625450b6aba93baf521e",
-"canvaskit/profiling/canvaskit.js": "f3bfccc993a1e0bfdd3440af60d99df4",
-"canvaskit/profiling/canvaskit.wasm": "a9610cf39260f60fbe7524a785c66101",
-"canvaskit/canvaskit.wasm": "04ed3c745ff1dee16504be01f9623498"
+"canvaskit/canvaskit.js": "c2b4e5f3d7a3d82aed024e7249a78487",
+"canvaskit/profiling/canvaskit.js": "ae2949af4efc61d28a4a80fffa1db900",
+"canvaskit/profiling/canvaskit.wasm": "95e736ab31147d1b2c7b25f11d4c32cd",
+"canvaskit/canvaskit.wasm": "4b83d89d9fecbea8ca46f2f760c5a9ba"
 };
 
 // The application shell files that are downloaded before a service worker can
