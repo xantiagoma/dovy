@@ -1,5 +1,7 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'address_details.dart';
 
@@ -59,7 +61,7 @@ class _$AddressDetailsTearOff {
     );
   }
 
-  AddressDetails fromJson(Map<String, Object> json) {
+  AddressDetails fromJson(Map<String, Object?> json) {
     return AddressDetails.fromJson(json);
   }
 }
@@ -409,7 +411,7 @@ class _$_AddressDetails implements _AddressDetails {
       required this.boundingbox});
 
   factory _$_AddressDetails.fromJson(Map<String, dynamic> json) =>
-      _$_$_AddressDetailsFromJson(json);
+      _$$_AddressDetailsFromJson(json);
 
   @override
   @JsonKey(name: 'place_id')
@@ -459,75 +461,52 @@ class _$_AddressDetails implements _AddressDetails {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _AddressDetails &&
-            (identical(other.placeId, placeId) ||
-                const DeepCollectionEquality()
-                    .equals(other.placeId, placeId)) &&
-            (identical(other.licence, licence) ||
-                const DeepCollectionEquality()
-                    .equals(other.licence, licence)) &&
-            (identical(other.osmType, osmType) ||
-                const DeepCollectionEquality()
-                    .equals(other.osmType, osmType)) &&
-            (identical(other.osmId, osmId) ||
-                const DeepCollectionEquality().equals(other.osmId, osmId)) &&
-            (identical(other.lat, lat) ||
-                const DeepCollectionEquality().equals(other.lat, lat)) &&
-            (identical(other.lon, lon) ||
-                const DeepCollectionEquality().equals(other.lon, lon)) &&
-            (identical(other.placeRank, placeRank) ||
-                const DeepCollectionEquality()
-                    .equals(other.placeRank, placeRank)) &&
-            (identical(other.category, category) ||
-                const DeepCollectionEquality()
-                    .equals(other.category, category)) &&
-            (identical(other.type, type) ||
-                const DeepCollectionEquality().equals(other.type, type)) &&
-            (identical(other.importance, importance) ||
-                const DeepCollectionEquality()
-                    .equals(other.importance, importance)) &&
-            (identical(other.addresstype, addresstype) ||
-                const DeepCollectionEquality()
-                    .equals(other.addresstype, addresstype)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.displayName, displayName) ||
-                const DeepCollectionEquality()
-                    .equals(other.displayName, displayName)) &&
-            (identical(other.address, address) ||
-                const DeepCollectionEquality()
-                    .equals(other.address, address)) &&
-            (identical(other.extratags, extratags) ||
-                const DeepCollectionEquality()
-                    .equals(other.extratags, extratags)) &&
-            (identical(other.namedetails, namedetails) ||
-                const DeepCollectionEquality()
-                    .equals(other.namedetails, namedetails)) &&
-            (identical(other.boundingbox, boundingbox) ||
-                const DeepCollectionEquality()
-                    .equals(other.boundingbox, boundingbox)));
+        (other.runtimeType == runtimeType &&
+            other is _AddressDetails &&
+            const DeepCollectionEquality().equals(other.placeId, placeId) &&
+            const DeepCollectionEquality().equals(other.licence, licence) &&
+            const DeepCollectionEquality().equals(other.osmType, osmType) &&
+            const DeepCollectionEquality().equals(other.osmId, osmId) &&
+            const DeepCollectionEquality().equals(other.lat, lat) &&
+            const DeepCollectionEquality().equals(other.lon, lon) &&
+            const DeepCollectionEquality().equals(other.placeRank, placeRank) &&
+            const DeepCollectionEquality().equals(other.category, category) &&
+            const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality()
+                .equals(other.importance, importance) &&
+            const DeepCollectionEquality()
+                .equals(other.addresstype, addresstype) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality()
+                .equals(other.displayName, displayName) &&
+            const DeepCollectionEquality().equals(other.address, address) &&
+            const DeepCollectionEquality().equals(other.extratags, extratags) &&
+            const DeepCollectionEquality()
+                .equals(other.namedetails, namedetails) &&
+            const DeepCollectionEquality()
+                .equals(other.boundingbox, boundingbox));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(placeId) ^
-      const DeepCollectionEquality().hash(licence) ^
-      const DeepCollectionEquality().hash(osmType) ^
-      const DeepCollectionEquality().hash(osmId) ^
-      const DeepCollectionEquality().hash(lat) ^
-      const DeepCollectionEquality().hash(lon) ^
-      const DeepCollectionEquality().hash(placeRank) ^
-      const DeepCollectionEquality().hash(category) ^
-      const DeepCollectionEquality().hash(type) ^
-      const DeepCollectionEquality().hash(importance) ^
-      const DeepCollectionEquality().hash(addresstype) ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(displayName) ^
-      const DeepCollectionEquality().hash(address) ^
-      const DeepCollectionEquality().hash(extratags) ^
-      const DeepCollectionEquality().hash(namedetails) ^
-      const DeepCollectionEquality().hash(boundingbox);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(placeId),
+      const DeepCollectionEquality().hash(licence),
+      const DeepCollectionEquality().hash(osmType),
+      const DeepCollectionEquality().hash(osmId),
+      const DeepCollectionEquality().hash(lat),
+      const DeepCollectionEquality().hash(lon),
+      const DeepCollectionEquality().hash(placeRank),
+      const DeepCollectionEquality().hash(category),
+      const DeepCollectionEquality().hash(type),
+      const DeepCollectionEquality().hash(importance),
+      const DeepCollectionEquality().hash(addresstype),
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(displayName),
+      const DeepCollectionEquality().hash(address),
+      const DeepCollectionEquality().hash(extratags),
+      const DeepCollectionEquality().hash(namedetails),
+      const DeepCollectionEquality().hash(boundingbox));
 
   @JsonKey(ignore: true)
   @override
@@ -536,7 +515,7 @@ class _$_AddressDetails implements _AddressDetails {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_AddressDetailsToJson(this);
+    return _$$_AddressDetailsToJson(this);
   }
 }
 
@@ -565,43 +544,43 @@ abstract class _AddressDetails implements AddressDetails {
 
   @override
   @JsonKey(name: 'place_id')
-  int? get placeId => throw _privateConstructorUsedError;
+  int? get placeId;
   @override
-  String? get licence => throw _privateConstructorUsedError;
+  String? get licence;
   @override
   @JsonKey(name: 'osm_type')
-  String? get osmType => throw _privateConstructorUsedError;
+  String? get osmType;
   @override
   @JsonKey(name: 'osm_id')
-  int? get osmId => throw _privateConstructorUsedError;
+  int? get osmId;
   @override
-  String? get lat => throw _privateConstructorUsedError;
+  String? get lat;
   @override
-  String? get lon => throw _privateConstructorUsedError;
+  String? get lon;
   @override
   @JsonKey(name: 'place_rank')
-  int? get placeRank => throw _privateConstructorUsedError;
+  int? get placeRank;
   @override
-  String? get category => throw _privateConstructorUsedError;
+  String? get category;
   @override
-  String? get type => throw _privateConstructorUsedError;
+  String? get type;
   @override
-  double? get importance => throw _privateConstructorUsedError;
+  double? get importance;
   @override
-  String? get addresstype => throw _privateConstructorUsedError;
+  String? get addresstype;
   @override
-  String? get name => throw _privateConstructorUsedError;
+  String? get name;
   @override
   @JsonKey(name: 'display_name')
-  String? get displayName => throw _privateConstructorUsedError;
+  String? get displayName;
   @override
-  Address? get address => throw _privateConstructorUsedError;
+  Address? get address;
   @override
-  Map<String, dynamic>? get extratags => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get extratags;
   @override
-  Namedetails? get namedetails => throw _privateConstructorUsedError;
+  Namedetails? get namedetails;
   @override
-  List<String>? get boundingbox => throw _privateConstructorUsedError;
+  List<String>? get boundingbox;
   @override
   @JsonKey(ignore: true)
   _$AddressDetailsCopyWith<_AddressDetails> get copyWith =>
@@ -641,7 +620,7 @@ class _$AddressTearOff {
     );
   }
 
-  Address fromJson(Map<String, Object> json) {
+  Address fromJson(Map<String, Object?> json) {
     return Address.fromJson(json);
   }
 }
@@ -854,7 +833,7 @@ class _$_Address implements _Address {
       @JsonKey(name: 'country_code') this.countryCode});
 
   factory _$_Address.fromJson(Map<String, dynamic> json) =>
-      _$_$_AddressFromJson(json);
+      _$$_AddressFromJson(json);
 
   @override
   final String? neighbourhood;
@@ -888,48 +867,37 @@ class _$_Address implements _Address {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Address &&
-            (identical(other.neighbourhood, neighbourhood) ||
-                const DeepCollectionEquality()
-                    .equals(other.neighbourhood, neighbourhood)) &&
-            (identical(other.suburb, suburb) ||
-                const DeepCollectionEquality().equals(other.suburb, suburb)) &&
-            (identical(other.cityDistrict, cityDistrict) ||
-                const DeepCollectionEquality()
-                    .equals(other.cityDistrict, cityDistrict)) &&
-            (identical(other.city, city) ||
-                const DeepCollectionEquality().equals(other.city, city)) &&
-            (identical(other.stateDistrict, stateDistrict) ||
-                const DeepCollectionEquality()
-                    .equals(other.stateDistrict, stateDistrict)) &&
-            (identical(other.state, state) ||
-                const DeepCollectionEquality().equals(other.state, state)) &&
-            (identical(other.region, region) ||
-                const DeepCollectionEquality().equals(other.region, region)) &&
-            (identical(other.postcode, postcode) ||
-                const DeepCollectionEquality()
-                    .equals(other.postcode, postcode)) &&
-            (identical(other.country, country) ||
-                const DeepCollectionEquality()
-                    .equals(other.country, country)) &&
-            (identical(other.countryCode, countryCode) ||
-                const DeepCollectionEquality()
-                    .equals(other.countryCode, countryCode)));
+        (other.runtimeType == runtimeType &&
+            other is _Address &&
+            const DeepCollectionEquality()
+                .equals(other.neighbourhood, neighbourhood) &&
+            const DeepCollectionEquality().equals(other.suburb, suburb) &&
+            const DeepCollectionEquality()
+                .equals(other.cityDistrict, cityDistrict) &&
+            const DeepCollectionEquality().equals(other.city, city) &&
+            const DeepCollectionEquality()
+                .equals(other.stateDistrict, stateDistrict) &&
+            const DeepCollectionEquality().equals(other.state, state) &&
+            const DeepCollectionEquality().equals(other.region, region) &&
+            const DeepCollectionEquality().equals(other.postcode, postcode) &&
+            const DeepCollectionEquality().equals(other.country, country) &&
+            const DeepCollectionEquality()
+                .equals(other.countryCode, countryCode));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(neighbourhood) ^
-      const DeepCollectionEquality().hash(suburb) ^
-      const DeepCollectionEquality().hash(cityDistrict) ^
-      const DeepCollectionEquality().hash(city) ^
-      const DeepCollectionEquality().hash(stateDistrict) ^
-      const DeepCollectionEquality().hash(state) ^
-      const DeepCollectionEquality().hash(region) ^
-      const DeepCollectionEquality().hash(postcode) ^
-      const DeepCollectionEquality().hash(country) ^
-      const DeepCollectionEquality().hash(countryCode);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(neighbourhood),
+      const DeepCollectionEquality().hash(suburb),
+      const DeepCollectionEquality().hash(cityDistrict),
+      const DeepCollectionEquality().hash(city),
+      const DeepCollectionEquality().hash(stateDistrict),
+      const DeepCollectionEquality().hash(state),
+      const DeepCollectionEquality().hash(region),
+      const DeepCollectionEquality().hash(postcode),
+      const DeepCollectionEquality().hash(country),
+      const DeepCollectionEquality().hash(countryCode));
 
   @JsonKey(ignore: true)
   @override
@@ -938,7 +906,7 @@ class _$_Address implements _Address {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_AddressToJson(this);
+    return _$$_AddressToJson(this);
   }
 }
 
@@ -958,28 +926,28 @@ abstract class _Address implements Address {
   factory _Address.fromJson(Map<String, dynamic> json) = _$_Address.fromJson;
 
   @override
-  String? get neighbourhood => throw _privateConstructorUsedError;
+  String? get neighbourhood;
   @override
-  String? get suburb => throw _privateConstructorUsedError;
+  String? get suburb;
   @override
   @JsonKey(name: 'city_district')
-  String? get cityDistrict => throw _privateConstructorUsedError;
+  String? get cityDistrict;
   @override
-  String? get city => throw _privateConstructorUsedError;
+  String? get city;
   @override
   @JsonKey(name: 'state_district')
-  String? get stateDistrict => throw _privateConstructorUsedError;
+  String? get stateDistrict;
   @override
-  String? get state => throw _privateConstructorUsedError;
+  String? get state;
   @override
-  String? get region => throw _privateConstructorUsedError;
+  String? get region;
   @override
-  String? get postcode => throw _privateConstructorUsedError;
+  String? get postcode;
   @override
-  String? get country => throw _privateConstructorUsedError;
+  String? get country;
   @override
   @JsonKey(name: 'country_code')
-  String? get countryCode => throw _privateConstructorUsedError;
+  String? get countryCode;
   @override
   @JsonKey(ignore: true)
   _$AddressCopyWith<_Address> get copyWith =>
@@ -1000,7 +968,7 @@ class _$NamedetailsTearOff {
     );
   }
 
-  Namedetails fromJson(Map<String, Object> json) {
+  Namedetails fromJson(Map<String, Object?> json) {
     return Namedetails.fromJson(json);
   }
 }
@@ -1086,7 +1054,7 @@ class _$_Namedetails implements _Namedetails {
   _$_Namedetails({this.name});
 
   factory _$_Namedetails.fromJson(Map<String, dynamic> json) =>
-      _$_$_NamedetailsFromJson(json);
+      _$$_NamedetailsFromJson(json);
 
   @override
   final String? name;
@@ -1099,14 +1067,14 @@ class _$_Namedetails implements _Namedetails {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Namedetails &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)));
+        (other.runtimeType == runtimeType &&
+            other is _Namedetails &&
+            const DeepCollectionEquality().equals(other.name, name));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(name);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(name));
 
   @JsonKey(ignore: true)
   @override
@@ -1115,7 +1083,7 @@ class _$_Namedetails implements _Namedetails {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_NamedetailsToJson(this);
+    return _$$_NamedetailsToJson(this);
   }
 }
 
@@ -1126,7 +1094,7 @@ abstract class _Namedetails implements Namedetails {
       _$_Namedetails.fromJson;
 
   @override
-  String? get name => throw _privateConstructorUsedError;
+  String? get name;
   @override
   @JsonKey(ignore: true)
   _$NamedetailsCopyWith<_Namedetails> get copyWith =>

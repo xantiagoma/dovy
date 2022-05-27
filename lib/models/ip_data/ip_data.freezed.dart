@@ -1,5 +1,7 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'ip_data.dart';
 
@@ -71,7 +73,7 @@ class _$IPDataTearOff {
     );
   }
 
-  IPData fromJson(Map<String, Object> json) {
+  IPData fromJson(Map<String, Object?> json) {
     return IPData.fromJson(json);
   }
 }
@@ -476,7 +478,7 @@ class _$_IPData implements _IPData {
       this.org});
 
   factory _$_IPData.fromJson(Map<String, dynamic> json) =>
-      _$_$_IPDataFromJson(json);
+      _$$_IPDataFromJson(json);
 
   @override
   final String? ip;
@@ -546,98 +548,71 @@ class _$_IPData implements _IPData {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _IPData &&
-            (identical(other.ip, ip) ||
-                const DeepCollectionEquality().equals(other.ip, ip)) &&
-            (identical(other.version, version) ||
-                const DeepCollectionEquality()
-                    .equals(other.version, version)) &&
-            (identical(other.city, city) ||
-                const DeepCollectionEquality().equals(other.city, city)) &&
-            (identical(other.region, region) ||
-                const DeepCollectionEquality().equals(other.region, region)) &&
-            (identical(other.regionCode, regionCode) ||
-                const DeepCollectionEquality()
-                    .equals(other.regionCode, regionCode)) &&
-            (identical(other.country, country) ||
-                const DeepCollectionEquality()
-                    .equals(other.country, country)) &&
-            (identical(other.countryName, countryName) ||
-                const DeepCollectionEquality()
-                    .equals(other.countryName, countryName)) &&
-            (identical(other.countryCode, countryCode) ||
-                const DeepCollectionEquality()
-                    .equals(other.countryCode, countryCode)) &&
-            (identical(other.countryCodeIso3, countryCodeIso3) ||
-                const DeepCollectionEquality()
-                    .equals(other.countryCodeIso3, countryCodeIso3)) &&
-            (identical(other.countryCapital, countryCapital) ||
-                const DeepCollectionEquality()
-                    .equals(other.countryCapital, countryCapital)) &&
-            (identical(other.countryTld, countryTld) ||
-                const DeepCollectionEquality()
-                    .equals(other.countryTld, countryTld)) &&
-            (identical(other.continentCode, continentCode) ||
-                const DeepCollectionEquality()
-                    .equals(other.continentCode, continentCode)) &&
-            (identical(other.inEu, inEu) ||
-                const DeepCollectionEquality().equals(other.inEu, inEu)) &&
-            (identical(other.timezone, timezone) ||
-                const DeepCollectionEquality()
-                    .equals(other.timezone, timezone)) &&
-            (identical(other.utcOffset, utcOffset) ||
-                const DeepCollectionEquality()
-                    .equals(other.utcOffset, utcOffset)) &&
-            (identical(other.countryCallingCode, countryCallingCode) ||
-                const DeepCollectionEquality()
-                    .equals(other.countryCallingCode, countryCallingCode)) &&
-            (identical(other.currency, currency) ||
-                const DeepCollectionEquality()
-                    .equals(other.currency, currency)) &&
-            (identical(other.currencyName, currencyName) ||
-                const DeepCollectionEquality()
-                    .equals(other.currencyName, currencyName)) &&
-            (identical(other.languages, languages) ||
-                const DeepCollectionEquality()
-                    .equals(other.languages, languages)) &&
-            (identical(other.countryArea, countryArea) ||
-                const DeepCollectionEquality()
-                    .equals(other.countryArea, countryArea)) &&
-            (identical(other.countryPopulation, countryPopulation) ||
-                const DeepCollectionEquality()
-                    .equals(other.countryPopulation, countryPopulation)) &&
-            (identical(other.asn, asn) ||
-                const DeepCollectionEquality().equals(other.asn, asn)) &&
-            (identical(other.org, org) ||
-                const DeepCollectionEquality().equals(other.org, org)));
+        (other.runtimeType == runtimeType &&
+            other is _IPData &&
+            const DeepCollectionEquality().equals(other.ip, ip) &&
+            const DeepCollectionEquality().equals(other.version, version) &&
+            const DeepCollectionEquality().equals(other.city, city) &&
+            const DeepCollectionEquality().equals(other.region, region) &&
+            const DeepCollectionEquality()
+                .equals(other.regionCode, regionCode) &&
+            const DeepCollectionEquality().equals(other.country, country) &&
+            const DeepCollectionEquality()
+                .equals(other.countryName, countryName) &&
+            const DeepCollectionEquality()
+                .equals(other.countryCode, countryCode) &&
+            const DeepCollectionEquality()
+                .equals(other.countryCodeIso3, countryCodeIso3) &&
+            const DeepCollectionEquality()
+                .equals(other.countryCapital, countryCapital) &&
+            const DeepCollectionEquality()
+                .equals(other.countryTld, countryTld) &&
+            const DeepCollectionEquality()
+                .equals(other.continentCode, continentCode) &&
+            const DeepCollectionEquality().equals(other.inEu, inEu) &&
+            const DeepCollectionEquality().equals(other.timezone, timezone) &&
+            const DeepCollectionEquality().equals(other.utcOffset, utcOffset) &&
+            const DeepCollectionEquality()
+                .equals(other.countryCallingCode, countryCallingCode) &&
+            const DeepCollectionEquality().equals(other.currency, currency) &&
+            const DeepCollectionEquality()
+                .equals(other.currencyName, currencyName) &&
+            const DeepCollectionEquality().equals(other.languages, languages) &&
+            const DeepCollectionEquality()
+                .equals(other.countryArea, countryArea) &&
+            const DeepCollectionEquality()
+                .equals(other.countryPopulation, countryPopulation) &&
+            const DeepCollectionEquality().equals(other.asn, asn) &&
+            const DeepCollectionEquality().equals(other.org, org));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(ip) ^
-      const DeepCollectionEquality().hash(version) ^
-      const DeepCollectionEquality().hash(city) ^
-      const DeepCollectionEquality().hash(region) ^
-      const DeepCollectionEquality().hash(regionCode) ^
-      const DeepCollectionEquality().hash(country) ^
-      const DeepCollectionEquality().hash(countryName) ^
-      const DeepCollectionEquality().hash(countryCode) ^
-      const DeepCollectionEquality().hash(countryCodeIso3) ^
-      const DeepCollectionEquality().hash(countryCapital) ^
-      const DeepCollectionEquality().hash(countryTld) ^
-      const DeepCollectionEquality().hash(continentCode) ^
-      const DeepCollectionEquality().hash(inEu) ^
-      const DeepCollectionEquality().hash(timezone) ^
-      const DeepCollectionEquality().hash(utcOffset) ^
-      const DeepCollectionEquality().hash(countryCallingCode) ^
-      const DeepCollectionEquality().hash(currency) ^
-      const DeepCollectionEquality().hash(currencyName) ^
-      const DeepCollectionEquality().hash(languages) ^
-      const DeepCollectionEquality().hash(countryArea) ^
-      const DeepCollectionEquality().hash(countryPopulation) ^
-      const DeepCollectionEquality().hash(asn) ^
-      const DeepCollectionEquality().hash(org);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(ip),
+        const DeepCollectionEquality().hash(version),
+        const DeepCollectionEquality().hash(city),
+        const DeepCollectionEquality().hash(region),
+        const DeepCollectionEquality().hash(regionCode),
+        const DeepCollectionEquality().hash(country),
+        const DeepCollectionEquality().hash(countryName),
+        const DeepCollectionEquality().hash(countryCode),
+        const DeepCollectionEquality().hash(countryCodeIso3),
+        const DeepCollectionEquality().hash(countryCapital),
+        const DeepCollectionEquality().hash(countryTld),
+        const DeepCollectionEquality().hash(continentCode),
+        const DeepCollectionEquality().hash(inEu),
+        const DeepCollectionEquality().hash(timezone),
+        const DeepCollectionEquality().hash(utcOffset),
+        const DeepCollectionEquality().hash(countryCallingCode),
+        const DeepCollectionEquality().hash(currency),
+        const DeepCollectionEquality().hash(currencyName),
+        const DeepCollectionEquality().hash(languages),
+        const DeepCollectionEquality().hash(countryArea),
+        const DeepCollectionEquality().hash(countryPopulation),
+        const DeepCollectionEquality().hash(asn),
+        const DeepCollectionEquality().hash(org)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -646,7 +621,7 @@ class _$_IPData implements _IPData {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_IPDataToJson(this);
+    return _$$_IPDataToJson(this);
   }
 }
 
@@ -679,64 +654,64 @@ abstract class _IPData implements IPData {
   factory _IPData.fromJson(Map<String, dynamic> json) = _$_IPData.fromJson;
 
   @override
-  String? get ip => throw _privateConstructorUsedError;
+  String? get ip;
   @override
-  String? get version => throw _privateConstructorUsedError;
+  String? get version;
   @override
-  String? get city => throw _privateConstructorUsedError;
+  String? get city;
   @override
-  String? get region => throw _privateConstructorUsedError;
+  String? get region;
   @override
   @JsonKey(name: 'region_code')
-  String? get regionCode => throw _privateConstructorUsedError;
+  String? get regionCode;
   @override
-  String? get country => throw _privateConstructorUsedError;
+  String? get country;
   @override
   @JsonKey(name: 'country_name')
-  String? get countryName => throw _privateConstructorUsedError;
+  String? get countryName;
   @override
   @JsonKey(name: 'country_code')
-  String? get countryCode => throw _privateConstructorUsedError;
+  String? get countryCode;
   @override
   @JsonKey(name: 'country_code_iso3')
-  String? get countryCodeIso3 => throw _privateConstructorUsedError;
+  String? get countryCodeIso3;
   @override
   @JsonKey(name: 'country_capital')
-  String? get countryCapital => throw _privateConstructorUsedError;
+  String? get countryCapital;
   @override
   @JsonKey(name: 'country_tld')
-  String? get countryTld => throw _privateConstructorUsedError;
+  String? get countryTld;
   @override
   @JsonKey(name: 'continent_code')
-  String? get continentCode => throw _privateConstructorUsedError;
+  String? get continentCode;
   @override
   @JsonKey(name: 'in_eu')
-  bool? get inEu => throw _privateConstructorUsedError;
+  bool? get inEu;
   @override
-  String? get timezone => throw _privateConstructorUsedError;
+  String? get timezone;
   @override
   @JsonKey(name: 'utc_offset')
-  String? get utcOffset => throw _privateConstructorUsedError;
+  String? get utcOffset;
   @override
   @JsonKey(name: 'country_calling_code')
-  String? get countryCallingCode => throw _privateConstructorUsedError;
+  String? get countryCallingCode;
   @override
-  String? get currency => throw _privateConstructorUsedError;
+  String? get currency;
   @override
   @JsonKey(name: 'currency_name')
-  String? get currencyName => throw _privateConstructorUsedError;
+  String? get currencyName;
   @override
-  String? get languages => throw _privateConstructorUsedError;
+  String? get languages;
   @override
   @JsonKey(name: 'country_area')
-  int? get countryArea => throw _privateConstructorUsedError;
+  int? get countryArea;
   @override
   @JsonKey(name: 'country_population')
-  int? get countryPopulation => throw _privateConstructorUsedError;
+  int? get countryPopulation;
   @override
-  String? get asn => throw _privateConstructorUsedError;
+  String? get asn;
   @override
-  String? get org => throw _privateConstructorUsedError;
+  String? get org;
   @override
   @JsonKey(ignore: true)
   _$IPDataCopyWith<_IPData> get copyWith => throw _privateConstructorUsedError;
